@@ -63,17 +63,73 @@
 		7F01D5A01D2A163B000A51D8 /* DashingPenguin */ = {
 			isa = PBXGroup;
 			children = (
-				7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */,
-				7F01D5A31D2A163B000A51D8 /* GameScene.sks */,
-				7F01D5A51D2A163B000A51D8 /* Actions.sks */,
-				7F01D5A71D2A163B000A51D8 /* GameScene.swift */,
-				7F01D5A91D2A163B000A51D8 /* GameViewController.swift */,
-				7F01D5AB1D2A163B000A51D8 /* Main.storyboard */,
-				7F01D5AE1D2A163B000A51D8 /* Assets.xcassets */,
-				7F01D5B01D2A163B000A51D8 /* LaunchScreen.storyboard */,
-				7F01D5B31D2A163B000A51D8 /* Info.plist */,
+				7FB4ED4E1D2B267000407A8B /* Scenes */,
+				7FB4ED521D2B26F800407A8B /* Entities */,
+				7FB4ED531D2B26FF00407A8B /* Components */,
+				7FB4ED4D1D2B262B00407A8B /* Assets */,
+				7F75856C1D2B210500B18307 /* iOS */,
 			);
 			path = DashingPenguin;
+			sourceTree = "<group>";
+		};
+		7F75856C1D2B210500B18307 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */,
+				7F01D5A91D2A163B000A51D8 /* GameViewController.swift */,
+				7F01D5AB1D2A163B000A51D8 /* Main.storyboard */,
+				7F01D5B01D2A163B000A51D8 /* LaunchScreen.storyboard */,
+				7FB4ED4C1D2B260A00407A8B /* Supporting Files */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7FB4ED4C1D2B260A00407A8B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7F01D5B31D2A163B000A51D8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7FB4ED4D1D2B262B00407A8B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7FB4ED511D2B26D200407A8B /* Scenes */,
+				7F01D5AE1D2A163B000A51D8 /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		7FB4ED4E1D2B267000407A8B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7F01D5A71D2A163B000A51D8 /* GameScene.swift */,
+				7F01D5A51D2A163B000A51D8 /* Actions.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		7FB4ED511D2B26D200407A8B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7F01D5A31D2A163B000A51D8 /* GameScene.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		7FB4ED521D2B26F800407A8B /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		7FB4ED531D2B26FF00407A8B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +369,7 @@
 				7F01D5B81D2A163B000A51D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

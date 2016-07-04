@@ -26,6 +26,8 @@ class GameScene: SKScene {
     
 //    private var penguin = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "penguin-air2")))
     
+    var buttonPress : ( () -> () )!
+    
     override func sceneDidLoad() {
 
         self.lastUpdateTime = 0
