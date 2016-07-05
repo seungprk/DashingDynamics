@@ -20,7 +20,7 @@ class GameScene: SKScene {
     // Game Session Info
     private var label: SKLabelNode?
     
-    // Touch Debug
+    // Touch Debug -> Code for this is in GameScene+TouchDebug.swift
     internal var spinnyNode: SKShapeNode?
     
     // Assets
@@ -40,7 +40,6 @@ class GameScene: SKScene {
         }
         
         print(entities)
-        
     }
 
     override func didMove(to view: SKView) {
@@ -49,19 +48,15 @@ class GameScene: SKScene {
     // MARK: - Touch overrides
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

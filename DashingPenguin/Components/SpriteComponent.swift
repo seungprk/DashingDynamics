@@ -20,6 +20,7 @@ class SpriteComponent: GKComponent {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        print(aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
     
