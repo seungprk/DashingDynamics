@@ -18,16 +18,8 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
-    
-//    private var penguin = SKSpriteNode(imageNamed: "penguin-air2")
     var penguinAtlas = SKTextureAtlas(named: "Penguin")
-    
-//    private var penguin = SKSpriteNode(texture: penguinAtlas)
-    
-//    private var penguin = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "penguin-air2")))
-    
-    var buttonPress : ( () -> () )!
-    
+        
     override func sceneDidLoad() {
 
         self.lastUpdateTime = 0
@@ -46,19 +38,13 @@ class GameScene: SKScene {
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
             
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
             spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
         }
-        
-        // Add penguin
-//        self.addChild(penguin)
     }
 
     override func didMove(to view: SKView) {
-//        self.penguin.position = CGPoint(x: view.frame.midX, y: view.frame.midY)
-        
         let penguin = SKSpriteNode(texture: penguinAtlas.textureNamed("penguin-air2"))
         self.addChild(penguin)
     }

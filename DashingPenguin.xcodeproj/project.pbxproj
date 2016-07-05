@@ -43,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		698A6E801D2B44470016F95F /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				7F01D5A51D2A163B000A51D8 /* Actions.sks */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
 		7F01D5951D2A163B000A51D8 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +103,7 @@
 		7FB4ED4D1D2B262B00407A8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				698A6E801D2B44470016F95F /* Actions */,
 				7FB4ED511D2B26D200407A8B /* Scenes */,
 				7F01D5AE1D2A163B000A51D8 /* Assets.xcassets */,
 			);
@@ -105,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				7F01D5A71D2A163B000A51D8 /* GameScene.swift */,
-				7F01D5A51D2A163B000A51D8 /* Actions.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
