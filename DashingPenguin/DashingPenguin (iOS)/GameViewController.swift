@@ -40,6 +40,7 @@ class GameViewController: UIViewController {
                 }
             }
         }
+        
     }
 
     override func shouldAutorotate() -> Bool {
