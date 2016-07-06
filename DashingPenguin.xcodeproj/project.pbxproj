@@ -8,45 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
-		7F01D5A41D2A163B000A51D8 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7F01D5A31D2A163B000A51D8 /* GameScene.sks */; };
-		7F01D5A61D2A163B000A51D8 /* TouchActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7F01D5A51D2A163B000A51D8 /* TouchActions.sks */; };
-		7F01D5A81D2A163B000A51D8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A71D2A163B000A51D8 /* GameScene.swift */; };
 		7F01D5AA1D2A163B000A51D8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A91D2A163B000A51D8 /* GameViewController.swift */; };
-		7F01D5AD1D2A163B000A51D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F01D5AB1D2A163B000A51D8 /* Main.storyboard */; };
-		7F01D5B21D2A163B000A51D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F01D5B01D2A163B000A51D8 /* LaunchScreen.storyboard */; };
-		7F23A5B21D2C7D48008CDA5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5B11D2C7D48008CDA5C /* Assets.xcassets */; };
-		7F36553E1D2C529F00F5C3ED /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36553D1D2C529F00F5C3ED /* SpriteComponent.swift */; };
-		7F3655401D2C54AB00F5C3ED /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36553F1D2C54AB00F5C3ED /* Player.swift */; };
-		7F3655421D2C557400F5C3ED /* GameScene+TouchDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3655411D2C557400F5C3ED /* GameScene+TouchDebug.swift */; };
-		7F3655451D2C65E900F5C3ED /* PlayerData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F3655441D2C65E900F5C3ED /* PlayerData.plist */; };
-		7F3655471D2C751F00F5C3ED /* DashComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3655461D2C751F00F5C3ED /* DashComponent.swift */; };
-		7F3655491D2C7ACC00F5C3ED /* DashingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3655481D2C7ACC00F5C3ED /* DashingState.swift */; };
-		7F36554B1D2C7AD700F5C3ED /* DashEndingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36554A1D2C7AD700F5C3ED /* DashEndingState.swift */; };
-		7F36554D1D2C7ADF00F5C3ED /* LandedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36554C1D2C7ADF00F5C3ED /* LandedState.swift */; };
-		7F36554F1D2C7AE800F5C3ED /* DeathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F36554E1D2C7AE800F5C3ED /* DeathState.swift */; };
+		7F23A5B91D2C802F008CDA5C /* DashComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B31D2C802F008CDA5C /* DashComponent.swift */; };
+		7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */; };
+		7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B51D2C802F008CDA5C /* DashingState.swift */; };
+		7F23A5BC1D2C802F008CDA5C /* DeathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B61D2C802F008CDA5C /* DeathState.swift */; };
+		7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B71D2C802F008CDA5C /* LandedState.swift */; };
+		7F23A5BE1D2C802F008CDA5C /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */; };
+		7F23A5C01D2C803E008CDA5C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5BF1D2C803E008CDA5C /* Player.swift */; };
+		7F23A5C31D2C804C008CDA5C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5C11D2C804C008CDA5C /* GameScene.swift */; };
+		7F23A5C41D2C804C008CDA5C /* GameScene+TouchDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5C21D2C804C008CDA5C /* GameScene+TouchDebug.swift */; };
+		7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5C51D2C8064008CDA5C /* Assets.xcassets */; };
+		7F23A5CA1D2C8064008CDA5C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5C61D2C8064008CDA5C /* GameScene.sks */; };
+		7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5C71D2C8064008CDA5C /* PlayerData.plist */; };
+		7F23A5CC1D2C8064008CDA5C /* TouchActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5C81D2C8064008CDA5C /* TouchActions.sks */; };
+		7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5CD1D2C8081008CDA5C /* LaunchScreen.storyboard */; };
+		7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5CF1D2C8081008CDA5C /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7F01D59E1D2A163B000A51D8 /* DashingPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DashingPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "DashingPenguin/DashingPenguin (iOS)/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
-		7F01D5A31D2A163B000A51D8 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		7F01D5A51D2A163B000A51D8 /* TouchActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = TouchActions.sks; path = Assets/TouchActions.sks; sourceTree = "<group>"; };
-		7F01D5A71D2A163B000A51D8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = Scenes/GameScene.swift; sourceTree = "<group>"; };
 		7F01D5A91D2A163B000A51D8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = "DashingPenguin/DashingPenguin (iOS)/GameViewController.swift"; sourceTree = SOURCE_ROOT; };
-		7F01D5AC1D2A163B000A51D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7F01D5B11D2A163B000A51D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F01D5B31D2A163B000A51D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "DashingPenguin/DashingPenguin (iOS)/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7F01D5B91D2A165B000A51D8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7F23A5B11D2C7D48008CDA5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets/Assets.xcassets; sourceTree = "<group>"; };
-		7F36553D1D2C529F00F5C3ED /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteComponent.swift; path = Components/SpriteComponent.swift; sourceTree = "<group>"; };
-		7F36553F1D2C54AB00F5C3ED /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Entities/Player.swift; sourceTree = "<group>"; };
-		7F3655411D2C557400F5C3ED /* GameScene+TouchDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+TouchDebug.swift"; path = "Scenes/GameScene+TouchDebug.swift"; sourceTree = "<group>"; };
-		7F3655441D2C65E900F5C3ED /* PlayerData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PlayerData.plist; path = Assets/PlayerData.plist; sourceTree = "<group>"; };
-		7F3655461D2C751F00F5C3ED /* DashComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashComponent.swift; path = Components/DashComponent.swift; sourceTree = "<group>"; };
-		7F3655481D2C7ACC00F5C3ED /* DashingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashingState.swift; path = Components/DashingState.swift; sourceTree = "<group>"; };
-		7F36554A1D2C7AD700F5C3ED /* DashEndingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashEndingState.swift; path = Components/DashEndingState.swift; sourceTree = "<group>"; };
-		7F36554C1D2C7ADF00F5C3ED /* LandedState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandedState.swift; path = Components/LandedState.swift; sourceTree = "<group>"; };
-		7F36554E1D2C7AE800F5C3ED /* DeathState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeathState.swift; path = Components/DeathState.swift; sourceTree = "<group>"; };
+		7F23A5B31D2C802F008CDA5C /* DashComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashComponent.swift; path = DashingPenguin/Components/DashComponent.swift; sourceTree = "<group>"; };
+		7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashEndingState.swift; path = DashingPenguin/Components/DashEndingState.swift; sourceTree = "<group>"; };
+		7F23A5B51D2C802F008CDA5C /* DashingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashingState.swift; path = DashingPenguin/Components/DashingState.swift; sourceTree = "<group>"; };
+		7F23A5B61D2C802F008CDA5C /* DeathState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeathState.swift; path = DashingPenguin/Components/DeathState.swift; sourceTree = "<group>"; };
+		7F23A5B71D2C802F008CDA5C /* LandedState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandedState.swift; path = DashingPenguin/Components/LandedState.swift; sourceTree = "<group>"; };
+		7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteComponent.swift; path = DashingPenguin/Components/SpriteComponent.swift; sourceTree = "<group>"; };
+		7F23A5BF1D2C803E008CDA5C /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = DashingPenguin/Entities/Player.swift; sourceTree = "<group>"; };
+		7F23A5C11D2C804C008CDA5C /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = DashingPenguin/Scenes/GameScene.swift; sourceTree = "<group>"; };
+		7F23A5C21D2C804C008CDA5C /* GameScene+TouchDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+TouchDebug.swift"; path = "DashingPenguin/Scenes/GameScene+TouchDebug.swift"; sourceTree = "<group>"; };
+		7F23A5C51D2C8064008CDA5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = DashingPenguin/Assets/Assets.xcassets; sourceTree = "<group>"; };
+		7F23A5C61D2C8064008CDA5C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameScene.sks; path = DashingPenguin/Assets/GameScene.sks; sourceTree = "<group>"; };
+		7F23A5C71D2C8064008CDA5C /* PlayerData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PlayerData.plist; path = DashingPenguin/Assets/PlayerData.plist; sourceTree = "<group>"; };
+		7F23A5C81D2C8064008CDA5C /* TouchActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = TouchActions.sks; path = DashingPenguin/Assets/TouchActions.sks; sourceTree = "<group>"; };
+		7F23A5CE1D2C8081008CDA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "DashingPenguin (iOS)/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		7F23A5D01D2C8081008CDA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "DashingPenguin (iOS)/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +60,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		698A6E801D2B44470016F95F /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				7F01D5A51D2A163B000A51D8 /* TouchActions.sks */,
-			);
-			name = Actions;
-			sourceTree = "<group>";
-		};
 		7F01D5951D2A163B000A51D8 = {
 			isa = PBXGroup;
 			children = (
@@ -102,8 +94,8 @@
 			children = (
 				7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */,
 				7F01D5A91D2A163B000A51D8 /* GameViewController.swift */,
-				7F01D5AB1D2A163B000A51D8 /* Main.storyboard */,
-				7F01D5B01D2A163B000A51D8 /* LaunchScreen.storyboard */,
+				7F23A5CD1D2C8081008CDA5C /* LaunchScreen.storyboard */,
+				7F23A5CF1D2C8081008CDA5C /* Main.storyboard */,
 				7FB4ED4C1D2B260A00407A8B /* Supporting Files */,
 			);
 			name = iOS;
@@ -121,10 +113,10 @@
 		7FB4ED4D1D2B262B00407A8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				7F23A5B11D2C7D48008CDA5C /* Assets.xcassets */,
-				698A6E801D2B44470016F95F /* Actions */,
-				7FB4ED511D2B26D200407A8B /* Scenes */,
-				7F3655441D2C65E900F5C3ED /* PlayerData.plist */,
+				7F23A5C51D2C8064008CDA5C /* Assets.xcassets */,
+				7F23A5C61D2C8064008CDA5C /* GameScene.sks */,
+				7F23A5C71D2C8064008CDA5C /* PlayerData.plist */,
+				7F23A5C81D2C8064008CDA5C /* TouchActions.sks */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -132,16 +124,8 @@
 		7FB4ED4E1D2B267000407A8B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				7F01D5A71D2A163B000A51D8 /* GameScene.swift */,
-				7F3655411D2C557400F5C3ED /* GameScene+TouchDebug.swift */,
-			);
-			name = Scenes;
-			sourceTree = "<group>";
-		};
-		7FB4ED511D2B26D200407A8B /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				7F01D5A31D2A163B000A51D8 /* GameScene.sks */,
+				7F23A5C11D2C804C008CDA5C /* GameScene.swift */,
+				7F23A5C21D2C804C008CDA5C /* GameScene+TouchDebug.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -149,7 +133,7 @@
 		7FB4ED521D2B26F800407A8B /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				7F36553F1D2C54AB00F5C3ED /* Player.swift */,
+				7F23A5BF1D2C803E008CDA5C /* Player.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -157,12 +141,12 @@
 		7FB4ED531D2B26FF00407A8B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7F36553D1D2C529F00F5C3ED /* SpriteComponent.swift */,
-				7F3655461D2C751F00F5C3ED /* DashComponent.swift */,
-				7F36554C1D2C7ADF00F5C3ED /* LandedState.swift */,
-				7F3655481D2C7ACC00F5C3ED /* DashingState.swift */,
-				7F36554A1D2C7AD700F5C3ED /* DashEndingState.swift */,
-				7F36554E1D2C7AE800F5C3ED /* DeathState.swift */,
+				7F23A5B31D2C802F008CDA5C /* DashComponent.swift */,
+				7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */,
+				7F23A5B51D2C802F008CDA5C /* DashingState.swift */,
+				7F23A5B61D2C802F008CDA5C /* DeathState.swift */,
+				7F23A5B71D2C802F008CDA5C /* LandedState.swift */,
+				7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -228,12 +212,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3655451D2C65E900F5C3ED /* PlayerData.plist in Resources */,
-				7F01D5AD1D2A163B000A51D8 /* Main.storyboard in Resources */,
-				7F01D5A41D2A163B000A51D8 /* GameScene.sks in Resources */,
-				7F01D5B21D2A163B000A51D8 /* LaunchScreen.storyboard in Resources */,
-				7F23A5B21D2C7D48008CDA5C /* Assets.xcassets in Resources */,
-				7F01D5A61D2A163B000A51D8 /* TouchActions.sks in Resources */,
+				7F23A5CA1D2C8064008CDA5C /* GameScene.sks in Resources */,
+				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
+				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
+				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
+				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
+				7F23A5CC1D2C8064008CDA5C /* TouchActions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,40 +228,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F01D5A81D2A163B000A51D8 /* GameScene.swift in Sources */,
-				7F36554D1D2C7ADF00F5C3ED /* LandedState.swift in Sources */,
-				7F36554B1D2C7AD700F5C3ED /* DashEndingState.swift in Sources */,
-				7F36553E1D2C529F00F5C3ED /* SpriteComponent.swift in Sources */,
+				7F23A5C31D2C804C008CDA5C /* GameScene.swift in Sources */,
+				7F23A5BC1D2C802F008CDA5C /* DeathState.swift in Sources */,
+				7F23A5BE1D2C802F008CDA5C /* SpriteComponent.swift in Sources */,
+				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
+				7F23A5C01D2C803E008CDA5C /* Player.swift in Sources */,
 				7F01D5AA1D2A163B000A51D8 /* GameViewController.swift in Sources */,
-				7F3655421D2C557400F5C3ED /* GameScene+TouchDebug.swift in Sources */,
-				7F3655491D2C7ACC00F5C3ED /* DashingState.swift in Sources */,
-				7F3655401D2C54AB00F5C3ED /* Player.swift in Sources */,
-				7F3655471D2C751F00F5C3ED /* DashComponent.swift in Sources */,
+				7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */,
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,
-				7F36554F1D2C7AE800F5C3ED /* DeathState.swift in Sources */,
+				7F23A5C41D2C804C008CDA5C /* GameScene+TouchDebug.swift in Sources */,
+				7F23A5B91D2C802F008CDA5C /* DashComponent.swift in Sources */,
+				7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7F01D5AB1D2A163B000A51D8 /* Main.storyboard */ = {
+		7F23A5CD1D2C8081008CDA5C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7F01D5AC1D2A163B000A51D8 /* Base */,
-			);
-			name = Main.storyboard;
-			path = "DashingPenguin/DashingPenguin (iOS)";
-			sourceTree = SOURCE_ROOT;
-		};
-		7F01D5B01D2A163B000A51D8 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7F01D5B11D2A163B000A51D8 /* Base */,
+				7F23A5CE1D2C8081008CDA5C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			path = "DashingPenguin/DashingPenguin (iOS)";
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
+		};
+		7F23A5CF1D2C8081008CDA5C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F23A5D01D2C8081008CDA5C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
@@ -373,8 +355,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DashingPenguin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dd.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -386,8 +368,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = DashingPenguin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dd.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
