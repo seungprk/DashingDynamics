@@ -8,10 +8,17 @@
 
 import SpriteKit
 
+protocol GameInputDelegate: class {
+    
+    func swipeGesture(velocity: CGVector)
+    func tapGesture(at location: CGPoint)
+}
+
 class TouchControlInputNode: SKSpriteNode {
     
     var startLocation: CGPoint!
     var startTime: TimeInterval!
+    weak var delegate: GameInputDelegate?
     
     init(frame: CGRect) {
         super.init(texture: nil, color: UIColor.red(), size: frame.size)
@@ -55,8 +62,12 @@ class TouchControlInputNode: SKSpriteNode {
                     
                     let direction = CGVector(dx: dx / magnitude, dy: dy / magnitude)
                     print(direction)
+                    
+                    
                 }
             }
+        } else {
+            delegate?.tapGesture(at: endLocation)
         }
     }
 }
