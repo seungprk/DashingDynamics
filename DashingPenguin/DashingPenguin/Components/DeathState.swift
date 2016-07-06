@@ -6,4 +6,14 @@
 //  Copyright © 2016 Dashing Duo. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+import GameplayKit
+
+class DeathState: GKState {
+    
+    unowned var entity: Player
+    
+    required init(entity: Player) {
+        self.entity = entity
+    }
+}

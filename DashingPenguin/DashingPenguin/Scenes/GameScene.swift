@@ -37,12 +37,12 @@ class GameScene: SKScene {
         if let label = self.label {
             label.alpha = 0.0
             label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
-        
-        print(entities)
+        }        
     }
 
     override func didMove(to view: SKView) {
+        let touchNode = TouchControlInputNode(frame: view.bounds)
+        addChild(touchNode)
     }
  
     // MARK: - Touch overrides

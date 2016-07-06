@@ -9,16 +9,17 @@
 import SpriteKit
 import GameplayKit
 
-class DashComponent: GKComponent {
+class MovementComponent: GKComponent {
     
     let stateMachine: GKStateMachine
     
     let initialStateClass: AnyClass
     
-    override init() {
-        stateMachine = GKStateMachine(states: [
-            ])
-        initialStateClass = stateMachine.currentState! as! AnyClass
+    init(states: [GKState]) {
+        stateMachine = GKStateMachine(states: states)
+        
+        let initialState = states.first!
+        initialStateClass = initialState.dynamicType
         
         super.init()
     }
