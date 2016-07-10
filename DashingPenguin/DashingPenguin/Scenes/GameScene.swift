@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, GameInputDelegate {
     
     var entities = [GKEntity]()
     var graphs = [GKGraph]()
@@ -20,16 +20,24 @@ class GameScene: SKScene {
     // Game Session Info
     private var label: SKLabelNode?
     
-    // Touch Debug -> Code for this is in GameScene+TouchDebug.swift
-    internal var spinnyNode: SKShapeNode?
-    
     // Assets
     var penguinAtlas = SKTextureAtlas(named: "Penguin")
+    
+    // Control Input
+    var controlInputNode: TouchControlInputNode?
+    
+    // Camera Node
+    var cameraNode: SKCameraNode?
+    
+    // Temporary Player
+    var tempPlayer = SKSpriteNode(color: UIColor.green(), size: CGSize(width: 0.2, height: 0.2))
     
     // MARK: - Scene Setup
     
     override func sceneDidLoad() {
 
+        backgroundColor = SKColor.white()
+        
         self.lastUpdateTime = 0
         
         // Get label node from scene and store it for use later
@@ -39,28 +47,22 @@ class GameScene: SKScene {
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
         
-        let touchNode = TouchControlInputNode(frame: self.frame)
-        touchNode.position = CGPoint(x: self.frame.midX, y:  self.frame.midY)
-        addChild(touchNode)
+        // Initialize touch input node
+        let controlInputNode = TouchControlInputNode(frame: self.frame)
+        controlInputNode.delegate = self
+        
+        cameraNode = SKCameraNode()
+        cameraNode?.addChild(controlInputNode)
+        
+        controlInputNode.position = cameraNode!.position
+        
+        addChild(cameraNode!)
+        camera = cameraNode
     }
 
     override func didMove(to view: SKView) {
+        addChild(tempPlayer)
     }
- 
-    // MARK: - Touch overrides
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -79,5 +81,21 @@ class GameScene: SKScene {
         }
         
         self.lastUpdateTime = currentTime
+        
+        centerCamera()
+    }
+    
+    func swipeGesture(velocity: CGVector) {
+        tempPlayer.run(SKAction.move(by: velocity, duration: 0.5))
+    }
+    
+    func tapGesture(at location: CGPoint) {
+        print("tapGesture(at:) has not been implemented")
+    }
+    
+    func centerCamera() {
+        let move = SKAction.move(to: tempPlayer.position, duration: 0.1)
+        move.timingMode = .easeOut
+        cameraNode?.run(move)
     }
 }
