@@ -21,11 +21,11 @@ class TouchControlInputNode: SKSpriteNode {
     weak var delegate: GameInputDelegate?
     
     init(frame: CGRect) {
-        super.init(texture: nil, color: UIColor.red(), size: frame.size)
+        let testColor = SKColor.init(red: 1, green: 0, blue: 0, alpha: 0.2)
+        super.init(texture: nil, color: testColor, size: frame.size)
         
-        print(frame)
-        
-        zPosition = 10000
+        zPosition = GameplayConfiguration.HeightOf.controlInputNode
+        name      = GameplayConfiguration.NameOf.controlInputNode
         isUserInteractionEnabled = true
     }
     
@@ -34,40 +34,42 @@ class TouchControlInputNode: SKSpriteNode {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         guard touches.count == 1 else { return }
         
         let touch = touches.first!
-        
-        startLocation = touch.location(in: self)
         startTime = touch.timestamp
         
-        print("swiping...", terminator: "")
+        if let scene = self.scene {
+            let touchLocation = touch.location(in: scene.view)
+            startLocation = CGPoint(x: touchLocation.x, y: scene.view!.frame.maxY - touchLocation.y)
+            
+            print("swiping...", terminator: "")
+            print(startLocation)
+        }
 
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        let endLocation = touch.location(in: self)
         
-        let dx = endLocation.x - startLocation.x
-        let dy = endLocation.y - startLocation.y
-        let magnitude = sqrt(dx * dx + dy * dy)
+        guard touches.count == 1 else { return }
         
-        if magnitude >= GameplayConfiguration.TouchControls.minDistance {
-            let dt = touch.timestamp - startTime
-            if dt > GameplayConfiguration.TouchControls.minDuration {
-                
-                let speed = Double(magnitude) / dt
-                if speed >= GameplayConfiguration.TouchControls.minSpeed && speed <= GameplayConfiguration.TouchControls.maxSpeed {
-                    
-                    let direction = CGVector(dx: dx / magnitude, dy: dy / magnitude)
-                    print(direction)
-                    
-                    
-                }
-            }
-        } else {
-            delegate?.tapGesture(at: endLocation)
+        if let scene = self.scene {
+            let touchLocation = touches.first!.location(in: scene.view)
+            let endLocation = CGPoint(x: touchLocation.x, y: scene.view!.frame.maxY - touchLocation.y)
+            
+            let dx = endLocation.x - startLocation.x
+            let dy = endLocation.y - startLocation.y
+
+            delegate?.swipeGesture(velocity: CGVector(dx: dx, dy: dy))
         }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
     }
 }

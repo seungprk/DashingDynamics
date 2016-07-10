@@ -21,4 +21,12 @@ struct GameplayConfiguration {
         static let minSpeed   : Double  = 000
         static let maxSpeed   : Double  = 900
     }
+    
+    struct HeightOf {
+        static let controlInputNode: CGFloat = 10000
+    }
+    
+    struct NameOf {
+        static let controlInputNode = "touchInputNode"
+    }
 }

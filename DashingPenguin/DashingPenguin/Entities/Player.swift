@@ -16,7 +16,12 @@ class Player: GKEntity {
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
         addComponent(spriteComponent)
-        addComponent(MovementComponent(states: <#T##[GKState]#>))
+        addComponent(MovementComponent(states: [
+            LandedState(entity: self),
+            DashingState(entity: self),
+            DashEndingState(entity: self),
+            DeathState(entity: self)
+        ]))
     }
     
     required init?(coder aDecoder: NSCoder) {
