@@ -55,18 +55,18 @@ class TouchControlInputNode: SKSpriteNode {
         
         if magnitude >= GameplayConfiguration.TouchControls.minDistance {
             let dt = touch.timestamp - startTime
-            if dt > GameplayConfiguration.TouchControls.minDuration {
-                
+//            if dt > GameplayConfiguration.TouchControls.minDuration {
+            
                 let speed = Double(magnitude) / dt
-                if speed >= GameplayConfiguration.TouchControls.minSpeed && speed <= GameplayConfiguration.TouchControls.maxSpeed {
-                    
+//                if speed >= GameplayConfiguration.TouchControls.minSpeed && speed <= GameplayConfiguration.TouchControls.maxSpeed {
+                
                     let direction = CGVector(dx: dx / magnitude, dy: dy / magnitude)
                     print(direction)
-                    
-                    
-                }
-            }
+//                }
+//            }
         } else {
+            
+            print(magnitude)
             delegate?.tapGesture(at: endLocation)
         }
     }

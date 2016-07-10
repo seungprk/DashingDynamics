@@ -37,30 +37,28 @@ class GameScene: SKScene {
         if let label = self.label {
             label.alpha = 0.0
             label.run(SKAction.fadeIn(withDuration: 2.0))
-        }        
+        }
+        
+        let touchNode = TouchControlInputNode(frame: self.frame)
+        touchNode.position = CGPoint(x: self.frame.midX, y:  self.frame.midY)
+        addChild(touchNode)
     }
 
     override func didMove(to view: SKView) {
-        let touchNode = TouchControlInputNode(frame: view.bounds)
-        addChild(touchNode)
     }
  
     // MARK: - Touch overrides
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     
