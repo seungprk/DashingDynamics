@@ -17,8 +17,8 @@ class GameScene: SKScene, GameInputDelegate {
     var penguinAtlas = SKTextureAtlas(named: "Penguin")
     var controlInputNode: TouchControlInputNode?
     var cameraNode: SKCameraNode?
-    var tempPlayer = SKSpriteNode(color: UIColor.green(), size: CGSize(width: 0.2, height: 0.2))
-    var platformBlocksManager = PlatformBlocksManager()
+    var tempPlayer = Player(imageNamed: "penguin-front")
+    var platformBlocksManager: PlatformBlocksManager!
     
     // MARK: - Scene Setup
     
@@ -28,11 +28,10 @@ class GameScene: SKScene, GameInputDelegate {
         
         self.lastUpdateTime = 0
         
-        // Get label node from scene and store it for use later
+        // Label for testing
         let label = SKLabelNode(text: "Dashing Penguin")
-        //label.position = CGPoint(x: size.width/2, y: size.height/2)
         label.fontColor = UIColor.black()
-        label.alpha = 0.0
+        label.alpha = 1.0
         label.run(SKAction.fadeIn(withDuration: 2.0))
         addChild(label)
         
@@ -40,17 +39,19 @@ class GameScene: SKScene, GameInputDelegate {
         let controlInputNode = TouchControlInputNode(frame: self.frame)
         controlInputNode.delegate = self
         
+        // Camera Node Setup
         cameraNode = SKCameraNode()
         cameraNode?.addChild(controlInputNode)
-        
         controlInputNode.position = cameraNode!.position
-        
         addChild(cameraNode!)
         camera = cameraNode
-    }
-
-    override func didMove(to view: SKView) {
-        addChild(tempPlayer)
+        
+        // Temp Player Entity Setup
+        if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
+            playerSprite.size = CGSize(width: 40, height: 60)
+        }
+        addChild((tempPlayer.componentForClass(SpriteComponent.self)?.node)!)
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -75,7 +76,9 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func swipeGesture(velocity: CGVector) {
-        tempPlayer.run(SKAction.move(by: velocity, duration: 0.5))
+        if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
+            playerSprite.run(SKAction.move(by: velocity, duration: 0.1))
+        }
     }
     
     func tapGesture(at location: CGPoint) {
@@ -83,8 +86,10 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func centerCamera() {
-        let move = SKAction.move(to: tempPlayer.position, duration: 0.1)
-        move.timingMode = .easeOut
-        cameraNode?.run(move)
+        if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
+            let move = SKAction.move(to: playerSprite.position, duration: 0.1)
+            move.timingMode = .easeOut
+            cameraNode?.run(move)
+        }
     }
 }
