@@ -12,21 +12,13 @@ import GameplayKit
 class GameScene: SKScene, GameInputDelegate {
     
     var entities = [GKEntity]()
-    
-    // Game Logic
+
     private var lastUpdateTime: TimeInterval = 0
-    
-    // Assets
     var penguinAtlas = SKTextureAtlas(named: "Penguin")
-    
-    // Control Input
     var controlInputNode: TouchControlInputNode?
-    
-    // Camera Node
     var cameraNode: SKCameraNode?
-    
-    // Temporary Player
     var tempPlayer = SKSpriteNode(color: UIColor.green(), size: CGSize(width: 0.2, height: 0.2))
+    var platformBlocksManager = PlatformBlocksManager()
     
     // MARK: - Scene Setup
     

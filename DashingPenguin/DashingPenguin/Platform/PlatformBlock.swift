@@ -9,14 +9,18 @@
 import SpriteKit
 import GameplayKit
 
-class PlatformBlock: GKEntity {
+class PlatformBlock: SKNode {
     
-    init(imageNamed imageName: String) {
+    var platforms = [Platform]()
+    
+    override init() {
         super.init()
+        
+        
+        print("PlatformBlock Object Created")
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
