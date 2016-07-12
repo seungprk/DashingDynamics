@@ -11,10 +11,10 @@ import GameplayKit
 
 class Platform: GKEntity {
     
-    init(imageNamed imageName: String) {
+    override init() {
         super.init()
         
-        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
+        let spriteComponent = SpriteComponent(color: UIColor.green(), size: CGSize(width: 50, height: 50))
         addComponent(spriteComponent)
     }
     
@@ -23,4 +23,3 @@ class Platform: GKEntity {
     }
     
 }
-

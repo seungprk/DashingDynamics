@@ -23,9 +23,9 @@ class GameScene: SKScene, GameInputDelegate {
     // MARK: - Scene Setup
     
     override func sceneDidLoad() {
-
-        backgroundColor = SKColor.white()
         
+        // Misc Setup
+        backgroundColor = SKColor.white()
         self.lastUpdateTime = 0
         
         // Label for testing
@@ -48,10 +48,12 @@ class GameScene: SKScene, GameInputDelegate {
         
         // Temp Player Entity Setup
         if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
-            playerSprite.size = CGSize(width: 40, height: 60)
+            playerSprite.size = CGSize(width: 40, height: 50)
         }
         addChild((tempPlayer.componentForClass(SpriteComponent.self)?.node)!)
         
+        // Platform Manager Setup
+        platformBlocksManager = PlatformBlocksManager(scene: self)
     }
     
     override func update(_ currentTime: TimeInterval) {

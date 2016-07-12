@@ -13,9 +13,16 @@ class SpriteComponent: GKComponent {
     
     let node: SKSpriteNode
     
+    // Init with Texture
     init(texture: SKTexture) {
         node = SKSpriteNode(texture: texture, color: SKColor.clear(), size: texture.size())
         
+        super.init()
+    }
+    
+    // Init as Rectangle for Debug
+    init(color: UIColor, size: CGSize) {
+        node = SKSpriteNode(color: color, size: size)
         super.init()
     }
     

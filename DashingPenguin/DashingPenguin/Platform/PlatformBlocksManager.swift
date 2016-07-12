@@ -11,13 +11,22 @@ import GameplayKit
 
 class PlatformBlocksManager {
     
+    var scene: GameScene!
     var blocks = [PlatformBlock]()
     
-    init() {
+    init(scene: GameScene) {
+        self.scene = scene
         print("PlatformBlocksManager Object created")
+        
+        // Create and Place First Block
+        let firstBlock = PlatformBlock(size: CGSize(width: scene.size.width, height: 300))
+        scene.addChild(firstBlock)
+        blocks.append(firstBlock)
     }
     
     func addBlock() {
-        //TODO
+        let newBlock = PlatformBlock(size: CGSize(width: scene.size.width, height: 300))
+        scene.addChild(newBlock)
+        blocks.append(newBlock)
     }
 }
