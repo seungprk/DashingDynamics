@@ -59,6 +59,13 @@ class GameScene: SKScene, GameInputDelegate {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
+        platformBlocksManager.checkIfBlockNeedsToBeAdded()
+        platformBlocksManager.checkIfBlockNeedsToBeRemoved()
+        updateCurrentTime(currentTime)
+        centerCamera()
+    }
+    
+    func updateCurrentTime(_ currentTime: TimeInterval) {
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
             self.lastUpdateTime = currentTime
@@ -73,8 +80,6 @@ class GameScene: SKScene, GameInputDelegate {
         }
         
         self.lastUpdateTime = currentTime
-        
-        centerCamera()
     }
     
     func swipeGesture(velocity: CGVector) {
@@ -89,7 +94,7 @@ class GameScene: SKScene, GameInputDelegate {
     
     func centerCamera() {
         if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
-            let move = SKAction.move(to: playerSprite.position, duration: 0.1)
+            let move = SKAction.move(to: playerSprite.position, duration: 0.2)
             move.timingMode = .easeOut
             cameraNode?.run(move)
         }
