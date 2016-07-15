@@ -19,7 +19,7 @@ class PlatformBlocksManager {
         print("PlatformBlocksManager Object created")
         
         // Create and Place First Block
-        let firstBlock = PlatformBlock(size: CGSize(width: scene.size.width, height: 300))
+        let firstBlock = PlatformBlockFirst(scene: scene)
         scene.addChild(firstBlock)
         blocks.append(firstBlock)
     }
@@ -40,11 +40,11 @@ class PlatformBlocksManager {
             blocks.removeFirst()
         }
     }
+    
     func addBlock() {
-        let newBlock = PlatformBlock(size: CGSize(width: scene.size.width, height: 300))
+        let newBlock = PlatformBlockSingleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         let lastBlock = (blocks.last)!
-        let nextBlockPos = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
-        newBlock.position = nextBlockPos
+        newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
         scene.addChild(newBlock)
         blocks.append(newBlock)
     }
