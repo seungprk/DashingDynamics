@@ -9,16 +9,19 @@
 import SpriteKit
 import GameplayKit
 
-class PlatformBlockSingleDash: PlatformBlock {
+class PlatformBlockObstacleDoubleDash: PlatformBlock {
+    
+    var obstacle: Obstacle!
     
     init(scene: GameScene, firstPlatXPos: CGFloat) {
         super.init()
         
         let platformSize = Platform().size
+        let obstacleSize = Obstacle().size
         
         // Get Random Distance
-        let rMax = GameplayConfiguration.TouchControls.maxDistance
-        let rMin = sqrt(2) * platformSize.height/2 * 1.5
+        let rMax = GameplayConfiguration.TouchControls.maxDistance * 2
+        let rMin = sqrt(2) * platformSize.height/2 * 1.5 + GameplayConfiguration.TouchControls.maxDistance
         let randomDist = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
@@ -52,7 +55,7 @@ class PlatformBlockSingleDash: PlatformBlock {
         nextBlockFirstPlatformXPos = firstPlatXPos + xDelta
         
         // Background for debug
-        addChild(SKSpriteNode(color: UIColor.red(), size: self.size))
+        addChild(SKSpriteNode(color: UIColor.purple(), size: self.size))
         addChild(SKSpriteNode(color: UIColor.white(), size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
         
         // Setup Platform
@@ -62,6 +65,11 @@ class PlatformBlockSingleDash: PlatformBlock {
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
 
+        // Setup Obstacle
+        obstacle = Obstacle()
+        let obstacleSpriteNode = obstacle.componentForClass(SpriteComponent.self)!.node
+        obstacleSpriteNode.position = CGPoint(x: (firstPlatXPos + nextBlockFirstPlatformXPos)/2, y: platformSize.height/2)
+        addChild(obstacleSpriteNode)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -42,7 +42,7 @@ class PlatformBlocksManager {
     }
     
     func addBlock() {
-        let newBlock = PlatformBlockSingleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        let newBlock = PlatformBlockObstacleDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         let lastBlock = (blocks.last)!
         newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
         scene.addChild(newBlock)
