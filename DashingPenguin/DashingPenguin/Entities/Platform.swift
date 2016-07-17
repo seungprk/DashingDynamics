@@ -11,10 +11,12 @@ import GameplayKit
 
 class Platform: GKEntity {
     
+    let size = CGSize(width: 50, height: 50)
+    
     override init() {
         super.init()
         
-        let spriteComponent = SpriteComponent(color: UIColor.green(), size: CGSize(width: 50, height: 50))
+        let spriteComponent = SpriteComponent(color: UIColor.green(), size: self.size)
         addComponent(spriteComponent)
     }
     

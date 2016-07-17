@@ -17,6 +17,7 @@ class PlatformBlockFirst: PlatformBlock {
         
         // Background for Debug
         addChild(SKSpriteNode(color: UIColor.blue(), size: self.size))
+        addChild(SKSpriteNode(color: UIColor.white(), size: CGSize(width: self.size.width - 2, height: self.size.height - 2)))
         
         // Setup Platforms
         let firstPlatform = Platform()
