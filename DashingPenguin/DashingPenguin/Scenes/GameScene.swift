@@ -17,8 +17,10 @@ class GameScene: SKScene, GameInputDelegate {
     var penguinAtlas = SKTextureAtlas(named: "Penguin")
     var controlInputNode: TouchControlInputNode?
     var cameraNode: SKCameraNode?
-    var tempPlayer = Player(imageNamed: "penguin-front")
+    var player: Player?
     var platformBlocksManager: PlatformBlocksManager!
+    
+//    let movementComponent = GKComponentSystem(componentClass: MovementComponent.self)
     
     // MARK: - Scene Setup
     
@@ -46,14 +48,19 @@ class GameScene: SKScene, GameInputDelegate {
         addChild(cameraNode!)
         camera = cameraNode
         
-        // Temp Player Entity Setup
-        if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
-            playerSprite.size = CGSize(width: 40, height: 50)
+        // Player Entity Setup
+        self.player = Player(imageNamed: "penguin-front")
+        entities.append(player!)
+        if let playerSprite = player?.componentForClass(SpriteComponent.self) {
+            addChild(playerSprite.node)
         }
-        addChild((tempPlayer.componentForClass(SpriteComponent.self)?.node)!)
         
         // Platform Manager Setup
         platformBlocksManager = PlatformBlocksManager(scene: self)
+    }
+    
+    override func didMove(to view: SKView) {
+        player?.componentForClass(MovementComponent.self)?.enterInitialState()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -66,7 +73,7 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func updateCurrentTime(_ currentTime: TimeInterval) {
-        // Initialize _lastUpdateTime if it has not already been
+        // Initialize lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
             self.lastUpdateTime = currentTime
         }
@@ -83,8 +90,8 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func swipeGesture(velocity: CGVector) {
-        if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
-            playerSprite.run(SKAction.move(by: velocity, duration: 0.1))
+        if let playerMovement = player?.componentForClass(MovementComponent.self) {
+            playerMovement.dash(velocity)
         }
     }
     

@@ -15,17 +15,21 @@ class Player: GKEntity {
         super.init()
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
+        spriteComponent.node.size = GameplayConfiguration.Player.size
+        
         addComponent(spriteComponent)
-        addComponent(MovementComponent(states: [
-            LandedState(entity: self),
-            DashingState(entity: self),
-            DashEndingState(entity: self),
-            DeathState(entity: self)
-        ]))
+        addComponent(MovementComponent(states: [ LandedState(entity: self),
+                                                 DashingState(entity: self),
+                                                 DashEndingState(entity: self),
+                                                 DeathState(entity: self) ]))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func update(withDeltaTime seconds: TimeInterval) {
+        componentForClass(MovementComponent.self)?.update(withDeltaTime: seconds)
     }
     
 }
