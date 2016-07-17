@@ -15,6 +15,13 @@ class DashEndingState: GKState {
     
     var elapsedTime: TimeInterval = 0.0
     
+    let temporarySequence: SKAction = {
+        let flashCount = 5
+        let flashOut = SKAction.fadeOut(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
+        let flashIn = SKAction.fadeIn(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
+        return SKAction.repeat(SKAction.sequence([flashOut, flashIn]), count: flashCount)
+    }()
+    
     required init(entity: Player) {
         self.entity = entity
     }
@@ -23,11 +30,7 @@ class DashEndingState: GKState {
         super.didEnter(withPreviousState: previousState)
                 
         if let spriteComponent = self.entity.componentForClass(SpriteComponent.self) {
-            let flashCount = 5
-            let flashOut = SKAction.fadeOut(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
-            let flashIn = SKAction.fadeIn(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
-            
-            spriteComponent.node.run(SKAction.repeat(SKAction.sequence([flashOut, flashIn]), count: flashCount))
+            spriteComponent.node.run(temporarySequence)
         }
         
         elapsedTime = 0.0
