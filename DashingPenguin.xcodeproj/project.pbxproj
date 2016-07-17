@@ -99,8 +99,8 @@
 		7F01D5A01D2A163B000A51D8 /* DashingPenguin */ = {
 			isa = PBXGroup;
 			children = (
-				247DA90F1D331659004C4A14 /* Platform */,
 				7FB4ED4E1D2B267000407A8B /* Scenes */,
+				247DA90F1D331659004C4A14 /* Platform */,
 				7FB4ED521D2B26F800407A8B /* Entities */,
 				7FB4ED531D2B26FF00407A8B /* Components */,
 				7F3C34DD1D2CA65C008DA5B3 /* Player Control */,

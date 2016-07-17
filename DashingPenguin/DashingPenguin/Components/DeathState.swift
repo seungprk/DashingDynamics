@@ -16,4 +16,8 @@ class DeathState: GKState {
     required init(entity: Player) {
         self.entity = entity
     }
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        return stateClass is LandedState.Type
+    }
 }

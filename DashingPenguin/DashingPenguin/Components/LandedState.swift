@@ -17,9 +17,12 @@ class LandedState: GKState {
         self.entity = entity
     }
     
+    override func didEnter(withPreviousState previousState: GKState?) {
+        print("\n\n\n\n\n\n\nLANDED\n\n\n\n\n\n\n\n")
+        entity.componentForClass(MovementComponent.self)?.dashCount = 0
+    }
+    
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass is DashEndingState.Type
-        
-
+        return stateClass is DashingState.Type
     }
 }
