@@ -10,10 +10,14 @@ import SpriteKit
 import GameplayKit
 
 class MovementComponent: GKComponent {
-    
+        
     let stateMachine: GKStateMachine
     
     let initialStateClass: AnyClass
+    
+    var velocity: CGVector?
+    
+    var dashCount = 0
     
     init(states: [GKState]) {
         stateMachine = GKStateMachine(states: states)
@@ -32,9 +36,19 @@ class MovementComponent: GKComponent {
         super.update(withDeltaTime: seconds)
         
         stateMachine.update(withDeltaTime: seconds)
+        
+        print("Movement component updating")
     }
     
     func enterInitialState() {
         stateMachine.enterState(initialStateClass)
+    }
+    
+    func dash(_ velocity: CGVector) {
+        print("\n\n\nDASHING\n\n\n")
+        print(stateMachine.currentState)
+        
+        self.velocity = velocity
+        stateMachine.enterState(DashingState.self)
     }
 }
