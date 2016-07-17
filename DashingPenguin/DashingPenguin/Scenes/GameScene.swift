@@ -100,7 +100,7 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func centerCamera() {
-        if let playerSprite = tempPlayer.componentForClass(SpriteComponent.self)?.node {
+        if let playerSprite = player?.componentForClass(SpriteComponent.self)?.node {
             let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y), duration: 0.2)
             move.timingMode = .easeOut
             cameraNode?.run(move)
