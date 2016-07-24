@@ -42,13 +42,15 @@ class DashEndingState: GKState {
         elapsedTime += seconds
         
         if elapsedTime >= GameplayConfiguration.Player.dashEndDuration {
-            stateMachine?.enterState(LandedState.self)
+//            stateMachine?.enterState(LandedState.self)
             
-//            if entity.isOverPlatform {
-//                stateMachine?.enterState(LandedState.self)
-//            } else {
-//                stateMachine?.enterState(DeathState.self)
-//            }
+            
+            print("testing death", entity.isOnPlatform)
+            if entity.isOnPlatform {
+                stateMachine?.enterState(LandedState.self)
+            } else {
+                stateMachine?.enterState(DeathState.self)
+            }
         }
     }
     

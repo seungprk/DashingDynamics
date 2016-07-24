@@ -20,8 +20,17 @@ class Player: GKEntity {
         spriteComponent.node.size = GameplayConfiguration.Player.size
         
         let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
         physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
+        
+//        physicsBody.friction = 1
+        physicsBody.mass = 0.1
+        physicsBody.usesPreciseCollisionDetection = true
+        
+        physicsBody.isDynamic = true
+        
+        spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)
         addComponent(MovementComponent(states: [ LandedState(entity: self),

@@ -14,7 +14,7 @@ class GameScene: SKScene, GameInputDelegate {
     var entities = [GKEntity]()
 
     private var lastUpdateTime: TimeInterval = 0
-    var penguinAtlas = SKTextureAtlas(named: "Penguin")
+//    var penguinAtlas = SKTextureAtlas(named: "Penguin")
     var controlInputNode: TouchControlInputNode?
     var cameraNode: SKCameraNode?
     var player: Player?
@@ -55,6 +55,9 @@ class GameScene: SKScene, GameInputDelegate {
         
         // Platform Manager Setup
         platformBlocksManager = PlatformBlocksManager(scene: self)
+        
+        // Physics
+        setupPhysics()
     }
     
     override func didMove(to view: SKView) {
@@ -104,4 +107,5 @@ class GameScene: SKScene, GameInputDelegate {
             cameraNode?.run(move)
         }
     }
+    
 }
