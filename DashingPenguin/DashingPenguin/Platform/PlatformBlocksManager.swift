@@ -42,10 +42,24 @@ class PlatformBlocksManager {
     }
     
     func addBlock() {
-        let newBlock = PlatformBlockObstacleDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        let newBlock = selectBlock()!
         let lastBlock = (blocks.last)!
         newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
         scene.addChild(newBlock)
         blocks.append(newBlock)
+    }
+    
+    func selectBlock() -> PlatformBlock? {
+        let num = arc4random_uniform(3)
+        switch num {
+        case 0:
+            return PlatformBlockSingleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        case 1:
+            return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        case 2:
+            return PlatformBlockObstacleDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        default:
+            return nil
+        }
     }
 }
