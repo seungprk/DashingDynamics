@@ -19,9 +19,7 @@ class GameScene: SKScene, GameInputDelegate {
     var cameraNode: SKCameraNode?
     var player: Player?
     var platformBlocksManager: PlatformBlocksManager!
-    
-//    let movementComponent = GKComponentSystem(componentClass: MovementComponent.self)
-    
+        
     // MARK: - Scene Setup
     
     override func sceneDidLoad() {
