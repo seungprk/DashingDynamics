@@ -20,4 +20,9 @@ class DeathState: GKState {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass is LandedState.Type
     }
+    
+    override func didEnter(withPreviousState previousState: GKState?) {
+        print("DEADDDDDD")
+        entity.componentForClass(SpriteComponent.self)?.node.alpha = 0.1
+    }
 }

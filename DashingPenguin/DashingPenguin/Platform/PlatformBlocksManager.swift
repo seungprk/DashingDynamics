@@ -19,7 +19,7 @@ class PlatformBlocksManager {
         print("PlatformBlocksManager Object created")
         
         // Create and Place First Block
-        let firstBlock = PlatformBlockFirst(scene: scene)
+        let firstBlock = PlatformBlockSingleDash(scene: scene, firstPlatXPos: 0)
         scene.addChild(firstBlock)
         blocks.append(firstBlock)
     }

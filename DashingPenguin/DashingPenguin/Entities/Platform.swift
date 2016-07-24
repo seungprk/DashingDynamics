@@ -17,7 +17,17 @@ class Platform: GKEntity {
         super.init()
         
         let spriteComponent = SpriteComponent(color: UIColor.green(), size: self.size)
+        let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
+        physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
+        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
+        
+        physicsBody.isDynamic = true
+        
+        spriteComponent.node.physicsBody = physicsBody
+        
         addComponent(spriteComponent)
+        addComponent(PhysicsComponent(physicsBody: physicsBody))
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -13,7 +13,7 @@ struct GameplayConfiguration {
     struct Player {
         static let size = CGSize(width: 40, height: 50)
         static let physicsBodyOffset = CGPoint(x: 0, y: -25)
-        static let physicsBodyRadius: CGFloat = 40
+        static let physicsBodyRadius: CGFloat = 20
 
         static let dashDuration = 0.1
         static let dashEndDuration = 1.0
