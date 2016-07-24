@@ -20,26 +20,25 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         let obstacleSize = Obstacle().size
         
         // Get Random Distance
-        let rMax = GameplayConfiguration.TouchControls.maxDistance * 2
-        let rMin = sqrt(2) * platformSize.height/2 * 1.5 + GameplayConfiguration.TouchControls.maxDistance
-        let randomDist = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
+        let maxDash = GameplayConfiguration.TouchControls.maxDistance
+        let distance = sqrt(2) * maxDash
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
         let distToRightEdge = scene.size.width/2 - firstPlatXPos - platformSize.width/2
         let distToLeftEdge = firstPlatXPos + scene.size.width/2 - platformSize.width/2
         
-        let angleReducFromRightEdge = acos(distToRightEdge / randomDist)
-        let angleReducFromLeftEdge = acos(distToLeftEdge / randomDist)
-        let angleReducFromNextPlat = asin(platformSize.height / randomDist)
+        let angleReducFromRightEdge = acos(distToRightEdge / distance)
+        let angleReducFromLeftEdge = acos(distToLeftEdge / distance)
+        let angleReducFromNextPlat = asin(platformSize.height / distance)
         
         var angleMin: CGFloat!
-        if distToRightEdge < sqrt(randomDist * randomDist - platformSize.height * platformSize.height) {
+        if distToRightEdge < sqrt(distance * distance - platformSize.height * platformSize.height) {
             angleMin = angleReducFromRightEdge
         } else {
             angleMin = angleReducFromNextPlat
         }
         var maxReduction: CGFloat!
-        if distToLeftEdge < sqrt(randomDist * randomDist - platformSize.height * platformSize.height) {
+        if distToLeftEdge < sqrt(distance * distance - platformSize.height * platformSize.height) {
             maxReduction = angleReducFromLeftEdge
         } else {
             maxReduction = angleReducFromNextPlat
@@ -47,8 +46,8 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         let angleMax = CGFloat.pi - maxReduction
         let randomAngle = CGFloat(arc4random()) / CGFloat(UInt32.max) * (angleMax - angleMin) + angleMin
         
-        let yDelta = sin(randomAngle) * randomDist
-        let xDelta = cos(randomAngle) * randomDist
+        let yDelta = sin(randomAngle) * distance
+        let xDelta = cos(randomAngle) * distance
         
         // Setup Size of Block and X Position of First Platform in the Next Block
         size = CGSize(width: scene.size.width, height: yDelta + platformSize.height)
