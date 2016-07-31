@@ -6,6 +6,16 @@
 //  Copyright © 2016 Dashing Duo. All rights reserved.
 //
 
+import SpriteKit
+import GameplayKit
+
 class ZoneB: Zone {
-    //TODO
+    
+    override init(scene: GameScene, begYPos: CGFloat) {
+        super.init(scene: scene, begYPos: begYPos)
+        platformBlocksManager.addBlock(withType: "ObstacleDoubleDash")
+        platformBlocksManager.addBlock(withType: "ObstacleDoubleDash")
+        initSize()
+    }
+    
 }
