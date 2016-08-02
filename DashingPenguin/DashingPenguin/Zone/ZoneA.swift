@@ -13,7 +13,9 @@ class ZoneA: Zone {
     
     override init(scene: GameScene, begYPos: CGFloat) {
         super.init(scene: scene, begYPos: begYPos)
-        platformBlocksManager.addBlock(withType: "SingleDash")
+        for index in 0..<5 {
+            platformBlocksManager.addBlock(withType: "SingleDash")
+        }
         platformBlocksManager.addBlock(withType: "DoubleDash")
         initSize()
     }
