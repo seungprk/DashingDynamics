@@ -19,7 +19,10 @@ class GameScene: SKScene, GameInputDelegate {
     var cameraNode: SKCameraNode?
     var player: Player?
     var platformBlocksManager: PlatformBlocksManager!
-        
+    var zoneManager: ZoneManager!
+    
+//    let movementComponent = GKComponentSystem(componentClass: MovementComponent.self)
+    
     // MARK: - Scene Setup
     
     override func sceneDidLoad() {
@@ -54,10 +57,11 @@ class GameScene: SKScene, GameInputDelegate {
         }
         
         // Platform Manager Setup
-        platformBlocksManager = PlatformBlocksManager(scene: self)
+        platformBlocksManager = PlatformBlocksManager(scene: self, begYPos: 0)
         
         // Physics
         setupPhysics()
+        zoneManager = ZoneManager(scene: self)
     }
     
     override func didMove(to view: SKView) {
@@ -66,9 +70,6 @@ class GameScene: SKScene, GameInputDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        
-        platformBlocksManager.checkIfBlockNeedsToBeAdded()
-        platformBlocksManager.checkIfBlockNeedsToBeRemoved()
         updateCurrentTime(currentTime)
         centerCamera()
     }

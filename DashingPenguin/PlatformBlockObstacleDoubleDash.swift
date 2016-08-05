@@ -24,34 +24,11 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         let distance = sqrt(2) * maxDash
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
-        let distToRightEdge = scene.size.width/2 - firstPlatXPos - platformSize.width/2
-        let distToLeftEdge = firstPlatXPos + scene.size.width/2 - platformSize.width/2
-        
-        let angleReducFromRightEdge = acos(distToRightEdge / distance)
-        let angleReducFromLeftEdge = acos(distToLeftEdge / distance)
-        let angleReducFromNextPlat = asin(platformSize.height / distance)
-        
-        var angleMin: CGFloat!
-        if distToRightEdge < sqrt(distance * distance - platformSize.height * platformSize.height) {
-            angleMin = angleReducFromRightEdge
-        } else {
-            angleMin = angleReducFromNextPlat
-        }
-        var maxReduction: CGFloat!
-        if distToLeftEdge < sqrt(distance * distance - platformSize.height * platformSize.height) {
-            maxReduction = angleReducFromLeftEdge
-        } else {
-            maxReduction = angleReducFromNextPlat
-        }
-        let angleMax = CGFloat.pi - maxReduction
-        let randomAngle = CGFloat(arc4random()) / CGFloat(UInt32.max) * (angleMax - angleMin) + angleMin
-        
-        let yDelta = sin(randomAngle) * distance
-        let xDelta = cos(randomAngle) * distance
+        let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: distance, inScene: scene)
         
         // Setup Size of Block and X Position of First Platform in the Next Block
-        size = CGSize(width: scene.size.width, height: yDelta + platformSize.height)
-        nextBlockFirstPlatformXPos = firstPlatXPos + xDelta
+        size = CGSize(width: scene.size.width, height: nextDelta.dy + platformSize.height)
+        nextBlockFirstPlatformXPos = firstPlatXPos + nextDelta.dx
         
         // Background for debug
         addChild(SKSpriteNode(color: UIColor.purple(), size: self.size))
