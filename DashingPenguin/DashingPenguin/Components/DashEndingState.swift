@@ -49,7 +49,8 @@ class DashEndingState: GKState {
             if entity.isOnPlatform {
                 stateMachine?.enterState(LandedState.self)
             } else {
-                stateMachine?.enterState(DeathState.self)
+                stateMachine?.enterState(LandedState.self)
+//                stateMachine?.enterState(DeathState.self)
             }
         }
     }
