@@ -13,34 +13,33 @@ class ZoneManager {
     
     var scene: GameScene!
     var zones = [Zone]()
+    enum ZoneType {
+        case NormalZone
+        case ChallengeZone
+    }
+    var lastZoneType = ZoneType.NormalZone
     
     init(scene: GameScene) {
         self.scene = scene
         
-        // Add Zone A
-        zones.append(ZoneA(scene: scene, begYPos: 0))
-        
-        // Add Zone B
-        let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
-        print(zones.last?.begYPos)
-        print(zones.last?.size.height)
-        zones.append(ZoneB(scene: scene, begYPos: lastZoneTopYPos))
+        // Add Normal Zone
+        zones.append(ZoneNormal(scene: scene, begYPos: 0))
     }
-//    
-//    func update() {
-//        checkIfBlockNeedsToBeAdded()
-//        checkIfBlockNeedsToBeRemoved()
-//    }
-//    
-//    func checkIfBlockNeedsToBeAdded() {
-//        let yPosOfTopOfScreen = (scene.cameraNode?.position.y)! + scene.size.height/2
-//        let yPosOfTopOfLastBlock = (blocks.last?.position.y)! + (blocks.last?.size.height)!/2
-//        if yPosOfTopOfScreen >= yPosOfTopOfLastBlock {
-//            addBlock()
-//        }
-//    }
-//    
-//    func checkIfBlockNeedsToBeRemoved() {
+    
+    func update() {
+        checkIfZoneNeedsToBeAdded()
+        //checkIfZoneNeedsToBeRemoved()
+    }
+    
+    func checkIfZoneNeedsToBeAdded() {
+        let yPosOfPlayer = scene.player?.componentForClass(SpriteComponent.self)?.node.position.y
+        let begYPosOfLastZone = zones.last?.begYPos
+        if yPosOfPlayer > begYPosOfLastZone {
+            addZone()
+        }
+    }
+    
+//    func checkIfZoneNeedsToBeRemoved() {
 //        let yPosOfBottomOfScreen = (scene.cameraNode?.position.y)! - scene.size.height/2
 //        let yPosOfTopOfFirstBlock = (blocks.first?.position.y)! + (blocks.first?.size.height)!/2
 //        if yPosOfBottomOfScreen >= yPosOfTopOfFirstBlock {
@@ -49,4 +48,14 @@ class ZoneManager {
 //        }
 //    }
     
+    func addZone() {
+        let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
+        if lastZoneType == ZoneType.NormalZone {
+            zones.append(ZoneChallenge(scene: scene, begYPos: lastZoneTopYPos))
+            lastZoneType = .ChallengeZone
+        } else {
+            zones.append(ZoneNormal(scene: scene, begYPos: lastZoneTopYPos))
+            lastZoneType = .NormalZone
+        }
+    }
 }

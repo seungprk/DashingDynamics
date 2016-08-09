@@ -67,6 +67,7 @@ class GameScene: SKScene, GameInputDelegate {
         // Called before each frame is rendered
         updateCurrentTime(currentTime)
         centerCamera()
+        zoneManager.update()
     }
     
     func updateCurrentTime(_ currentTime: TimeInterval) {
@@ -98,7 +99,7 @@ class GameScene: SKScene, GameInputDelegate {
     
     func centerCamera() {
         if let playerSprite = player?.componentForClass(SpriteComponent.self)?.node {
-            let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y), duration: 0.2)
+            let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y + self.size.height * 0.3), duration: 0.2)
             move.timingMode = .easeOut
             cameraNode?.run(move)
         }

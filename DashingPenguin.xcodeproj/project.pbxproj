@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		2401654F1D4AF2F9006E31DC /* ZoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2401654E1D4AF2F9006E31DC /* ZoneManager.swift */; };
 		240165511D4AF409006E31DC /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165501D4AF409006E31DC /* Zone.swift */; };
-		240165531D4AFA2E006E31DC /* ZoneA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165521D4AFA2E006E31DC /* ZoneA.swift */; };
-		240165551D4AFABC006E31DC /* ZoneB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165541D4AFABC006E31DC /* ZoneB.swift */; };
+		240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165521D4AFA2E006E31DC /* ZoneNormal.swift */; };
+		240165551D4AFABC006E31DC /* ZoneChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165541D4AFABC006E31DC /* ZoneChallenge.swift */; };
 		247DA9131D3316CA004C4A14 /* PlatformBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9121D3316CA004C4A14 /* PlatformBlock.swift */; };
 		247DA9151D331F5C004C4A14 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9141D331F5C004C4A14 /* Platform.swift */; };
 		248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */; };
@@ -40,8 +40,8 @@
 /* Begin PBXFileReference section */
 		2401654E1D4AF2F9006E31DC /* ZoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneManager.swift; path = DashingPenguin/Zone/ZoneManager.swift; sourceTree = "<group>"; };
 		240165501D4AF409006E31DC /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zone.swift; path = DashingPenguin/Zone/Zone.swift; sourceTree = "<group>"; };
-		240165521D4AFA2E006E31DC /* ZoneA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneA.swift; path = DashingPenguin/Zone/ZoneA.swift; sourceTree = "<group>"; };
-		240165541D4AFABC006E31DC /* ZoneB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneB.swift; path = DashingPenguin/Zone/ZoneB.swift; sourceTree = "<group>"; };
+		240165521D4AFA2E006E31DC /* ZoneNormal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneNormal.swift; path = DashingPenguin/Zone/ZoneNormal.swift; sourceTree = "<group>"; };
+		240165541D4AFABC006E31DC /* ZoneChallenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallenge.swift; path = DashingPenguin/Zone/ZoneChallenge.swift; sourceTree = "<group>"; };
 		247DA9121D3316CA004C4A14 /* PlatformBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlock.swift; path = DashingPenguin/Platform/PlatformBlock.swift; sourceTree = "<group>"; };
 		247DA9141D331F5C004C4A14 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Platform.swift; path = DashingPenguin/Entities/Platform.swift; sourceTree = "<group>"; };
 		248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformBlockDoubleDash.swift; sourceTree = "<group>"; };
@@ -87,8 +87,8 @@
 			children = (
 				2401654E1D4AF2F9006E31DC /* ZoneManager.swift */,
 				240165501D4AF409006E31DC /* Zone.swift */,
-				240165521D4AFA2E006E31DC /* ZoneA.swift */,
-				240165541D4AFABC006E31DC /* ZoneB.swift */,
+				240165521D4AFA2E006E31DC /* ZoneNormal.swift */,
+				240165541D4AFABC006E31DC /* ZoneChallenge.swift */,
 			);
 			name = Zone;
 			sourceTree = "<group>";
@@ -301,7 +301,7 @@
 				247DA9131D3316CA004C4A14 /* PlatformBlock.swift in Sources */,
 				7F23A5BE1D2C802F008CDA5C /* SpriteComponent.swift in Sources */,
 				248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */,
-				240165531D4AFA2E006E31DC /* ZoneA.swift in Sources */,
+				240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
 				24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */,
 				7F23A5C01D2C803E008CDA5C /* Player.swift in Sources */,
@@ -311,7 +311,7 @@
 				7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */,
 				240165511D4AF409006E31DC /* Zone.swift in Sources */,
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,
-				240165551D4AFABC006E31DC /* ZoneB.swift in Sources */,
+				240165551D4AFABC006E31DC /* ZoneChallenge.swift in Sources */,
 				248C794F1D3C26A7003F8A0E /* PlatformBlockObstacleDoubleDash.swift in Sources */,
 				7F23A5B91D2C802F008CDA5C /* MovementComponent.swift in Sources */,
 				7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */,
