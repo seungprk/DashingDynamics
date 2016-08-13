@@ -26,12 +26,14 @@ extension GameScene: SKPhysicsContactDelegate {
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
-            player?.isOnPlatform = true
+            contactCount += 1
             print("Player over platform")
             
         default:
             break
         }
+        
+        player?.isOnPlatform = contactCount == 0 ? false : true
         
     }
     
@@ -46,11 +48,13 @@ extension GameScene: SKPhysicsContactDelegate {
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
-            player?.isOnPlatform = false
+            contactCount -= 1
             print("! Player NOT on platform")
             
         default:
             break
         }
+
+        player?.isOnPlatform = contactCount == 0 ? false : true
     }
 }

@@ -23,6 +23,8 @@ class GameScene: SKScene, GameInputDelegate {
     
 //    let movementComponent = GKComponentSystem(componentClass: MovementComponent.self)
     
+    var contactCount = 0
+    
     // MARK: - Scene Setup
     
     override func sceneDidLoad() {
@@ -89,6 +91,7 @@ class GameScene: SKScene, GameInputDelegate {
         }
         
         self.lastUpdateTime = currentTime
+        
     }
     
     func swipeGesture(velocity: CGVector) {
