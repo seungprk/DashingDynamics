@@ -17,39 +17,28 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
                 
-        let firstBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ?
-            contact.bodyA : contact.bodyB
-        let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ?
-            contact.bodyB : contact.bodyA
-        
-        print(firstBody.categoryBitMask)
+        let firstBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyA : contact.bodyB
+        let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyB : contact.bodyA
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
-            contactCount += 1
-            print("Player over platform")
+            physicsContactCount += 1
             
         default:
             break
         }
         
         player?.isOnPlatform = contactCount == 0 ? false : true
-        
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
         
-        let firstBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ?
-            contact.bodyA : contact.bodyB
-        let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ?
-            contact.bodyB : contact.bodyA
-        
-        print(firstBody.categoryBitMask, secondBody.categoryBitMask)
+        let firstBody: SKPhysicsBody  = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyA : contact.bodyB
+        let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyB : contact.bodyA
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
-            contactCount -= 1
-            print("! Player NOT on platform")
+            physicsContactCount -= 1
             
         default:
             break

@@ -13,17 +13,14 @@ class GameScene: SKScene, GameInputDelegate {
     
     var entities = [GKEntity]()
 
-    private var lastUpdateTime: TimeInterval = 0
-//    var penguinAtlas = SKTextureAtlas(named: "Penguin")
     var controlInputNode: TouchControlInputNode?
     var cameraNode: SKCameraNode?
     var player: Player?
     var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
     
-//    let movementComponent = GKComponentSystem(componentClass: MovementComponent.self)
-    
-    var contactCount = 0
+    private var lastUpdateTime: TimeInterval = 0
+    private var physicsContactCount = 0
     
     // MARK: - Scene Setup
     
