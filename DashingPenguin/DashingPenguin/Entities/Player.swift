@@ -11,17 +11,34 @@ import GameplayKit
 
 class Player: GKEntity {
     
+    var isOnPlatform = false
+    
     init(imageNamed imageName: String) {
         super.init()
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
         spriteComponent.node.size = GameplayConfiguration.Player.size
         
+        let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
+        physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
+        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
+        
+//        physicsBody.friction = 1
+        physicsBody.mass = 0.1
+        physicsBody.usesPreciseCollisionDetection = true
+        
+        physicsBody.isDynamic = true
+        
+        spriteComponent.node.physicsBody = physicsBody
+        
         addComponent(spriteComponent)
         addComponent(MovementComponent(states: [ LandedState(entity: self),
                                                  DashingState(entity: self),
                                                  DashEndingState(entity: self),
                                                  DeathState(entity: self) ]))
+        
+        addComponent(PhysicsComponent(physicsBody: physicsBody))
     }
     
     required init?(coder aDecoder: NSCoder) {

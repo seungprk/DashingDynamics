@@ -13,14 +13,14 @@ class GameScene: SKScene, GameInputDelegate {
     
     var entities = [GKEntity]()
 
-    private var lastUpdateTime: TimeInterval = 0
-    var penguinAtlas = SKTextureAtlas(named: "Penguin")
     var controlInputNode: TouchControlInputNode?
     var cameraNode: SKCameraNode?
     var player: Player?
+    var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
     
-//    let movementComponent = GKComponentSystem(componentClass: MovementComponent.self)
+    private var lastUpdateTime: TimeInterval = 0
+    private var physicsContactCount = 0
     
     // MARK: - Scene Setup
     
@@ -56,6 +56,10 @@ class GameScene: SKScene, GameInputDelegate {
         }
         
         // Platform Manager Setup
+        platformBlocksManager = PlatformBlocksManager(scene: self, begYPos: 0)
+        
+        // Physics
+        setupPhysics()
         zoneManager = ZoneManager(scene: self)
     }
     
@@ -85,6 +89,7 @@ class GameScene: SKScene, GameInputDelegate {
         }
         
         self.lastUpdateTime = currentTime
+        
     }
     
     func swipeGesture(velocity: CGVector) {
@@ -104,4 +109,5 @@ class GameScene: SKScene, GameInputDelegate {
             cameraNode?.run(move)
         }
     }
+    
 }

@@ -33,7 +33,7 @@ class MovementComponent: GKComponent {
     override func update(withDeltaTime seconds: TimeInterval) {
         super.update(withDeltaTime: seconds)
         
-        stateMachine.update(withDeltaTime: seconds)
+        stateMachine.update(withDeltaTime: seconds)        
     }
     
     func enterInitialState() {

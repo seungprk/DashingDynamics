@@ -28,10 +28,18 @@ class DashingState: GKState {
 
         if let velocity = self.entity.componentForClass(MovementComponent.self)?.velocity,
                spriteComponent = self.entity.componentForClass(SpriteComponent.self) {
-            spriteComponent.node.run(SKAction.move(by: velocity, duration: GameplayConfiguration.Player.dashDuration), completion: {
-                
+            
+            spriteComponent.node.physicsBody?.applyImpulse(velocity)
+            
+            spriteComponent.node.run(SKAction.wait(forDuration: GameplayConfiguration.Player.dashDuration), completion: {
+                spriteComponent.node.physicsBody?.velocity = CGVector.zero
                 self.stateMachine?.enterState(DashEndingState.self)
             })
+            
+//            spriteComponent.node.run(SKAction.move(by: velocity, duration: GameplayConfiguration.Player.dashDuration), completion: {
+//                
+//                self.stateMachine?.enterState(DashEndingState.self)
+//            })
         }
 
     }
