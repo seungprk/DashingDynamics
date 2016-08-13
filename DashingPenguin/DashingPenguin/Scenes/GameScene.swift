@@ -20,7 +20,7 @@ class GameScene: SKScene, GameInputDelegate {
     var zoneManager: ZoneManager!
     
     private var lastUpdateTime: TimeInterval = 0
-    private var physicsContactCount = 0
+    internal var physicsContactCount = 0
     
     // MARK: - Scene Setup
     

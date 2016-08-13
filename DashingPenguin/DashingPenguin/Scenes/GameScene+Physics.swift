@@ -28,7 +28,7 @@ extension GameScene: SKPhysicsContactDelegate {
             break
         }
         
-        player?.isOnPlatform = contactCount == 0 ? false : true
+        player?.isOnPlatform = physicsContactCount == 0 ? false : true
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
@@ -44,6 +44,6 @@ extension GameScene: SKPhysicsContactDelegate {
             break
         }
 
-        player?.isOnPlatform = contactCount == 0 ? false : true
+        player?.isOnPlatform = physicsContactCount == 0 ? false : true
     }
 }

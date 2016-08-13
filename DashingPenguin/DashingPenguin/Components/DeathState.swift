@@ -22,7 +22,7 @@ class DeathState: GKState {
     }
     
     override func didEnter(withPreviousState previousState: GKState?) {
-        print("DEADDDDDD")
+        print("DEAD")
         entity.componentForClass(SpriteComponent.self)?.node.alpha = 0.1
     }
 }
