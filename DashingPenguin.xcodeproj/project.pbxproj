@@ -254,8 +254,8 @@
 				TargetAttributes = {
 					7F01D59D1D2A163B000A51D8 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = RZ2DT6A2TM;
-						DevelopmentTeamName = "Matthew Tso (Personal Team)";
+						DevelopmentTeam = RLZEP44CD7;
+						DevelopmentTeamName = "Seung Park (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -442,7 +442,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dd.DashingPenguin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DashingDuo.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -455,7 +455,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dd.DashingPenguin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DashingDuo.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
