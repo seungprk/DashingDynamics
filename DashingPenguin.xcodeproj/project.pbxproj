@@ -36,6 +36,7 @@
 		7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */; };
 		7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */; };
 		7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */; };
+		7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */; };
 		7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchControlInputNode.swift; path = DashingPenguin/Controls/TouchControlInputNode.swift; sourceTree = "<group>"; };
 		7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayConfiguration.swift; path = DashingPenguin/Assets/GameplayConfiguration.swift; sourceTree = "<group>"; };
 		7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+Physics.swift"; path = "DashingPenguin/Scenes/GameScene+Physics.swift"; sourceTree = "<group>"; };
+		7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlidingComponent.swift; path = DashingPenguin/Components/SlidingComponent.swift; sourceTree = "<group>"; };
 		7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsComponent.swift; path = DashingPenguin/Components/PhysicsComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */,
+				7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */,
 				7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */,
 				7F044F3B1D2C85BB00DDE789 /* MovementComponent States (Player) */,
 				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
@@ -309,6 +312,7 @@
 				248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */,
 				240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
+				7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */,
 				7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */,
 				24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */,
 				7F23A5C01D2C803E008CDA5C /* Player.swift in Sources */,

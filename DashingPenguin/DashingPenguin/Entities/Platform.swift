@@ -21,13 +21,38 @@ class Platform: GKEntity {
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
-        
         physicsBody.isDynamic = true
-        
         spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)
         addComponent(PhysicsComponent(physicsBody: physicsBody))
+    }
+    
+    /**
+     * Initializer for a moving platform.
+     */
+    init(scene: SKScene, slidingMagnitude: CGFloat) {
+        super.init()
+        
+        let possibleCenterMin = size.width / 2 + slidingMagnitude / 2
+        let possibleCenterMax = scene.frame.width - size.width / 2 - slidingMagnitude / 2
+        let randomSlidingCenterX = CGFloat(arc4random_uniform(UInt32(possibleCenterMax - possibleCenterMin))) + possibleCenterMin
+        
+        
+        let spriteComponent = SpriteComponent(color: UIColor.green(), size: self.size)
+        let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
+        let slidingComponent = SlidingComponent(node: spriteComponent.node, centerX: randomSlidingCenterX, magnitude: slidingMagnitude)
+        
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
+        physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
+        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
+        physicsBody.isDynamic = true
+        spriteComponent.node.physicsBody = physicsBody
+        spriteComponent.node.position = CGPoint(x: randomSlidingCenterX, y: spriteComponent.node.position.y)
+        
+        addComponent(spriteComponent)
+        addComponent(PhysicsComponent(physicsBody: physicsBody))
+        addComponent(slidingComponent)
     }
     
     required init?(coder aDecoder: NSCoder) {
