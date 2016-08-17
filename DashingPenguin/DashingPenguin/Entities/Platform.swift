@@ -34,14 +34,13 @@ class Platform: GKEntity {
     init(scene: SKScene, slidingMagnitude: CGFloat) {
         super.init()
         
-        let possibleCenterMin = size.width / 2 + slidingMagnitude / 2
-        let possibleCenterMax = scene.frame.width - size.width / 2 - slidingMagnitude / 2
+        let possibleCenterMin = size.width / 2 + slidingMagnitude / 2 - scene.frame.width / 2
+        let possibleCenterMax = scene.frame.width - size.width / 2 - slidingMagnitude / 2 - scene.frame.width / 2
         let randomSlidingCenterX = CGFloat(arc4random_uniform(UInt32(possibleCenterMax - possibleCenterMin))) + possibleCenterMin
-        
+        print("\(randomSlidingCenterX) in \(scene.frame.width) between \(possibleCenterMin) and \(possibleCenterMax)")
         
         let spriteComponent = SpriteComponent(color: UIColor.green(), size: self.size)
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
-        let slidingComponent = SlidingComponent(node: spriteComponent.node, centerX: randomSlidingCenterX, magnitude: slidingMagnitude)
         
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
@@ -49,9 +48,12 @@ class Platform: GKEntity {
         physicsBody.isDynamic = true
         spriteComponent.node.physicsBody = physicsBody
         spriteComponent.node.position = CGPoint(x: randomSlidingCenterX, y: spriteComponent.node.position.y)
-        
         addComponent(spriteComponent)
         addComponent(PhysicsComponent(physicsBody: physicsBody))
+        
+        let slidingComponent = SlidingComponent(node: spriteComponent.node,
+                                                centerX: randomSlidingCenterX,
+                                                magnitude: slidingMagnitude)
         addComponent(slidingComponent)
     }
     

@@ -37,6 +37,7 @@ class PlatformBlockFirst: PlatformBlock {
         secondPlatformSpriteNode.position = CGPoint(x: secondPlatformSpriteNode.position.x,
                                                     y: secondPlatformSpriteNode.size.height/2)
         addChild(secondPlatformSpriteNode)
+        secondPlatform.componentForClass(SlidingComponent.self)?.beginSliding()
         platforms.append(secondPlatform)
         
         // Setup X Position of First Platform for Next Block

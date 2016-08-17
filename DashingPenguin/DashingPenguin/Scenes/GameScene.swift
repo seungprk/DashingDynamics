@@ -65,6 +65,7 @@ class GameScene: SKScene, GameInputDelegate {
     
     override func didMove(to view: SKView) {
         player?.componentForClass(MovementComponent.self)?.enterInitialState()
+        platformBlocksManager = PlatformBlocksManager(scene: self, begYPos: 0)
     }
     
     override func update(_ currentTime: TimeInterval) {
