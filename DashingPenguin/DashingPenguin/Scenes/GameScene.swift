@@ -21,6 +21,7 @@ class GameScene: SKScene, GameInputDelegate {
     
     private var lastUpdateTime: TimeInterval = 0
     internal var physicsContactCount = 0
+    var platformLandingDelegate: PlatformLandingDelegate?
     
     // MARK: - Scene Setup
     
@@ -50,13 +51,11 @@ class GameScene: SKScene, GameInputDelegate {
         
         // Player Entity Setup
         self.player = Player(imageNamed: "penguin-front")
+        platformLandingDelegate = self.player!.playerDashEndingState
         entities.append(player!)
         if let playerSprite = player?.componentForClass(SpriteComponent.self) {
             addChild(playerSprite.node)
         }
-        
-        // Platform Manager Setup
-        platformBlocksManager = PlatformBlocksManager(scene: self, begYPos: 0)
         
         // Physics
         setupPhysics()
@@ -65,14 +64,12 @@ class GameScene: SKScene, GameInputDelegate {
     
     override func didMove(to view: SKView) {
         player?.componentForClass(MovementComponent.self)?.enterInitialState()
-        platformBlocksManager = PlatformBlocksManager(scene: self, begYPos: 0)
     }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         updateCurrentTime(currentTime)
         centerCamera()
-        zoneManager.update()
     }
     
     func updateCurrentTime(_ currentTime: TimeInterval) {

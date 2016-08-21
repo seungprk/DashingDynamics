@@ -26,10 +26,10 @@ class ZoneManager {
         zones.append(ZoneNormal(scene: scene, begYPos: 0))
     }
     
-    func update() {
-        checkIfZoneNeedsToBeAdded()
-        //checkIfZoneNeedsToBeRemoved()
-    }
+//    func update() {
+//        checkIfZoneNeedsToBeAdded()
+//        //checkIfZoneNeedsToBeRemoved()
+//    }
     
     func checkIfZoneNeedsToBeAdded() {
         let yPosOfPlayer = scene.player?.componentForClass(SpriteComponent.self)?.node.position.y

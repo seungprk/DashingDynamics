@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+protocol PlatformLandingDelegate {
+    func markForLanding(platform: SKNode)
+}
+
 extension GameScene: SKPhysicsContactDelegate {
     
     func setupPhysics() {
@@ -24,11 +28,15 @@ extension GameScene: SKPhysicsContactDelegate {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
             physicsContactCount += 1
             
+            guard let node = secondBody.node else { break }
+            platformLandingDelegate?.markForLanding(platform: node)
+            
         default:
             break
         }
         
         player?.isOnPlatform = physicsContactCount == 0 ? false : true
+        
     }
     
     func didEnd(_ contact: SKPhysicsContact) {

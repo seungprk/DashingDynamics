@@ -9,11 +9,17 @@
 import SpriteKit
 import GameplayKit
 
-class DashEndingState: GKState {
+let bumpUp = SKAction.scale(to: 1.4, duration: 0.1)
+let bumpDown = SKAction.scale(to: 1.0, duration: 0.1)
+let bump = SKAction.sequence([bumpUp, bumpDown])
+
+class DashEndingState: GKState, PlatformLandingDelegate {
     
     unowned var entity: Player
     
     var elapsedTime: TimeInterval = 0.0
+    
+    var markedPlatform: SKNode?
     
     let temporarySequence: SKAction = {
         let flashCount = 5
@@ -42,12 +48,14 @@ class DashEndingState: GKState {
         elapsedTime += seconds
         
         if elapsedTime >= GameplayConfiguration.Player.dashEndDuration {            
+            // End of dash
             
-            print("testing death", entity.isOnPlatform)
             if entity.isOnPlatform {
+                markedPlatform?.removeAllActions()
+                markedPlatform?.run(bump)
+                
                 stateMachine?.enterState(LandedState.self)
             } else {
-//                stateMachine?.enterState(LandedState.self)
                 stateMachine?.enterState(DeathState.self)
             }
         }
@@ -66,5 +74,9 @@ class DashEndingState: GKState {
         default:
             return false
         }
+    }
+    
+    func markForLanding(platform: SKNode) {
+        markedPlatform = platform
     }
 }

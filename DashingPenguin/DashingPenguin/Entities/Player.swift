@@ -12,6 +12,7 @@ import GameplayKit
 class Player: GKEntity {
     
     var isOnPlatform = false
+    var playerDashEndingState: DashEndingState?
     
     init(imageNamed imageName: String) {
         super.init()
@@ -33,9 +34,11 @@ class Player: GKEntity {
         spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)
+        
+        playerDashEndingState = DashEndingState(entity: self)
         addComponent(MovementComponent(states: [ LandedState(entity: self),
                                                  DashingState(entity: self),
-                                                 DashEndingState(entity: self),
+                                                 playerDashEndingState!,
                                                  DeathState(entity: self) ]))
         
         addComponent(PhysicsComponent(physicsBody: physicsBody))

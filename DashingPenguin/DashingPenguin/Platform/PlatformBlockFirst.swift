@@ -26,7 +26,7 @@ class PlatformBlockFirst: PlatformBlock {
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
         
-        let secondPlatform = Platform(scene: scene, slidingMagnitude: 50)
+        let secondPlatform = Platform(scene: scene, slidingMagnitude: 50, yPosition: size.height / 2)
         let secondPlatformSpriteNode = secondPlatform.componentForClass(SpriteComponent.self)!.node
         /* 
          Temp code change for moving platform
