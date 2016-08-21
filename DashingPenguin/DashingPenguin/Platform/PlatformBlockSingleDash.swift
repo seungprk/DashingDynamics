@@ -29,12 +29,12 @@ class PlatformBlockSingleDash: PlatformBlock {
         nextBlockFirstPlatformXPos = firstPlatXPos + nextDelta.dx
         
         // Background for debug
-        addChild(SKSpriteNode(color: UIColor.red(), size: self.size))
-        addChild(SKSpriteNode(color: UIColor.white(), size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
+        addChild(SKSpriteNode(color: UIColor.red, size: self.size))
+        addChild(SKSpriteNode(color: UIColor.white, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
         
         // Setup Platform
         let firstPlatform = Platform()
-        let firstPlatformSpriteNode = firstPlatform.componentForClass(SpriteComponent.self)!.node
+        let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
         firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)

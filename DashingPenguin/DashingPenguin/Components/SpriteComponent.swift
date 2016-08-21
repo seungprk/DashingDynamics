@@ -15,7 +15,7 @@ class SpriteComponent: GKComponent {
     
     // Init with Texture
     init(texture: SKTexture) {
-        node = SKSpriteNode(texture: texture, color: SKColor.clear(), size: texture.size())
+        node = SKSpriteNode(texture: texture, color: SKColor.clear, size: texture.size())
         
         super.init()
     }

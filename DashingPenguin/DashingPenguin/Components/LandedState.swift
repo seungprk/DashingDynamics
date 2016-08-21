@@ -17,11 +17,16 @@ class LandedState: GKState {
         self.entity = entity
     }
     
-    override func didEnter(withPreviousState previousState: GKState?) {
-        entity.componentForClass(MovementComponent.self)?.dashCount = 0
+    override func didEnter(from previousState: GKState?) {
+        entity.component(ofType: MovementComponent.self)?.dashCount = 0
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass is DashingState.Type
+        switch stateClass {
+        case is DashingState.Type:
+            return true
+        default:
+            return false
+        }
     }
 }

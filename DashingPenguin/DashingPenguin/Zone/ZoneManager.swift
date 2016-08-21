@@ -32,9 +32,9 @@ class ZoneManager {
 //    }
     
     func checkIfZoneNeedsToBeAdded() {
-        let yPosOfPlayer = scene.player?.componentForClass(SpriteComponent.self)?.node.position.y
+        let yPosOfPlayer = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
         let begYPosOfLastZone = zones.last?.begYPos
-        if yPosOfPlayer > begYPosOfLastZone {
+        if yPosOfPlayer! > begYPosOfLastZone! {
             addZone()
         }
     }

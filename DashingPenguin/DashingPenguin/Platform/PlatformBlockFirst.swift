@@ -16,18 +16,18 @@ class PlatformBlockFirst: PlatformBlock {
         size = CGSize(width: scene.size.width, height: 200)
         
         // Background for Debug
-        addChild(SKSpriteNode(color: UIColor.blue(), size: self.size))
-        addChild(SKSpriteNode(color: UIColor.red(), size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
+        addChild(SKSpriteNode(color: UIColor.blue, size: self.size))
+        addChild(SKSpriteNode(color: UIColor.red, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
         
         // Setup Platforms
         let firstPlatform = Platform()
-        let firstPlatformSpriteNode = firstPlatform.componentForClass(SpriteComponent.self)!.node
+        let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
         firstPlatformSpriteNode.position = CGPoint(x: 0, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
         
         let secondPlatform = Platform(scene: scene, slidingMagnitude: 50, yPosition: size.height / 2)
-        let secondPlatformSpriteNode = secondPlatform.componentForClass(SpriteComponent.self)!.node
+        let secondPlatformSpriteNode = secondPlatform.component(ofType: SpriteComponent.self)!.node
         /* 
          Temp code change for moving platform
          Retain x value when setting position because it has been calculated in initialization.
@@ -36,8 +36,9 @@ class PlatformBlockFirst: PlatformBlock {
          */
         secondPlatformSpriteNode.position = CGPoint(x: secondPlatformSpriteNode.position.x,
                                                     y: secondPlatformSpriteNode.size.height/2)
+
         addChild(secondPlatformSpriteNode)
-        secondPlatform.componentForClass(SlidingComponent.self)?.beginSliding()
+        secondPlatform.component(ofType: SlidingComponent.self)?.beginSliding()
         platforms.append(secondPlatform)
         
         // Setup X Position of First Platform for Next Block

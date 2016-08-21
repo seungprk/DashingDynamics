@@ -65,14 +65,14 @@ class TouchControlInputNode: SKSpriteNode {
             let dx = endLocation.x - startLocation.x
             let dy = endLocation.y - startLocation.y
             let distance = sqrt(dx * dx + dy * dy)
-            var moveX = dx/2
-            var moveY = dy/2
+            var moveX = dx
+            var moveY = dy
             
             let maxDist = GameplayConfiguration.TouchControls.maxDistance
             if distance > maxDist {
                 let swipeAngle = atan2(dy, dx)
-                moveX = cos(swipeAngle) * maxDist / 2
-                moveY = sin(swipeAngle) * maxDist / 2
+                moveX = cos(swipeAngle) * maxDist
+                moveY = sin(swipeAngle) * maxDist
             }
             
             delegate?.swipeGesture(velocity: CGVector(dx: moveX, dy: moveY))

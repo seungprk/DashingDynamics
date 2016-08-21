@@ -29,8 +29,11 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+    
+    override var prefersStatusBarHidden: Bool {
+        get {
+            return true
+        }  
+    }  
+    
 }

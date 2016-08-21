@@ -16,7 +16,7 @@ class Platform: GKEntity {
     override init() {
         super.init()
         
-        let spriteComponent = SpriteComponent(color: UIColor.black(), size: self.size)
+        let spriteComponent = SpriteComponent(color: UIColor.green, size: self.size)
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
@@ -39,7 +39,7 @@ class Platform: GKEntity {
         let randomSlidingCenterX = CGFloat(arc4random_uniform(UInt32(possibleCenterMax - possibleCenterMin))) + possibleCenterMin
         print("\(randomSlidingCenterX) in \(scene.frame.width) between \(possibleCenterMin) and \(possibleCenterMax)")
         
-        let spriteComponent = SpriteComponent(color: UIColor.black(), size: self.size)
+        let spriteComponent = SpriteComponent(color: UIColor.green, size: self.size)
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
         
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform

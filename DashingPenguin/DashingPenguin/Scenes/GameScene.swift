@@ -25,17 +25,18 @@ class GameScene: SKScene, GameInputDelegate {
     
     // MARK: - Scene Setup
     
-    override func sceneDidLoad() {
+    override func didMove(to view: SKView) {
         
         // Misc Setup
-        backgroundColor = SKColor.white()
+        backgroundColor = SKColor.white
         self.lastUpdateTime = 0
         
         // Label for testing
         let label = SKLabelNode(text: "Dashing Penguin")
-        label.fontColor = UIColor.black()
+        label.fontColor = UIColor.black
         label.alpha = 1.0
         label.run(SKAction.fadeIn(withDuration: 2.0))
+        label.position = CGPoint(x: 0, y: 300)
         addChild(label)
         
         // Initialize touch input node
@@ -53,17 +54,15 @@ class GameScene: SKScene, GameInputDelegate {
         self.player = Player(imageNamed: "penguin-front")
         platformLandingDelegate = self.player!.playerDashEndingState
         entities.append(player!)
-        if let playerSprite = player?.componentForClass(SpriteComponent.self) {
+        if let playerSprite = player?.component(ofType: SpriteComponent.self) {
             addChild(playerSprite.node)
         }
         
         // Physics
         setupPhysics()
         zoneManager = ZoneManager(scene: self)
-    }
-    
-    override func didMove(to view: SKView) {
-        player?.componentForClass(MovementComponent.self)?.enterInitialState()
+        
+        player?.component(ofType: MovementComponent.self)?.enterInitialState()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -83,7 +82,7 @@ class GameScene: SKScene, GameInputDelegate {
         
         // Update entities
         for entity in self.entities {
-            entity.update(withDeltaTime: dt)
+            entity.update(deltaTime: dt)
         }
         
         self.lastUpdateTime = currentTime
@@ -91,7 +90,7 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func swipeGesture(velocity: CGVector) {
-        if let playerMovement = player?.componentForClass(MovementComponent.self) {
+        if let playerMovement = player?.component(ofType: MovementComponent.self) {
             playerMovement.dash(velocity)
         }
     }
@@ -101,7 +100,7 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func centerCamera() {
-        if let playerSprite = player?.componentForClass(SpriteComponent.self)?.node {
+        if let playerSprite = player?.component(ofType: SpriteComponent.self)?.node {
             let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y + self.size.height * 0.3), duration: 0.2)
             move.timingMode = .easeOut
             cameraNode?.run(move)

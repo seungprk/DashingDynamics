@@ -32,48 +32,47 @@ class DashEndingState: GKState, PlatformLandingDelegate {
         self.entity = entity
     }
     
-    override func didEnter(withPreviousState previousState: GKState?) {
-        super.didEnter(withPreviousState: previousState)
+    override func didEnter(from previousState: GKState?) {
+        super.didEnter(from: previousState)
                 
-        if let spriteComponent = self.entity.componentForClass(SpriteComponent.self) {
-            spriteComponent.node.run(temporarySequence)
+        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
+            if (entity.component(ofType: MovementComponent.self)?.dashCount)! < GameplayConfiguration.Player.maxDashes {
+                let dashCount = self.entity.component(ofType: MovementComponent.self)?.dashCount
+                if dashCount! < GameplayConfiguration.Player.maxDashes {
+                    let flashCount = 5
+                    let flashOut = SKAction.fadeOut(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
+                    let flashIn = SKAction.fadeIn(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
+                    let checkDeathAction = SKAction.run({self.checkDeath()})
+                    let temporarySequence = SKAction.sequence([flashOut, flashIn, flashOut, flashIn, checkDeathAction])
+                    spriteComponent.node.run(temporarySequence)
+                } else {
+                    checkDeath()
+                }
+            }
         }
         
         elapsedTime = 0.0
     }
     
-    override func update(withDeltaTime seconds: TimeInterval) {
-        super.update(withDeltaTime: seconds)
-        
-        elapsedTime += seconds
-        
-        if elapsedTime >= GameplayConfiguration.Player.dashEndDuration {            
-            // End of dash
+    func checkDeath() {
+        print("testing death", entity.isOnPlatform)
+        if entity.isOnPlatform {
             
-            if entity.isOnPlatform {
-                markedPlatform?.removeAllActions()
-                markedPlatform?.run(bump)
-                
-                stateMachine?.enterState(LandedState.self)
-            } else {
-                stateMachine?.enterState(DeathState.self)
-            }
+            stateMachine?.enter(LandedState.self)
+        } else {
+            stateMachine?.enter(DeathState.self)
         }
     }
     
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
+        
+        elapsedTime += seconds
+        
+    }
+    
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        switch stateClass {
-        case is LandedState.Type, is DeathState.Type:
-            return true
-            
-        case is DashingState.Type:
-            let dashCount = self.entity.componentForClass(MovementComponent.self)?.dashCount
-            
-            return dashCount < GameplayConfiguration.Player.maxDashes ? true : false
-            
-        default:
-            return false
-        }
+        return true
     }
     
     func markForLanding(platform: SKNode) {

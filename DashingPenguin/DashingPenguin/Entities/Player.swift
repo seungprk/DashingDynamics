@@ -48,8 +48,8 @@ class Player: GKEntity {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func update(withDeltaTime seconds: TimeInterval) {
-        componentForClass(MovementComponent.self)?.update(withDeltaTime: seconds)
+    override func update(deltaTime seconds: TimeInterval) {
+        component(ofType: MovementComponent.self)?.update(deltaTime: seconds)
     }
     
 }

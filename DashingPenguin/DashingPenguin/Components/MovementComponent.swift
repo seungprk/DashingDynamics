@@ -21,7 +21,7 @@ class MovementComponent: GKComponent {
         stateMachine = GKStateMachine(states: states)
         
         let initialState = states.first!
-        initialStateClass = initialState.dynamicType
+        initialStateClass = type(of: initialState)
         
         super.init()
     }
@@ -30,18 +30,17 @@ class MovementComponent: GKComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func update(withDeltaTime seconds: TimeInterval) {
-        super.update(withDeltaTime: seconds)
-        
-        stateMachine.update(withDeltaTime: seconds)        
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
+        stateMachine.update(deltaTime: seconds)
     }
     
     func enterInitialState() {
-        stateMachine.enterState(initialStateClass)
+        stateMachine.enter(initialStateClass)
     }
     
     func dash(_ velocity: CGVector) {
         self.velocity = velocity
-        stateMachine.enterState(DashingState.self)
+        stateMachine.enter(DashingState.self)
     }
 }

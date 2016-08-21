@@ -16,7 +16,7 @@ struct GameplayConfiguration {
         static let physicsBodyRadius: CGFloat = 20
 
         static let dashDuration = 0.1
-        static let dashEndDuration = 1.0
+        static let dashEndDuration = 1.5
         static let maxDashes = 2
     }
     

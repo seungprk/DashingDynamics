@@ -19,21 +19,27 @@ class DashingState: GKState {
         self.entity = entity
     }
     
-    override func didEnter(withPreviousState previousState: GKState?) {
-        super.didEnter(withPreviousState: previousState)
+    override func didEnter(from previousState: GKState?) {
+        super.didEnter(from: previousState)
         
-        entity.componentForClass(MovementComponent.self)?.dashCount += 1
-        
+        entity.component(ofType: MovementComponent.self)?.dashCount += 1
+        print(entity.component(ofType: MovementComponent.self)?.dashCount)
         elapsedTime = 0.0
 
-        if let velocity = self.entity.componentForClass(MovementComponent.self)?.velocity,
-               spriteComponent = self.entity.componentForClass(SpriteComponent.self) {
-            
+        if let velocity = self.entity.component(ofType: MovementComponent.self)?.velocity,
+        let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
+        
             spriteComponent.node.physicsBody?.applyImpulse(velocity)
             
             spriteComponent.node.run(SKAction.wait(forDuration: GameplayConfiguration.Player.dashDuration), completion: {
                 spriteComponent.node.physicsBody?.velocity = CGVector.zero
-                self.stateMachine?.enterState(DashEndingState.self)
+                if self.entity.isOnPlatform {
+                    
+                    
+                    self.stateMachine?.enter(LandedState.self)
+                } else {
+                    self.stateMachine?.enter(DashEndingState.self)
+                }
             })
             
 //            spriteComponent.node.run(SKAction.move(by: velocity, duration: GameplayConfiguration.Player.dashDuration), completion: {
@@ -44,13 +50,18 @@ class DashingState: GKState {
 
     }
     
-    override func update(withDeltaTime seconds: TimeInterval) {
-        super.update(withDeltaTime: seconds)
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
         
         elapsedTime += seconds
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass is DashEndingState.Type
+        switch stateClass {
+        case is DashEndingState.Type, is LandedState.Type:
+            return true
+        default:
+            return false
+        }
     }
 }
