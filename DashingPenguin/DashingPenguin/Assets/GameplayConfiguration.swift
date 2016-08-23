@@ -24,7 +24,7 @@ struct GameplayConfiguration {
         static let minDistance: CGFloat = 005
         static let maxDistance: CGFloat = 150
         static let minDuration: Double  = 0.01
-        static let maxDuration: Double  = 0.5
+        static let maxDuration: Double  = 0.3
         static let minSpeed   : Double  = 000
         static let maxSpeed   : Double  = 900
     }

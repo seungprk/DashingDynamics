@@ -58,24 +58,28 @@ class TouchControlInputNode: SKSpriteNode {
         
         guard touches.count == 1 else { return }
         
-        if let scene = self.scene {
-            let touchLocation = touches.first!.location(in: scene.view)
-            let endLocation = CGPoint(x: touchLocation.x, y: scene.view!.frame.maxY - touchLocation.y)
-            
-            let dx = endLocation.x - startLocation.x
-            let dy = endLocation.y - startLocation.y
-            let distance = sqrt(dx * dx + dy * dy)
-            var moveX = dx
-            var moveY = dy
-            
-            let maxDist = GameplayConfiguration.TouchControls.maxDistance
-            if distance > maxDist {
-                let swipeAngle = atan2(dy, dx)
-                moveX = cos(swipeAngle) * maxDist
-                moveY = sin(swipeAngle) * maxDist
+        let touch = touches.first!
+        let endTime = touch.timestamp
+        if endTime - startTime < GameplayConfiguration.TouchControls.maxDuration {
+            if let scene = self.scene {
+                let touchLocation = touches.first!.location(in: scene.view)
+                let endLocation = CGPoint(x: touchLocation.x, y: scene.view!.frame.maxY - touchLocation.y)
+                
+                let dx = endLocation.x - startLocation.x
+                let dy = endLocation.y - startLocation.y
+                let distance = sqrt(dx * dx + dy * dy)
+                var moveX = dx
+                var moveY = dy
+                
+                let maxDist = GameplayConfiguration.TouchControls.maxDistance
+                if distance > maxDist {
+                    let swipeAngle = atan2(dy, dx)
+                    moveX = cos(swipeAngle) * maxDist
+                    moveY = sin(swipeAngle) * maxDist
+                }
+                
+                delegate?.swipeGesture(velocity: CGVector(dx: moveX, dy: moveY))
             }
-            
-            delegate?.swipeGesture(velocity: CGVector(dx: moveX, dy: moveY))
         }
     }
     

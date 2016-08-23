@@ -57,7 +57,6 @@ class DashEndingState: GKState, PlatformLandingDelegate {
     func checkDeath() {
         print("testing death", entity.isOnPlatform)
         if entity.isOnPlatform {
-            
             stateMachine?.enter(LandedState.self)
         } else {
             stateMachine?.enter(DeathState.self)
