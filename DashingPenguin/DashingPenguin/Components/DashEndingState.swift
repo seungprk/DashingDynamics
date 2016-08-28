@@ -13,14 +13,12 @@ let bumpUp = SKAction.scale(to: 1.4, duration: 0.1)
 let bumpDown = SKAction.scale(to: 1.0, duration: 0.1)
 let bump = SKAction.sequence([bumpUp, bumpDown])
 
-class DashEndingState: GKState, PlatformLandingDelegate {
+class DashEndingState: GKState {
     
     unowned var entity: Player
     
     var elapsedTime: TimeInterval = 0.0
-    
-    var markedPlatform: SKNode?
-    
+        
     let temporarySequence: SKAction = {
         let flashCount = 5
         let flashOut = SKAction.fadeOut(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
@@ -73,8 +71,5 @@ class DashEndingState: GKState, PlatformLandingDelegate {
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return true
     }
-    
-    func markForLanding(platform: SKNode) {
-        markedPlatform = platform
-    }
+
 }

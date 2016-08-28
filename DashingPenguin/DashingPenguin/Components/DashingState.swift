@@ -23,31 +23,19 @@ class DashingState: GKState {
         super.didEnter(from: previousState)
         
         entity.component(ofType: MovementComponent.self)?.dashCount += 1
-        print(entity.component(ofType: MovementComponent.self)?.dashCount)
+
         elapsedTime = 0.0
 
-        if let velocity = self.entity.component(ofType: MovementComponent.self)?.velocity,
-        let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
+        if let velocity        = self.entity.component(ofType: MovementComponent.self)?.velocity,
+           let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
         
             spriteComponent.node.physicsBody?.applyImpulse(velocity)
-            
             spriteComponent.node.run(SKAction.wait(forDuration: GameplayConfiguration.Player.dashDuration), completion: {
+                
                 spriteComponent.node.physicsBody?.velocity = CGVector.zero
-                if self.entity.isOnPlatform {
-                    
-                    
-                    self.stateMachine?.enter(LandedState.self)
-                } else {
-                    self.stateMachine?.enter(DashEndingState.self)
-                }
+                self.entity.isOnPlatform ? self.stateMachine?.enter(LandedState.self) : self.stateMachine?.enter(DashEndingState.self)
             })
-            
-//            spriteComponent.node.run(SKAction.move(by: velocity, duration: GameplayConfiguration.Player.dashDuration), completion: {
-//                
-//                self.stateMachine?.enterState(DashEndingState.self)
-//            })
         }
-
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -55,6 +43,7 @@ class DashingState: GKState {
         
         elapsedTime += seconds
     }
+
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {

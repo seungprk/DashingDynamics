@@ -52,7 +52,7 @@ class GameScene: SKScene, GameInputDelegate {
         
         // Player Entity Setup
         self.player = Player(imageNamed: "penguin-front")
-        platformLandingDelegate = self.player!.playerDashEndingState
+        platformLandingDelegate = self.player!.landedState
         entities.append(player!)
         if let playerSprite = player?.component(ofType: SpriteComponent.self) {
             addChild(playerSprite.node)

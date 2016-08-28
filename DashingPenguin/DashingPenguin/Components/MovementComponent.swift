@@ -16,7 +16,7 @@ class MovementComponent: GKComponent {
     
     var dashCount = 0
     var velocity: CGVector?
-    
+        
     init(states: [GKState]) {
         stateMachine = GKStateMachine(states: states)
         
