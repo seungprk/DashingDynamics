@@ -26,10 +26,19 @@ class ZoneManager {
         zones.append(ZoneNormal(scene: scene, begYPos: 0))
     }
     
-//    func update() {
-//        checkIfZoneNeedsToBeAdded()
-//        //checkIfZoneNeedsToBeRemoved()
-//    }
+    func update(deltaTime seconds: TimeInterval) {
+        checkIfZoneNeedsToBeAdded()
+//        checkIfZoneNeedsToBeRemoved()
+        
+        for zone in zones {
+            for block in zone.platformBlocksManager.blocks {
+                for entity in block.entities {
+                    entity.update(deltaTime: seconds)
+                    print("Updating \(entity.description)")
+                }
+            }
+        }
+    }
     
     func checkIfZoneNeedsToBeAdded() {
         let yPosOfPlayer = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y

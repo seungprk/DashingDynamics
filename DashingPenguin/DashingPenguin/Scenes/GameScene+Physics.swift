@@ -25,11 +25,14 @@ extension GameScene: SKPhysicsContactDelegate {
         let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyB : contact.bodyA
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
+            
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
             physicsContactCount += 1
-            
             guard let node = secondBody.node else { break }
             platformLandingDelegate?.markForLanding(platform: node)
+            
+        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.laser):
+            print("Hit laser")
             
         default:
             break

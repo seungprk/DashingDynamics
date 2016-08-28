@@ -15,6 +15,8 @@ class PlatformBlock: SKNode {
     var size: CGSize!
     var nextBlockFirstPlatformXPos: CGFloat!
     
+    var entities = [GKEntity]()
+    
     override init() {
         super.init()
         print("PlatformBlock Object Created")

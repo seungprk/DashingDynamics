@@ -9,6 +9,13 @@
 import SpriteKit
 import GameplayKit
 
+enum PlatformBlockType {
+    case singleDash
+    case doubleDash
+    case obstacleDoubleDash
+    case laserDoubleDash
+}
+
 class PlatformBlocksManager {
     
     var scene: GameScene!
@@ -42,7 +49,7 @@ class PlatformBlocksManager {
         case "DoubleDash":
             return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleDoubleDash":
-            return PlatformBlockObstacleDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+            return PlatformBlockLaserDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         default:
             print("Block selection Failed")
             return nil

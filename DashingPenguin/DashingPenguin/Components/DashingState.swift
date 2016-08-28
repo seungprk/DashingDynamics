@@ -33,7 +33,11 @@ class DashingState: GKState {
             spriteComponent.node.run(SKAction.wait(forDuration: GameplayConfiguration.Player.dashDuration), completion: {
                 
                 spriteComponent.node.physicsBody?.velocity = CGVector.zero
-                self.entity.isOnPlatform ? self.stateMachine?.enter(LandedState.self) : self.stateMachine?.enter(DashEndingState.self)
+                if self.entity.isOnPlatform {
+                    self.stateMachine?.enter(LandedState.self)
+                } else {
+                    self.stateMachine?.enter(DashEndingState.self)
+                }
             })
         }
     }

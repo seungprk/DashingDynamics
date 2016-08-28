@@ -84,6 +84,8 @@ class GameScene: SKScene, GameInputDelegate {
         for entity in self.entities {
             entity.update(deltaTime: dt)
         }
+
+        zoneManager.update(deltaTime: dt)
         
         self.lastUpdateTime = currentTime
         

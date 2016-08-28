@@ -36,6 +36,8 @@
 		7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */; };
 		7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */; };
 		7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */; };
+		7F4B330F1D738D600000D467 /* Laser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4B330E1D738D600000D467 /* Laser.swift */; };
+		7F4B33111D738F9C0000D467 /* PlatformBlockLaserDoubleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4B33101D738F9C0000D467 /* PlatformBlockLaserDoubleDash.swift */; };
 		7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */; };
 		7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,8 @@
 		7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchControlInputNode.swift; path = DashingPenguin/Controls/TouchControlInputNode.swift; sourceTree = "<group>"; };
 		7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayConfiguration.swift; path = DashingPenguin/Assets/GameplayConfiguration.swift; sourceTree = "<group>"; };
 		7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+Physics.swift"; path = "DashingPenguin/Scenes/GameScene+Physics.swift"; sourceTree = "<group>"; };
+		7F4B330E1D738D600000D467 /* Laser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Laser.swift; path = DashingPenguin/Entities/Laser.swift; sourceTree = "<group>"; };
+		7F4B33101D738F9C0000D467 /* PlatformBlockLaserDoubleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockLaserDoubleDash.swift; path = DashingPenguin/Platform/PlatformBlockLaserDoubleDash.swift; sourceTree = "<group>"; };
 		7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlidingComponent.swift; path = DashingPenguin/Components/SlidingComponent.swift; sourceTree = "<group>"; };
 		7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsComponent.swift; path = DashingPenguin/Components/PhysicsComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +112,7 @@
 				24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */,
 				248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */,
 				248C794E1D3C26A7003F8A0E /* PlatformBlockObstacleDoubleDash.swift */,
+				7F4B33101D738F9C0000D467 /* PlatformBlockLaserDoubleDash.swift */,
 			);
 			name = Platform;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				7F23A5BF1D2C803E008CDA5C /* Player.swift */,
 				247DA9141D331F5C004C4A14 /* Platform.swift */,
 				248C79501D3C2C2D003F8A0E /* Obstacle.swift */,
+				7F4B330E1D738D600000D467 /* Laser.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -325,7 +331,9 @@
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,
 				240165551D4AFABC006E31DC /* ZoneChallenge.swift in Sources */,
 				248C794F1D3C26A7003F8A0E /* PlatformBlockObstacleDoubleDash.swift in Sources */,
+				7F4B33111D738F9C0000D467 /* PlatformBlockLaserDoubleDash.swift in Sources */,
 				7F23A5B91D2C802F008CDA5C /* MovementComponent.swift in Sources */,
+				7F4B330F1D738D600000D467 /* Laser.swift in Sources */,
 				7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
