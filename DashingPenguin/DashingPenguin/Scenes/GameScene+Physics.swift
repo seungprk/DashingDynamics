@@ -32,7 +32,13 @@ extension GameScene: SKPhysicsContactDelegate {
             platformLandingDelegate?.markForLanding(platform: node)
             
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.laser):
-            print("Hit laser")
+//            print("Hit laser")
+            guard let laserNode = secondBody.node else { break }
+            guard let laserDelegate = self.laserIdDelegate else { break }
+            
+            if laserDelegate.isLaserActivated(for: laserNode) {
+                self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
+            }
             
         default:
             break

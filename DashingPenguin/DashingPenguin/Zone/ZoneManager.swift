@@ -9,7 +9,11 @@
 import SpriteKit
 import GameplayKit
 
-class ZoneManager {
+protocol LaserIdentificationDelegate {
+    func isLaserActivated(for node: SKNode) -> Bool
+}
+
+class ZoneManager: LaserIdentificationDelegate {
     
     var scene: GameScene!
     var zones = [Zone]()
@@ -34,7 +38,7 @@ class ZoneManager {
             for block in zone.platformBlocksManager.blocks {
                 for entity in block.entities {
                     entity.update(deltaTime: seconds)
-                    print("Updating \(entity.description)")
+//                    print("Updating \(entity.description)")
                 }
             }
         }
@@ -66,5 +70,20 @@ class ZoneManager {
             zones.append(ZoneNormal(scene: scene, begYPos: lastZoneTopYPos))
             lastZoneType = .NormalZone
         }
+    }
+    
+    func isLaserActivated(for node: SKNode) -> Bool {
+        for zone in zones {
+            for block in zone.platformBlocksManager.blocks {
+                for entity in block.entities {
+                    guard let laserEntity = entity as? Laser else { continue }
+                    if laserEntity.id == node.name {
+                        print("player collided with \(node.name!) and isActivated is \(laserEntity.isActivated)")
+                        return laserEntity.isActivated
+                    }
+                }
+            }
+        }
+        return false
     }
 }

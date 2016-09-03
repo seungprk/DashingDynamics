@@ -6,12 +6,22 @@
 //  Copyright © 2016 Dashing Duo. All rights reserved.
 //
 
+
 import SpriteKit
 import GameplayKit
 
 class Laser: GKEntity {
     
+    var isActivated = false
+    static var idIncrement = 0
+    
+    let id: String
+    
     init(frame: CGRect) {
+        let name = "laser\(Laser.idIncrement)"
+        Laser.idIncrement += 1
+        id = name
+        
         super.init()
         
         let spriteComponent = SpriteComponent(color: .yellow, size: CGSize(width: frame.width, height: 10))
@@ -24,6 +34,8 @@ class Laser: GKEntity {
         physicsBody.isDynamic = true
         
         spriteComponent.node.physicsBody = physicsBody
+        
+        spriteComponent.node.name = name
         
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
         
@@ -43,7 +55,9 @@ class Laser: GKEntity {
         if laserElapsed > 2 {
             laserElapsed = 0
             component(ofType: SpriteComponent.self)!.node.isHidden = component(ofType: SpriteComponent.self)!.node.isHidden ? false : true
+            isActivated = component(ofType: SpriteComponent.self)!.node.isHidden ? false : true
         }
     }
+
 }
 

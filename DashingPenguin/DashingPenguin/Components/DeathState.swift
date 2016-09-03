@@ -24,5 +24,6 @@ class DeathState: GKState {
     override func didEnter(from previousState: GKState?) {
         print("DEAD")
         entity.component(ofType: SpriteComponent.self)?.node.alpha = 0.1
+        entity.component(ofType: SpriteComponent.self)?.node.physicsBody?.velocity = CGVector.zero
     }
 }

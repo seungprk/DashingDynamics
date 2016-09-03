@@ -51,7 +51,7 @@ class DashingState: GKState {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is DashEndingState.Type, is LandedState.Type:
+        case is DashEndingState.Type, is LandedState.Type, is DeathState.Type:
             return true
         default:
             return false

@@ -22,6 +22,7 @@ class GameScene: SKScene, GameInputDelegate {
     private var lastUpdateTime: TimeInterval = 0
     internal var physicsContactCount = 0
     var platformLandingDelegate: PlatformLandingDelegate?
+    var laserIdDelegate: LaserIdentificationDelegate?
     
     // MARK: - Scene Setup
     
@@ -61,6 +62,7 @@ class GameScene: SKScene, GameInputDelegate {
         // Physics
         setupPhysics()
         zoneManager = ZoneManager(scene: self)
+        self.laserIdDelegate = zoneManager
         
         player?.component(ofType: MovementComponent.self)?.enterInitialState()
     }

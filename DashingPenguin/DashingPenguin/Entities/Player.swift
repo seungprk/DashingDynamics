@@ -9,6 +9,10 @@
 import SpriteKit
 import GameplayKit
 
+protocol LaserContactDelegate {
+    func laserBodyDidContactPlayer()
+}
+
 class Player: GKEntity {
     
     var isOnPlatform = false
