@@ -50,6 +50,8 @@ class PlatformBlocksManager {
             return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleDoubleDash":
             return PlatformBlockLaserDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        case "ObstacleWall":
+            return PlatformBlockObstacleWall(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         default:
             print("Block selection Failed")
             return nil

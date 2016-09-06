@@ -18,6 +18,7 @@
 		248C79511D3C2C2D003F8A0E /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248C79501D3C2C2D003F8A0E /* Obstacle.swift */; };
 		24AD9A441D38A1D7003EB602 /* PlatformBlockSingleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */; };
 		24AD9A461D38B009003EB602 /* PlatformBlockFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */; };
+		24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */; };
 		24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */; };
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
 		7F01D5AA1D2A163B000A51D8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A91D2A163B000A51D8 /* GameViewController.swift */; };
@@ -54,6 +55,7 @@
 		248C79501D3C2C2D003F8A0E /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Obstacle.swift; path = DashingPenguin/Entities/Obstacle.swift; sourceTree = "<group>"; };
 		24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockSingleDash.swift; path = DashingPenguin/Platform/PlatformBlockSingleDash.swift; sourceTree = "<group>"; };
 		24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockFirst.swift; path = DashingPenguin/Platform/PlatformBlockFirst.swift; sourceTree = "<group>"; };
+		24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleWall.swift; path = DashingPenguin/Platform/PlatformBlockObstacleWall.swift; sourceTree = "<group>"; };
 		24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlocksManager.swift; path = DashingPenguin/Platform/PlatformBlocksManager.swift; sourceTree = "<group>"; };
 		7F01D59E1D2A163B000A51D8 /* DashingPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DashingPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "DashingPenguin/DashingPenguin (iOS)/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
@@ -113,6 +115,7 @@
 				248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */,
 				248C794E1D3C26A7003F8A0E /* PlatformBlockObstacleDoubleDash.swift */,
 				7F4B33101D738F9C0000D467 /* PlatformBlockLaserDoubleDash.swift */,
+				24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */,
 			);
 			name = Platform;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				7F23A5BE1D2C802F008CDA5C /* SpriteComponent.swift in Sources */,
 				248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */,
 				240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */,
+				24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
 				7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */,
 				7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */,

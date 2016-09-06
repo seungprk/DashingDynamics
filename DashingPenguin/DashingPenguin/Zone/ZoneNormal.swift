@@ -13,8 +13,7 @@ class ZoneNormal: Zone {
     
     override init(scene: GameScene, begYPos: CGFloat) {
         super.init(scene: scene, begYPos: begYPos)
-        platformBlocksManager.addBlock(withType: "SingleDash")
-        platformBlocksManager.addBlock(withType: "SingleDash")
+        platformBlocksManager.addBlock(withType: "ObstacleWall")
         initSize()
     }
     

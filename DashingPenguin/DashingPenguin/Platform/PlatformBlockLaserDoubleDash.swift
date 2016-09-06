@@ -17,7 +17,6 @@ class PlatformBlockLaserDoubleDash: PlatformBlock {
         super.init()
         
         let platformSize = Platform().size
-        _ = Obstacle().size
         
         // Get Random Distance
         let maxDash = GameplayConfiguration.TouchControls.maxDistance

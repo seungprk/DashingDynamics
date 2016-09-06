@@ -11,12 +11,12 @@ import GameplayKit
 
 class Obstacle: GKEntity {
     
-    let size = CGSize(width: 50, height: 50)
+    var size: CGSize!
     
-    override init() {
+    init(size: CGSize) {
         super.init()
-        
-        let spriteComponent = SpriteComponent(color: UIColor.red, size: self.size)
+        self.size = size
+        let spriteComponent = SpriteComponent(color: UIColor.red, size: size)
         
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
@@ -28,10 +28,10 @@ class Obstacle: GKEntity {
         physicsBody.isDynamic = true
         
         spriteComponent.node.physicsBody = physicsBody
-
+        
         addComponent(spriteComponent)
         addComponent(PhysicsComponent(physicsBody: physicsBody))
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

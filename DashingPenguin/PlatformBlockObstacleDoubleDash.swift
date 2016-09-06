@@ -17,7 +17,6 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         super.init()
         
         let platformSize = Platform().size
-        _ = Obstacle().size
         
         // Get Random Distance
         let maxDash = GameplayConfiguration.TouchControls.maxDistance
@@ -42,7 +41,7 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         platforms.append(firstPlatform)
 
         // Setup Obstacle
-        obstacle = Obstacle()
+        obstacle = Obstacle(size: CGSize(width: 50, height: 50))
         let obstacleSpriteNode = obstacle.component(ofType: SpriteComponent.self)!.node
         obstacleSpriteNode.position = CGPoint(x: (firstPlatXPos + nextBlockFirstPlatformXPos)/2, y: platformSize.height/2)
         addChild(obstacleSpriteNode)
