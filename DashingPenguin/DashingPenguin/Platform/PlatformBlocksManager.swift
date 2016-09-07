@@ -49,12 +49,38 @@ class PlatformBlocksManager {
         case "DoubleDash":
             return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleDoubleDash":
-            return PlatformBlockLaserDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+            return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        case "Moving":
+            return PlatformBlockMoving(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        case "ObstacleLaser":
+            return PlatformBlockObstacleLaser(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleWall":
             return PlatformBlockObstacleWall(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         default:
             print("Block selection Failed")
             return nil
+        }
+    }
+    
+    func generateRandomBlocks(amount: Int) {
+        for _ in 0..<amount {
+            let randomize = arc4random_uniform(6)
+            switch randomize {
+            case 0:
+                addBlock(withType: "SingleDash")
+            case 1:
+                addBlock(withType: "DoubleDash")
+            case 2:
+                addBlock(withType: "ObstacleDoubleDash")
+            case 3:
+                addBlock(withType: "Moving")
+            case 4:
+                addBlock(withType: "ObstacleLaser")
+            case 5:
+                addBlock(withType: "ObstacleWall")
+            default:
+                break
+            }
         }
     }
 }

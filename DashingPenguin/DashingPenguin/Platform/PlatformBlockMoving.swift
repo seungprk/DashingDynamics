@@ -9,9 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class PlatformBlockLaserDoubleDash: PlatformBlock {
-    
-    var laser: Laser!
+class PlatformBlockMoving: PlatformBlock {
     
     init(scene: GameScene, firstPlatXPos: CGFloat) {
         super.init()
@@ -19,38 +17,36 @@ class PlatformBlockLaserDoubleDash: PlatformBlock {
         let platformSize = Platform().size
         
         // Get Random Distance
-        let maxDash = GameplayConfiguration.TouchControls.maxDistance
-        let distance = sqrt(2) * maxDash
+        let rMax = GameplayConfiguration.TouchControls.maxDistance
+        let rMin = sqrt(2) * platformSize.height/2 * 1.5
+        let randomDist = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
-        let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: distance, inScene: scene)
+        let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: randomDist, inScene: scene)
         
         // Setup Size of Block and X Position of First Platform in the Next Block
         size = CGSize(width: scene.size.width, height: nextDelta.dy + platformSize.height)
         nextBlockFirstPlatformXPos = firstPlatXPos + nextDelta.dx
         
         // Background for debug
-        addChild(SKSpriteNode(color: UIColor.purple, size: self.size))
+        addChild(SKSpriteNode(color: UIColor.red, size: self.size))
         addChild(SKSpriteNode(color: UIColor.white, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
         
         // Setup Platform
-        let firstPlatform = Platform()
+        let firstPlatform = Platform(scene: scene, slidingMagnitude: 50, yPosition: size.height / 2)
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: firstPlatformSpriteNode.position.x,
+                                                    y: firstPlatformSpriteNode.size.height/2)
         addChild(firstPlatformSpriteNode)
+        firstPlatform.component(ofType: SlidingComponent.self)?.beginSliding()
         platforms.append(firstPlatform)
         
-        // Setup Laser
-        laser = Laser(frame: scene.frame)
-        let laserSpriteNode = laser.component(ofType: SpriteComponent.self)!.node
-        laserSpriteNode.position = CGPoint(x: 0, y: platformSize.height / 2)
-        addChild(laserSpriteNode)
-        
-        entities.append(laser)
+        // Setup X Position of First Platform for Next Block
+        nextBlockFirstPlatformXPos = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }

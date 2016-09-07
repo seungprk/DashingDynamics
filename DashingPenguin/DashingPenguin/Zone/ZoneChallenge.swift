@@ -13,7 +13,7 @@ class ZoneChallenge: Zone {
     
     override init(scene: GameScene, begYPos: CGFloat) {
         super.init(scene: scene, begYPos: begYPos)
-        platformBlocksManager.addBlock(withType: "ObstacleDoubleDash")
+        platformBlocksManager.generateRandomBlocks(amount: 5)
         initSize()
     }
     

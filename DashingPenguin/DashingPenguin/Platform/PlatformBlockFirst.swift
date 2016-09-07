@@ -26,21 +26,6 @@ class PlatformBlockFirst: PlatformBlock {
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
         
-        let secondPlatform = Platform(scene: scene, slidingMagnitude: 50, yPosition: size.height / 2)
-        let secondPlatformSpriteNode = secondPlatform.component(ofType: SpriteComponent.self)!.node
-        /* 
-         Temp code change for moving platform
-         Retain x value when setting position because it has been calculated in initialization.
-         Original Code:
-         secondPlatformSpriteNode.position = CGPoint(x: 0, y: secondPlatformSpriteNode.size.height/2)
-         */
-        secondPlatformSpriteNode.position = CGPoint(x: secondPlatformSpriteNode.position.x,
-                                                    y: secondPlatformSpriteNode.size.height/2)
-
-        addChild(secondPlatformSpriteNode)
-        secondPlatform.component(ofType: SlidingComponent.self)?.beginSliding()
-        platforms.append(secondPlatform)
-        
         // Setup X Position of First Platform for Next Block
         nextBlockFirstPlatformXPos = 0
     }
