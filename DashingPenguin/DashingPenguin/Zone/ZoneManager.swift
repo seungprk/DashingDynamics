@@ -27,7 +27,7 @@ class ZoneManager: LaserIdentificationDelegate {
         self.scene = scene
         
         // Add Normal Zone
-        zones.append(ZoneNormal(scene: scene, begYPos: 0))
+        zones.append(ZoneNormal(scene: scene, begXPos: 0, begYPos: 0))
     }
     
     func update(deltaTime seconds: TimeInterval) {
@@ -62,12 +62,13 @@ class ZoneManager: LaserIdentificationDelegate {
 //    }
     
     func addZone() {
+        let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
         if lastZoneType == ZoneType.NormalZone {
-            zones.append(ZoneChallenge(scene: scene, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallenge(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .ChallengeZone
         } else {
-            zones.append(ZoneNormal(scene: scene, begYPos: lastZoneTopYPos))
+            zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .NormalZone
         }
     }

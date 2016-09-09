@@ -21,14 +21,16 @@ class PlatformBlocksManager {
     var scene: GameScene!
     var blocks = [PlatformBlock]()
     var begYPos: CGFloat!
+    var begXPos: CGFloat!
     
-    init(scene: GameScene, begYPos: CGFloat) {
+    init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         self.scene = scene
+        self.begXPos = begXPos
         self.begYPos = begYPos
         print("PlatformBlocksManager Object created")
         
         // Create and Place First Block
-        let firstBlock = PlatformBlockFirst(scene: scene)
+        let firstBlock = PlatformBlockSingleDash(scene: scene, firstPlatXPos: begXPos)
         firstBlock.position = CGPoint(x: 0, y: begYPos + firstBlock.size.height/2)
         scene.addChild(firstBlock)
         blocks.append(firstBlock)
@@ -82,5 +84,9 @@ class PlatformBlocksManager {
                 break
             }
         }
+    }
+    
+    func getLastBlockEndY() -> CGFloat {
+        return (blocks.last?.position.y)! + (blocks.last?.size.height)!/2
     }
 }

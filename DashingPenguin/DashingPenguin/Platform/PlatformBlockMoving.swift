@@ -35,8 +35,8 @@ class PlatformBlockMoving: PlatformBlock {
         // Setup Platform
         let firstPlatform = Platform(scene: scene, slidingMagnitude: 50, yPosition: size.height / 2)
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: firstPlatformSpriteNode.position.x,
-                                                    y: firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos,
+                                                    y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
         addChild(firstPlatformSpriteNode)
         firstPlatform.component(ofType: SlidingComponent.self)?.beginSliding()
         platforms.append(firstPlatform)

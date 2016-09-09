@@ -11,9 +11,9 @@ import GameplayKit
 
 class ZoneNormal: Zone {
     
-    override init(scene: GameScene, begYPos: CGFloat) {
-        super.init(scene: scene, begYPos: begYPos)
-        platformBlocksManager.generateRandomBlocks(amount: 5)
+    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
+        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
+        platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
     }
     

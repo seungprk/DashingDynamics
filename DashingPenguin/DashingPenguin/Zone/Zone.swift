@@ -16,10 +16,10 @@ class Zone {
     var begYPos: CGFloat!
     var platformBlocksManager: PlatformBlocksManager!
     
-    init(scene: GameScene, begYPos: CGFloat) {
+    init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         self.scene = scene
         self.begYPos = begYPos
-        platformBlocksManager = PlatformBlocksManager(scene: scene, begYPos: begYPos)
+        platformBlocksManager = PlatformBlocksManager(scene: scene, begXPos: begXPos, begYPos: begYPos)
     }
     
     func initSize() {
@@ -28,4 +28,5 @@ class Zone {
         let topY = (platformBlocksManager.blocks.last?.position.y)! + (platformBlocksManager.blocks.last?.size.height)!/2
         size = CGSize(width: scene.size.width, height: topY - botY)
     }
+    
 }
