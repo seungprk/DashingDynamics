@@ -40,7 +40,7 @@ class MenuScene: SKScene {
         
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
         
-        soundLabel.text = isSoundOn ? SoundStringOn : SoundStringOff
+        soundLabel.text = !isSoundOn ? SoundStringOn : SoundStringOff
         soundLabel.name = "soundLabel"
         soundLabel.fontName = fontName
         soundLabel.position = playLabel.position
