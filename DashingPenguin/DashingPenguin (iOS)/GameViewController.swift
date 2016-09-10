@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.showsPhysics = true
         skView.ignoresSiblingOrder = true
-        let scene = GameScene(size: skView.frame.size)
+        let scene = MenuScene(size: skView.frame.size) // GameScene(size: skView.frame.size)
         scene.scaleMode = .aspectFill
         skView.presentScene(scene)
     }
