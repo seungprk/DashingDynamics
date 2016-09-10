@@ -9,7 +9,12 @@
 import SpriteKit
 import GameplayKit
 
+let SoundStringOn = "Sound On"
+let SoundStringOff = "Sound Off"
+
 class MenuScene: SKScene {
+    
+    var soundLabel = SKLabelNode(text: "unititialized")
     
     override func didMove(to view: SKView) {
         
@@ -18,6 +23,7 @@ class MenuScene: SKScene {
         let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
         guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist") ; return }
         let string = data.value(forKey: "Title") as? String
+//        let isSoundOn = data.value(forKey: "isSoundOn") as? Bool
         
         let label = SKLabelNode(text: string)
         label.position = CGPoint(x: frame.midX, y: frame.midY + label.frame.height * 2)
@@ -31,6 +37,15 @@ class MenuScene: SKScene {
         playLabel.position = label.position
         playLabel.position.y -= playLabel.frame.height * 4
         addChild(playLabel)
+        
+        guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
+        
+        soundLabel.text = isSoundOn ? SoundStringOn : SoundStringOff
+        soundLabel.name = "soundLabel"
+        soundLabel.fontName = fontName
+        soundLabel.position = playLabel.position
+        soundLabel.position.y -= soundLabel.frame.height * 2
+        addChild(soundLabel)
         
         /*
         // Save value to plist key
@@ -47,6 +62,8 @@ class MenuScene: SKScene {
             for node in nodes(at: touchLocation) {
                 if node.name == "playLabel" {
                     presentGameScene()
+                } else if node.name == "soundLabel" {
+                    toggleSound()
                 }
             }
         }
@@ -66,6 +83,17 @@ class MenuScene: SKScene {
         if let view = self.view {
             view.presentScene(gameScene, transition: transition)
         }
+    }
+    
+    func toggleSound() {
+        guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist") else { print("can't make PlayerData.plist url") ; return }
+        guard let data = NSDictionary(contentsOf: url) else { print("No PlayerData.plist") ; return }
+        guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
+
+        let soundSettingToggle = NSDictionary(dictionary: ["isSoundOn": !isSoundOn])
+        soundSettingToggle.write(to: url, atomically: false)
+        
+        soundLabel.text = !isSoundOn ? SoundStringOff : SoundStringOn
     }
     
 }
