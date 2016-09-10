@@ -90,8 +90,10 @@ class MenuScene: SKScene {
         guard let data = NSDictionary(contentsOf: url) else { print("No PlayerData.plist") ; return }
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
 
-        let soundSettingToggle = NSDictionary(dictionary: ["isSoundOn": !isSoundOn])
-        soundSettingToggle.write(to: url, atomically: false)
+        let newData = NSMutableDictionary(dictionary: data)
+        newData.setValue(!isSoundOn, forKey: "isSoundOn")
+//        let soundSettingToggle = NSDictionary(dictionary: ["isSoundOn": !isSoundOn])
+        newData.write(to: url, atomically: false)
         
         soundLabel.text = !isSoundOn ? SoundStringOff : SoundStringOn
     }
