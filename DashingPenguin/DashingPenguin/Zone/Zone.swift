@@ -15,6 +15,8 @@ class Zone {
     var size: CGSize!
     var begYPos: CGFloat!
     var platformBlocksManager: PlatformBlocksManager!
+    var firstPlatform: Platform!
+    var hasBeenEntered = false
     
     init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         self.scene = scene

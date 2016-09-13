@@ -32,8 +32,28 @@ class ZoneManager: LaserIdentificationDelegate {
     
     func update(deltaTime seconds: TimeInterval) {
         checkIfZoneNeedsToBeAdded()
-//        checkIfZoneNeedsToBeRemoved()
+        checkIfZoneNeedsToBeRemoved()
         
+        // Get current platform the player is on
+        var currentPlatformSprite: SKSpriteNode!
+        let playerStateMachine = scene.player?.component(ofType: MovementComponent.self)?.stateMachine
+        if playerStateMachine?.currentState is LandedState {
+            if let currentPlatform = playerStateMachine?.state(forClass: LandedState.self)?.currentPlatform {
+                currentPlatformSprite = currentPlatform as! SKSpriteNode
+                
+                // Work with the found platform
+                currentPlatformSprite.color = UIColor.black
+                for zone in zones {
+                    let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
+                    if zone is ZoneChallenge && firstPlatSprite == currentPlatformSprite {
+                        let challengeZone = zone as! ZoneChallenge
+                        challengeZone.enterEvent()
+                    }
+                }
+            }
+        }
+        
+        // Update through all entities
         for zone in zones {
             for block in zone.platformBlocksManager.blocks {
                 for entity in block.entities {
@@ -52,14 +72,14 @@ class ZoneManager: LaserIdentificationDelegate {
         }
     }
     
-//    func checkIfZoneNeedsToBeRemoved() {
+    func checkIfZoneNeedsToBeRemoved() {
 //        let yPosOfBottomOfScreen = (scene.cameraNode?.position.y)! - scene.size.height/2
 //        let yPosOfTopOfFirstBlock = (blocks.first?.position.y)! + (blocks.first?.size.height)!/2
 //        if yPosOfBottomOfScreen >= yPosOfTopOfFirstBlock {
 //            blocks.first?.removeFromParent()
 //            blocks.removeFirst()
 //        }
-//    }
+    }
     
     func addZone() {
         let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
@@ -87,4 +107,5 @@ class ZoneManager: LaserIdentificationDelegate {
         }
         return false
     }
+    
 }
