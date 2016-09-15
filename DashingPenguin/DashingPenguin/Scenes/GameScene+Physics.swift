@@ -30,7 +30,7 @@ extension GameScene: SKPhysicsContactDelegate {
             physicsContactCount += 1
             guard let node = secondBody.node else { break }
             platformLandingDelegate?.markForLanding(platform: node)
-            
+                        
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.laser):
 //            print("Hit laser")
             guard let laserNode = secondBody.node else { break }
