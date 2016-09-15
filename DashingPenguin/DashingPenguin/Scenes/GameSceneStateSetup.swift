@@ -31,6 +31,31 @@ class GameSceneStateSetup: GKState {
         label.position = CGPoint(x: 0, y: 300)
         scene.addChild(label)
         
+        // Initialize touch input node
+        let controlInputNode = TouchControlInputNode(frame: scene.frame)
+        controlInputNode.delegate = scene
+        
+        // Camera Node Setup
+        scene.cameraNode = SKCameraNode()
+        scene.cameraNode?.addChild(controlInputNode)
+        controlInputNode.position = scene.cameraNode!.position
+        scene.addChild(scene.cameraNode!)
+        scene.camera = scene.cameraNode
+
+        // Player Entity Setup
+        scene.player = Player(imageNamed: "penguin-front")
+        scene.platformLandingDelegate = scene.player!.landedState
+        scene.entities.append(scene.player!)
+        if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
+            scene.addChild(playerSprite.node)
+        }
+        
+        // Physics
+        scene.setupPhysics()
+        scene.zoneManager = ZoneManager(scene: scene)
+        scene.laserIdDelegate = scene.zoneManager
+        
+        scene.player?.component(ofType: MovementComponent.self)?.enterInitialState()
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

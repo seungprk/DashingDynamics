@@ -6,4 +6,8 @@
 //  Copyright © 2016 Dashing Duo. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+import GameplayKit
+
+class GameSceneStatePause: GKState {
+}

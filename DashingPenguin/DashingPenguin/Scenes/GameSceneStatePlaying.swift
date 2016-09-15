@@ -11,4 +11,14 @@ import GameplayKit
 
 class GameSceneStatePlaying: GKState {
     
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        switch stateClass {
+        case is GameSceneStateGameover.Type, is GameSceneStatePause.Type:
+            return true
+        
+        default:
+            return false
+        }
+    }
 }
