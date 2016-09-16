@@ -22,6 +22,8 @@ class ZoneManager: LaserIdentificationDelegate {
         case ChallengeZone
     }
     var lastZoneType = ZoneType.NormalZone
+    var currentZone: Zone?
+    var currentZoneExited = false
     
     init(scene: GameScene) {
         self.scene = scene
@@ -34,31 +36,14 @@ class ZoneManager: LaserIdentificationDelegate {
         checkIfZoneNeedsToBeAdded()
         checkIfZoneNeedsToBeRemoved()
         
-        // Get current platform the player is on
-        var currentPlatformSprite: SKSpriteNode!
-        let playerStateMachine = scene.player?.component(ofType: MovementComponent.self)?.stateMachine
-        if playerStateMachine?.currentState is LandedState {
-            if let currentPlatform = playerStateMachine?.state(forClass: LandedState.self)?.currentPlatform {
-                currentPlatformSprite = currentPlatform as! SKSpriteNode
-                
-                // Work with the found platform
-                currentPlatformSprite.color = UIColor.black
-                for zone in zones {
-                    let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
-                    if zone is ZoneChallenge && firstPlatSprite == currentPlatformSprite {
-                        let challengeZone = zone as! ZoneChallenge
-                        challengeZone.enterEvent()
-                    }
-                }
-            }
-        }
+        checkIfChallengeZoneEntered()
+        checkIfChallengeZoneExited()
         
         // Update through all entities
         for zone in zones {
             for block in zone.platformBlocksManager.blocks {
                 for entity in block.entities {
                     entity.update(deltaTime: seconds)
-//                    print("Updating \(entity.description)")
                 }
             }
         }
@@ -90,6 +75,41 @@ class ZoneManager: LaserIdentificationDelegate {
         } else {
             zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .NormalZone
+        }
+    }
+    
+    func checkIfChallengeZoneEntered() {
+        // Get current zone and platform the player is on
+        var currentPlatformSprite: SKSpriteNode!
+        let playerStateMachine = scene.player?.component(ofType: MovementComponent.self)?.stateMachine
+        if playerStateMachine?.currentState is LandedState {
+            if let currentPlatform = playerStateMachine?.state(forClass: LandedState.self)?.currentPlatform {
+                currentPlatformSprite = currentPlatform as! SKSpriteNode
+                
+                // Work with the found platform
+                currentPlatformSprite.color = UIColor.black
+                for zone in zones {
+                    let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
+                    if zone is ZoneChallenge && firstPlatSprite == currentPlatformSprite {
+                        let challengeZone = zone as! ZoneChallenge
+                        challengeZone.enterEvent()
+                        currentZone = zone
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkIfChallengeZoneExited() {
+        if currentZone != nil && currentZone is ZoneChallenge {
+            let currentChallengeZone = currentZone as! ZoneChallenge
+            let yPosOfPlayer = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
+            let begYPosOfcurrentZone = currentChallengeZone.begYPos
+            let endYPosOfcurrentZone = begYPosOfcurrentZone! + currentChallengeZone.size.height
+            if yPosOfPlayer! > endYPosOfcurrentZone {
+                currentChallengeZone.exitEvent()
+            }
         }
     }
     
