@@ -30,7 +30,8 @@ struct GameplayConfiguration {
     }
     
     struct HeightOf {
-        static let controlInputNode: CGFloat = 10000
+        static let controlInputNode: CGFloat = 100000
+        static let overlay         : CGFloat =  50000
     }
     
     struct NameOf {

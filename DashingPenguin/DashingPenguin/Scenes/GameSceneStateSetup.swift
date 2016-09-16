@@ -50,6 +50,14 @@ class GameSceneStateSetup: GKState {
             scene.addChild(playerSprite.node)
         }
         
+        if let overlay = SKNode.unarchiveFromFile(file: "Overlay")?.childNode(withName: "Overlay"),
+            let playerSprite = scene.player?.component(ofType: SpriteComponent.self)?.node {
+            overlay.removeFromParent()
+            overlay.zPosition = GameplayConfiguration.HeightOf.overlay
+            overlay.position = CGPoint(x: 0, y: -playerSprite.position.y - scene.size.height * 0.3)
+            scene.camera?.addChild(overlay)
+        }
+        
         // Physics
         scene.setupPhysics()
         scene.zoneManager = ZoneManager(scene: scene)

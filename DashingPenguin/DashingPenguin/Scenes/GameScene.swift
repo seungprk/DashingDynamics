@@ -14,6 +14,7 @@ class GameScene: SKScene, GameInputDelegate {
     var entities = [GKEntity]()
 
     var controlInputNode: TouchControlInputNode?
+//    var overlay: SKNode?
     var cameraNode: SKCameraNode?
     var player: Player?
     var platformBlocksManager: PlatformBlocksManager!

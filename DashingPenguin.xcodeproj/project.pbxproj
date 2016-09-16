@@ -46,6 +46,8 @@
 		7F4B330F1D738D600000D467 /* Laser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4B330E1D738D600000D467 /* Laser.swift */; };
 		7F4B33111D738F9C0000D467 /* PlatformBlockObstacleLaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4B33101D738F9C0000D467 /* PlatformBlockObstacleLaser.swift */; };
 		7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */; };
+		7FCAE7B41D8B72D600A02B79 /* SKNode+Unarchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */; };
+		7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */; };
 		7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,8 @@
 		7F4B330E1D738D600000D467 /* Laser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Laser.swift; path = DashingPenguin/Entities/Laser.swift; sourceTree = "<group>"; };
 		7F4B33101D738F9C0000D467 /* PlatformBlockObstacleLaser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleLaser.swift; path = DashingPenguin/Platform/PlatformBlockObstacleLaser.swift; sourceTree = "<group>"; };
 		7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlidingComponent.swift; path = DashingPenguin/Components/SlidingComponent.swift; sourceTree = "<group>"; };
+		7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKNode+Unarchiver.swift"; path = "DashingPenguin/Node/SKNode+Unarchiver.swift"; sourceTree = "<group>"; };
+		7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Overlay.sks; path = DashingPenguin/Assets/Overlay.sks; sourceTree = "<group>"; };
 		7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsComponent.swift; path = DashingPenguin/Components/PhysicsComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +157,7 @@
 		7F01D5A01D2A163B000A51D8 /* DashingPenguin */ = {
 			isa = PBXGroup;
 			children = (
+				7FCAE7B21D8B72BE00A02B79 /* Nodes */,
 				7FB4ED4E1D2B267000407A8B /* Scenes */,
 				2401654B1D4AF28D006E31DC /* Zone */,
 				247DA90F1D331659004C4A14 /* Platform */,
@@ -222,6 +227,7 @@
 				7F23A5C51D2C8064008CDA5C /* Assets.xcassets */,
 				7F23A5C71D2C8064008CDA5C /* PlayerData.plist */,
 				7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */,
+				7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -258,6 +264,14 @@
 				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		7FCAE7B21D8B72BE00A02B79 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */,
+			);
+			name = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +338,7 @@
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
+				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +363,7 @@
 				7F23A5BE1D2C802F008CDA5C /* SpriteComponent.swift in Sources */,
 				248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */,
 				240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */,
+				7FCAE7B41D8B72D600A02B79 /* SKNode+Unarchiver.swift in Sources */,
 				24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */,
 				7F098E671D8382E2009B1A4A /* MenuScene.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
