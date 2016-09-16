@@ -23,14 +23,23 @@ class ZoneChallenge: Zone {
         if hasBeenEntered == false {
             print("challenge zone entered")
             let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
+            flashingLabel.name = "flashingLabel"
             flashingLabel.fontColor = UIColor.black
             flashingLabel.position = CGPoint(x: 0, y: 0)
             scene.cameraNode?.addChild(flashingLabel)
             
-            let flashingAction = SKAction.sequence([SKAction.fadeIn(withDuration: 0.5), SKAction.fadeOut(withDuration: 1)])
+            let flashingAction = SKAction.repeatForever(SKAction.sequence([SKAction.fadeIn(withDuration: 0.5), SKAction.fadeOut(withDuration: 1)]))
             flashingLabel.run(flashingAction)
-            
             hasBeenEntered = true
+        }
+    }
+    
+    func exitEvent() {
+        if hasBeenExited == false {
+            scene.cameraNode?.childNode(withName: "flashingLabel")?.removeAllActions()
+            scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
+            print("EXIT ZONE!!")
+            hasBeenExited = true
         }
     }
 }
