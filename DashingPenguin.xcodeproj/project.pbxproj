@@ -23,6 +23,10 @@
 		24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */; };
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
 		7F01D5AA1D2A163B000A51D8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A91D2A163B000A51D8 /* GameViewController.swift */; };
+		7F027DB81D8606F900C91CCD /* GameSceneStateSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DB71D8606F900C91CCD /* GameSceneStateSetup.swift */; };
+		7F027DBB1D8607DE00C91CCD /* GameSceneStatePlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DBA1D8607DE00C91CCD /* GameSceneStatePlaying.swift */; };
+		7F027DBD1D8607EE00C91CCD /* GameSceneStatePause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */; };
+		7F027DBF1D8607F900C91CCD /* GameSceneStateGameover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */; };
 		7F098E671D8382E2009B1A4A /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F098E661D8382E2009B1A4A /* MenuScene.swift */; };
 		7F23A5B91D2C802F008CDA5C /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */; };
 		7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */; };
@@ -65,6 +69,10 @@
 		7F01D5A91D2A163B000A51D8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = "DashingPenguin/DashingPenguin (iOS)/GameViewController.swift"; sourceTree = SOURCE_ROOT; };
 		7F01D5B31D2A163B000A51D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "DashingPenguin/DashingPenguin (iOS)/Info.plist"; sourceTree = SOURCE_ROOT; };
 		7F01D5B91D2A165B000A51D8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7F027DB71D8606F900C91CCD /* GameSceneStateSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateSetup.swift; path = DashingPenguin/Scenes/GameSceneStateSetup.swift; sourceTree = "<group>"; };
+		7F027DBA1D8607DE00C91CCD /* GameSceneStatePlaying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStatePlaying.swift; path = DashingPenguin/Scenes/GameSceneStatePlaying.swift; sourceTree = "<group>"; };
+		7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStatePause.swift; path = DashingPenguin/Scenes/GameSceneStatePause.swift; sourceTree = "<group>"; };
+		7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateGameover.swift; path = DashingPenguin/Scenes/GameSceneStateGameover.swift; sourceTree = "<group>"; };
 		7F098E661D8382E2009B1A4A /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = DashingPenguin/Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovementComponent.swift; path = DashingPenguin/Components/MovementComponent.swift; sourceTree = "<group>"; };
 		7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashEndingState.swift; path = DashingPenguin/Components/DashEndingState.swift; sourceTree = "<group>"; };
@@ -157,6 +165,17 @@
 			path = DashingPenguin;
 			sourceTree = "<group>";
 		};
+		7F027DB91D86076200C91CCD /* GameScene States */ = {
+			isa = PBXGroup;
+			children = (
+				7F027DB71D8606F900C91CCD /* GameSceneStateSetup.swift */,
+				7F027DBA1D8607DE00C91CCD /* GameSceneStatePlaying.swift */,
+				7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */,
+				7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */,
+			);
+			name = "GameScene States";
+			sourceTree = "<group>";
+		};
 		7F044F3B1D2C85BB00DDE789 /* MovementComponent States (Player) */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +232,7 @@
 				7F098E661D8382E2009B1A4A /* MenuScene.swift */,
 				7F23A5C11D2C804C008CDA5C /* GameScene.swift */,
 				7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */,
+				7F027DB91D86076200C91CCD /* GameScene States */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -320,6 +340,7 @@
 				248C79511D3C2C2D003F8A0E /* Obstacle.swift in Sources */,
 				7F23A5C31D2C804C008CDA5C /* GameScene.swift in Sources */,
 				2401654F1D4AF2F9006E31DC /* ZoneManager.swift in Sources */,
+				7F027DBB1D8607DE00C91CCD /* GameSceneStatePlaying.swift in Sources */,
 				24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */,
 				7F23A5BC1D2C802F008CDA5C /* DeathState.swift in Sources */,
 				7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */,
@@ -332,12 +353,15 @@
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
 				7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */,
 				7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */,
+				7F027DBD1D8607EE00C91CCD /* GameSceneStatePause.swift in Sources */,
 				24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */,
 				7F23A5C01D2C803E008CDA5C /* Player.swift in Sources */,
 				24AD9A441D38A1D7003EB602 /* PlatformBlockSingleDash.swift in Sources */,
+				7F027DB81D8606F900C91CCD /* GameSceneStateSetup.swift in Sources */,
 				24AD9A461D38B009003EB602 /* PlatformBlockFirst.swift in Sources */,
 				7F01D5AA1D2A163B000A51D8 /* GameViewController.swift in Sources */,
 				7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */,
+				7F027DBF1D8607F900C91CCD /* GameSceneStateGameover.swift in Sources */,
 				7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */,
 				240165511D4AF409006E31DC /* Zone.swift in Sources */,
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,

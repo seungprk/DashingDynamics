@@ -19,52 +19,20 @@ class GameScene: SKScene, GameInputDelegate {
     var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
     
-    private var lastUpdateTime: TimeInterval = 0
+    var lastUpdateTime: TimeInterval = 0
     internal var physicsContactCount = 0
     var platformLandingDelegate: PlatformLandingDelegate?
     var laserIdDelegate: LaserIdentificationDelegate?
+    
+    var stateMachine: GKStateMachine!
     
     // MARK: - Scene Setup
     
     override func didMove(to view: SKView) {
         
-        // Misc Setup
-        backgroundColor = SKColor.white
-        self.lastUpdateTime = 0
+        stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self) ])
+        stateMachine.enter(GameSceneStateSetup.self)
         
-        // Label for testing
-        let label = SKLabelNode(text: "Dashing Penguin")
-        label.fontColor = UIColor.black
-        label.alpha = 1.0
-        label.run(SKAction.fadeIn(withDuration: 2.0))
-        label.position = CGPoint(x: 0, y: 300)
-        addChild(label)
-        
-        // Initialize touch input node
-        let controlInputNode = TouchControlInputNode(frame: self.frame)
-        controlInputNode.delegate = self
-        
-        // Camera Node Setup
-        cameraNode = SKCameraNode()
-        cameraNode?.addChild(controlInputNode)
-        controlInputNode.position = cameraNode!.position
-        addChild(cameraNode!)
-        camera = cameraNode
-        
-        // Player Entity Setup
-        self.player = Player(imageNamed: "penguin-front")
-        platformLandingDelegate = self.player!.landedState
-        entities.append(player!)
-        if let playerSprite = player?.component(ofType: SpriteComponent.self) {
-            addChild(playerSprite.node)
-        }
-        
-        // Physics
-        setupPhysics()
-        zoneManager = ZoneManager(scene: self)
-        self.laserIdDelegate = zoneManager
-        
-        player?.component(ofType: MovementComponent.self)?.enterInitialState()
     }
     
     override func update(_ currentTime: TimeInterval) {
