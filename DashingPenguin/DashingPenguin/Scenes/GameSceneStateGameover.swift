@@ -20,6 +20,17 @@ class GameSceneStateGameover: GKState {
     
     override func didEnter(from previousState: GKState?) {
         print("game over")
+        
+        let delay = SKAction.wait(forDuration: 2.0)
+        
+        scene.run(delay) {
+            let transition = SKTransition.moveIn(with: .up, duration: 0.5)
+            
+            if let view = self.scene.view,
+               let menu = self.scene.menuScene{
+                view.presentScene(menu, transition: transition)
+            }
+        }
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

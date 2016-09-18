@@ -27,6 +27,8 @@ class GameScene: SKScene, GameInputDelegate {
     
     var stateMachine: GKStateMachine!
     
+    var menuScene: MenuScene?
+    
     var pauseOverlay: SKNode?
     
     // MARK: - Scene Setup
@@ -76,14 +78,11 @@ class GameScene: SKScene, GameInputDelegate {
     
     func swipeGesture(velocity: CGVector) {
         guard let currentState = stateMachine.currentState,
-            let playerMovement = player?.component(ofType: MovementComponent.self) else { return }
+              let playerMovement = player?.component(ofType: MovementComponent.self) else { return }
+        
         if type(of: currentState) is GameSceneStatePlaying.Type {
             playerMovement.dash(velocity)
         }
-        
-//        if let playerMovement = player?.component(ofType: MovementComponent.self) {
-//            playerMovement.dash(velocity)
-//        }
     }
     
     func tapGesture(at location: CGPoint) {

@@ -16,7 +16,8 @@ class MenuScene: SKScene {
     
     var soundLabel = SKLabelNode(text: "unititialized")
     
-    override func didMove(to view: SKView) {
+    override init(size: CGSize) {
+        super.init(size: size)
         
         let fontName = "Helvetica Neue Condensed Black"
         
@@ -46,6 +47,14 @@ class MenuScene: SKScene {
         addChild(soundLabel)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didMove(to view: SKView) {
+        
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let touchLocation = t.location(in: self)
@@ -68,6 +77,7 @@ class MenuScene: SKScene {
         // Set Up and Present Main Game Scene
         let gameScene = GameScene(size: self.size)
         gameScene.scaleMode = SKSceneScaleMode.aspectFill
+        gameScene.menuScene = self
         let transition = SKTransition.moveIn(with: .up, duration: 0.5)
         
         if let view = self.view {
