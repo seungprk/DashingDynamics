@@ -6,6 +6,10 @@
 //  Copyright © 2016 Dashing Duo. All rights reserved.
 //
 
+/*  TODO: Resolve SKScene memory dealloc
+ *  http://stackoverflow.com/a/22528395/2684355
+ */
+
 import SpriteKit
 import GameplayKit
 
