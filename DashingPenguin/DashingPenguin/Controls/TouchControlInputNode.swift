@@ -59,6 +59,8 @@ class TouchControlInputNode: SKSpriteNode {
         guard touches.count == 1 else { return }
         
         let touch = touches.first!
+        delegate?.tapGesture(at: touch.location(in: scene?.view))
+        
         let endTime = touch.timestamp
         if endTime - startTime < GameplayConfiguration.TouchControls.maxDuration {
             if let scene = self.scene {

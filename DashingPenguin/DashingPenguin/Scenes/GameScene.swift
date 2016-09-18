@@ -27,17 +27,29 @@ class GameScene: SKScene, GameInputDelegate {
     
     var stateMachine: GKStateMachine!
     
+    var pauseOverlay: SKNode?
+    
     // MARK: - Scene Setup
     
     override func didMove(to view: SKView) {
         
-        stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self) ])
+        stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self),
+                                                GameSceneStatePlaying(scene: self),
+                                                GameSceneStatePause(scene: self),
+                                                GameSceneStateGameover(scene: self) ])
         stateMachine.enter(GameSceneStateSetup.self)
         
     }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
+        if let currentState = player?.component(ofType: MovementComponent.self)?.stateMachine.currentState {
+            if type(of: currentState) is DeathState.Type {
+                stateMachine.enter(GameSceneStateGameover.self)
+            }
+        }
+        
         updateCurrentTime(currentTime)
         centerCamera()
     }
@@ -63,13 +75,19 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func swipeGesture(velocity: CGVector) {
-        if let playerMovement = player?.component(ofType: MovementComponent.self) {
+        guard let currentState = stateMachine.currentState,
+            let playerMovement = player?.component(ofType: MovementComponent.self) else { return }
+        if type(of: currentState) is GameSceneStatePlaying.Type {
             playerMovement.dash(velocity)
         }
+        
+//        if let playerMovement = player?.component(ofType: MovementComponent.self) {
+//            playerMovement.dash(velocity)
+//        }
     }
     
     func tapGesture(at location: CGPoint) {
-        print("tapGesture(at:) has not been implemented")
+
     }
     
     func centerCamera() {

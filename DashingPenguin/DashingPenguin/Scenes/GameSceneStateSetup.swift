@@ -50,13 +50,32 @@ class GameSceneStateSetup: GKState {
             scene.addChild(playerSprite.node)
         }
         
-        if let overlay = SKNode.unarchiveFromFile(file: "Overlay")?.childNode(withName: "Overlay"),
-            let playerSprite = scene.player?.component(ofType: SpriteComponent.self)?.node {
-            overlay.removeFromParent()
+        
+        let pauseButton = SKButton(ofType: .pause)
+        pauseButton.delegate = scene
+        pauseButton.zPosition = GameplayConfiguration.HeightOf.overlay + GameplayConfiguration.HeightOf.controlInputNode
+        pauseButton.name = "pauseButton"
+        pauseButton.position = CGPoint(x: scene.frame.midX - pauseButton.frame.width * 0.5, y: scene.frame.midY - pauseButton.frame.height * 0.5)
+        scene.camera?.addChild(pauseButton)
+        
+        /** WIP **
+        // Set up overlay with sks objects.
+        if let overlayScene = SKScene(fileNamed: "Overlay.sks") {
+            let overlay = SKNode()
+            overlay.position = CGPoint.zero
+            overlay.name = "hudOverlay"
             overlay.zPosition = GameplayConfiguration.HeightOf.overlay
-            overlay.position = CGPoint(x: 0, y: -playerSprite.position.y - scene.size.height * 0.3)
+            overlay.setScale(0.5)
+            
+            for child in overlayScene.children {
+                child.removeFromParent()
+                child.isUserInteractionEnabled = true
+                overlay.addChild(child)
+            }
+
             scene.camera?.addChild(overlay)
         }
+        */
         
         // Physics
         scene.setupPhysics()
@@ -64,6 +83,7 @@ class GameSceneStateSetup: GKState {
         scene.laserIdDelegate = scene.zoneManager
         
         scene.player?.component(ofType: MovementComponent.self)?.enterInitialState()
+        self.stateMachine?.enter(GameSceneStatePlaying.self)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

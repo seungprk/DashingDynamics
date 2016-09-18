@@ -28,6 +28,8 @@
 		7F027DBD1D8607EE00C91CCD /* GameSceneStatePause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */; };
 		7F027DBF1D8607F900C91CCD /* GameSceneStateGameover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */; };
 		7F098E671D8382E2009B1A4A /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F098E661D8382E2009B1A4A /* MenuScene.swift */; };
+		7F0D445A1D8E237A0065A1C3 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D44591D8E237A0065A1C3 /* SKButton.swift */; };
+		7F0D445C1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0D445B1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift */; };
 		7F23A5B91D2C802F008CDA5C /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */; };
 		7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */; };
 		7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F23A5B51D2C802F008CDA5C /* DashingState.swift */; };
@@ -76,6 +78,8 @@
 		7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStatePause.swift; path = DashingPenguin/Scenes/GameSceneStatePause.swift; sourceTree = "<group>"; };
 		7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateGameover.swift; path = DashingPenguin/Scenes/GameSceneStateGameover.swift; sourceTree = "<group>"; };
 		7F098E661D8382E2009B1A4A /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = DashingPenguin/Scenes/MenuScene.swift; sourceTree = "<group>"; };
+		7F0D44591D8E237A0065A1C3 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKButton.swift; path = DashingPenguin/Node/SKButton.swift; sourceTree = "<group>"; };
+		7F0D445B1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+SKButtonDelegate.swift"; path = "DashingPenguin/Scenes/GameScene+SKButtonDelegate.swift"; sourceTree = "<group>"; };
 		7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovementComponent.swift; path = DashingPenguin/Components/MovementComponent.swift; sourceTree = "<group>"; };
 		7F23A5B41D2C802F008CDA5C /* DashEndingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashEndingState.swift; path = DashingPenguin/Components/DashEndingState.swift; sourceTree = "<group>"; };
 		7F23A5B51D2C802F008CDA5C /* DashingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashingState.swift; path = DashingPenguin/Components/DashingState.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				7F098E661D8382E2009B1A4A /* MenuScene.swift */,
 				7F23A5C11D2C804C008CDA5C /* GameScene.swift */,
 				7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */,
+				7F0D445B1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift */,
 				7F027DB91D86076200C91CCD /* GameScene States */,
 			);
 			name = Scenes;
@@ -270,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */,
+				7F0D44591D8E237A0065A1C3 /* SKButton.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 				2401654F1D4AF2F9006E31DC /* ZoneManager.swift in Sources */,
 				7F027DBB1D8607DE00C91CCD /* GameSceneStatePlaying.swift in Sources */,
 				24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */,
+				7F0D445A1D8E237A0065A1C3 /* SKButton.swift in Sources */,
 				7F23A5BC1D2C802F008CDA5C /* DeathState.swift in Sources */,
 				7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */,
 				247DA9131D3316CA004C4A14 /* PlatformBlock.swift in Sources */,
@@ -387,6 +394,7 @@
 				7F23A5B91D2C802F008CDA5C /* MovementComponent.swift in Sources */,
 				7F4B330F1D738D600000D467 /* Laser.swift in Sources */,
 				7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */,
+				7F0D445C1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
