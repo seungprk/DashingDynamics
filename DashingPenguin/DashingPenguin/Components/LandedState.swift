@@ -43,6 +43,10 @@ class LandedState: GKState, PlatformLandingDelegate {
         if let currentPlatform = currentPlatform {
             previousPlatformPosition = currentPlatform.position
         }
+        
+        if entity.isOnPlatform == false {
+            stateMachine?.enter(DeathState.self)
+        }
 
     }
     
@@ -53,7 +57,7 @@ class LandedState: GKState, PlatformLandingDelegate {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is DashingState.Type:
+        case is DashingState.Type, is DeathState.Type:
             return true
         default:
             return false

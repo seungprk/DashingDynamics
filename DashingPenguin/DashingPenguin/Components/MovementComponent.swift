@@ -15,7 +15,7 @@ class MovementComponent: GKComponent {
     let initialStateClass: AnyClass
     
     var dashCount = 0
-    var velocity: CGVector?
+    var dashVelocity: CGVector?
         
     init(states: [GKState]) {
         stateMachine = GKStateMachine(states: states)
@@ -40,7 +40,7 @@ class MovementComponent: GKComponent {
     }
     
     func dash(_ velocity: CGVector) {
-        self.velocity = velocity
+        self.dashVelocity = velocity
         stateMachine.enter(DashingState.self)
     }
 }

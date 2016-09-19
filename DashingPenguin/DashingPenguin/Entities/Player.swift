@@ -15,7 +15,7 @@ protocol LaserContactDelegate {
 
 class Player: GKEntity {
     
-    var isOnPlatform = false
+    var isOnPlatform = true
     var landedState: LandedState?
     
     init(imageNamed imageName: String) {
@@ -29,22 +29,19 @@ class Player: GKEntity {
         physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
         
-//        physicsBody.friction = 1
-        physicsBody.mass = 0.1
+        physicsBody.friction = 0
+        physicsBody.mass = 1
+        physicsBody.linearDamping = 0
         physicsBody.usesPreciseCollisionDetection = true
-        
         physicsBody.isDynamic = true
         
         spriteComponent.node.physicsBody = physicsBody
-        
         addComponent(spriteComponent)
-        
         landedState = LandedState(entity: self)
         addComponent(MovementComponent(states: [ landedState!,
                                                  DashingState(entity: self),
                                                  DashEndingState(entity: self),
                                                  DeathState(entity: self) ]))
-        
         addComponent(PhysicsComponent(physicsBody: physicsBody))
     }
     

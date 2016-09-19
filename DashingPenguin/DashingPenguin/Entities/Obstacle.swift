@@ -18,14 +18,10 @@ class Obstacle: GKEntity {
         self.size = size
         let spriteComponent = SpriteComponent(color: UIColor.red, size: size)
         
-        let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
+        let physicsBody = SKPhysicsBody(edgeLoopFrom: spriteComponent.node.frame)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.player
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.none
-        
-        physicsBody.mass = 1000
-        
-        physicsBody.isDynamic = true
         
         spriteComponent.node.physicsBody = physicsBody
         

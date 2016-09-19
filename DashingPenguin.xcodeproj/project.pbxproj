@@ -11,6 +11,7 @@
 		240165511D4AF409006E31DC /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165501D4AF409006E31DC /* Zone.swift */; };
 		240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165521D4AFA2E006E31DC /* ZoneNormal.swift */; };
 		240165551D4AFABC006E31DC /* ZoneChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165541D4AFABC006E31DC /* ZoneChallenge.swift */; };
+		245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */; };
 		247DA9131D3316CA004C4A14 /* PlatformBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9121D3316CA004C4A14 /* PlatformBlock.swift */; };
 		247DA9151D331F5C004C4A14 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9141D331F5C004C4A14 /* Platform.swift */; };
 		248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */; };
@@ -58,6 +59,7 @@
 		240165501D4AF409006E31DC /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zone.swift; path = DashingPenguin/Zone/Zone.swift; sourceTree = "<group>"; };
 		240165521D4AFA2E006E31DC /* ZoneNormal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneNormal.swift; path = DashingPenguin/Zone/ZoneNormal.swift; sourceTree = "<group>"; };
 		240165541D4AFABC006E31DC /* ZoneChallenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallenge.swift; path = DashingPenguin/Zone/ZoneChallenge.swift; sourceTree = "<group>"; };
+		245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnetMoveComponent.swift; path = DashingPenguin/Components/MagnetMoveComponent.swift; sourceTree = "<group>"; };
 		247DA9121D3316CA004C4A14 /* PlatformBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlock.swift; path = DashingPenguin/Platform/PlatformBlock.swift; sourceTree = "<group>"; };
 		247DA9141D331F5C004C4A14 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Platform.swift; path = DashingPenguin/Entities/Platform.swift; sourceTree = "<group>"; };
 		248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformBlockDoubleDash.swift; sourceTree = "<group>"; };
@@ -128,9 +130,9 @@
 		247DA90F1D331659004C4A14 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */,
 				247DA9121D3316CA004C4A14 /* PlatformBlock.swift */,
 				24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */,
-				24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */,
 				24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */,
 				24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */,
 				248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */,
@@ -167,6 +169,7 @@
 				247DA90F1D331659004C4A14 /* Platform */,
 				7FB4ED521D2B26F800407A8B /* Entities */,
 				7FB4ED531D2B26FF00407A8B /* Components */,
+				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
 				7F3C34DD1D2CA65C008DA5B3 /* Player Control */,
 				7FB4ED4D1D2B262B00407A8B /* Assets */,
 				7F75856C1D2B210500B18307 /* iOS */,
@@ -264,9 +267,9 @@
 			children = (
 				7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */,
 				7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */,
+				245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */,
 				7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */,
 				7F044F3B1D2C85BB00DDE789 /* MovementComponent States (Player) */,
-				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				248C79511D3C2C2D003F8A0E /* Obstacle.swift in Sources */,
 				7F23A5C31D2C804C008CDA5C /* GameScene.swift in Sources */,
 				2401654F1D4AF2F9006E31DC /* ZoneManager.swift in Sources */,
+				245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */,
 				7F027DBB1D8607DE00C91CCD /* GameSceneStatePlaying.swift in Sources */,
 				24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */,
 				7F0D445A1D8E237A0065A1C3 /* SKButton.swift in Sources */,

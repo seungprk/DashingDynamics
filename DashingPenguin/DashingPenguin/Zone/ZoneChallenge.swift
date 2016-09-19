@@ -22,6 +22,8 @@ class ZoneChallenge: Zone {
     func enterEvent() {
         if hasBeenEntered == false {
             print("challenge zone entered")
+            
+            // Test Event
             let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
             flashingLabel.name = "flashingLabel"
             flashingLabel.fontColor = UIColor.black
@@ -30,14 +32,25 @@ class ZoneChallenge: Zone {
             
             let flashingAction = SKAction.repeatForever(SKAction.sequence([SKAction.fadeIn(withDuration: 0.5), SKAction.fadeOut(withDuration: 1)]))
             flashingLabel.run(flashingAction)
+            
+            // eal Event
+            scene.player?.addComponent(MagnetMoveComponent(velocityX: 30))
+            let magnetComponent = scene.player?.component(ofType: MagnetMoveComponent.self)
+            magnetComponent?.beginMagnetEffect()
             hasBeenEntered = true
         }
     }
     
     func exitEvent() {
         if hasBeenExited == false {
+            
+            // Test Event
             scene.cameraNode?.childNode(withName: "flashingLabel")?.removeAllActions()
             scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
+            
+            // Real Event
+            scene.player?.removeComponent(ofType: MagnetMoveComponent.self)
+            
             print("EXIT ZONE!!")
             hasBeenExited = true
         }
