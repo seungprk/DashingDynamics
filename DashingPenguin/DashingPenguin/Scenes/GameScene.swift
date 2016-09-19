@@ -31,9 +31,12 @@ class GameScene: SKScene, GameInputDelegate {
     
     var pauseOverlay: SKNode?
     
-    // MARK: - Scene Setup
+    // MARK: - State Machine setup
     
     override func didMove(to view: SKView) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(appWillBecomeActive), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
         stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self),
                                                 GameSceneStatePlaying(scene: self),
@@ -42,6 +45,8 @@ class GameScene: SKScene, GameInputDelegate {
         stateMachine.enter(GameSceneStateSetup.self)
         
     }
+    
+    // MARK: Update methods
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -76,6 +81,16 @@ class GameScene: SKScene, GameInputDelegate {
         
     }
     
+    func centerCamera() {
+        if let playerSprite = player?.component(ofType: SpriteComponent.self)?.node {
+            let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y + self.size.height * 0.3), duration: 0.2)
+            move.timingMode = .easeOut
+            cameraNode?.run(move)
+        }
+    }
+    
+    // MARK: Control Input methods
+    
     func swipeGesture(velocity: CGVector) {
         guard let currentState = stateMachine.currentState,
               let playerMovement = player?.component(ofType: MovementComponent.self) else { return }
@@ -89,12 +104,13 @@ class GameScene: SKScene, GameInputDelegate {
 
     }
     
-    func centerCamera() {
-        if let playerSprite = player?.component(ofType: SpriteComponent.self)?.node {
-            let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y + self.size.height * 0.3), duration: 0.2)
-            move.timingMode = .easeOut
-            cameraNode?.run(move)
-        }
+    // MARK: Notification Center methods
+    
+    func appWillResignActive() {
+        stateMachine.enter(GameSceneStatePause.self)
+    }
+    
+    func appWillBecomeActive() {
     }
     
 }
