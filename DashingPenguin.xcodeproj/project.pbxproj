@@ -43,6 +43,9 @@
 		7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5C71D2C8064008CDA5C /* PlayerData.plist */; };
 		7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5CD1D2C8081008CDA5C /* LaunchScreen.storyboard */; };
 		7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F23A5CF1D2C8081008CDA5C /* Main.storyboard */; };
+		7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */; };
+		7F24DF4F1D92018300796DB0 /* dial.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7F24DF4E1D92018300796DB0 /* dial.wav */; };
+		7F24DF511D92019600796DB0 /* charge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7F24DF501D92019600796DB0 /* charge.wav */; };
 		7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */; };
 		7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */; };
 		7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */; };
@@ -94,6 +97,9 @@
 		7F23A5C71D2C8064008CDA5C /* PlayerData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PlayerData.plist; path = DashingPenguin/Assets/PlayerData.plist; sourceTree = "<group>"; };
 		7F23A5CE1D2C8081008CDA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "DashingPenguin (iOS)/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		7F23A5D01D2C8081008CDA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "DashingPenguin (iOS)/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioManager.swift; path = DashingPenguin/Audio/AudioManager.swift; sourceTree = "<group>"; };
+		7F24DF4E1D92018300796DB0 /* dial.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dial.wav; sourceTree = "<group>"; };
+		7F24DF501D92019600796DB0 /* charge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = charge.wav; sourceTree = "<group>"; };
 		7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchControlInputNode.swift; path = DashingPenguin/Controls/TouchControlInputNode.swift; sourceTree = "<group>"; };
 		7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayConfiguration.swift; path = DashingPenguin/Assets/GameplayConfiguration.swift; sourceTree = "<group>"; };
 		7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+Physics.swift"; path = "DashingPenguin/Scenes/GameScene+Physics.swift"; sourceTree = "<group>"; };
@@ -163,6 +169,7 @@
 		7F01D5A01D2A163B000A51D8 /* DashingPenguin */ = {
 			isa = PBXGroup;
 			children = (
+				7F24DF4C1D91FFA200796DB0 /* Audio */,
 				7FCAE7B21D8B72BE00A02B79 /* Nodes */,
 				7FB4ED4E1D2B267000407A8B /* Scenes */,
 				2401654B1D4AF28D006E31DC /* Zone */,
@@ -199,6 +206,23 @@
 			name = "MovementComponent States (Player)";
 			sourceTree = "<group>";
 		};
+		7F24DF4C1D91FFA200796DB0 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		7F24DF4D1D92010900796DB0 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				7F24DF501D92019600796DB0 /* charge.wav */,
+				7F24DF4E1D92018300796DB0 /* dial.wav */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		7F3C34DD1D2CA65C008DA5B3 /* Player Control */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +255,7 @@
 		7FB4ED4D1D2B262B00407A8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				7F24DF4D1D92010900796DB0 /* Audio */,
 				7F23A5C51D2C8064008CDA5C /* Assets.xcassets */,
 				7F23A5C71D2C8064008CDA5C /* PlayerData.plist */,
 				7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */,
@@ -344,9 +369,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F24DF4F1D92018300796DB0 /* dial.wav in Resources */,
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
+				7F24DF511D92019600796DB0 /* charge.wav in Resources */,
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
 			);
@@ -379,6 +406,7 @@
 				7F098E671D8382E2009B1A4A /* MenuScene.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
 				7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */,
+				7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */,
 				7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */,
 				7F027DBD1D8607EE00C91CCD /* GameSceneStatePause.swift in Sources */,
 				24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */,

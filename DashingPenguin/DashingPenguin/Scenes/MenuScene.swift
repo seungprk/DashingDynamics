@@ -19,7 +19,7 @@ let SoundStringOff = "Sound Off"
 class MenuScene: SKScene {
     
     var soundLabel = SKLabelNode(text: "unititialized")
-    
+
     override init(size: CGSize) {
         super.init(size: size)
         
@@ -49,10 +49,15 @@ class MenuScene: SKScene {
         soundLabel.position = playLabel.position
         soundLabel.position.y -= soundLabel.frame.height * 2
         addChild(soundLabel)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func testButtonClick() {
+        print("Test button clicked")
     }
     
     override func didMove(to view: SKView) {
@@ -90,6 +95,8 @@ class MenuScene: SKScene {
     }
     
     func toggleSound() {
+        AudioManager.sharedInstance.play("charge")
+        
         guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
             else { print("can't make PlayerData.plist url") ; return }
         guard let data = NSDictionary(contentsOf: url)
