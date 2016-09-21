@@ -7,9 +7,9 @@
 //
 
 extension GameScene: SKButtonDelegate {
-    func onButtonPress(type: SKButtonType) {
-        switch type {
-        case .pause:
+    func onButtonPress(named: String) {
+        switch named {
+        case "pauseButton":
             guard let currentState = stateMachine.currentState else { return }
             if type(of: currentState) is GameSceneStatePause.Type {
                 stateMachine.enter(GameSceneStatePlaying.self)
@@ -17,7 +17,8 @@ extension GameScene: SKButtonDelegate {
             else {
                 stateMachine.enter(GameSceneStatePause.self)
             }
-            
+        default:
+            break
         }
     }
 }

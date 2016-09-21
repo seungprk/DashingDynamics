@@ -16,7 +16,7 @@ import GameplayKit
 let SoundStringOn  = "Sound On"
 let SoundStringOff = "Sound Off"
 
-class MenuScene: SKScene {
+class MenuScene: SKScene, SKButtonDelegate {
     
     var soundLabel = SKLabelNode(text: "unititialized")
 
@@ -34,19 +34,25 @@ class MenuScene: SKScene {
         label.fontName = fontName
         addChild(label)
         
+        let playButton = SKButton(size: CGSize(width: 200, height: 40), nameForImageNormal: nil, nameForImageNormalHighlight: nil)
+        playButton.name = "playButton"
+        playButton.delegate = self
+        playButton.position = CGPoint(x: label.position.x, y: label.position.y - playButton.frame.height * 4)
+        
         let playLabel = SKLabelNode(text: "Play")
         playLabel.name = "playLabel"
         playLabel.fontName = fontName
-        playLabel.fontSize = 48
-        playLabel.position = label.position
-        playLabel.position.y -= playLabel.frame.height * 4
-        addChild(playLabel)
+        playLabel.fontSize = 24
+        playLabel.position = CGPoint.zero
+        
+        playButton.addChild(playLabel)
+        addChild(playButton)
         
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
         soundLabel.text = isSoundOn ? SoundStringOn : SoundStringOff
         soundLabel.name = "soundLabel"
         soundLabel.fontName = fontName
-        soundLabel.position = playLabel.position
+        soundLabel.position = playButton.position
         soundLabel.position.y -= soundLabel.frame.height * 2
         addChild(soundLabel)
         
@@ -54,10 +60,6 @@ class MenuScene: SKScene {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func testButtonClick() {
-        print("Test button clicked")
     }
     
     override func didMove(to view: SKView) {
@@ -111,4 +113,13 @@ class MenuScene: SKScene {
         soundLabel.text = !isSoundOn ? SoundStringOn : SoundStringOff
     }
     
+    func onButtonPress(named: String) {
+        switch named {
+        case "playButton":
+            presentGameScene()
+            
+        default:
+            break
+        }
+    }
 }

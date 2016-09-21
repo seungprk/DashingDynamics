@@ -8,29 +8,42 @@
 
 import SpriteKit
 
-enum SKButtonType {
-    case pause
-}
+//enum SKButtonType {
+//    case pause
+//    case sound
+//    case music
+//    case beginPlay
+//    case gameCenter
+//    case credits
+//}
 
 protocol SKButtonDelegate {
-    func onButtonPress(type: SKButtonType)
+    func onButtonPress(named: String)
 }
 
 class SKButton: SKSpriteNode {
     
     var delegate: SKButtonDelegate?
-    let type: SKButtonType
     
-    init(ofType type: SKButtonType) {
-        self.type = type
-        super.init(texture: nil, color: SKColor.init(red: 0, green: 0, blue: 1, alpha: 0.2) , size: CGSize(width: 50, height: 50))
-        let label = SKLabelNode(text: "II")
-        label.zPosition = GameplayConfiguration.HeightOf.controlInputNode * 3
-        label.fontName = "Helvetica Neue Bold"
-        label.position = CGPoint(x: 0, y: -self.frame.height * 0.25) //.zero
-        label.fontColor = .black
-        label.fontSize = 36
-        addChild(label)
+    let textureNormal: SKTexture?
+    let textureNormalHighlight: SKTexture?
+    
+    init(size: CGSize, nameForImageNormal: String?, nameForImageNormalHighlight: String?) {
+        
+        if let nameNormal = nameForImageNormal {
+            textureNormal = SKTexture(imageNamed: nameNormal)
+        } else {
+            textureNormal = nil
+        }
+        
+        if let nameHighlight = nameForImageNormalHighlight {
+            textureNormalHighlight = SKTexture(imageNamed: nameHighlight)
+        } else {
+            textureNormalHighlight = nil
+        }
+        
+        super.init(texture: textureNormal, color: .clear, size: size)
+        
         self.isUserInteractionEnabled = true
     }
     
@@ -39,7 +52,19 @@ class SKButton: SKSpriteNode {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        delegate?.onButtonPress(type: type)
+        if let textureHiglight = textureNormalHighlight {
+            self.texture = textureHiglight
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.texture = textureNormal
+        
+        if let name = self.name {
+            delegate?.onButtonPress(named: name)
+        } else {
+            print("Pressed button has no name")
+        }
     }
     
 }

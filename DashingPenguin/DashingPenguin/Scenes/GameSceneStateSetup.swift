@@ -50,8 +50,8 @@ class GameSceneStateSetup: GKState {
             scene.addChild(playerSprite.node)
         }
         
-        
-        let pauseButton = SKButton(ofType: .pause)
+        let pauseButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "pause_on", nameForImageNormalHighlight: "pause_off")
+        pauseButton.name = "pauseButton"
         pauseButton.delegate = scene
         pauseButton.zPosition = GameplayConfiguration.HeightOf.overlay + GameplayConfiguration.HeightOf.controlInputNode
         pauseButton.name = "pauseButton"
