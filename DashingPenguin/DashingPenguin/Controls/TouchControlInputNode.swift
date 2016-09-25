@@ -21,7 +21,7 @@ class TouchControlInputNode: SKSpriteNode {
     weak var delegate: GameInputDelegate?
     
     init(frame: CGRect) {
-        let testColor = SKColor.init(red: 1, green: 0, blue: 0, alpha: 0.2)
+        let testColor = UIColor.clear
         super.init(texture: nil, color: testColor, size: frame.size)
         
         zPosition = GameplayConfiguration.HeightOf.controlInputNode

@@ -22,37 +22,46 @@ class ZoneChallenge: Zone {
     func enterEvent() {
         if hasBeenEntered == false {
             print("challenge zone entered")
+            hasBeenEntered = true
+            scene.stateMachine.enter(GameSceneStateCinematicPause.self)
             
-            // Test Event
+            // Setup Challenge Start Overlay
+            let challengeOverlayNode = SKNode()
             let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
             flashingLabel.name = "flashingLabel"
             flashingLabel.fontColor = UIColor.black
             flashingLabel.position = CGPoint(x: 0, y: 0)
-            scene.cameraNode?.addChild(flashingLabel)
             
-            let flashingAction = SKAction.repeatForever(SKAction.sequence([SKAction.fadeIn(withDuration: 0.5), SKAction.fadeOut(withDuration: 1)]))
-            flashingLabel.run(flashingAction)
+            scene.cameraNode?.addChild(challengeOverlayNode)
+            challengeOverlayNode.addChild(flashingLabel)
             
-            // eal Event
-            scene.player?.addComponent(MagnetMoveComponent(velocityX: 30))
-            let magnetComponent = scene.player?.component(ofType: MagnetMoveComponent.self)
-            magnetComponent?.beginMagnetEffect()
-            hasBeenEntered = true
+            // Animate Layer
+            let flashingAction = SKAction.sequence([SKAction.fadeIn(withDuration: 1), SKAction.fadeOut(withDuration: 1)])
+            
+            flashingLabel.run(flashingAction, completion: {
+                self.scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
+                self.scene.stateMachine.enter(GameSceneStatePlaying.self)
+                
+                // Activate Challenge
+                self.scene.player?.addComponent(MagnetMoveComponent(velocityX: 30))
+                let magnetComponent = self.scene.player?.component(ofType: MagnetMoveComponent.self)
+                magnetComponent?.beginMagnetEffect()
+            })
+
         }
     }
     
     func exitEvent() {
         if hasBeenExited == false {
             
-            // Test Event
-            scene.cameraNode?.childNode(withName: "flashingLabel")?.removeAllActions()
-            scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
-            
-            // Real Event
+            // Deactivate Challenge
             scene.player?.removeComponent(ofType: MagnetMoveComponent.self)
+            
+            // Run Exit Animation
             
             print("EXIT ZONE!!")
             hasBeenExited = true
         }
     }
+    
 }

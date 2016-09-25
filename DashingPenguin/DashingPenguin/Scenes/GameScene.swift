@@ -41,6 +41,7 @@ class GameScene: SKScene, GameInputDelegate {
         stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self),
                                                 GameSceneStatePlaying(scene: self),
                                                 GameSceneStatePause(scene: self),
+                                                GameSceneStateCinematicPause(scene: self),
                                                 GameSceneStateGameover(scene: self) ])
         stateMachine.enter(GameSceneStateSetup.self)
         

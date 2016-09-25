@@ -19,7 +19,7 @@ class GameSceneStatePause: GKState {
         self.scene = scene
         
         pauseView = UIView(frame: scene.frame)
-        pauseView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
+        pauseView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
         let pauseLabel = UILabel(frame: CGRect(origin: CGPoint(x: scene.frame.midX, y: scene.frame.midY), size: CGSize(width: 300, height: 100)))
         pauseLabel.font = UIFont.systemFont(ofSize: 36)
         pauseLabel.textAlignment = .center

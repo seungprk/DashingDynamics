@@ -25,6 +25,7 @@ class DeathState: GKState {
         print("DEAD")
         let spriteComponent = self.entity.component(ofType: SpriteComponent.self)
         spriteComponent?.node.removeAllActions()
+        spriteComponent?.node.physicsBody?.velocity = CGVector.zero
         entity.component(ofType: SpriteComponent.self)?.node.alpha = 0.1
         entity.component(ofType: SpriteComponent.self)?.node.physicsBody?.velocity = CGVector.zero
     }

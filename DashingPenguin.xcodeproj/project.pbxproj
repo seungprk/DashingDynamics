@@ -20,6 +20,7 @@
 		24AD9A441D38A1D7003EB602 /* PlatformBlockSingleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */; };
 		24AD9A461D38B009003EB602 /* PlatformBlockFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */; };
 		24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */; };
+		24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */; };
 		24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */; };
 		24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */; };
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 		24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockSingleDash.swift; path = DashingPenguin/Platform/PlatformBlockSingleDash.swift; sourceTree = "<group>"; };
 		24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockFirst.swift; path = DashingPenguin/Platform/PlatformBlockFirst.swift; sourceTree = "<group>"; };
 		24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleWall.swift; path = DashingPenguin/Platform/PlatformBlockObstacleWall.swift; sourceTree = "<group>"; };
+		24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateCinematicPause.swift; path = DashingPenguin/Scenes/GameSceneStateCinematicPause.swift; sourceTree = "<group>"; };
 		24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlocksManager.swift; path = DashingPenguin/Platform/PlatformBlocksManager.swift; sourceTree = "<group>"; };
 		24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockMoving.swift; path = DashingPenguin/Platform/PlatformBlockMoving.swift; sourceTree = "<group>"; };
 		7F01D59E1D2A163B000A51D8 /* DashingPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DashingPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 				7F027DBA1D8607DE00C91CCD /* GameSceneStatePlaying.swift */,
 				7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */,
 				7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */,
+				24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */,
 			);
 			name = "GameScene States";
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */,
 				7F24DF531D92136800796DB0 /* SKToggle.swift in Sources */,
 				7F098E671D8382E2009B1A4A /* MenuScene.swift in Sources */,
+				24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
 				7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */,
 				7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */,
