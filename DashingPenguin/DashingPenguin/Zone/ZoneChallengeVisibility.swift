@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class ZoneChallenge: Zone {
+class ZoneChallengeVisibility: Zone {
     
     override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
@@ -19,7 +19,7 @@ class ZoneChallenge: Zone {
         firstPlatform.component(ofType: SpriteComponent.self)?.node.color = UIColor.darkGray
     }
     
-    func enterEvent() {
+    override func enterEvent() {
         if hasBeenEntered == false {
             print("challenge zone entered")
             hasBeenEntered = true
@@ -51,7 +51,7 @@ class ZoneChallenge: Zone {
         }
     }
     
-    func exitEvent() {
+    override func exitEvent() {
         if hasBeenExited == false {
             
             // Deactivate Challenge

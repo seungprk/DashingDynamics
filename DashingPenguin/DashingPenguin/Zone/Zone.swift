@@ -32,4 +32,19 @@ class Zone {
         size = CGSize(width: scene.size.width, height: topY - botY)
     }
     
+    func enterEvent() {
+        // Function for subclass
+        if hasBeenEntered == false {
+            print("Empty enterEvent Function")
+            hasBeenEntered = true
+        }
+    }
+    
+    func exitEvent() {
+        // Function for subclass
+        if hasBeenExited == false {
+            print("Empty exitEvent Function")
+            hasBeenExited = true
+        }
+    }
 }
