@@ -23,6 +23,8 @@ class MenuScene: SKScene, SKButtonDelegate {
     override init(size: CGSize) {
         super.init(size: size)
         
+        backgroundColor = .init(red: 0.05, green: 0.09, blue: 0.09, alpha: 1)
+        
         let fontName = "Helvetica Neue Condensed Black"
         
         let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
