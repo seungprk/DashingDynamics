@@ -70,7 +70,7 @@ class ZoneManager: LaserIdentificationDelegate {
         let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
         if lastZoneType == ZoneType.NormalZone {
-            zones.append(ZoneChallenge(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .ChallengeZone
         } else {
             zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
@@ -90,9 +90,8 @@ class ZoneManager: LaserIdentificationDelegate {
                 currentPlatformSprite.color = UIColor.black
                 for zone in zones {
                     let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
-                    if zone is ZoneChallenge && firstPlatSprite == currentPlatformSprite {
-                        let challengeZone = zone as! ZoneChallenge
-                        challengeZone.enterEvent()
+                    if firstPlatSprite == currentPlatformSprite {
+                        zone.enterEvent()
                         currentZone = zone
                         break
                     }
@@ -102,13 +101,12 @@ class ZoneManager: LaserIdentificationDelegate {
     }
     
     func checkIfChallengeZoneExited() {
-        if currentZone != nil && currentZone is ZoneChallenge {
-            let currentChallengeZone = currentZone as! ZoneChallenge
+        if currentZone != nil {
             let yPosOfPlayer = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
-            let begYPosOfcurrentZone = currentChallengeZone.begYPos
-            let endYPosOfcurrentZone = begYPosOfcurrentZone! + currentChallengeZone.size.height
+            let begYPosOfcurrentZone = currentZone?.begYPos
+            let endYPosOfcurrentZone = begYPosOfcurrentZone! + (currentZone?.size.height)!
             if yPosOfPlayer! > endYPosOfcurrentZone {
-                currentChallengeZone.exitEvent()
+                currentZone?.exitEvent()
             }
         }
     }
