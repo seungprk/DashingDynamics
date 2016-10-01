@@ -58,6 +58,12 @@ class MenuScene: SKScene, SKButtonDelegate {
         soundLabel.position.y -= soundLabel.frame.height * 2
         addChild(soundLabel)
         
+        
+        let soundButton = SKToggle(size: CGSize(width: 40, height: 40), isOn: isSoundOn, imageNormal: "sound_on", imageHighlight: "sound_on_highlight", imageOff: "sound_off", imageOffHighlight: "sound_off_highlight")
+        soundButton.name = "soundButton"
+        soundButton.delegate = self
+        soundButton.position = CGPoint(x: 50, y: 200)
+        addChild(soundButton)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -116,6 +122,8 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     func onButtonPress(named: String) {
+        print(named)
+        
         switch named {
         case "playButton":
             presentGameScene()
