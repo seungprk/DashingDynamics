@@ -53,15 +53,25 @@ class SKToggle: SKButton {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        isOn = !isOn
-        if let texture = isOn ? textureNormal : textureOff {
-            self.texture = texture
-        }
         
-        if let name = self.name {
-            delegate?.onButtonPress(named: name)
-        } else {
-            print("Pressed button has no name")
+        if let location = touches.first?.location(in: self.scene!) {
+            if self.contains(location) {
+                
+                isOn = !isOn
+                if let texture = isOn ? textureNormal : textureOff {
+                    self.texture = texture
+                }
+                
+                if let name = self.name {
+                    delegate?.onButtonPress(named: name)
+                } else {
+                    print("Pressed button has no name")
+                }
+            } else {
+                if let texture = isOn ? textureNormal : textureOff {
+                    self.texture = texture
+                }
+            }
         }
     }
 }
