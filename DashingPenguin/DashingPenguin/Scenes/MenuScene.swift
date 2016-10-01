@@ -18,8 +18,6 @@ let SoundStringOff = "Sound Off"
 
 class MenuScene: SKScene, SKButtonDelegate {
     
-//    var soundLabel = SKLabelNode(text: "unititialized")
-//    var soundButton: SKNode?
     override init(size: CGSize) {
         super.init(size: size)
         
@@ -51,14 +49,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         addChild(playButton)
         
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
-//        soundLabel.text = isSoundOn ? SoundStringOn : SoundStringOff
-//        soundLabel.name = "soundLabel"
-//        soundLabel.fontName = fontName
-//        soundLabel.position = playButton.position
-//        soundLabel.position.y -= soundLabel.frame.height * 2
-//        addChild(soundLabel)
-        
-        
+
         let soundButton = SKToggle(size: CGSize(width: 40, height: 40), isOn: isSoundOn, imageNormal: "sound_on", imageHighlight: "sound_on_highlight", imageOff: "sound_off", imageOffHighlight: "sound_off_highlight")
         soundButton.name = "soundButton"
         soundButton.delegate = self
@@ -80,8 +71,6 @@ class MenuScene: SKScene, SKButtonDelegate {
             for node in nodes(at: touchLocation) {
                 if node.name == "playLabel" {
                     presentGameScene()
-                } else if node.name == "soundButton" {
-                    toggleSound()
                 }
             }
         }
@@ -117,8 +106,6 @@ class MenuScene: SKScene, SKButtonDelegate {
         let newData = NSMutableDictionary(dictionary: data)
         newData.setValue(!isSoundOn, forKey: "isSoundOn")
         newData.write(to: url, atomically: false)
-        
-//        soundLabel.text = !isSoundOn ? SoundStringOn : SoundStringOff
     }
     
     func onButtonPress(named: String) {
@@ -127,6 +114,9 @@ class MenuScene: SKScene, SKButtonDelegate {
         switch named {
         case "playButton":
             presentGameScene()
+        
+        case "soundButton":
+            toggleSound()
             
         default:
             break
