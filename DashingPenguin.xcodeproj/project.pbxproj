@@ -183,7 +183,6 @@
 				247DA90F1D331659004C4A14 /* Platform */,
 				7FB4ED521D2B26F800407A8B /* Entities */,
 				7FB4ED531D2B26FF00407A8B /* Components */,
-				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
 				7F3C34DD1D2CA65C008DA5B3 /* Player Control */,
 				7FB4ED4D1D2B262B00407A8B /* Assets */,
 				7F75856C1D2B210500B18307 /* iOS */,
@@ -303,6 +302,7 @@
 				245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */,
 				7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */,
 				7F044F3B1D2C85BB00DDE789 /* MovementComponent States (Player) */,
+				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
