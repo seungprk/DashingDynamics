@@ -13,7 +13,7 @@ class ZoneChallengeVisibility: Zone {
     
     override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
-        platformBlocksManager.generateRandomBlocks(amount: 1)
+        platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.platforms.first
         firstPlatform.component(ofType: SpriteComponent.self)?.node.color = UIColor.darkGray
