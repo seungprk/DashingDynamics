@@ -17,9 +17,11 @@ import SpriteKit
 //    case credits
 //}
 
-protocol SKButtonDelegate {
+@objc protocol SKButtonDelegate {
     func onButtonPress(named: String)
+    @objc optional func onButtonDown(named: String?)
 }
+
 
 class SKButton: SKSpriteNode {
     
@@ -55,6 +57,8 @@ class SKButton: SKSpriteNode {
         if let textureHiglight = textureNormalHighlight {
             self.texture = textureHiglight
         }
+
+        delegate?.onButtonDown?(named: name)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

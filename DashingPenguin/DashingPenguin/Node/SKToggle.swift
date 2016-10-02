@@ -50,6 +50,8 @@ class SKToggle: SKButton {
         if let texture = isOn ? textureNormalHighlight : textureOffHighlight {
             self.texture = texture
         }
+        
+        delegate?.onButtonDown?(named: name)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

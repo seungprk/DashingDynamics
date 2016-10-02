@@ -43,7 +43,6 @@ class LandedState: GKState, PlatformLandingDelegate {
     }
     
     override func willExit(to nextState: GKState) {
-        currentPlatform = nil
         previousPlatformPosition = nil
     }
     
@@ -58,6 +57,10 @@ class LandedState: GKState, PlatformLandingDelegate {
     
     func markForLanding(platform: SKNode) {
         currentPlatform = platform
+    }
+    
+    func didExitPlatform() {
+        currentPlatform = nil
     }
 
 }
