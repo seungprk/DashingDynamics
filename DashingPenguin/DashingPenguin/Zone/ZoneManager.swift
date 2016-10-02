@@ -70,7 +70,7 @@ class ZoneManager: LaserIdentificationDelegate {
         let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
         if lastZoneType == ZoneType.NormalZone {
-            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .ChallengeZone
         } else {
             zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))

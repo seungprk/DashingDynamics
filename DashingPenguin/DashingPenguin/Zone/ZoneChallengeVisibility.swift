@@ -27,6 +27,8 @@ class ZoneChallengeVisibility: Zone {
             
             // Setup Challenge Start Overlay
             let challengeOverlayNode = SKNode()
+            challengeOverlayNode.name = "challengeOverlayNode"
+            
             let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
             flashingLabel.name = "flashingLabel"
             flashingLabel.fontColor = UIColor.black
@@ -42,10 +44,17 @@ class ZoneChallengeVisibility: Zone {
                 self.scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
                 self.scene.stateMachine.enter(GameSceneStatePlaying.self)
                 
+                // Setup Challenge Activation
+                let blinderOverlayNode = SKSpriteNode(texture: nil, color: UIColor.blue, size: self.scene.size)
+                blinderOverlayNode.name = "blinderOverlayNode"
+                blinderOverlayNode.position = CGPoint.zero
+                blinderOverlayNode.zPosition = GameplayConfiguration.HeightOf.overlay
+                let blinderAction = SKAction.sequence([SKAction.fadeIn(withDuration: 0.1), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.1), SKAction.wait(forDuration: 2)])
+                let blinderRepeatAction = SKAction.repeatForever(blinderAction)
+                
                 // Activate Challenge
-                self.scene.player?.addComponent(MagnetMoveComponent(velocityX: 30))
-                let magnetComponent = self.scene.player?.component(ofType: MagnetMoveComponent.self)
-                magnetComponent?.beginMagnetEffect()
+                challengeOverlayNode.addChild(blinderOverlayNode)
+                blinderOverlayNode.run(blinderRepeatAction)
             })
 
         }
@@ -55,6 +64,8 @@ class ZoneChallengeVisibility: Zone {
         if hasBeenExited == false {
             
             // Deactivate Challenge
+            let removeNode = scene.cameraNode?.childNode(withName: "challengeOverlayNode")
+            removeNode?.removeFromParent()
             scene.player?.removeComponent(ofType: MagnetMoveComponent.self)
             
             // Run Exit Animation
