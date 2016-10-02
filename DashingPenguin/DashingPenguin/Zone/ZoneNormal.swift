@@ -13,8 +13,8 @@ class ZoneNormal: Zone {
     
     override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
-        platformBlocksManager.addBlock(withType: "ObstacleWall")
-        platformBlocksManager.generateRandomBlocks(amount: 1)
+        //platformBlocksManager.addBlock(withType: "ObstacleWall")
+        platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.platforms.first
     }

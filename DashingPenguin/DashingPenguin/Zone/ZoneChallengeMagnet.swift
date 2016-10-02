@@ -13,7 +13,7 @@ class ZoneChallengeMagnet: Zone {
     
     override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
-        platformBlocksManager.generateRandomBlocks(amount: 1)
+        platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.platforms.first
         firstPlatform.component(ofType: SpriteComponent.self)?.node.color = UIColor.darkGray
@@ -27,6 +27,8 @@ class ZoneChallengeMagnet: Zone {
             
             // Setup Challenge Start Overlay
             let challengeOverlayNode = SKNode()
+            challengeOverlayNode.name = "challengeOverlayNode"
+            
             let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
             flashingLabel.name = "flashingLabel"
             flashingLabel.fontColor = UIColor.black
@@ -55,6 +57,8 @@ class ZoneChallengeMagnet: Zone {
         if hasBeenExited == false {
             
             // Deactivate Challenge
+            let removeNode = scene.cameraNode?.childNode(withName: "challengeOverlayNode")
+            removeNode?.removeFromParent()
             scene.player?.removeComponent(ofType: MagnetMoveComponent.self)
             
             // Run Exit Animation

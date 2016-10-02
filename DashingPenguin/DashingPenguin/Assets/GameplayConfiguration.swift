@@ -42,9 +42,10 @@ struct GameplayConfiguration {
         static let none: UInt32 = 0x0
         static let all : UInt32 = 0xFFFFFFFF
         
-        static let player  : UInt32 = 0x1 << 0
-        static let platform: UInt32 = 0x1 << 1
-        static let obstacle: UInt32 = 0x1 << 2
-        static let laser   : UInt32 = 0x1 << 3
+        static let player      : UInt32 = 0x1 << 0
+        static let platform    : UInt32 = 0x1 << 1
+        static let obstacle    : UInt32 = 0x1 << 2
+        static let laser       : UInt32 = 0x1 << 3
+        static let energyMatter: UInt32 = 0x1 << 4
     }
 }
