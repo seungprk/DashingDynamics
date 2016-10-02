@@ -10,6 +10,7 @@ import SpriteKit
 
 protocol PlatformLandingDelegate {
     func markForLanding(platform: SKNode)
+    func didExitPlatform()
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -55,6 +56,7 @@ extension GameScene: SKPhysicsContactDelegate {
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
             physicsContactCount -= 1
+            platformLandingDelegate?.didExitPlatform()
             
         default:
             break
