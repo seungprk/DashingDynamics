@@ -301,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */,
-				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
 				7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */,
 				245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */,
 				7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */,
@@ -353,7 +352,7 @@
 				TargetAttributes = {
 					7F01D59D1D2A163B000A51D8 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = RLZEP44CD7;
+						DevelopmentTeam = RZ2DT6A2TM;
 						DevelopmentTeamName = "Matthew Tso (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
@@ -561,11 +560,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RLZEP44CD7;
+				DEVELOPMENT_TEAM = RZ2DT6A2TM;
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dd.DashingPenguin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mtso.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -576,11 +575,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RLZEP44CD7;
+				DEVELOPMENT_TEAM = RZ2DT6A2TM;
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dd.DashingPenguin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mtso.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
