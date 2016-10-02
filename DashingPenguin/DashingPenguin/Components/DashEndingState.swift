@@ -32,32 +32,22 @@ class DashEndingState: GKState {
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
-                
-        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
-            if (entity.component(ofType: MovementComponent.self)?.dashCount)! < GameplayConfiguration.Player.maxDashes {
-                let dashCount = self.entity.component(ofType: MovementComponent.self)?.dashCount
-                if dashCount! < GameplayConfiguration.Player.maxDashes {
-                    let flashCount = 5
-                    let flashOut = SKAction.fadeOut(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
-                    let flashIn = SKAction.fadeIn(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
-                    let checkDeathAction = SKAction.run({self.checkDeath()})
-                    let temporarySequence = SKAction.sequence([flashOut, flashIn, flashOut, flashIn, checkDeathAction])
-                    spriteComponent.node.run(temporarySequence)
-                } else {
-                    checkDeath()
-                }
-            }
-        }
         
-        elapsedTime = 0.0
-    }
-    
-    func checkDeath() {
+        let spriteComponent = self.entity.component(ofType: SpriteComponent.self)!
         if entity.isOnPlatform {
             stateMachine?.enter(LandedState.self)
+        } else if (entity.component(ofType: MovementComponent.self)?.dashCount)! < GameplayConfiguration.Player.maxDashes {
+            let flashCount = 5
+            let flashOut = SKAction.fadeOut(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
+            let flashIn = SKAction.fadeIn(withDuration: GameplayConfiguration.Player.dashEndDuration / Double(flashCount) / 2)
+            let enterDeathAction = SKAction.run({self.stateMachine?.enter(DeathState.self)})
+            let flashingSequence = SKAction.sequence([flashOut, flashIn, flashOut, flashIn, enterDeathAction])
+            spriteComponent.node.run(flashingSequence, withKey: "flashingSequence")
         } else {
             stateMachine?.enter(DeathState.self)
         }
+        
+        elapsedTime = 0.0
     }
     
     override func update(deltaTime seconds: TimeInterval) {

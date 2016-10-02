@@ -23,10 +23,14 @@ class DashingState: GKState {
         super.didEnter(from: previousState)
         
         entity.component(ofType: MovementComponent.self)?.dashCount += 1
-
+        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.removeAction(forKey: "flashingSequence")
+            spriteComponent.node.alpha = 1
+        }
+        
         elapsedTime = 0.0
 
-        if let dashVelocity        = self.entity.component(ofType: MovementComponent.self)?.dashVelocity,
+        if let dashVelocity    = self.entity.component(ofType: MovementComponent.self)?.dashVelocity,
            let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
             let velocityMod: CGFloat = 10
             let modVelocity = CGVector(dx: dashVelocity.dx*velocityMod, dy: dashVelocity.dy*velocityMod)
@@ -43,14 +47,8 @@ class DashingState: GKState {
                 if let magnetComponent = self.entity.component(ofType: MagnetMoveComponent.self) {
                     spriteComponent.node.physicsBody?.velocity = CGVector(dx: magnetComponent.velocityX, dy: 0)
                 }
-                
                 print((spriteComponent.node.physicsBody?.velocity)!)
-                
-                if self.entity.isOnPlatform {
-                    self.stateMachine?.enter(LandedState.self)
-                } else {
-                    self.stateMachine?.enter(DashEndingState.self)
-                }
+                self.stateMachine?.enter(DashEndingState.self)
             })
         }
     }

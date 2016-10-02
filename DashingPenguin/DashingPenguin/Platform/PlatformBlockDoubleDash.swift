@@ -39,6 +39,12 @@ class PlatformBlockDoubleDash: PlatformBlock {
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
 
+        // **TEMP** Setup Energy Matter Item
+        let energyMatter = EnergyMatter()
+        let energyMatterSpriteNode = energyMatter.component(ofType: SpriteComponent.self)!.node
+        let midX = (firstPlatXPos + nextBlockFirstPlatformXPos) / 2
+        energyMatterSpriteNode.position = CGPoint(x: midX, y: 0)
+        addChild(energyMatterSpriteNode)
     }
     
     required init?(coder aDecoder: NSCoder) {

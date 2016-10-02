@@ -12,7 +12,6 @@ import GameplayKit
 class LandedState: GKState, PlatformLandingDelegate {
     
     unowned var entity: Player
-    
     var currentPlatform: SKNode?
     var previousPlatformPosition: CGPoint?
     
@@ -27,17 +26,10 @@ class LandedState: GKState, PlatformLandingDelegate {
     override func update(deltaTime seconds: TimeInterval) {
 
         if let previousPlatformPosition = previousPlatformPosition {
-            
             let deltaX = currentPlatform!.position.x - previousPlatformPosition.x
             let deltaY = currentPlatform!.position.y - previousPlatformPosition.y
-            
             entity.component(ofType: SpriteComponent.self)?.node.position.x += deltaX
             entity.component(ofType: SpriteComponent.self)?.node.position.y += deltaY
-
-//            let delay = SKAction.wait(forDuration: 0.05)
-//            let move = SKAction.move(by: CGVector(dx: deltaX, dy: deltaY), duration: 0.4)
-//            move.timingMode = .easeIn
-//            entity.component(ofType: SpriteComponent.self)?.node.run(SKAction.sequence([delay, move]))
         }
         
         if let currentPlatform = currentPlatform {
@@ -45,7 +37,7 @@ class LandedState: GKState, PlatformLandingDelegate {
         }
         
         if entity.isOnPlatform == false {
-            stateMachine?.enter(DeathState.self)
+            stateMachine?.enter(DashEndingState.self)
         }
 
     }
@@ -57,7 +49,7 @@ class LandedState: GKState, PlatformLandingDelegate {
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
-        case is DashingState.Type, is DeathState.Type:
+        case is DashingState.Type, is DashEndingState.Type:
             return true
         default:
             return false

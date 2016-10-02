@@ -25,12 +25,14 @@ extension GameScene: SKPhysicsContactDelegate {
         let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyB : contact.bodyA
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
-            
+        
+        // Player and platform intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.platform):
             physicsContactCount += 1
             guard let node = secondBody.node else { break }
             platformLandingDelegate?.markForLanding(platform: node)
-                        
+            
+        // Player and laser intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.laser):
             guard let laserNode = secondBody.node else { break }
             guard let laserDelegate = self.laserIdDelegate else { break }
@@ -38,7 +40,14 @@ extension GameScene: SKPhysicsContactDelegate {
             if laserDelegate.isLaserActivated(for: laserNode) {
                 self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
             }
-            
+        
+        // Player and energy matter intersect
+        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.energyMatter):
+            if secondBody.node?.parent != nil {
+                print("Physics: dashCount -1")
+                player?.component(ofType: MovementComponent.self)?.dashCount -= 1
+                secondBody.node?.removeFromParent()
+            }
         default:
             break
         }
