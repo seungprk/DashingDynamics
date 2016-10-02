@@ -21,6 +21,9 @@ class MenuScene: SKScene, SKButtonDelegate {
     
     var motionManager: CMMotionManager?
     
+    var background1: SKSpriteNode?
+    var background2: SKSpriteNode?
+    
     override init(size: CGSize) {
         super.init(size: size)
         
@@ -64,6 +67,18 @@ class MenuScene: SKScene, SKButtonDelegate {
         border.zPosition = -100000
         addChild(border)
         
+        background1 = SKSpriteNode(imageNamed: "background_1")
+        background2 = SKSpriteNode(imageNamed: "background_2")
+        
+        background1?.position = CGPoint(x: frame.midX, y: frame.midY)
+        background2?.position = CGPoint(x: frame.midX, y: frame.midY)
+        
+        background1?.zPosition = -100000
+        background2?.zPosition = -100000
+        
+        addChild(background1!)
+        addChild(background2!)
+        
         motionManager = CMMotionManager()
         motionManager?.startAccelerometerUpdates()
     }
@@ -73,12 +88,15 @@ class MenuScene: SKScene, SKButtonDelegate {
         if let motion = motionManager?.accelerometerData {
             print("\(motion.acceleration.x) \(motion.acceleration.y)")
             
-//            let mX = CGFloat(motion.acceleration.x * 10 * 4)
-//            let mY = CGFloat(motion.acceleration.y * 10 * 4)
+            let mX = CGFloat(motion.acceleration.x * 20)
+            let mY = CGFloat(motion.acceleration.y * 20)
 //            scene?.run(.move(to: CGPoint(x: mX, y: mY), duration: 0.1) )
             
-            view?.frame.origin.x = CGFloat(motion.acceleration.x * -20)
-            view?.frame.origin.y = CGFloat(motion.acceleration.y * -20)
+            view?.frame.origin.x = mX
+            view?.frame.origin.y = mY
+            
+            background1?.position = CGPoint(x: frame.midX - mX / 2, y: frame.midY - mY / 2)
+            background2?.position = CGPoint(x: frame.midX - mX * 2, y: frame.midY - mY * 2)
         }
     }
     
