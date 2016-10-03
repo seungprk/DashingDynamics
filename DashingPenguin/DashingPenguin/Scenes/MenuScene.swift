@@ -51,13 +51,13 @@ class MenuScene: SKScene, SKButtonDelegate {
         let soundToggle = SKToggle(size: CGSize(width: 40, height: 40), isOn: isSoundOn, imageNormal: "sound_on", imageHighlight: "sound_on_highlight", imageOff: "sound_off", imageOffHighlight: "sound_off_highlight")
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
-        soundToggle.position = CGPoint(x: 160, y: 560)
+        soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width, y: size.height - 20 - soundToggle.size.height)
         addChild(soundToggle)
         
         let leaderboardButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "leaderboard", nameForImageNormalHighlight: "leaderboard_highlight")
         leaderboardButton.name = "leaderboardButton"
         leaderboardButton.delegate = self
-        leaderboardButton.position = CGPoint(x: 220, y: 560)
+        leaderboardButton.position = CGPoint(x: size.width / 2 + leaderboardButton.size.width, y: size.height - 20 - leaderboardButton.size.height)
         addChild(leaderboardButton)
         
         let borderInset: CGFloat = 20
@@ -92,11 +92,11 @@ class MenuScene: SKScene, SKButtonDelegate {
             let mY = CGFloat(motion.acceleration.y * 20)
 //            scene?.run(.move(to: CGPoint(x: mX, y: mY), duration: 0.1) )
             
-            view?.frame.origin.x = mX
-            view?.frame.origin.y = mY
+            //view?.frame.origin.x = mX
+            //view?.frame.origin.y = mY
             
-            background1?.position = CGPoint(x: frame.midX - mX / 2, y: frame.midY - mY / 2)
-            background2?.position = CGPoint(x: frame.midX - mX * 2, y: frame.midY - mY * 2)
+            background1?.position = CGPoint(x: frame.midX - mX, y: frame.midY - mY)
+            background2?.position = CGPoint(x: frame.midX - mX * 4, y: frame.midY - mY * 4)
         }
     }
     
