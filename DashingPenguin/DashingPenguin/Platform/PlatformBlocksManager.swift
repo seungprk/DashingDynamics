@@ -58,6 +58,8 @@ class PlatformBlocksManager {
             return PlatformBlockObstacleLaser(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleWall":
             return PlatformBlockObstacleWall(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+        case "EnergyMatter":
+            return PlatformBlockEnergyMatter(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         default:
             print("Block selection Failed")
             return nil

@@ -1,19 +1,22 @@
 //
-//  ZoneB.swift
+//  ZoneChallengeFewPlatforms.swift
 //  DashingPenguin
 //
-//  Created by Seung Park on 7/28/16.
+//  Created by Seung Park on 10/2/16.
 //  Copyright © 2016 Dashing Duo. All rights reserved.
 //
 
 import SpriteKit
 import GameplayKit
 
-class ZoneChallengeVisibility: Zone {
+class ZoneChallengeLongJump: Zone {
     
     override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
-        platformBlocksManager.generateRandomBlocks(amount: 3)
+        platformBlocksManager.addBlock(withType: "EnergyMatter")
+        platformBlocksManager.addBlock(withType: "EnergyMatter")
+        platformBlocksManager.addBlock(withType: "EnergyMatter")
+        platformBlocksManager.addBlock(withType: "EnergyMatter")
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.platforms.first
         firstPlatform.component(ofType: SpriteComponent.self)?.node.color = UIColor.darkGray
@@ -43,20 +46,8 @@ class ZoneChallengeVisibility: Zone {
             flashingLabel.run(flashingAction, completion: {
                 self.scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
                 self.scene.stateMachine.enter(GameSceneStatePlaying.self)
-                
-                // Setup Challenge Activation
-                let blinderOverlayNode = SKSpriteNode(texture: nil, color: UIColor.blue, size: self.scene.size)
-                blinderOverlayNode.name = "blinderOverlayNode"
-                blinderOverlayNode.position = CGPoint.zero
-                blinderOverlayNode.zPosition = GameplayConfiguration.HeightOf.overlay
-                let blinderAction = SKAction.sequence([SKAction.fadeIn(withDuration: 0.1), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.1), SKAction.wait(forDuration: 2)])
-                let blinderRepeatAction = SKAction.repeatForever(blinderAction)
-                
-                // Activate Challenge
-                challengeOverlayNode.addChild(blinderOverlayNode)
-                blinderOverlayNode.run(blinderRepeatAction)
             })
-
+            
         }
     }
     

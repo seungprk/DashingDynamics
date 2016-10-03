@@ -70,11 +70,29 @@ class ZoneManager: LaserIdentificationDelegate {
         let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
         if lastZoneType == ZoneType.NormalZone {
-            zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            //addRandomChallengeZone()
+            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .ChallengeZone
         } else {
             zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
             lastZoneType = .NormalZone
+        }
+    }
+    
+    func addRandomChallengeZone() {
+        let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
+        let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
+        
+        let randomize = arc4random_uniform(3)
+        switch randomize {
+        case 0:
+            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+        case 1:
+            zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+        case 2:
+            zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+        default:
+            break
         }
     }
     

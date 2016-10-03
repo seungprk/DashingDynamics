@@ -25,19 +25,20 @@ class LandedState: GKState, PlatformLandingDelegate {
     
     override func update(deltaTime seconds: TimeInterval) {
 
-        if let previousPlatformPosition = previousPlatformPosition {
-            let deltaX = currentPlatform!.position.x - previousPlatformPosition.x
-            let deltaY = currentPlatform!.position.y - previousPlatformPosition.y
+        if entity.isOnPlatform == false {
+            stateMachine?.enter(DashEndingState.self)
+        }
+        
+        if let previousPlatformPosition = previousPlatformPosition,
+           let currentPlatform = currentPlatform {
+            let deltaX = currentPlatform.position.x - previousPlatformPosition.x
+            let deltaY = currentPlatform.position.y - previousPlatformPosition.y
             entity.component(ofType: SpriteComponent.self)?.node.position.x += deltaX
             entity.component(ofType: SpriteComponent.self)?.node.position.y += deltaY
         }
         
         if let currentPlatform = currentPlatform {
             previousPlatformPosition = currentPlatform.position
-        }
-        
-        if entity.isOnPlatform == false {
-            stateMachine?.enter(DashEndingState.self)
         }
 
     }

@@ -14,6 +14,8 @@
 		242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DA8281DA0C90400272FB5 /* EnergyMatter.swift */; };
 		243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */; };
 		245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */; };
+		24775DCA1DA1D8E600ED743C /* ZoneChallengeLongJump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */; };
+		24775DCC1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24775DCB1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift */; };
 		247DA9131D3316CA004C4A14 /* PlatformBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9121D3316CA004C4A14 /* PlatformBlock.swift */; };
 		247DA9151D331F5C004C4A14 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9141D331F5C004C4A14 /* Platform.swift */; };
 		248C794D1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */; };
@@ -69,6 +71,8 @@
 		242DA8281DA0C90400272FB5 /* EnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnergyMatter.swift; path = DashingPenguin/Entities/EnergyMatter.swift; sourceTree = "<group>"; };
 		243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeVisibility.swift; path = DashingPenguin/Zone/ZoneChallengeVisibility.swift; sourceTree = "<group>"; };
 		245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnetMoveComponent.swift; path = DashingPenguin/Components/MagnetMoveComponent.swift; sourceTree = "<group>"; };
+		24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeLongJump.swift; path = DashingPenguin/Zone/ZoneChallengeLongJump.swift; sourceTree = "<group>"; };
+		24775DCB1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockEnergyMatter.swift; path = DashingPenguin/Platform/PlatformBlockEnergyMatter.swift; sourceTree = "<group>"; };
 		247DA9121D3316CA004C4A14 /* PlatformBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlock.swift; path = DashingPenguin/Platform/PlatformBlock.swift; sourceTree = "<group>"; };
 		247DA9141D331F5C004C4A14 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Platform.swift; path = DashingPenguin/Entities/Platform.swift; sourceTree = "<group>"; };
 		248C794C1D3C22B3003F8A0E /* PlatformBlockDoubleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockDoubleDash.swift; path = DashingPenguin/Platform/PlatformBlockDoubleDash.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 				240165521D4AFA2E006E31DC /* ZoneNormal.swift */,
 				240165541D4AFABC006E31DC /* ZoneChallengeMagnet.swift */,
 				243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */,
+				24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */,
 			);
 			name = Zone;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				248C794E1D3C26A7003F8A0E /* PlatformBlockObstacleDoubleDash.swift */,
 				7F4B33101D738F9C0000D467 /* PlatformBlockObstacleLaser.swift */,
 				24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */,
+				24775DCB1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift */,
 			);
 			name = Platform;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24775DCC1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift in Sources */,
 				247DA9151D331F5C004C4A14 /* Platform.swift in Sources */,
 				7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */,
 				248C79511D3C2C2D003F8A0E /* Obstacle.swift in Sources */,
@@ -435,6 +442,7 @@
 				7F027DBF1D8607F900C91CCD /* GameSceneStateGameover.swift in Sources */,
 				7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */,
 				240165511D4AF409006E31DC /* Zone.swift in Sources */,
+				24775DCA1DA1D8E600ED743C /* ZoneChallengeLongJump.swift in Sources */,
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,
 				240165551D4AFABC006E31DC /* ZoneChallengeMagnet.swift in Sources */,
 				248C794F1D3C26A7003F8A0E /* PlatformBlockObstacleDoubleDash.swift in Sources */,
