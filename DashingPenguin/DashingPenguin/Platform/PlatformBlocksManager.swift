@@ -40,6 +40,9 @@ class PlatformBlocksManager {
         let newBlock = selectBlock(withType: withType)!
         let lastBlock = (blocks.last)!
         newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
+        let newBlockPlatSpriteNode = newBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+        let lastBlockPlatSpriteNode = lastBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+        newBlockPlatSpriteNode?.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - 1
         scene.addChild(newBlock)
         blocks.append(newBlock)
     }

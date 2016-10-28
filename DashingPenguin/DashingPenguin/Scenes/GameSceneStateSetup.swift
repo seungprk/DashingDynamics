@@ -42,8 +42,17 @@ class GameSceneStateSetup: GKState {
         scene.addChild(scene.cameraNode!)
         scene.camera = scene.cameraNode
 
+        // Player Texture Setup
+        let playerAnimatedAtlas = SKTextureAtlas(named: "player")
+        let framesNum = playerAnimatedAtlas.textureNames.count
+        var playerTextureFrames = [SKTexture]()
+        for i in 1...framesNum {
+            let textureName = "player\(i)"
+            playerTextureFrames.append(playerAnimatedAtlas.textureNamed(textureName))
+        }
+        
         // Player Entity Setup
-        scene.player = Player(imageNamed: "penguin-front")
+        scene.player = Player(textureFrames: playerTextureFrames)
         scene.platformLandingDelegate = scene.player!.landedState
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {

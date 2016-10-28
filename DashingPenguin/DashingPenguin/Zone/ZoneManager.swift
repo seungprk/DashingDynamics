@@ -105,7 +105,7 @@ class ZoneManager: LaserIdentificationDelegate {
                 currentPlatformSprite = currentPlatform as! SKSpriteNode
                 
                 // Work with the found platform
-                currentPlatformSprite.color = UIColor.black
+                currentPlatformSprite.texture = SKTexture(imageNamed: "platform2")
                 for zone in zones {
                     let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
                     if firstPlatSprite == currentPlatformSprite {

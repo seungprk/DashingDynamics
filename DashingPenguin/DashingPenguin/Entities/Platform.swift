@@ -11,13 +11,14 @@ import GameplayKit
 
 class Platform: GKEntity {
     
-    let size = CGSize(width: 50, height: 50)
+    let size = CGSize(width: 29, height: 22)
     
     override init() {
         super.init()
         
-        let spriteComponent = SpriteComponent(color: UIColor.green, size: self.size)
-        let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
+        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "platform1"))
+        let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2 - 1)
+        let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
@@ -39,15 +40,16 @@ class Platform: GKEntity {
         let randomSlidingCenterX = CGFloat(arc4random_uniform(UInt32(possibleCenterMax - possibleCenterMin))) + possibleCenterMin
         print("\(randomSlidingCenterX) in \(scene.frame.width) between \(possibleCenterMin) and \(possibleCenterMax)")
         
-        let spriteComponent = SpriteComponent(color: UIColor.green, size: self.size)
-        let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.size, center: spriteComponent.node.position)
+        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "platform1"))
+        let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2 - 1)
+        let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         physicsBody.isDynamic = true
         spriteComponent.node.physicsBody = physicsBody
-        spriteComponent.node.position = CGPoint(x: randomSlidingCenterX, y: yPosition) // spriteComponent.node.position.y)
+        spriteComponent.node.position = CGPoint(x: randomSlidingCenterX, y: yPosition)
         
         addComponent(spriteComponent)
         addComponent(PhysicsComponent(physicsBody: physicsBody))

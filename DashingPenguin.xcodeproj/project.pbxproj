@@ -11,6 +11,7 @@
 		240165511D4AF409006E31DC /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165501D4AF409006E31DC /* Zone.swift */; };
 		240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165521D4AFA2E006E31DC /* ZoneNormal.swift */; };
 		240165551D4AFABC006E31DC /* ZoneChallengeMagnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165541D4AFABC006E31DC /* ZoneChallengeMagnet.swift */; };
+		2425B70E1DBD73DD005168A7 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2425B70D1DBD73DD005168A7 /* player.atlas */; };
 		242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DA8281DA0C90400272FB5 /* EnergyMatter.swift */; };
 		243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */; };
 		245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */; };
@@ -68,6 +69,7 @@
 		240165501D4AF409006E31DC /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zone.swift; path = DashingPenguin/Zone/Zone.swift; sourceTree = "<group>"; };
 		240165521D4AFA2E006E31DC /* ZoneNormal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneNormal.swift; path = DashingPenguin/Zone/ZoneNormal.swift; sourceTree = "<group>"; };
 		240165541D4AFABC006E31DC /* ZoneChallengeMagnet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeMagnet.swift; path = DashingPenguin/Zone/ZoneChallengeMagnet.swift; sourceTree = "<group>"; };
+		2425B70D1DBD73DD005168A7 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
 		242DA8281DA0C90400272FB5 /* EnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnergyMatter.swift; path = DashingPenguin/Entities/EnergyMatter.swift; sourceTree = "<group>"; };
 		243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeVisibility.swift; path = DashingPenguin/Zone/ZoneChallengeVisibility.swift; sourceTree = "<group>"; };
 		245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnetMoveComponent.swift; path = DashingPenguin/Components/MagnetMoveComponent.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				7F24DF4D1D92010900796DB0 /* Audio */,
+				2425B70D1DBD73DD005168A7 /* player.atlas */,
 				7F23A5C51D2C8064008CDA5C /* Assets.xcassets */,
 				7F23A5C71D2C8064008CDA5C /* PlayerData.plist */,
 				7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */,
@@ -391,6 +394,7 @@
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
+				2425B70E1DBD73DD005168A7 /* player.atlas in Resources */,
 				7F24DF511D92019600796DB0 /* charge.wav in Resources */,
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,

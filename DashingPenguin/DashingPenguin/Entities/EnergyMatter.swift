@@ -11,7 +11,7 @@ import GameplayKit
 
 class EnergyMatter: GKEntity {
     
-    var size = CGSize(width: 20, height: 20)
+    var size = CGSize(width: 10, height: 10)
     
     override init() {
         super.init()

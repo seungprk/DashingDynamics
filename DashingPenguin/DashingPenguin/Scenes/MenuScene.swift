@@ -36,28 +36,32 @@ class MenuScene: SKScene, SKButtonDelegate {
 //        let string = data.value(forKey: "Title") as? String
         
         let logo = SKSpriteNode(imageNamed: "ahi_logo")
-        logo.size = CGSize(width: 142, height: 63)
-        logo.position = CGPoint(x: frame.midX, y: frame.midY + logo.frame.height)
+        logo.size = CGSize(width: 105, height: 47)
+        logo.texture?.filteringMode = .nearest
+        logo.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(logo)
         
-        let playButton = SKButton(size: CGSize(width: 120, height: 40), nameForImageNormal: "play_button", nameForImageNormalHighlight: "play_button_highlight")
+        let playButton = SKButton(size: CGSize(width: 75, height: 25), nameForImageNormal: "play_button", nameForImageNormalHighlight: "play_button_highlight")
         playButton.name = "playButton"
         playButton.delegate = self
-        playButton.position = CGPoint(x: logo.position.x, y: logo.position.y - playButton.frame.height * 6)
+        playButton.texture?.filteringMode = .nearest
+        playButton.position = CGPoint(x: logo.position.x, y: size.height * 0.2)
         addChild(playButton)
         
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
 
-        let soundToggle = SKToggle(size: CGSize(width: 40, height: 40), isOn: isSoundOn, imageNormal: "sound_on", imageHighlight: "sound_on_highlight", imageOff: "sound_off", imageOffHighlight: "sound_off_highlight")
+        let soundToggle = SKToggle(size: CGSize(width: 30, height: 30), isOn: isSoundOn, imageNormal: "sound_on", imageHighlight: "sound_on_highlight", imageOff: "sound_off", imageOffHighlight: "sound_off_highlight")
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
-        soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width, y: size.height - 20 - soundToggle.size.height)
+        soundToggle.texture?.filteringMode = .nearest
+        soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width, y: size.height * 0.8)
         addChild(soundToggle)
         
-        let leaderboardButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "leaderboard", nameForImageNormalHighlight: "leaderboard_highlight")
+        let leaderboardButton = SKButton(size: CGSize(width: 30, height: 30), nameForImageNormal: "leaderboard", nameForImageNormalHighlight: "leaderboard_highlight")
         leaderboardButton.name = "leaderboardButton"
         leaderboardButton.delegate = self
-        leaderboardButton.position = CGPoint(x: size.width / 2 + leaderboardButton.size.width, y: size.height - 20 - leaderboardButton.size.height)
+        leaderboardButton.texture?.filteringMode = .nearest
+        leaderboardButton.position = CGPoint(x: size.width / 2 + leaderboardButton.size.width, y: size.height * 0.8)
         addChild(leaderboardButton)
         
         let borderInset: CGFloat = 20
@@ -69,6 +73,9 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         background1 = SKSpriteNode(imageNamed: "background_1")
         background2 = SKSpriteNode(imageNamed: "background_2")
+        
+        background1?.size = CGSize(width: size.width, height: size.height)
+        background2?.size = CGSize(width: size.width, height: size.height)
         
         background1?.position = CGPoint(x: frame.midX, y: frame.midY)
         background2?.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -88,8 +95,8 @@ class MenuScene: SKScene, SKButtonDelegate {
         if let motion = motionManager?.accelerometerData {
             print("\(motion.acceleration.x) \(motion.acceleration.y)")
             
-            let mX = CGFloat(motion.acceleration.x * 20)
-            let mY = CGFloat(motion.acceleration.y * 20)
+            let mX = CGFloat(motion.acceleration.x * 10)
+            let mY = CGFloat(motion.acceleration.y * 10)
 //            scene?.run(.move(to: CGPoint(x: mX, y: mY), duration: 0.1) )
             
             //view?.frame.origin.x = mX

@@ -18,11 +18,42 @@ class Player: GKEntity {
     var isOnPlatform = true
     var landedState: LandedState?
     
+    // Single Texture Initialization
     init(imageNamed imageName: String) {
         super.init()
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
         spriteComponent.node.size = GameplayConfiguration.Player.size
+        spriteComponent.node.zPosition = 1000
+        
+        let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
+        physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
+        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
+        
+        physicsBody.friction = 0
+        physicsBody.mass = 1
+        physicsBody.linearDamping = 0
+        physicsBody.usesPreciseCollisionDetection = true
+        physicsBody.isDynamic = true
+        
+        spriteComponent.node.physicsBody = physicsBody
+        addComponent(spriteComponent)
+        landedState = LandedState(entity: self)
+        addComponent(MovementComponent(states: [ landedState!,
+                                                 DashingState(entity: self),
+                                                 DashEndingState(entity: self),
+                                                 DeathState(entity: self) ]))
+        addComponent(PhysicsComponent(physicsBody: physicsBody))
+    }
+    
+    // Multi Texture Initialization
+    init(textureFrames: [SKTexture]) {
+        super.init()
+        
+        let spriteComponent = SpriteComponent(textureFrames: textureFrames)
+        spriteComponent.node.size = GameplayConfiguration.Player.size
+        spriteComponent.node.zPosition = 1000
         
         let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player

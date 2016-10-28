@@ -29,8 +29,8 @@ class PlatformBlockMoving: PlatformBlock {
         nextBlockFirstPlatformXPos = firstPlatXPos + nextDelta.dx
         
         // Background for debug
-        addChild(SKSpriteNode(color: UIColor.red, size: self.size))
-        addChild(SKSpriteNode(color: UIColor.white, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
+        //addChild(SKSpriteNode(color: UIColor.red, size: self.size))
+        //addChild(SKSpriteNode(color: UIColor.white, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
         
         // Setup Platform
         let firstPlatform = Platform(scene: scene, slidingMagnitude: 50, yPosition: size.height / 2)

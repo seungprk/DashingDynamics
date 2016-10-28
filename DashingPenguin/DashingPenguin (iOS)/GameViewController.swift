@@ -20,7 +20,12 @@ class GameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.showsPhysics = true
         skView.ignoresSiblingOrder = true
-        let scene = MenuScene(size: skView.frame.size) // GameScene(size: skView.frame.size)
+        
+        // Lower resolution to pixelate game scenes
+        let downscaleRatio = 180 / skView.frame.width
+        let downscaledHeight = skView.frame.height * downscaleRatio
+        let downscaledSize = CGSize(width: 180, height: downscaledHeight)
+        let scene = MenuScene(size: downscaledSize) // GameScene(size: skView.frame.size)
         scene.scaleMode = .aspectFill
         skView.presentScene(scene)
     }

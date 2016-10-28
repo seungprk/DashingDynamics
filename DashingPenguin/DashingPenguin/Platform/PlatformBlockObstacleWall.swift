@@ -17,7 +17,7 @@ class PlatformBlockObstacleWall: PlatformBlock {
         super.init()
         
         let platformSize = Platform().size
-        let wallThickness: CGFloat = 20
+        let wallThickness: CGFloat = 10
         let wallOnLeft: Bool!
         
         // Pick left wall or right wall
@@ -68,8 +68,8 @@ class PlatformBlockObstacleWall: PlatformBlock {
         }
         
         // Background for debug
-        addChild(SKSpriteNode(color: UIColor.purple, size: self.size))
-        addChild(SKSpriteNode(color: UIColor.white, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
+        //addChild(SKSpriteNode(color: UIColor.purple, size: self.size))
+        //addChild(SKSpriteNode(color: UIColor.white, size: CGSize(width: self.size.width - 5, height: self.size.height - 5)))
         
         // Setup Platform
         let firstPlatform = Platform()

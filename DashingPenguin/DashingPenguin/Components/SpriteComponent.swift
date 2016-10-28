@@ -12,11 +12,22 @@ import GameplayKit
 class SpriteComponent: GKComponent {
     
     let node: SKSpriteNode
+    var textureFrames = [SKTexture]()
     
     // Init with Texture
     init(texture: SKTexture) {
+        texture.filteringMode = SKTextureFilteringMode.nearest
         node = SKSpriteNode(texture: texture, color: SKColor.clear, size: texture.size())
-        
+        super.init()
+    }
+    
+    // Init with Texture Atlas Frames
+    init(textureFrames: [SKTexture]) {
+        for texture in textureFrames {
+            texture.filteringMode = SKTextureFilteringMode.nearest
+        }
+        self.textureFrames = textureFrames
+        node = SKSpriteNode(texture: textureFrames[0], color: SKColor.clear, size: textureFrames[0].size())
         super.init()
     }
     

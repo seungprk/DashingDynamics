@@ -11,9 +11,9 @@ import CoreGraphics
 
 struct GameplayConfiguration {
     struct Player {
-        static let size = CGSize(width: 40, height: 50)
+        static let size = CGSize(width: 32, height: 32)
         static let physicsBodyOffset = CGPoint(x: 0, y: -25)
-        static let physicsBodyRadius: CGFloat = 20
+        static let physicsBodyRadius: CGFloat = 10
 
         static let dashDuration = 0.1
         static let dashEndDuration = 1.5
@@ -22,7 +22,7 @@ struct GameplayConfiguration {
     
     struct TouchControls {
         static let minDistance: CGFloat = 005
-        static let maxDistance: CGFloat = 150
+        static let maxDistance: CGFloat = 60
         static let minDuration: Double  = 0.01
         static let maxDuration: Double  = 0.3
         static let minSpeed   : Double  = 000
