@@ -15,18 +15,30 @@ class EnergyMatter: GKEntity {
     
     override init() {
         super.init()
-        let spriteComponent = SpriteComponent(color: UIColor.blue, size: size)
         
-        let physicsBody = SKPhysicsBody(edgeLoopFrom: spriteComponent.node.frame)
+        // Energy Matter Texture Setup
+        let energyMatterAnimatedAtlas = SKTextureAtlas(named: "energyMatter")
+        var energyMatterTextureFrames = [SKTexture]()
+        for i in 1...energyMatterAnimatedAtlas.textureNames.count {
+            let textureName = "energyMatter\(i)"
+            energyMatterTextureFrames.append(energyMatterAnimatedAtlas.textureNamed(textureName))
+        }
+        let spriteComponent = SpriteComponent(textureFrames: energyMatterTextureFrames)
+
+        // PhysicsBody Setup
+        let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.EnergyMatter.size.height/2)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.energyMatter
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
-        
         spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)
         addComponent(PhysicsComponent(physicsBody: physicsBody))
         
+        // Animation
+        let idleAction = SKAction.animate(with: energyMatterTextureFrames, timePerFrame: 1)
+        let loopIdleAction = SKAction.repeatForever(idleAction)
+        spriteComponent.node.run(loopIdleAction)
     }
     
     required init?(coder aDecoder: NSCoder) {

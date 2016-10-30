@@ -28,6 +28,9 @@ struct GameplayConfiguration {
         static let size = CGSize(width: 20, height: 20)
     }
     
+    struct EnergyMatter {
+        static let size = CGSize(width: 16, height: 16)
+    }
     struct TouchControls {
         static let minDistance: CGFloat = 005
         static let maxDistance: CGFloat = 60
