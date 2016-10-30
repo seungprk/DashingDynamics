@@ -11,8 +11,8 @@ import GameplayKit
 
 class ZoneNormal: Zone {
     
-    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
-        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
+    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat, begZPos: CGFloat) {
+        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos, begZPos: begZPos)
         //platformBlocksManager.addBlock(withType: "ObstacleWall")
         platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()

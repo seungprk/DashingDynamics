@@ -22,7 +22,7 @@ class PlatformBlockFirst: PlatformBlock {
         // Setup Platforms
         let firstPlatform = Platform()
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: 0, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: 0, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
         

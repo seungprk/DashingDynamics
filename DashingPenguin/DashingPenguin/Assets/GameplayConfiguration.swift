@@ -20,6 +20,14 @@ struct GameplayConfiguration {
         static let maxDashes = 2
     }
     
+    struct Platform {
+        static let size = CGSize(width: 39, height: 28)
+    }
+    
+    struct Obstacle {
+        static let size = CGSize(width: 20, height: 20)
+    }
+    
     struct TouchControls {
         static let minDistance: CGFloat = 005
         static let maxDistance: CGFloat = 60

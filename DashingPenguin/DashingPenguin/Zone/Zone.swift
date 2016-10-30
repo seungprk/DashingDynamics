@@ -19,10 +19,10 @@ class Zone {
     var hasBeenEntered = false
     var hasBeenExited = false
     
-    init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
+    init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat, begZPos: CGFloat) {
         self.scene = scene
         self.begYPos = begYPos
-        platformBlocksManager = PlatformBlocksManager(scene: scene, begXPos: begXPos, begYPos: begYPos)
+        platformBlocksManager = PlatformBlocksManager(scene: scene, begXPos: begXPos, begYPos: begYPos, begZPos: begZPos)
     }
     
     func initSize() {

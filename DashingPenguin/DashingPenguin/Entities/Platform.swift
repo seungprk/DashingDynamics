@@ -11,13 +11,13 @@ import GameplayKit
 
 class Platform: GKEntity {
     
-    let size = CGSize(width: 29, height: 22)
+    let size = GameplayConfiguration.Platform.size
     
     override init() {
         super.init()
         
-        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "platform1"))
-        let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2 - 1)
+        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
+        let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2)
         let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
@@ -29,7 +29,7 @@ class Platform: GKEntity {
         addComponent(PhysicsComponent(physicsBody: physicsBody))
     }
     
-    /**
+    /*
      * Initializer for a moving platform.
      */
     init(scene: SKScene, slidingMagnitude: CGFloat, yPosition: CGFloat) {
@@ -40,8 +40,8 @@ class Platform: GKEntity {
         let randomSlidingCenterX = CGFloat(arc4random_uniform(UInt32(possibleCenterMax - possibleCenterMin))) + possibleCenterMin
         print("\(randomSlidingCenterX) in \(scene.frame.width) between \(possibleCenterMin) and \(possibleCenterMax)")
         
-        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "platform1"))
-        let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2 - 1)
+        let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
+        let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2)
         let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
