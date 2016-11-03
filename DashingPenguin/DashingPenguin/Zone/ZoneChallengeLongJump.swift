@@ -11,15 +11,14 @@ import GameplayKit
 
 class ZoneChallengeLongJump: Zone {
     
-    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
-        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
+    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat, begZPos: CGFloat) {
+        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos, begZPos: begZPos)
         platformBlocksManager.addBlock(withType: "EnergyMatter")
         platformBlocksManager.addBlock(withType: "EnergyMatter")
         platformBlocksManager.addBlock(withType: "EnergyMatter")
         platformBlocksManager.addBlock(withType: "EnergyMatter")
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.platforms.first
-        firstPlatform.component(ofType: SpriteComponent.self)?.node.color = UIColor.darkGray
     }
     
     override func enterEvent() {

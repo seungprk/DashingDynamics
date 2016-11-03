@@ -23,14 +23,6 @@ class GameSceneStateSetup: GKState {
         scene.backgroundColor = SKColor.black
         scene.lastUpdateTime = 0
         
-        // Label for testing
-        let label = SKLabelNode(text: "Dashing Penguin")
-        label.fontColor = UIColor.black
-        label.alpha = 1.0
-        label.run(SKAction.fadeIn(withDuration: 2.0))
-        label.position = CGPoint(x: 0, y: 300)
-        scene.addChild(label)
-        
         // Initialize touch input node
         let controlInputNode = TouchControlInputNode(frame: scene.frame)
         controlInputNode.delegate = scene
@@ -41,12 +33,29 @@ class GameSceneStateSetup: GKState {
         controlInputNode.position = scene.cameraNode!.position
         scene.addChild(scene.cameraNode!)
         scene.camera = scene.cameraNode
+        
+        // Add walls to camera node
+        let rightWallCenter = CGPoint(x: scene.size.width / 2, y: 0)
+        let leftWallCenter = CGPoint(x: -scene.size.width / 2, y: 0)
+        
+        let wallRight = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: scene.size.height * 2), center: rightWallCenter)
+        let wallLeft = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: scene.size.height * 2), center: leftWallCenter)
+        wallLeft.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
+        wallRight.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
+        wallLeft.isDynamic = false
+        wallRight.isDynamic = false
+        
+        let wallRightNode = SKNode()
+        let wallLeftNode = SKNode()
+        wallRightNode.physicsBody = wallRight
+        wallLeftNode.physicsBody = wallLeft
+        scene.cameraNode?.addChild(wallRightNode)
+        scene.cameraNode?.addChild(wallLeftNode)
 
         // Player Texture Setup
         let playerAnimatedAtlas = SKTextureAtlas(named: "player")
-        let framesNum = playerAnimatedAtlas.textureNames.count
         var playerTextureFrames = [SKTexture]()
-        for i in 1...framesNum {
+        for i in 1...playerAnimatedAtlas.textureNames.count {
             let textureName = "player\(i)"
             playerTextureFrames.append(playerAnimatedAtlas.textureNamed(textureName))
         }

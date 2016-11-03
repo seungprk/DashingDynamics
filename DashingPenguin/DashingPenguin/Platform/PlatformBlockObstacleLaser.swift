@@ -36,14 +36,14 @@ class PlatformBlockObstacleLaser: PlatformBlock {
         // Setup Platform
         let firstPlatform = Platform()
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
         
         // Setup Laser
         laser = Laser(frame: scene.frame)
         let laserSpriteNode = laser.component(ofType: SpriteComponent.self)!.node
-        laserSpriteNode.position = CGPoint(x: 0, y: platformSize.height / 2)
+        laserSpriteNode.position = CGPoint(x: 0, y: GameplayConfiguration.Platform.size.height / 2)
         addChild(laserSpriteNode)
         
         entities.append(laser)

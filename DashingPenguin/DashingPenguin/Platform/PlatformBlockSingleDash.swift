@@ -17,12 +17,12 @@ class PlatformBlockSingleDash: PlatformBlock {
         let platformSize = Platform().size
         
         // Get Random Distance
-        let rMax = GameplayConfiguration.TouchControls.maxDistance
-        let rMin = sqrt(2) * platformSize.height/2 * 1.5
-        let randomDist = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
+        //let rMax = GameplayConfiguration.TouchControls.maxDistance
+        //let rMin = sqrt(2) * platformSize.height/2 * 1.5
+        //let randomDist = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
-        let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: randomDist, inScene: scene)
+        let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: GameplayConfiguration.TouchControls.maxDistance, inScene: scene)
         
         // Setup Size of Block and X Position of First Platform in the Next Block
         size = CGSize(width: scene.size.width, height: nextDelta.dy + platformSize.height)
@@ -35,10 +35,9 @@ class PlatformBlockSingleDash: PlatformBlock {
         // Setup Platform
         let firstPlatform = Platform()
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
-
     }
     
     required init?(coder aDecoder: NSCoder) {

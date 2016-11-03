@@ -22,16 +22,19 @@ class PlatformBlocksManager {
     var blocks = [PlatformBlock]()
     var begYPos: CGFloat!
     var begXPos: CGFloat!
+    var begZPos: CGFloat!
     
-    init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
+    init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat, begZPos: CGFloat) {
         self.scene = scene
         self.begXPos = begXPos
         self.begYPos = begYPos
+        self.begZPos = begZPos
         print("PlatformBlocksManager Object created")
         
         // Create and Place First Block
         let firstBlock = PlatformBlockSingleDash(scene: scene, firstPlatXPos: begXPos)
         firstBlock.position = CGPoint(x: 0, y: begYPos + firstBlock.size.height/2)
+        firstBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node.zPosition = begZPos - 1
         scene.addChild(firstBlock)
         blocks.append(firstBlock)
     }
@@ -40,8 +43,23 @@ class PlatformBlocksManager {
         let newBlock = selectBlock(withType: withType)!
         let lastBlock = (blocks.last)!
         newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
-        let newBlockPlatSpriteNode = newBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
-        let lastBlockPlatSpriteNode = lastBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+        
+        // Set New Block Sprite Node
+        var newBlockPlatSpriteNode: SKSpriteNode! = nil
+        if newBlock is PlatformBlockEnergyMatter {
+            newBlockPlatSpriteNode = newBlock.children.first as! SKSpriteNode
+        } else {
+            newBlockPlatSpriteNode = newBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+        }
+        
+        // Set Last Block Sprite Node
+        var lastBlockPlatSpriteNode: SKSpriteNode! = nil
+        if lastBlock is PlatformBlockEnergyMatter {
+            lastBlockPlatSpriteNode = lastBlock.children.first as! SKSpriteNode
+        } else {
+            lastBlockPlatSpriteNode = lastBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+        }
+        
         newBlockPlatSpriteNode?.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - 1
         scene.addChild(newBlock)
         blocks.append(newBlock)
@@ -54,7 +72,7 @@ class PlatformBlocksManager {
         case "DoubleDash":
             return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleDoubleDash":
-            return PlatformBlockDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
+            return PlatformBlockObstacleDoubleDash(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "Moving":
             return PlatformBlockMoving(scene: scene, firstPlatXPos: (blocks.last?.nextBlockFirstPlatformXPos)!)
         case "ObstacleLaser":

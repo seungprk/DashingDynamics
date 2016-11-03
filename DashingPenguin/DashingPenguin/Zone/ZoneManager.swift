@@ -29,7 +29,7 @@ class ZoneManager: LaserIdentificationDelegate {
         self.scene = scene
         
         // Add Normal Zone
-        zones.append(ZoneNormal(scene: scene, begXPos: 0, begYPos: 0))
+        zones.append(ZoneNormal(scene: scene, begXPos: 0, begYPos: 0, begZPos: 0))
     }
     
     func update(deltaTime seconds: TimeInterval) {
@@ -69,12 +69,21 @@ class ZoneManager: LaserIdentificationDelegate {
     func addZone() {
         let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
+        
+        // Get Last Platform's zPosition
+        var lastZoneZPos: CGFloat! = nil
+        if zones.last?.platformBlocksManager.blocks.last is PlatformBlockEnergyMatter {
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.first?.zPosition
+        } else {
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.platforms.first?.component(ofType: SpriteComponent.self)?.node.zPosition
+        }
+        
         if lastZoneType == ZoneType.NormalZone {
-            //addRandomChallengeZone()
-            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            addRandomChallengeZone()
+            //zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
             lastZoneType = .ChallengeZone
         } else {
-            zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
             lastZoneType = .NormalZone
         }
     }
@@ -82,15 +91,20 @@ class ZoneManager: LaserIdentificationDelegate {
     func addRandomChallengeZone() {
         let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
-        
+        var lastZoneZPos: CGFloat! = nil
+        if zones.last?.platformBlocksManager.blocks.last is PlatformBlockEnergyMatter {
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.first?.zPosition
+        } else {
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.platforms.first?.component(ofType: SpriteComponent.self)?.node.zPosition
+        }
         let randomize = arc4random_uniform(3)
         switch randomize {
         case 0:
-            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
         case 1:
-            zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
         case 2:
-            zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
         default:
             break
         }
@@ -104,8 +118,12 @@ class ZoneManager: LaserIdentificationDelegate {
             if let currentPlatform = playerStateMachine?.state(forClass: LandedState.self)?.currentPlatform {
                 currentPlatformSprite = currentPlatform as! SKSpriteNode
                 
-                // Work with the found platform
-                currentPlatformSprite.texture = SKTexture(imageNamed: "platform2")
+                // Change Platform Texture landed on
+                let landedTexture = SKTexture(imageNamed: "bigPlatform2")
+                landedTexture.filteringMode = .nearest
+                currentPlatformSprite.texture = landedTexture
+                
+                // Activate enter event for zone
                 for zone in zones {
                     let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
                     if firstPlatSprite == currentPlatformSprite {

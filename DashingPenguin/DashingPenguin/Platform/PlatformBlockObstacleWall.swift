@@ -74,7 +74,7 @@ class PlatformBlockObstacleWall: PlatformBlock {
         // Setup Platform
         let firstPlatform = Platform()
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
 
@@ -82,6 +82,7 @@ class PlatformBlockObstacleWall: PlatformBlock {
         obstacle = Obstacle(size: CGSize(width: wallLength, height: wallThickness))
         let obstacleSpriteNode = obstacle.component(ofType: SpriteComponent.self)!.node
         obstacleSpriteNode.position = CGPoint(x: wallXPos, y: -size.height/2 + wallYPos)
+        obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
         addChild(obstacleSpriteNode)
     }
     

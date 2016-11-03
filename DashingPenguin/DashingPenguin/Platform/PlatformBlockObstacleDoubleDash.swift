@@ -36,14 +36,15 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         // Setup Platform
         let firstPlatform = Platform()
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
-        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + firstPlatformSpriteNode.size.height/2)
+        firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
 
         // Setup Obstacle
-        obstacle = Obstacle(size: CGSize(width: 50, height: 50))
+        obstacle = Obstacle(size: GameplayConfiguration.Obstacle.size)
         let obstacleSpriteNode = obstacle.component(ofType: SpriteComponent.self)!.node
-        obstacleSpriteNode.position = CGPoint(x: (firstPlatXPos + nextBlockFirstPlatformXPos)/2, y: platformSize.height/2)
+        obstacleSpriteNode.position = CGPoint(x: (firstPlatXPos + nextBlockFirstPlatformXPos)/2, y: GameplayConfiguration.Platform.size.height/2)
+        obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
         addChild(obstacleSpriteNode)
     }
     

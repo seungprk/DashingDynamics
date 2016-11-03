@@ -24,6 +24,8 @@ class MenuScene: SKScene, SKButtonDelegate {
     var background1: SKSpriteNode?
     var background2: SKSpriteNode?
     
+    var nodesToAnimateIn = [SKNode]()
+    
     override init(size: CGSize) {
         super.init(size: size)
         
@@ -88,6 +90,16 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         motionManager = CMMotionManager()
         motionManager?.startAccelerometerUpdates()
+        
+        for child in children {
+            nodesToAnimateIn.append(child)
+        }
+    }
+    
+    override func didMove(to view: SKView) {
+        for node in nodesToAnimateIn {
+            blinkIn(node: node)
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -181,13 +193,31 @@ class MenuScene: SKScene, SKButtonDelegate {
         }
     }
     
-//    func applyBlinkTo(node: SKNode) {
-//        let initialDelay = TimeInterval( arc4random_uniform(4) )
-//        let delay: TimeInterval = 6
-//        
-//        let blinkOut = SKAction.fadeAlpha(to: 0, duration: 0.1)
-//        let blinkIn = SKAction.fadeAlpha(to: 1, duration: 0.1)
-//        
-//        let blink = SKAction.repeat(SKAction.sequence([blinkOut, blinkIn]), count: 3)
-//    }
+    var blinkCounter = 0
+    
+    func blinkIn(node: SKNode) {
+        blinkCounter += 1
+        let blinkIn = SKAction.fadeIn(withDuration: 0)
+        let blinkOut = SKAction.fadeOut(withDuration: 0)
+        let initialDelay = SKAction.wait(forDuration: 0.2 * TimeInterval(blinkCounter))
+        let delay = SKAction.wait(forDuration: 0.04)
+        
+        let blinkInSequence = SKAction.repeat(SKAction.sequence([delay, blinkOut, delay, blinkIn]), count: 4)
+
+        node.alpha = 0
+        node.run(SKAction.sequence([initialDelay, blinkIn, blinkInSequence, periodicBlink()]))
+    }
+    
+    func periodicBlink() -> SKAction {
+    // private let periodicBlink: SKAction = {
+        let randomOffset = TimeInterval( Double(arc4random_uniform(40)) / 10.0 )// * 10.0
+        
+        let blinkIn = SKAction.fadeIn(withDuration: 0)
+        let blinkOut = SKAction.fadeOut(withDuration: 0)
+        let delay = SKAction.wait(forDuration: 0.04)
+        
+        let blinkSequence = SKAction.repeat(SKAction.sequence([delay, blinkOut, delay, blinkIn]), count: 4)
+        let forever = SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 6), blinkSequence]))
+        return SKAction.sequence([SKAction.wait(forDuration: randomOffset), forever])
+    }
 }
