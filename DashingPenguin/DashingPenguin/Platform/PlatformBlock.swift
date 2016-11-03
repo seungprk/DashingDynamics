@@ -14,7 +14,7 @@ class PlatformBlock: SKNode {
     var platforms = [Platform]()
     var size: CGSize!
     var nextBlockFirstPlatformXPos: CGFloat!
-    
+        
     var entities = [GKEntity]()
     
     override init() {

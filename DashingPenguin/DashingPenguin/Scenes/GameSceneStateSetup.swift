@@ -33,6 +33,24 @@ class GameSceneStateSetup: GKState {
         controlInputNode.position = scene.cameraNode!.position
         scene.addChild(scene.cameraNode!)
         scene.camera = scene.cameraNode
+        
+        // Add walls to camera node
+        let rightWallCenter = CGPoint(x: scene.size.width / 2, y: 0)
+        let leftWallCenter = CGPoint(x: -scene.size.width / 2, y: 0)
+        
+        let wallRight = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: scene.size.height * 2), center: rightWallCenter)
+        let wallLeft = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: scene.size.height * 2), center: leftWallCenter)
+        wallLeft.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
+        wallRight.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
+        wallLeft.isDynamic = false
+        wallRight.isDynamic = false
+        
+        let wallRightNode = SKNode()
+        let wallLeftNode = SKNode()
+        wallRightNode.physicsBody = wallRight
+        wallLeftNode.physicsBody = wallLeft
+        scene.cameraNode?.addChild(wallRightNode)
+        scene.cameraNode?.addChild(wallLeftNode)
 
         // Player Texture Setup
         let playerAnimatedAtlas = SKTextureAtlas(named: "player")
