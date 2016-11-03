@@ -20,7 +20,7 @@ class GameSceneStateSetup: GKState {
     
     override func didEnter(from previousState: GKState?) {
         // Misc Setup
-        scene.backgroundColor = SKColor.white
+        scene.backgroundColor = SKColor.black
         scene.lastUpdateTime = 0
         
         // Label for testing

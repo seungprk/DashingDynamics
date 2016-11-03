@@ -34,7 +34,7 @@ class GameScene: SKScene, GameInputDelegate {
     // MARK: - State Machine setup
     
     override func didMove(to view: SKView) {
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(appWillBecomeActive), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         

@@ -180,4 +180,14 @@ class MenuScene: SKScene, SKButtonDelegate {
             print("No action registered for onButtonDown(_:) of \(named) button")
         }
     }
+    
+//    func applyBlinkTo(node: SKNode) {
+//        let initialDelay = TimeInterval( arc4random_uniform(4) )
+//        let delay: TimeInterval = 6
+//        
+//        let blinkOut = SKAction.fadeAlpha(to: 0, duration: 0.1)
+//        let blinkIn = SKAction.fadeAlpha(to: 1, duration: 0.1)
+//        
+//        let blink = SKAction.repeat(SKAction.sequence([blinkOut, blinkIn]), count: 3)
+//    }
 }
