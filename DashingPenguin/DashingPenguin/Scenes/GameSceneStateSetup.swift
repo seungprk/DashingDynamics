@@ -54,9 +54,8 @@ class GameSceneStateSetup: GKState {
 
         // Player Texture Setup
         let playerAnimatedAtlas = SKTextureAtlas(named: "player")
-        let framesNum = playerAnimatedAtlas.textureNames.count
         var playerTextureFrames = [SKTexture]()
-        for i in 1...framesNum {
+        for i in 1...playerAnimatedAtlas.textureNames.count {
             let textureName = "player\(i)"
             playerTextureFrames.append(playerAnimatedAtlas.textureNamed(textureName))
         }
