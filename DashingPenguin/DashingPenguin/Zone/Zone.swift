@@ -18,7 +18,7 @@ class Zone {
     var firstPlatform: Platform! {
         didSet {
             initWall()
-            print("initializing wall")
+            print("initialized wall")
         }
     }
     var hasBeenEntered = false
@@ -45,16 +45,20 @@ class Zone {
             let newWall = Obstacle(size: CGSize(width: 8, height: CGFloat(wallHeight)))
             let newWallLeft = Obstacle(size: CGSize(width: 8, height: CGFloat(wallHeight)))
             
+            // TODO: Clean this ugly code >.<
             if let node = newWall.component(ofType: SpriteComponent.self)?.node,
                 let platform = firstPlatform.component(ofType: SpriteComponent.self)?.node,
                 let nodeLeft = newWallLeft.component(ofType: SpriteComponent.self)?.node {
+                
                 let xPos = size.width / 2
-                let position = CGPoint(x: xPos, y: platform.position.y + CGFloat(wallHeight * index))
+                let position = CGPoint(x: xPos, y: begYPos + platform.position.y + CGFloat(wallHeight * index))
+
                 node.position = position
                 
                 nodeLeft.position = CGPoint(x: -xPos, y: position.y)
                 nodeLeft.physicsBody = nil
                 node.physicsBody = nil
+                
                 scene.addChild(node)
                 scene.addChild(nodeLeft)
             }

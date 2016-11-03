@@ -44,7 +44,8 @@ class DashEndingState: GKState {
             let flashingSequence = SKAction.sequence([flashOut, flashIn, flashOut, flashIn, enterDeathAction])
             spriteComponent.node.run(flashingSequence, withKey: "flashingSequence")
         } else {
-            stateMachine?.enter(DeathState.self)
+            // Comment this out to enable invincibility
+            // stateMachine?.enter(DeathState.self)
         }
         
         elapsedTime = 0.0
