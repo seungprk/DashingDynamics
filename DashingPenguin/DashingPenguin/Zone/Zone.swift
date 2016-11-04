@@ -39,14 +39,15 @@ class Zone {
     
     
     func initWall() {
-        let wallHeight = 10
+        let wallTexture = SKTexture(imageNamed: "wall")
+        let wallHeight = Int(wallTexture.size().height)
         let numberOfWalls = (Int(size.height) / wallHeight) + 1
         for index in 0..<numberOfWalls {
-            let newWall = Obstacle(size: CGSize(width: GameplayConfiguration.Sidewall.width, height: CGFloat(wallHeight)))
-            let newWallLeft = Obstacle(size: CGSize(width: GameplayConfiguration.Sidewall.width, height: CGFloat(wallHeight)))
+            let newWallRight = Obstacle(size: CGSize(width: GameplayConfiguration.Sidewall.width, height: CGFloat(wallHeight)), texture: wallTexture)
+            let newWallLeft = Obstacle(size: CGSize(width: GameplayConfiguration.Sidewall.width, height: CGFloat(wallHeight)), texture: wallTexture)
             
             // TODO: Clean this ugly code >.<
-            if let nodeRight = newWall.component(ofType: SpriteComponent.self)?.node,
+            if let nodeRight = newWallRight.component(ofType: SpriteComponent.self)?.node,
                 let platform = firstPlatform.component(ofType: SpriteComponent.self)?.node,
                 let nodeLeft = newWallLeft.component(ofType: SpriteComponent.self)?.node {
                 

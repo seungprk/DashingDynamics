@@ -35,11 +35,11 @@ class GameSceneStateSetup: GKState {
         scene.camera = scene.cameraNode
         
         // Add walls to camera node
-        let rightWallCenter = CGPoint(x: scene.size.width / 2, y: 0)
-        let leftWallCenter = CGPoint(x: -scene.size.width / 2, y: 0)
+        let rightWallCenter = CGPoint(x: scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2, y: 0)
+        let leftWallCenter = CGPoint(x: -scene.size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: 0)
         
-        let wallRight = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: scene.size.height * 2), center: rightWallCenter)
-        let wallLeft = SKPhysicsBody(rectangleOf: CGSize(width: 8, height: scene.size.height * 2), center: leftWallCenter)
+        let wallRight = SKPhysicsBody(rectangleOf: CGSize(width: GameplayConfiguration.Sidewall.width, height: scene.size.height * 2), center: rightWallCenter)
+        let wallLeft = SKPhysicsBody(rectangleOf: CGSize(width: GameplayConfiguration.Sidewall.width, height: scene.size.height * 2), center: leftWallCenter)
         wallLeft.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
         wallRight.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
         wallLeft.isDynamic = false
