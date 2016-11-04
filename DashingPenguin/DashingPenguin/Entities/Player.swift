@@ -84,4 +84,5 @@ class Player: GKEntity {
         component(ofType: MovementComponent.self)?.update(deltaTime: seconds)
     }
     
+    
 }

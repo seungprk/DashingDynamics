@@ -28,6 +28,10 @@ struct GameplayConfiguration {
         static let size = CGSize(width: 20, height: 20)
     }
     
+    struct Sidewall {
+        static let width: CGFloat = 10
+    }
+    
     struct EnergyMatter {
         static let size = CGSize(width: 16, height: 16)
     }

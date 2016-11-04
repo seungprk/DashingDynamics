@@ -42,24 +42,24 @@ class Zone {
         let wallHeight = 10
         let numberOfWalls = (Int(size.height) / wallHeight) + 1
         for index in 0..<numberOfWalls {
-            let newWall = Obstacle(size: CGSize(width: 8, height: CGFloat(wallHeight)))
-            let newWallLeft = Obstacle(size: CGSize(width: 8, height: CGFloat(wallHeight)))
+            let newWall = Obstacle(size: CGSize(width: GameplayConfiguration.Sidewall.width, height: CGFloat(wallHeight)))
+            let newWallLeft = Obstacle(size: CGSize(width: GameplayConfiguration.Sidewall.width, height: CGFloat(wallHeight)))
             
             // TODO: Clean this ugly code >.<
-            if let node = newWall.component(ofType: SpriteComponent.self)?.node,
+            if let nodeRight = newWall.component(ofType: SpriteComponent.self)?.node,
                 let platform = firstPlatform.component(ofType: SpriteComponent.self)?.node,
                 let nodeLeft = newWallLeft.component(ofType: SpriteComponent.self)?.node {
                 
-                let xPos = size.width / 2
+                let xPos = size.width / 2 - GameplayConfiguration.Sidewall.width / 2
                 let position = CGPoint(x: xPos, y: begYPos + platform.position.y + CGFloat(wallHeight * index))
 
-                node.position = position
+                nodeRight.position = position
                 
-                nodeLeft.position = CGPoint(x: -xPos, y: position.y)
+                nodeLeft.position = CGPoint(x: -size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: position.y)
                 nodeLeft.physicsBody = nil
-                node.physicsBody = nil
+                nodeRight.physicsBody = nil
                 
-                scene.addChild(node)
+                scene.addChild(nodeRight)
                 scene.addChild(nodeLeft)
             }
         }
