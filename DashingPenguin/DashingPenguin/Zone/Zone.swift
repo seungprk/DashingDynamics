@@ -55,6 +55,7 @@ class Zone {
                 let position = CGPoint(x: xPos, y: begYPos + platform.position.y + CGFloat(wallHeight * index))
 
                 nodeRight.position = position
+                nodeRight.xScale = -1
                 
                 nodeLeft.position = CGPoint(x: -size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: position.y)
                 nodeLeft.physicsBody = nil
