@@ -55,7 +55,7 @@ class Player: GKEntity {
         spriteComponent.node.size = GameplayConfiguration.Player.size
         spriteComponent.node.zPosition = 1000
         
-        let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
+        let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: GameplayConfiguration.Player.physicsBodyOffset)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
         physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform

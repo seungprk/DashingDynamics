@@ -12,8 +12,8 @@ import CoreGraphics
 struct GameplayConfiguration {
     struct Player {
         static let size = CGSize(width: 32, height: 32)
-        static let physicsBodyOffset = CGPoint(x: 0, y: -25)
-        static let physicsBodyRadius: CGFloat = 10
+        static let physicsBodyOffset = CGPoint(x: 0, y: -5)
+        static let physicsBodyRadius: CGFloat = 7
 
         static let dashDuration = 0.1
         static let dashEndDuration = 1.5
