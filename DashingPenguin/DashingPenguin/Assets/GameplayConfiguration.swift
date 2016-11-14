@@ -15,7 +15,7 @@ struct GameplayConfiguration {
         static let physicsBodyOffset = CGPoint(x: 0, y: -5)
         static let physicsBodyRadius: CGFloat = 7
 
-        static let dashDuration = 0.1
+        static let dashDuration = 0.3 // 0.1
         static let dashEndDuration = 1.5
         static let maxDashes = 2
     }
@@ -52,7 +52,7 @@ struct GameplayConfiguration {
     struct NameOf {
         static let controlInputNode = "touchInputNode"
     }
-    
+        
     struct PhysicsBitmask {
         static let none: UInt32 = 0x0
         static let all : UInt32 = 0xFFFFFFFF
@@ -62,5 +62,6 @@ struct GameplayConfiguration {
         static let obstacle    : UInt32 = 0x1 << 2
         static let laser       : UInt32 = 0x1 << 3
         static let energyMatter: UInt32 = 0x1 << 4
+        static let wall        : UInt32 = 0x1 << 5
     }
 }

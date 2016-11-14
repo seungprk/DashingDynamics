@@ -13,6 +13,10 @@ protocol PlatformLandingDelegate {
     func didExitPlatform()
 }
 
+protocol WallContactDelegate {
+    func didContactWall()
+}
+
 extension GameScene: SKPhysicsContactDelegate {
     
     func setupPhysics() {
@@ -49,6 +53,10 @@ extension GameScene: SKPhysicsContactDelegate {
                 player?.component(ofType: MovementComponent.self)?.dashCount -= 1
                 secondBody.node?.removeFromParent()
             }
+            
+        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.wall):
+            wallContactDelegate?.didContactWall()
+            
         default:
             break
         }

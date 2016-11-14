@@ -57,11 +57,28 @@ class DashingState: GKState {
         super.update(deltaTime: seconds)
         
         elapsedTime += seconds
-        
-        let rate = CGFloat(50 * elapsedTime)
-        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
-            spriteComponent.node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: rate))
+
+        if elapsedTime > GameplayConfiguration.Player.dashDuration {
+            if let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
+                spriteComponent.node.physicsBody?.velocity = CGVector.zero
+            }
+            self.stateMachine?.enter(DashEndingState.self)
         }
+        
+        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self),
+            let dashVelocity = self.entity.component(ofType: MovementComponent.self)?.dashVelocity {
+            
+            let progress = curvedProgress(elapsed: elapsedTime)
+            let rate = CGFloat(3.4 * progress)
+            let currentVelocity = CGVector(dx: dashVelocity.dx * rate, dy: dashVelocity.dy * rate)
+            
+            spriteComponent.node.physicsBody?.applyImpulse(currentVelocity)
+        }
+    }
+    
+    func curvedProgress(elapsed: TimeInterval) -> Double {
+        let dashCompletion = min(1, elapsed / GameplayConfiguration.Player.dashDuration)
+        return -(pow(-dashCompletion, 10) - 1)
     }
 
     

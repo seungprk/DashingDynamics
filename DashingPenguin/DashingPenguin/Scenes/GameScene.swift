@@ -20,10 +20,14 @@ class GameScene: SKScene, GameInputDelegate {
     var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
     
+    // Physics
     var lastUpdateTime: TimeInterval = 0
     internal var physicsContactCount = 0
+    
+    // Delegates
     var platformLandingDelegate: PlatformLandingDelegate?
     var laserIdDelegate: LaserIdentificationDelegate?
+    var wallContactDelegate: WallContactDelegate?
     
     var stateMachine: GKStateMachine!
     
