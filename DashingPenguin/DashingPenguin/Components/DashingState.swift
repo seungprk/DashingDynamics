@@ -29,28 +29,6 @@ class DashingState: GKState {
         }
         
         elapsedTime = 0.0
-
-//        if let dashVelocity    = self.entity.component(ofType: MovementComponent.self)?.dashVelocity,
-//           let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
-//            let velocityMod: CGFloat = 10
-//            let modVelocity = CGVector(dx: dashVelocity.dx*velocityMod, dy: dashVelocity.dy*velocityMod)
-//            let origVelocity = (spriteComponent.node.physicsBody?.velocity)!
-//            let sumVelocity = CGVector(dx: origVelocity.dx+modVelocity.dx, dy: origVelocity.dy+modVelocity.dy)
-//            spriteComponent.node.physicsBody?.applyImpulse(sumVelocity)
-//            
-//            print("CURRENT STATE: ", stateMachine?.currentState)
-//            print("applied VEL", sumVelocity)
-//            print("VEL after applied", spriteComponent.node.physicsBody?.velocity)
-//            
-//            spriteComponent.node.run(SKAction.wait(forDuration: GameplayConfiguration.Player.dashDuration), completion: {
-//                spriteComponent.node.physicsBody?.velocity = CGVector.zero
-//                if let magnetComponent = self.entity.component(ofType: MagnetMoveComponent.self) {
-//                    spriteComponent.node.physicsBody?.velocity = CGVector(dx: magnetComponent.velocityX, dy: 0)
-//                }
-//                print((spriteComponent.node.physicsBody?.velocity)!)
-//                self.stateMachine?.enter(DashEndingState.self)
-//            })
-//        }
     }
     
     override func update(deltaTime seconds: TimeInterval) {
