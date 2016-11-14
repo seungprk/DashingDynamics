@@ -24,19 +24,21 @@ class Laser: GKEntity {
         
         super.init()
         
-        let spriteComponent = SpriteComponent(color: .yellow, size: CGSize(width: frame.width, height: 10))
+        // Setup Sprite
+        let laserTexture1 = SKTexture(imageNamed: "laser1")
+        let laserTexture2 = SKTexture(imageNamed: "laser2")
+        let textureArray = [laserTexture1, laserTexture2]
+        let spriteComponent = SpriteComponent(textureFrames: textureArray)
         
+        // Setup Physicsbody
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.frame.size)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.laser
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         
         physicsBody.isDynamic = true
-        
         spriteComponent.node.physicsBody = physicsBody
-        
         spriteComponent.node.name = name
-        
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
         
         addComponent(spriteComponent)
@@ -54,8 +56,9 @@ class Laser: GKEntity {
         
         if laserElapsed > 2 {
             laserElapsed = 0
-            component(ofType: SpriteComponent.self)!.node.isHidden = component(ofType: SpriteComponent.self)!.node.isHidden ? false : true
-            isActivated = component(ofType: SpriteComponent.self)!.node.isHidden ? false : true
+            let spriteComponent = component(ofType: SpriteComponent.self)
+            spriteComponent?.node.texture = isActivated ? spriteComponent?.textureFrames[0] : spriteComponent?.textureFrames[1]
+            isActivated = !isActivated
         }
     }
 
