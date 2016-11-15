@@ -15,6 +15,8 @@
 		242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DA8281DA0C90400272FB5 /* EnergyMatter.swift */; };
 		243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */; };
 		245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */; };
+		247607561DDAC83900237A53 /* TiledWallSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */; };
+		247607581DDAD56F00237A53 /* ObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247607571DDAD56F00237A53 /* ObstacleWall.swift */; };
 		24775DCA1DA1D8E600ED743C /* ZoneChallengeLongJump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */; };
 		24775DCC1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24775DCB1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift */; };
 		247DA9131D3316CA004C4A14 /* PlatformBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247DA9121D3316CA004C4A14 /* PlatformBlock.swift */; };
@@ -74,6 +76,8 @@
 		242DA8281DA0C90400272FB5 /* EnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnergyMatter.swift; path = DashingPenguin/Entities/EnergyMatter.swift; sourceTree = "<group>"; };
 		243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeVisibility.swift; path = DashingPenguin/Zone/ZoneChallengeVisibility.swift; sourceTree = "<group>"; };
 		245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnetMoveComponent.swift; path = DashingPenguin/Components/MagnetMoveComponent.swift; sourceTree = "<group>"; };
+		247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiledWallSpriteComponent.swift; path = DashingPenguin/Components/TiledWallSpriteComponent.swift; sourceTree = "<group>"; };
+		247607571DDAD56F00237A53 /* ObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObstacleWall.swift; path = DashingPenguin/Entities/ObstacleWall.swift; sourceTree = "<group>"; };
 		24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeLongJump.swift; path = DashingPenguin/Zone/ZoneChallengeLongJump.swift; sourceTree = "<group>"; };
 		24775DCB1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockEnergyMatter.swift; path = DashingPenguin/Platform/PlatformBlockEnergyMatter.swift; sourceTree = "<group>"; };
 		247DA9121D3316CA004C4A14 /* PlatformBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlock.swift; path = DashingPenguin/Platform/PlatformBlock.swift; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 				7F23A5BF1D2C803E008CDA5C /* Player.swift */,
 				247DA9141D331F5C004C4A14 /* Platform.swift */,
 				248C79501D3C2C2D003F8A0E /* Obstacle.swift */,
+				247607571DDAD56F00237A53 /* ObstacleWall.swift */,
 				242DA8281DA0C90400272FB5 /* EnergyMatter.swift */,
 				7F4B330E1D738D600000D467 /* Laser.swift */,
 			);
@@ -313,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */,
+				247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */,
 				7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */,
 				245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */,
 				7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */,
@@ -449,6 +455,7 @@
 				7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */,
 				7F027DBF1D8607F900C91CCD /* GameSceneStateGameover.swift in Sources */,
 				7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */,
+				247607561DDAC83900237A53 /* TiledWallSpriteComponent.swift in Sources */,
 				240165511D4AF409006E31DC /* Zone.swift in Sources */,
 				24775DCA1DA1D8E600ED743C /* ZoneChallengeLongJump.swift in Sources */,
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,
@@ -458,6 +465,7 @@
 				7F23A5B91D2C802F008CDA5C /* MovementComponent.swift in Sources */,
 				7F4B330F1D738D600000D467 /* Laser.swift in Sources */,
 				7F23A5BA1D2C802F008CDA5C /* DashEndingState.swift in Sources */,
+				247607581DDAD56F00237A53 /* ObstacleWall.swift in Sources */,
 				7F0D445C1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

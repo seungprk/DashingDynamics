@@ -11,7 +11,7 @@ import GameplayKit
 
 class PlatformBlockObstacleWall: PlatformBlock {
     
-    var obstacle: Obstacle!
+    var obstacleWall: ObstacleWall!
     
     init(scene: GameScene, firstPlatXPos: CGFloat) {
         super.init()
@@ -78,10 +78,9 @@ class PlatformBlockObstacleWall: PlatformBlock {
         addChild(firstPlatformSpriteNode)
         platforms.append(firstPlatform)
 
-        // Setup Obstacle
-        
-        obstacle = Obstacle(size: CGSize(width: wallLength, height: wallThickness), texture: SKTexture(imageNamed: "obstaclewall"))
-        let obstacleSpriteNode = obstacle.component(ofType: SpriteComponent.self)!.node
+        // Setup Obstacle Wall
+        obstacleWall = ObstacleWall(size: CGSize(width: wallLength, height: wallThickness), textures: [SKTexture(imageNamed: "obstaclewall")])
+        let obstacleSpriteNode = obstacleWall.component(ofType: TiledWallSpriteComponent.self)!.node
         obstacleSpriteNode.position = CGPoint(x: wallXPos, y: -size.height/2 + wallYPos)
         obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
         addChild(obstacleSpriteNode)
