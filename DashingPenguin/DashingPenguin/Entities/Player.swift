@@ -24,29 +24,7 @@ class Player: GKEntity {
         super.init()
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: imageName))
-        spriteComponent.node.size = GameplayConfiguration.Player.size
-        spriteComponent.node.zPosition = 1000
-        
-        let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
-        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
-        physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
-        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform | GameplayConfiguration.PhysicsBitmask.obstacle
-        
-        physicsBody.friction = 0
-        physicsBody.mass = 1
-        physicsBody.linearDamping = 0
-        physicsBody.usesPreciseCollisionDetection = true
-        physicsBody.isDynamic = true
-        
-        spriteComponent.node.physicsBody = physicsBody
-        addComponent(spriteComponent)
-        landedState = LandedState(entity: self)
-        dashingState = DashingState(entity: self)
-        addComponent(MovementComponent(states: [ landedState!,
-                                                 dashingState!,
-                                                 DashEndingState(entity: self),
-                                                 DeathState(entity: self) ]))
-        addComponent(PhysicsComponent(physicsBody: physicsBody))
+        initPhysics(spriteComponent: spriteComponent)
     }
     
     // Multi Texture Initialization
@@ -54,6 +32,10 @@ class Player: GKEntity {
         super.init()
         
         let spriteComponent = SpriteComponent(textureFrames: textureFrames)
+        initPhysics(spriteComponent: spriteComponent)
+    }
+    
+    func initPhysics(spriteComponent: SpriteComponent) {
         spriteComponent.node.size = GameplayConfiguration.Player.size
         spriteComponent.node.zPosition = 1000
         
@@ -70,9 +52,11 @@ class Player: GKEntity {
         
         spriteComponent.node.physicsBody = physicsBody
         addComponent(spriteComponent)
+        
         landedState = LandedState(entity: self)
+        dashingState = DashingState(entity: self)
         addComponent(MovementComponent(states: [ landedState!,
-                                                 DashingState(entity: self),
+                                                 dashingState!,
                                                  DashEndingState(entity: self),
                                                  DeathState(entity: self) ]))
         addComponent(PhysicsComponent(physicsBody: physicsBody))

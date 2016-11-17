@@ -85,6 +85,8 @@ class GameSceneStateSetup: GKState {
         scene.player = Player(textureFrames: playerTextureFrames)
         scene.platformLandingDelegate = scene.player!.landedState
         scene.wallContactDelegate = scene.player!.dashingState
+        print("PLAYER DELEGATES: \n\(scene.player!.landedState) \(scene.player!.dashingState)")
+        
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
             scene.addChild(playerSprite.node)

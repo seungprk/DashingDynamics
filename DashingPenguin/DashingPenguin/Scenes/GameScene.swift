@@ -40,7 +40,6 @@ class GameScene: SKScene, GameInputDelegate {
     override func didMove(to view: SKView) {
 
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(appWillBecomeActive), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
         stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self),
                                                 GameSceneStatePlaying(scene: self),
