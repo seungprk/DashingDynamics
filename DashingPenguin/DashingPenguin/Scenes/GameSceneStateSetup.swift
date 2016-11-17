@@ -35,7 +35,7 @@ class GameSceneStateSetup: GKState {
         scene.camera = scene.cameraNode
         
         // Add Background to Camera Node
-        let bgTexture = SKTexture(imageNamed: "backgroundb")
+        let bgTexture = SKTexture(imageNamed: "background")
         bgTexture.filteringMode = .nearest
         let tileWidth = bgTexture.size().width
         let tileHeight = bgTexture.size().height
