@@ -17,6 +17,7 @@ class Player: GKEntity {
     
     var isOnPlatform = true
     var landedState: LandedState?
+    var dashingState: DashingState?
     
     // Single Texture Initialization
     init(imageNamed imageName: String) {
@@ -29,7 +30,7 @@ class Player: GKEntity {
         let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: CGPoint.zero)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
         physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
-        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
+        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform | GameplayConfiguration.PhysicsBitmask.obstacle
         
         physicsBody.friction = 0
         physicsBody.mass = 1
@@ -40,8 +41,9 @@ class Player: GKEntity {
         spriteComponent.node.physicsBody = physicsBody
         addComponent(spriteComponent)
         landedState = LandedState(entity: self)
+        dashingState = DashingState(entity: self)
         addComponent(MovementComponent(states: [ landedState!,
-                                                 DashingState(entity: self),
+                                                 dashingState!,
                                                  DashEndingState(entity: self),
                                                  DeathState(entity: self) ]))
         addComponent(PhysicsComponent(physicsBody: physicsBody))

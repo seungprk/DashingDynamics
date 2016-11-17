@@ -61,6 +61,8 @@ class GameSceneStateSetup: GKState {
         let wallLeft = SKPhysicsBody(rectangleOf: CGSize(width: GameplayConfiguration.Sidewall.width, height: scene.size.height * 2), center: leftWallCenter)
         wallLeft.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
         wallRight.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
+        wallLeft.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
+        wallRight.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         wallLeft.isDynamic = false
         wallRight.isDynamic = false
         
@@ -82,6 +84,7 @@ class GameSceneStateSetup: GKState {
         // Player Entity Setup
         scene.player = Player(textureFrames: playerTextureFrames)
         scene.platformLandingDelegate = scene.player!.landedState
+        scene.wallContactDelegate = scene.player!.dashingState
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
             scene.addChild(playerSprite.node)

@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class DashingState: GKState {
+class DashingState: GKState, WallContactDelegate {
     
     unowned var entity: Player
     
@@ -29,6 +29,11 @@ class DashingState: GKState {
         }
         
         elapsedTime = 0.0
+        
+//        if let dashVelocity = self.entity.component(ofType: MovementComponent.self)?.dashVelocity {
+//            let velocityMod: CGFloat = 10
+//            let modVelocity = CGVector(dx: dashVelocity.dx*velocityMod, dy: dashVelocity.dy*velocityMod)
+//        }
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -47,18 +52,13 @@ class DashingState: GKState {
             let dashVelocity = self.entity.component(ofType: MovementComponent.self)?.dashVelocity {
             
             let progress = curvedProgress(elapsed: elapsedTime)
-            let rate = CGFloat(3.4 * progress)
+//            let rate = CGFloat(3.4 * progress)
+            let rate = CGFloat(5 * progress)
             let currentVelocity = CGVector(dx: dashVelocity.dx * rate, dy: dashVelocity.dy * rate)
             
             spriteComponent.node.physicsBody?.applyImpulse(currentVelocity)
         }
     }
-    
-    func curvedProgress(elapsed: TimeInterval) -> Double {
-        let dashCompletion = min(1, elapsed / GameplayConfiguration.Player.dashDuration)
-        return -(pow(-dashCompletion, 10) - 1)
-    }
-
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass {
@@ -67,5 +67,14 @@ class DashingState: GKState {
         default:
             return false
         }
+    }
+    
+    func curvedProgress(elapsed: TimeInterval) -> Double {
+        let dashCompletion = min(1, elapsed / GameplayConfiguration.Player.dashDuration)
+        return -(pow(-dashCompletion, 10) - 1)
+    }
+    
+    func didContactWall() {
+        print("HITWALL")
     }
 }

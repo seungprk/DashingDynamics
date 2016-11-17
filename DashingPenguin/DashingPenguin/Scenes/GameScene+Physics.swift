@@ -28,7 +28,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 
         let firstBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyA : contact.bodyB
         let secondBody: SKPhysicsBody = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask ? contact.bodyB : contact.bodyA
-        
+                
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
         
         // Player and platform intersect
@@ -54,8 +54,10 @@ extension GameScene: SKPhysicsContactDelegate {
                 secondBody.node?.removeFromParent()
             }
             
-        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.wall):
+        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):
             wallContactDelegate?.didContactWall()
+            print(wallContactDelegate)
+            //print("HIT WALL")
             
         default:
             break
