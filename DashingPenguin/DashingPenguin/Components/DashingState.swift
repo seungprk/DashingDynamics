@@ -53,7 +53,7 @@ class DashingState: GKState, WallContactDelegate {
             
             let progress = curvedProgress(elapsed: elapsedTime)
 //            let rate = CGFloat(3.4 * progress)
-            let rate = CGFloat(5 * progress)
+            let rate = CGFloat(3 * progress)
             let currentVelocity = CGVector(dx: dashVelocity.dx * rate, dy: dashVelocity.dy * rate)
             
             spriteComponent.node.physicsBody?.applyImpulse(currentVelocity)
