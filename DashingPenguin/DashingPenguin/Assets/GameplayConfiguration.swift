@@ -64,6 +64,7 @@ struct GameplayConfiguration {
         static let obstacle    : UInt32 = 0x1 << 2
         static let laser       : UInt32 = 0x1 << 3
         static let energyMatter: UInt32 = 0x1 << 4
+        static let field       : UInt32 = 0x1 << 5
         //static let wall        : UInt32 = 0x1 << 5
     }
 }
