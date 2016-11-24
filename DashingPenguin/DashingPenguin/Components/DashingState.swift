@@ -67,7 +67,7 @@ class DashingState: GKState, WallContactDelegate {
             // FORMULA2: y = 200 ^ (x - 1.3)
             // FORMULA3: y = 20000 ^ (x - 1.1)
             // FORMULAfinal: y = 20000 ^ (x - 0.4)
-            var rate: CGFloat = pow(20000, (progress - 0.4))
+            var rate: CGFloat = pow(20000, (progress - 0.55))
             if (rate < 0) { rate = 0 }
             if (rate > 0.2) { rate = 0.2 }
             

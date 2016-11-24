@@ -15,9 +15,10 @@ struct GameplayConfiguration {
         static let physicsBodyOffset = CGPoint(x: 0, y: -5)
         static let physicsBodyRadius: CGFloat = 7
 
-        static let dashDuration = 0.8 // 0.1
+        static let dashDuration = 0.5 // 0.8 // 0.1
         static let dashEndDuration = 1.5
         static let maxDashes = 2
+        static let dashDistance: CGFloat = 400
     }
     
     struct Platform {
