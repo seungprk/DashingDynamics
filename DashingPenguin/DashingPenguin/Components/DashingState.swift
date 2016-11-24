@@ -35,7 +35,8 @@ class DashingState: GKState, WallContactDelegate {
         // Give initial impulse to the player
         if let spriteComponent = self.entity.component(ofType: SpriteComponent.self),
             let dashVelocity = self.entity.component(ofType: MovementComponent.self)?.dashVelocity {
-            spriteComponent.node.physicsBody?.velocity = dashVelocity
+            spriteComponent.node.physicsBody?.velocity.dx += dashVelocity.dx
+            spriteComponent.node.physicsBody?.velocity.dy += dashVelocity.dy
         }
     }
     

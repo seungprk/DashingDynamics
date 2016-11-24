@@ -54,10 +54,8 @@ extension GameScene: SKPhysicsContactDelegate {
                 secondBody.node?.removeFromParent()
             }
             
-        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):
-            wallContactDelegate?.didContactWall()
-            print(wallContactDelegate)
-            print("HIT WALL")
+//        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):
+//            wallContactDelegate?.didContactWall()
             
         default:
             break
