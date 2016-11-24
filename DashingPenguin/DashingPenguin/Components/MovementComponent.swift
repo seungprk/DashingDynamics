@@ -15,7 +15,10 @@ class MovementComponent: GKComponent {
     let initialStateClass: AnyClass
     
     var dashCount = 0
+    
     var dashVelocity: CGVector?
+    
+//    var swipeAngle: CGFloat?
     
     var needsVelocityUpdate = false
         
@@ -42,7 +45,14 @@ class MovementComponent: GKComponent {
     }
     
     func dash(_ velocity: CGVector) {
-        self.dashVelocity = velocity
+        let angle = atan2(velocity.dy, velocity.dx)
+        print(angle)
+        
+        let distance: CGFloat = 400
+        let calculatedX = distance * cos(angle)
+        let calculatedY = distance * sin(angle)
+        self.dashVelocity = CGVector(dx: calculatedX, dy: calculatedY)
+
         stateMachine.enter(DashingState.self)
     }
 }
