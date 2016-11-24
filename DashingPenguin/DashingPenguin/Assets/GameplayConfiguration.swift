@@ -19,6 +19,7 @@ struct GameplayConfiguration {
         static let dashEndDuration = 1.5
         static let maxDashes = 2
         static let dashDistance: CGFloat = 400
+        static let dashMagnitude: CGFloat = 0.55
     }
     
     struct Platform {

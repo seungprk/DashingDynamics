@@ -66,8 +66,9 @@ class DashingState: GKState, WallContactDelegate {
             // FORMULA1: y = 20 ^ (x - 1.5)
             // FORMULA2: y = 200 ^ (x - 1.3)
             // FORMULA3: y = 20000 ^ (x - 1.1)
-            // FORMULAfinal: y = 20000 ^ (x - 0.4)
-            var rate: CGFloat = pow(20000, (progress - 0.55))
+            // FORMULA4: y = 20000 ^ (x - 0.4)
+            // FORMULAcurrent: y = 20000 ^ (x - 0.55)
+            var rate: CGFloat = pow(20000, (progress - GameplayConfiguration.Player.dashMagnitude))
             if (rate < 0) { rate = 0 }
             if (rate > 0.2) { rate = 0.2 }
             
