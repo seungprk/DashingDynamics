@@ -56,11 +56,8 @@ class DashingState: GKState, WallContactDelegate {
         // Slow down the player based on its current velocity
         if let spriteComponent = self.entity.component(ofType: SpriteComponent.self),
             let currentVelocity = spriteComponent.node.physicsBody?.velocity {
-
-            // Calculate percentage of elapsed time
-            var progress = CGFloat(elapsedTime / GameplayConfiguration.Player.dashDuration)
-            if (progress > 1) { progress = 1 }
             
+            // ** Other Possible Formulas **
             // https://www.desmos.com/calculator/j16otdoh4a
             // initialRate = ~0.0
             // finalRate   = ~0.2
@@ -69,6 +66,11 @@ class DashingState: GKState, WallContactDelegate {
             // FORMULA3: y = 20000 ^ (x - 1.1)
             // FORMULA4: y = 20000 ^ (x - 0.4)
             // FORMULAcurrent: y = 20000 ^ (x - 0.55)
+            
+            // Calculate percentage of elapsed time
+            var progress = CGFloat(elapsedTime / GameplayConfiguration.Player.dashDuration)
+            if (progress > 1) { progress = 1 }
+            
             var rate: CGFloat = pow(20000, (progress - GameplayConfiguration.Player.dashMagnitude))
             if (rate < 0) { rate = 0 }
             if (rate > 0.2) { rate = 0.2 }
