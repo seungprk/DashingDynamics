@@ -72,17 +72,9 @@ class GameSceneStateSetup: GKState {
         wallLeftNode.physicsBody = wallLeft
         scene.cameraNode?.addChild(wallRightNode)
         scene.cameraNode?.addChild(wallLeftNode)
-
-        // Player Texture Setup
-        let playerAnimatedAtlas = SKTextureAtlas(named: "player")
-        var playerTextureFrames = [SKTexture]()
-        for i in 1...playerAnimatedAtlas.textureNames.count {
-            let textureName = "player\(i)"
-            playerTextureFrames.append(playerAnimatedAtlas.textureNamed(textureName))
-        }
         
         // Player Entity Setup
-        scene.player = Player(textureFrames: playerTextureFrames)
+        scene.player = Player()
         scene.platformLandingDelegate = scene.player!.landedState
         scene.wallContactDelegate = scene.player!.dashingState
         print("PLAYER DELEGATES: \n\(scene.player!.landedState) \(scene.player!.dashingState)")
