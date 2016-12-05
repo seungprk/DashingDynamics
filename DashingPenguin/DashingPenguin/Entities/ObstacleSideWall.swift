@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class Obstacle: GKEntity {
+class ObstacleSideWall: GKEntity {
     
     var size: CGSize!
     
@@ -32,26 +32,6 @@ class Obstacle: GKEntity {
         
         addComponent(spriteComponent)
         addComponent(PhysicsComponent(physicsBody: physicsBody))
-        
-        // Animate
-        let obstacleAtlas = SKTextureAtlas(named: "obstacle")
-        
-        let obstacleTextures = [obstacleAtlas.textureNamed("obstacle-2"),
-                                       obstacleAtlas.textureNamed("obstacle-3"),
-                                       obstacleAtlas.textureNamed("obstacle-4"),
-                                       obstacleAtlas.textureNamed("obstacle-4"),
-                                       obstacleAtlas.textureNamed("obstacle-3"),
-                                       obstacleAtlas.textureNamed("obstacle-2"),
-                                       obstacleAtlas.textureNamed("obstacle-1"),
-                                       obstacleAtlas.textureNamed("obstacle-1")]
-        for texture in obstacleTextures {
-            texture.filteringMode = .nearest
-        }
-        
-        let rotate = SKAction.animate(with: obstacleTextures, timePerFrame: 0.2)
-        let wait = SKAction.wait(forDuration: 0.4)
-        let rotateAnimation = SKAction.repeatForever(SKAction.sequence([rotate, wait]))
-        spriteComponent.node.run(rotateAnimation)
     }
     
     required init?(coder aDecoder: NSCoder) {
