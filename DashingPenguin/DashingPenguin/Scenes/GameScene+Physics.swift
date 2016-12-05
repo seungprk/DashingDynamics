@@ -51,7 +51,23 @@ extension GameScene: SKPhysicsContactDelegate {
             if secondBody.node?.parent != nil {
                 print("Physics: dashCount -1")
                 player?.component(ofType: MovementComponent.self)?.dashCount -= 1
-                secondBody.node?.removeFromParent()
+                
+                // Energy Matter Texture Setup
+                let energyMatterAnimatedAtlas = SKTextureAtlas(named: "energymatter")
+                let energyMatterTextureFrames = [energyMatterAnimatedAtlas.textureNamed("energymatter-1"),
+                                                 energyMatterAnimatedAtlas.textureNamed("energymatter-2"),
+                                                 energyMatterAnimatedAtlas.textureNamed("energymatter-2"),
+                                                 energyMatterAnimatedAtlas.textureNamed("energymatter-2")]
+                for texture in energyMatterTextureFrames {
+                    texture.filteringMode = .nearest
+                }
+                
+                // Animate and Remove
+                let glowAction = SKAction.animate(with: energyMatterTextureFrames, timePerFrame: 0.01)
+                let removeSpriteAction = SKAction.run({
+                    secondBody.node?.removeFromParent()
+                })
+                secondBody.node?.run(SKAction.sequence([glowAction, removeSpriteAction]))
             }
             
 //        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):

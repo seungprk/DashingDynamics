@@ -57,7 +57,20 @@ class Laser: GKEntity {
         if laserElapsed > 2 {
             laserElapsed = 0
             let spriteComponent = component(ofType: SpriteComponent.self)
-            spriteComponent?.node.texture = isActivated ? spriteComponent?.textureFrames[0] : spriteComponent?.textureFrames[1]
+            
+            let laserAtlas = SKTextureAtlas(named: "laser")
+            var laserTextures = [SKTexture]()
+            for range in 1...laserAtlas.textureNames.count {
+                let texture = laserAtlas.textureNamed("laser-\(range)")
+                texture.filteringMode = .nearest
+                laserTextures.append(texture)
+            }
+            let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
+            if isActivated {
+                spriteComponent?.node.texture = spriteComponent?.textureFrames[0]
+            } else {
+                spriteComponent?.node.run(animateAction)
+            }
             isActivated = !isActivated
         }
     }
