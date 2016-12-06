@@ -13,7 +13,7 @@ class ObstacleWall: GKEntity {
     
     var size: CGSize!
     
-    init(size: CGSize, textures: [SKTexture]) {
+    init(size: CGSize) {
         super.init()
         
         // Modify input size's width to be a multiple of the tile width
@@ -29,7 +29,7 @@ class ObstacleWall: GKEntity {
             resultingTileNum = tileMultiple + 1
         }
         
-        let spriteComponent = TiledWallSpriteComponent(textureFrames: textures, tileNum: resultingTileNum)
+        let spriteComponent = TiledWallSpriteComponent(tileNum: resultingTileNum)
         
         let physicsBody = SKPhysicsBody(rectangleOf: self.size)
         physicsBody.isDynamic = false

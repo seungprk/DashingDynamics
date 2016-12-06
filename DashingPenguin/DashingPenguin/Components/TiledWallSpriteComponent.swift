@@ -12,20 +12,23 @@ import GameplayKit
 class TiledWallSpriteComponent: GKComponent {
     
     let node: SKNode
-    var textureFrames = [SKTexture]()
+    var obstacleTextures = [SKTexture]()
     var TileSprites = [SKSpriteNode]()
     
     // Init with Texture Atlas Frames
-    init(textureFrames: [SKTexture], tileNum: Int) {
-        // Texture and parent node setup
-        for texture in textureFrames {
-            texture.filteringMode = SKTextureFilteringMode.nearest
+    init(tileNum: Int) {
+        // Setup Textures and Main Node
+        let obstacleAtlas = SKTextureAtlas(named: "obstaclewall")
+        obstacleTextures = [SKTexture]()
+        for range in 1...obstacleAtlas.textureNames.count {
+            let texture = obstacleAtlas.textureNamed("obstaclewall-\(range)")
+            texture.filteringMode = .nearest
+            obstacleTextures.append(texture)
         }
-        self.textureFrames = textureFrames
         node = SKNode()
         
         // Caculate leftmost tile position
-        let tileSize = textureFrames[0].size()
+        let tileSize = obstacleTextures[0].size()
         let isEven: Bool = (tileNum % 2 == 0)
         let midPointOfLeftMostTile: CGFloat
         if isEven == true {
@@ -36,10 +39,19 @@ class TiledWallSpriteComponent: GKComponent {
         
         // Lay tiles
         for index in 0..<tileNum {
-            let spriteNode = SKSpriteNode(texture: textureFrames[0], color: SKColor.clear, size: tileSize)
+            var spriteNode: SKSpriteNode?
+            if index == 0 {
+                spriteNode = SKSpriteNode(texture: obstacleTextures[0], color: SKColor.clear, size: tileSize)
+            } else if index == tileNum - 1 {
+                spriteNode = SKSpriteNode(texture: obstacleTextures[3], color: SKColor.clear, size: tileSize)
+            } else if index % 3 == 0 {
+                spriteNode = SKSpriteNode(texture: obstacleTextures[2], color: SKColor.clear, size: tileSize)
+            } else {
+                spriteNode = SKSpriteNode(texture: obstacleTextures[1], color: SKColor.clear, size: tileSize)
+            }
             let xPos = midPointOfLeftMostTile + (CGFloat(index) * tileSize.width)
-            spriteNode.position = CGPoint(x: xPos, y:0)
-            node.addChild(spriteNode)
+            spriteNode?.position = CGPoint(x: xPos, y:0)
+            node.addChild(spriteNode!)
         }
         
         super.init()

@@ -79,10 +79,15 @@ class PlatformBlockObstacleWall: PlatformBlock {
         platforms.append(firstPlatform)
 
         // Setup Obstacle Wall
-        obstacleWall = ObstacleWall(size: CGSize(width: wallLength, height: wallThickness), textures: [SKTexture(imageNamed: "obstaclewall")])
+        
+        obstacleWall = ObstacleWall(size: CGSize(width: wallLength, height: wallThickness))
         let obstacleSpriteNode = obstacleWall.component(ofType: TiledWallSpriteComponent.self)!.node
         obstacleSpriteNode.position = CGPoint(x: wallXPos, y: -size.height/2 + wallYPos)
         obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
+        for node in obstacleSpriteNode.children {
+            node.zPosition = firstPlatformSpriteNode.zPosition
+        }
+        
         addChild(obstacleSpriteNode)
     }
     

@@ -14,7 +14,7 @@ class Laser: GKEntity {
     
     var isActivated = false
     static var idIncrement = 0
-    
+    var laserTextures: [SKTexture]!
     let id: String
     
     init(frame: CGRect) {
@@ -25,10 +25,14 @@ class Laser: GKEntity {
         super.init()
         
         // Setup Sprite
-        let laserTexture1 = SKTexture(imageNamed: "laser1")
-        let laserTexture2 = SKTexture(imageNamed: "laser2")
-        let textureArray = [laserTexture1, laserTexture2]
-        let spriteComponent = SpriteComponent(textureFrames: textureArray)
+        let laserAtlas = SKTextureAtlas(named: "laser")
+        laserTextures = [SKTexture]()
+        for range in 1...laserAtlas.textureNames.count {
+            let texture = laserAtlas.textureNamed("laser-\(range)")
+            texture.filteringMode = .nearest
+            laserTextures.append(texture)
+        }
+        let spriteComponent = SpriteComponent(textureFrames: laserTextures)
         
         // Setup Physicsbody
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.frame.size)
@@ -57,21 +61,15 @@ class Laser: GKEntity {
         if laserElapsed > 2 {
             laserElapsed = 0
             let spriteComponent = component(ofType: SpriteComponent.self)
-            
-            let laserAtlas = SKTextureAtlas(named: "laser")
-            var laserTextures = [SKTexture]()
-            for range in 1...laserAtlas.textureNames.count {
-                let texture = laserAtlas.textureNamed("laser-\(range)")
-                texture.filteringMode = .nearest
-                laserTextures.append(texture)
-            }
             let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
             if isActivated {
                 spriteComponent?.node.texture = spriteComponent?.textureFrames[0]
+                isActivated = !isActivated
             } else {
-                spriteComponent?.node.run(animateAction)
+                spriteComponent?.node.run(animateAction, completion: {
+                    self.isActivated = !self.isActivated
+                })
             }
-            isActivated = !isActivated
         }
     }
 
