@@ -12,26 +12,60 @@ import GameplayKit
 class ObstacleSideWall: GKEntity {
     
     var size: CGSize!
-    
-    init(size: CGSize, texture: SKTexture? = nil) {
+    var tiles = [SKSpriteNode]()
+    var tileSize = SKTexture(imageNamed: "wall").size()
+    var cameraTopY: CGFloat = 0
+    init(size: CGSize) {
         super.init()
         self.size = size
-        let spriteComponent: SpriteComponent!
-        if texture == nil {
-            spriteComponent = SpriteComponent(color: UIColor.red, size: size)
-        } else {
-            spriteComponent = SpriteComponent(texture: texture!)
+    }
+    
+    func tileSideWall(scene: GameScene) {
+        let currentCameraTopY = (scene.cameraNode?.position.y)! + scene.size.height / 2
+        if currentCameraTopY > cameraTopY {
+            cameraTopY = (scene.cameraNode?.position.y)! + scene.size.height / 2
         }
+        var topTileY: CGFloat
+        // Start tiling from a screen below position 0
+        topTileY = tiles.count == 0 ? -scene.size.height : (tiles.last?.position.y)! + tileSize.height / 2
+        var tileNum = 0
+        let adjustedCameraTopY = cameraTopY + 100
         
-        let physicsBody = SKPhysicsBody(rectangleOf: size)
-        physicsBody.isDynamic = false
-        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
-        physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.player
-        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.none
-        spriteComponent.node.physicsBody = physicsBody
-        
-        addComponent(spriteComponent)
-        addComponent(PhysicsComponent(physicsBody: physicsBody))
+        // Add tiles
+        if adjustedCameraTopY > topTileY {
+            tileNum = Int((adjustedCameraTopY - topTileY) / tileSize.height) + 20 // 20 tiles added for batch loading
+            
+            for index in 0..<tileNum {
+                // Right tile
+                let newWallRight = SKSpriteNode(imageNamed: "wallb")
+                let xPos = size.width / 2 - GameplayConfiguration.Sidewall.width / 2
+                let yPos = topTileY + tileSize.height / 2 + tileSize.height * CGFloat(index)
+                let position = CGPoint(x: xPos, y: yPos)
+                newWallRight.position = position
+                newWallRight.zPosition = 1000000
+                newWallRight.xScale = -1
+                newWallRight.physicsBody = nil
+                scene.addChild(newWallRight)
+                tiles.append(newWallRight)
+                
+                // Left tile
+                let newWallLeft = SKSpriteNode(imageNamed: "wall")
+                newWallLeft.position = CGPoint(x: -size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: yPos)
+                newWallLeft.zPosition = 1000000
+                newWallLeft.physicsBody = nil
+                scene.addChild(newWallLeft)
+                tiles.append(newWallLeft)
+            }
+            
+            // Remove tiles half a screen below
+            let removeDistanceY = (scene.cameraNode?.position.y)! - (tiles.first?.position.y)! - scene.size.height
+            let removeNum = Int((removeDistanceY / tileSize.height) * 2)
+            for index in 0..<removeNum {
+                tiles[index].removeFromParent()
+            }
+            tiles.removeFirst(removeNum)
+            print("***REMOVE", removeNum)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
