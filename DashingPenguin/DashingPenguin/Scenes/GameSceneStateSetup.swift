@@ -73,6 +73,9 @@ class GameSceneStateSetup: GKState {
         scene.cameraNode?.addChild(wallRightNode)
         scene.cameraNode?.addChild(wallLeftNode)
         
+        // Add Side wall
+        scene.sideWall = ObstacleSideWall(size: scene.size)
+        
         // Player Entity Setup
         scene.player = Player()
         scene.platformLandingDelegate = scene.player!.landedState

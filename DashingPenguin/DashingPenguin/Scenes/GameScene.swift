@@ -12,13 +12,12 @@ import GameplayKit
 class GameScene: SKScene, GameInputDelegate {
     
     var entities = [GKEntity]()
-
     var controlInputNode: TouchControlInputNode?
-//    var overlay: SKNode?
     var cameraNode: SKCameraNode?
     var player: Player?
     var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
+    var sideWall: ObstacleSideWall?
     
     // Physics
     var lastUpdateTime: TimeInterval = 0
@@ -30,9 +29,7 @@ class GameScene: SKScene, GameInputDelegate {
     var wallContactDelegate: WallContactDelegate?
     
     var stateMachine: GKStateMachine!
-    
     var menuScene: MenuScene?
-    
     var pauseOverlay: SKNode?
     
     // MARK: - State Machine setup
@@ -63,6 +60,7 @@ class GameScene: SKScene, GameInputDelegate {
         
         updateCurrentTime(currentTime)
         centerCamera()
+        sideWall?.tileSideWall(scene: self)
     }
     
     func updateCurrentTime(_ currentTime: TimeInterval) {
