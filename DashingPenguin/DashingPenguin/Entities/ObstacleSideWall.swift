@@ -72,12 +72,14 @@ class ObstacleSideWall: GKEntity {
             
             // Remove tiles half a screen below
             let removeDistanceY = (scene.cameraNode?.position.y)! - (tiles.first?.position.y)! - scene.size.height
-            let removeNum = Int((removeDistanceY / tileSize.height) * 2)
-            for index in 0..<removeNum {
-                tiles[index].removeFromParent()
+            if removeDistanceY > 0 {
+                let removeNum = Int((removeDistanceY / tileSize.height) * 2)
+                for index in 0..<removeNum {
+                    tiles[index].removeFromParent()
+                }
+                print("***REMOVE", removeNum, "From", tiles[0].position, " to" , tiles[removeNum-1].position)
+                tiles.removeFirst(removeNum)
             }
-            tiles.removeFirst(removeNum)
-            print("***REMOVE", removeNum)
         }
     }
     

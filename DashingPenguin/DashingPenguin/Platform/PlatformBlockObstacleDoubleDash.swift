@@ -38,7 +38,7 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         let firstPlatformSpriteNode = firstPlatform.component(ofType: SpriteComponent.self)!.node
         firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
-        platforms.append(firstPlatform)
+        entities.append(firstPlatform)
 
         // Setup Obstacle
         let texture = SKTexture(imageNamed: "obstacle")
@@ -47,6 +47,7 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         obstacleSpriteNode.position = CGPoint(x: (firstPlatXPos + nextBlockFirstPlatformXPos)/2, y: GameplayConfiguration.Platform.size.height/2)
         obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
         addChild(obstacleSpriteNode)
+        entities.append(obstacle)
     }
     
     required init?(coder aDecoder: NSCoder) {

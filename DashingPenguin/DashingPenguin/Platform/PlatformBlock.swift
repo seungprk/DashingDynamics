@@ -11,10 +11,8 @@ import GameplayKit
 
 class PlatformBlock: SKNode {
     
-    var platforms = [Platform]()
     var size: CGSize!
     var nextBlockFirstPlatformXPos: CGFloat!
-        
     var entities = [GKEntity]()
     
     override init() {
@@ -56,5 +54,16 @@ class PlatformBlock: SKNode {
         let xDelta = cos(randomAngle) * randomDist
         
         return CGVector(dx: xDelta, dy: yDelta)
+    }
+    
+    func removeEntities() {
+        for entity in entities {
+            if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
+                spriteNode.removeFromParent()
+            }
+            if let spriteNode = entity.component(ofType: TiledWallSpriteComponent.self)?.node {
+                spriteNode.removeFromParent()
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ class PlatformBlockMoving: PlatformBlock {
         // Get Random Distance
         let rMax = GameplayConfiguration.TouchControls.maxDistance
         let rMin = sqrt(2) * platformSize.height/2 * 1.5
-        let randomDist = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
+        let randomDist = GameplayConfiguration.TouchControls.maxDistance
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
         let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: randomDist, inScene: scene)
@@ -38,7 +38,7 @@ class PlatformBlockMoving: PlatformBlock {
         firstPlatformSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 - firstPlatformSpriteNode.size.height/2 + GameplayConfiguration.Platform.size.height)
         addChild(firstPlatformSpriteNode)
         firstPlatform.component(ofType: SlidingComponent.self)?.beginSliding()
-        platforms.append(firstPlatform)
+        entities.append(firstPlatform)
         
         // Setup X Position of First Platform for Next Block
         nextBlockFirstPlatformXPos = 0
