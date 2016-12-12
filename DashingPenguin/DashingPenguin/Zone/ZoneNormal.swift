@@ -16,7 +16,7 @@ class ZoneNormal: Zone {
         //platformBlocksManager.addBlock(withType: "ObstacleWall")
         platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
-        firstPlatform = platformBlocksManager.blocks.first?.platforms.first
+        firstPlatform = platformBlocksManager.blocks.first?.entities.first as! Platform!
     }
     
 }

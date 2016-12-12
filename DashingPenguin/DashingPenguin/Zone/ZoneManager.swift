@@ -58,12 +58,14 @@ class ZoneManager: LaserIdentificationDelegate {
     }
     
     func checkIfZoneNeedsToBeRemoved() {
-//        let yPosOfBottomOfScreen = (scene.cameraNode?.position.y)! - scene.size.height/2
-//        let yPosOfTopOfFirstBlock = (blocks.first?.position.y)! + (blocks.first?.size.height)!/2
-//        if yPosOfBottomOfScreen >= yPosOfTopOfFirstBlock {
-//            blocks.first?.removeFromParent()
-//            blocks.removeFirst()
-//        }
+        let yPosOfBottomOfScreen = (scene.cameraNode?.position.y)! - scene.size.height/2
+        if zones.count >= 2 {
+            let begYPosOfSecondZone = zones[1].begYPos
+            if yPosOfBottomOfScreen >= begYPosOfSecondZone! {
+                zones.first?.platformBlocksManager.removeAllBlocks()
+                zones.removeFirst()
+            }
+        }
     }
     
     func addZone() {
@@ -75,7 +77,7 @@ class ZoneManager: LaserIdentificationDelegate {
         if zones.last?.platformBlocksManager.blocks.last is PlatformBlockEnergyMatter {
             lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.first?.zPosition
         } else {
-            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.platforms.first?.component(ofType: SpriteComponent.self)?.node.zPosition
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.first?.component(ofType: SpriteComponent.self)?.node.zPosition
         }
         
         if lastZoneType == ZoneType.NormalZone {
@@ -95,7 +97,7 @@ class ZoneManager: LaserIdentificationDelegate {
         if zones.last?.platformBlocksManager.blocks.last is PlatformBlockEnergyMatter {
             lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.first?.zPosition
         } else {
-            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.platforms.first?.component(ofType: SpriteComponent.self)?.node.zPosition
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.first?.component(ofType: SpriteComponent.self)?.node.zPosition
         }
         let randomize = arc4random_uniform(3)
         switch randomize {

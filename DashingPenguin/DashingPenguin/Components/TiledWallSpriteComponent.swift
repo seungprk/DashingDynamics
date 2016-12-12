@@ -13,7 +13,6 @@ class TiledWallSpriteComponent: GKComponent {
     
     let node: SKNode
     var obstacleTextures = [SKTexture]()
-    var TileSprites = [SKSpriteNode]()
     
     // Init with Texture Atlas Frames
     init(tileNum: Int) {

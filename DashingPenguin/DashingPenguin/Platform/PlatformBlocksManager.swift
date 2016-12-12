@@ -34,7 +34,7 @@ class PlatformBlocksManager {
         // Create and Place First Block
         let firstBlock = PlatformBlockSingleDash(scene: scene, firstPlatXPos: begXPos)
         firstBlock.position = CGPoint(x: 0, y: begYPos + firstBlock.size.height/2)
-        firstBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node.zPosition = begZPos - 1
+        firstBlock.entities.first?.component(ofType: SpriteComponent.self)?.node.zPosition = begZPos - 1
         scene.addChild(firstBlock)
         blocks.append(firstBlock)
     }
@@ -49,7 +49,7 @@ class PlatformBlocksManager {
         if newBlock is PlatformBlockEnergyMatter {
             newBlockPlatSpriteNode = newBlock.children.first as! SKSpriteNode
         } else {
-            newBlockPlatSpriteNode = newBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+            newBlockPlatSpriteNode = newBlock.entities.first?.component(ofType: SpriteComponent.self)?.node
         }
         
         // Set Last Block Sprite Node
@@ -57,7 +57,7 @@ class PlatformBlocksManager {
         if lastBlock is PlatformBlockEnergyMatter {
             lastBlockPlatSpriteNode = lastBlock.children.first as! SKSpriteNode
         } else {
-            lastBlockPlatSpriteNode = lastBlock.platforms.first?.component(ofType: SpriteComponent.self)?.node
+            lastBlockPlatSpriteNode = lastBlock.entities.first?.component(ofType: SpriteComponent.self)?.node
         }
         
         newBlockPlatSpriteNode?.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - 1
@@ -111,5 +111,12 @@ class PlatformBlocksManager {
     
     func getLastBlockEndY() -> CGFloat {
         return (blocks.last?.position.y)! + (blocks.last?.size.height)!/2
+    }
+    
+    func removeAllBlocks() {
+        for block in blocks {
+            block.removeEntities()
+        }
+        blocks.removeAll()
     }
 }

@@ -15,7 +15,7 @@ class ZoneChallengeMagnet: Zone {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos, begZPos: begZPos)
         platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
-        firstPlatform = platformBlocksManager.blocks.first?.platforms.first
+        firstPlatform = platformBlocksManager.blocks.first?.entities.first as! Platform!
     }
     
     override func enterEvent() {
