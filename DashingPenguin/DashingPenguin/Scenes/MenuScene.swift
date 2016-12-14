@@ -29,13 +29,32 @@ class MenuScene: SKScene, SKButtonDelegate {
     override init(size: CGSize) {
         super.init(size: size)
         
+        // tilemap iOS 10.0+ only
+//        let backgroundTexture = SKTexture(imageNamed: "menu-background")
+//        let backgroundDefinition = SKTileDefinition(texture: backgroundTexture)
+//        let backgroundGroup = SKTileGroup(tileDefinition: backgroundDefinition)
+        
+        let backgroundTexture = SKTexture(imageNamed: "menu-background")
+        let bgSize = backgroundTexture.size()
+        let cols = size.width / bgSize.width
+        let rows = size.height / bgSize.height
+        print("SIZE : \(bgSize)")
+        
+        for c in 0...Int(cols) {
+            for r in 0...Int(rows) {
+                let bgTile = SKSpriteNode(texture: backgroundTexture)
+                bgTile.position = CGPoint(
+                    x: CGFloat(c) * cols * 2.2, // + size.width / 2,
+                    y: CGFloat(r) * rows * 1.2 + 10) // + size.height / 2)
+                bgTile.zPosition = -10000
+                addChild(bgTile)
+            }
+        }
+        
         backgroundColor = .init(red: 0.05, green: 0.09, blue: 0.09, alpha: 1)
         
-//        let fontName = "Helvetica Neue Condensed Black"
-//        
         let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
         guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist"); return }
-//        let string = data.value(forKey: "Title") as? String
         
         let logo = SKSpriteNode(imageNamed: "ahi_logo")
         logo.size = CGSize(width: 105, height: 47)
@@ -66,13 +85,16 @@ class MenuScene: SKScene, SKButtonDelegate {
         leaderboardButton.position = CGPoint(x: size.width / 2 + leaderboardButton.size.width, y: size.height * 0.8)
         addChild(leaderboardButton)
         
-        let borderInset: CGFloat = 20
+        /*
+        let borderInset: CGFloat = 10
         let border = SKShapeNode(rect: CGRect(x: borderInset, y: borderInset, width: size.width - borderInset * 2, height: size.height - borderInset * 2))
         border.strokeColor = .init(red: 43/255, green: 237/255, blue: 230/255, alpha: 0.5)
         border.isUserInteractionEnabled = false
         border.zPosition = -100000
         addChild(border)
+        */
         
+        /*
         background1 = SKSpriteNode(imageNamed: "background_1")
         background2 = SKSpriteNode(imageNamed: "background_2")
         
@@ -87,23 +109,26 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         addChild(background1!)
         addChild(background2!)
+        */
         
-        motionManager = CMMotionManager()
-        motionManager?.startAccelerometerUpdates()
+        //motionManager = CMMotionManager()
+        //motionManager?.startAccelerometerUpdates()
         
+        /*
         for child in children {
             nodesToAnimateIn.append(child)
         }
+        */
     }
     
     override func didMove(to view: SKView) {
-        for node in nodesToAnimateIn {
+        /*for node in nodesToAnimateIn {
             blinkIn(node: node)
-        }
+        }*/
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
+        /*
         if let motion = motionManager?.accelerometerData {
             print("\(motion.acceleration.x) \(motion.acceleration.y)")
             
@@ -117,6 +142,7 @@ class MenuScene: SKScene, SKButtonDelegate {
             background1?.position = CGPoint(x: frame.midX - mX, y: frame.midY - mY)
             background2?.position = CGPoint(x: frame.midX - mX * 4, y: frame.midY - mY * 4)
         }
+        */
     }
     
     required init?(coder aDecoder: NSCoder) {

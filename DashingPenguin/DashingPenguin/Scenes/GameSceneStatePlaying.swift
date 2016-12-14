@@ -16,7 +16,7 @@ class GameSceneStatePlaying: GKState {
     init(scene: GameScene) {
         self.scene = scene
         super.init()
-    }
+    }   
     
     override func didEnter(from previousState: GKState?) {
         scene.view?.isPaused = false
