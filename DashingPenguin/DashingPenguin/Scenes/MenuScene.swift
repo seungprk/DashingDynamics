@@ -35,6 +35,7 @@ class MenuScene: SKScene, SKButtonDelegate {
 //        let backgroundGroup = SKTileGroup(tileDefinition: backgroundDefinition)
         
         let backgroundTexture = SKTexture(imageNamed: "menu-background")
+        backgroundTexture.filteringMode = .nearest
         let bgSize = backgroundTexture.size()
         let cols = size.width / bgSize.width
         let rows = size.height / bgSize.height
@@ -56,13 +57,6 @@ class MenuScene: SKScene, SKButtonDelegate {
         let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
         guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist"); return }
         
-        /*
-        let logo = SKSpriteNode(imageNamed: "ahi_logo")
-        logo.size = CGSize(width: 105, height: 47)
-        logo.texture?.filteringMode = .nearest
-        logo.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(logo)
-        */
         let logo = SKSpriteNode(imageNamed: "menu-title")
         logo.size = CGSize(width: 120, height: 40)
         logo.texture?.filteringMode = .nearest
@@ -70,11 +64,11 @@ class MenuScene: SKScene, SKButtonDelegate {
         addChild(logo)
         
         
-        let playButton = SKButton(size: CGSize(width: 75, height: 25), nameForImageNormal: "play_button", nameForImageNormalHighlight: "play_button_highlight")
+        let playButton = SKButton(size: CGSize(width: 120, height: 40), nameForImageNormal: "playbutton", nameForImageNormalHighlight: "playbutton-highlight")
         playButton.name = "playButton"
         playButton.delegate = self
         playButton.texture?.filteringMode = .nearest
-        playButton.position = CGPoint(x: size.width / 2, y: size.height * 0.2)
+        playButton.position = CGPoint(x: size.width / 2 - 0.5, y: size.height * 0.2 - 4.5)
         addChild(playButton)
         
         
