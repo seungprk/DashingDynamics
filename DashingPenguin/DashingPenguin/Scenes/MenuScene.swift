@@ -63,6 +63,11 @@ class MenuScene: SKScene, SKButtonDelegate {
         logo.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(logo)
         */
+        let logo = SKSpriteNode(imageNamed: "menu-title")
+        logo.size = CGSize(width: 120, height: 40)
+        logo.texture?.filteringMode = .nearest
+        logo.position = CGPoint(x: frame.midX, y: frame.midY + 60)
+        addChild(logo)
         
         
         let playButton = SKButton(size: CGSize(width: 75, height: 25), nameForImageNormal: "play_button", nameForImageNormalHighlight: "play_button_highlight")
