@@ -39,6 +39,7 @@ class Player: GKEntity {
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.fieldBitMask = GameplayConfiguration.PhysicsBitmask.field
         
+        physicsBody.restitution = 1
         physicsBody.charge = 0.1
         physicsBody.friction = 0
         physicsBody.mass = 1
