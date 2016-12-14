@@ -45,7 +45,7 @@ class MenuScene: SKScene, SKButtonDelegate {
                 let bgTile = SKSpriteNode(texture: backgroundTexture)
                 bgTile.position = CGPoint(
                     x: CGFloat(c) * cols * 2.2, // + size.width / 2,
-                    y: CGFloat(r) * rows * 1.2 + 10) // + size.height / 2)
+                    y: CGFloat(r) * rows * 1.25 + 10) // + size.height / 2)
                 bgTile.zPosition = -10000
                 addChild(bgTile)
             }
@@ -56,34 +56,40 @@ class MenuScene: SKScene, SKButtonDelegate {
         let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
         guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist"); return }
         
+        /*
         let logo = SKSpriteNode(imageNamed: "ahi_logo")
         logo.size = CGSize(width: 105, height: 47)
         logo.texture?.filteringMode = .nearest
         logo.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(logo)
+        */
+        
         
         let playButton = SKButton(size: CGSize(width: 75, height: 25), nameForImageNormal: "play_button", nameForImageNormalHighlight: "play_button_highlight")
         playButton.name = "playButton"
         playButton.delegate = self
         playButton.texture?.filteringMode = .nearest
-        playButton.position = CGPoint(x: logo.position.x, y: size.height * 0.2)
+        playButton.position = CGPoint(x: size.width / 2, y: size.height * 0.2)
         addChild(playButton)
+        
         
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
 
-        let soundToggle = SKToggle(size: CGSize(width: 30, height: 30), isOn: isSoundOn, imageNormal: "sound_on", imageHighlight: "sound_on_highlight", imageOff: "sound_off", imageOffHighlight: "sound_off_highlight")
+        let soundToggle = SKToggle(size: CGSize(width: 40.5, height: 20.5), isOn: isSoundOn, imageNormal: "sound-on", imageHighlight: "sound-on-highlight", imageOff: "sound-off", imageOffHighlight: "sound-off-highlight")
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
         soundToggle.texture?.filteringMode = .nearest
-        soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width, y: size.height * 0.8)
+        soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width + 0.5, y: size.height * 0.8 + 13.2)
         addChild(soundToggle)
         
+        /*
         let leaderboardButton = SKButton(size: CGSize(width: 30, height: 30), nameForImageNormal: "leaderboard", nameForImageNormalHighlight: "leaderboard_highlight")
         leaderboardButton.name = "leaderboardButton"
         leaderboardButton.delegate = self
         leaderboardButton.texture?.filteringMode = .nearest
         leaderboardButton.position = CGPoint(x: size.width / 2 + leaderboardButton.size.width, y: size.height * 0.8)
         addChild(leaderboardButton)
+        */
         
         /*
         let borderInset: CGFloat = 10
