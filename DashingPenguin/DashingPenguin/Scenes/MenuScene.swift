@@ -81,6 +81,18 @@ class MenuScene: SKScene, SKButtonDelegate {
         soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width + 0.5, y: size.height * 0.8 + 13.2)
         addChild(soundToggle)
         
+        let outline = SKSpriteNode(imageNamed: "robot-blueprint-outline")
+        outline.texture?.filteringMode = .nearest
+        outline.position = CGPoint(x: frame.midX, y: frame.midY - 20)
+        addChild(outline)
+        
+        let panSpeed: TimeInterval = 4
+        let slowPan = SKAction.sequence([ SKAction.moveBy(x: 1, y: 0, duration: panSpeed ),
+                                          SKAction.moveBy(x: 0, y: 1, duration: panSpeed ),
+                                          SKAction.moveBy(x: -1, y: -1, duration: panSpeed) ])
+        outline.run(SKAction.repeatForever(slowPan))
+
+        
         /*
         let leaderboardButton = SKButton(size: CGSize(width: 30, height: 30), nameForImageNormal: "leaderboard", nameForImageNormalHighlight: "leaderboard_highlight")
         leaderboardButton.name = "leaderboardButton"
@@ -162,6 +174,16 @@ class MenuScene: SKScene, SKButtonDelegate {
                     presentGameScene()
                 }
             }
+        }
+    }
+    
+    func movePixel(x: CGFloat, y: CGFloat, isHorizontal: Bool, iter: Int) {
+        let pixel = SKSpriteNode(imageNamed: "white-pixel")
+        pixel.position = CGPoint(x: x, y: y)
+        if isHorizontal {
+            
+            let shift = SKAction.moveTo(x: 1, duration: 0.2)
+            pixel.run(shift)
         }
     }
     
