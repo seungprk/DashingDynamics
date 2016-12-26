@@ -83,10 +83,6 @@ class PlatformBlockObstacleWall: PlatformBlock {
         obstacleWall = ObstacleWall(size: CGSize(width: wallLength, height: wallThickness))
         let obstacleSpriteNode = obstacleWall.component(ofType: TiledWallSpriteComponent.self)!.node
         obstacleSpriteNode.position = CGPoint(x: wallXPos, y: -size.height/2 + wallYPos)
-        obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
-        for node in obstacleSpriteNode.children {
-            node.zPosition = firstPlatformSpriteNode.zPosition
-        }
         
         addChild(obstacleSpriteNode)
         entities.append(obstacleWall)

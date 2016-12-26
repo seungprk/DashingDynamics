@@ -30,6 +30,7 @@ class ObstacleWall: GKEntity {
         }
         
         let spriteComponent = TiledWallSpriteComponent(tileNum: resultingTileNum)
+        spriteComponent.node.name = "tiled wall"
         
         let physicsBody = SKPhysicsBody(rectangleOf: self.size)
         physicsBody.isDynamic = false

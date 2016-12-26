@@ -44,6 +44,7 @@ class ObstacleSideWall: GKEntity {
                 } else {
                     randTexture = SKTexture(imageNamed: "wall")
                 }
+                randTexture.filteringMode = .nearest
                 let newWallRight = SKSpriteNode(texture: randTexture)
                 let xPos = size.width / 2 - GameplayConfiguration.Sidewall.width / 2
                 let yPos = topTileY + tileSize.height / 2 + tileSize.height * CGFloat(index)
@@ -62,6 +63,7 @@ class ObstacleSideWall: GKEntity {
                 } else {
                     randTexture = SKTexture(imageNamed: "wall")
                 }
+                randTexture.filteringMode = .nearest
                 let newWallLeft = SKSpriteNode(texture: randTexture)
                 newWallLeft.position = CGPoint(x: -size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: yPos)
                 newWallLeft.zPosition = 1000000

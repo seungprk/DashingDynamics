@@ -75,14 +75,16 @@ class ZoneManager: LaserIdentificationDelegate {
         // Get Last Platform's zPosition
         var lastZoneZPos: CGFloat! = nil
         if zones.last?.platformBlocksManager.blocks.last is PlatformBlockEnergyMatter {
-            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.first?.zPosition
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.last?.zPosition
         } else {
-            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.first?.component(ofType: SpriteComponent.self)?.node.zPosition
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.last?.component(ofType: SpriteComponent.self)?.node.zPosition
+            if zones.last?.platformBlocksManager.blocks.last is PlatformBlockObstacleWall {
+                lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.last?.component(ofType: TiledWallSpriteComponent.self)?.node.children.first?.zPosition
+            }
         }
         
         if lastZoneType == ZoneType.NormalZone {
             addRandomChallengeZone()
-            //zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
             lastZoneType = .ChallengeZone
         } else {
             zones.append(ZoneNormal(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos, begZPos: lastZoneZPos))
@@ -95,9 +97,12 @@ class ZoneManager: LaserIdentificationDelegate {
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
         var lastZoneZPos: CGFloat! = nil
         if zones.last?.platformBlocksManager.blocks.last is PlatformBlockEnergyMatter {
-            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.first?.zPosition
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.children.last?.zPosition
         } else {
-            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.first?.component(ofType: SpriteComponent.self)?.node.zPosition
+            lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.last?.component(ofType: SpriteComponent.self)?.node.zPosition
+            if zones.last?.platformBlocksManager.blocks.last is PlatformBlockObstacleWall {
+                lastZoneZPos = zones.last?.platformBlocksManager.blocks.last?.entities.last?.component(ofType: TiledWallSpriteComponent.self)?.node.children.first?.zPosition
+            }
         }
         let randomize = arc4random_uniform(3)
         switch randomize {
@@ -162,6 +167,31 @@ class ZoneManager: LaserIdentificationDelegate {
             }
         }
         return false
+    }
+    
+    func getMatchingZPosition(yPos: CGFloat) -> CGFloat {
+        if zones.count > 1 {
+            for zone in zones {
+                let firstPlatSpriteYPos = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node.position.y
+                if yPos > firstPlatSpriteYPos! - GameplayConfiguration.Platform.size.height / 2 {
+                    for block in zone.platformBlocksManager.blocks {
+                        for entity in block.entities {
+                            if let entitySprite = entity.component(ofType: SpriteComponent.self)?.node {
+                                var netEntYPos = block.position.y + entitySprite.position.y
+                                if let physicsBodyOffset = entitySprite.physicsBody?.node?.position.y {
+                                    netEntYPos += physicsBodyOffset
+                                }
+                                if netEntYPos > yPos {
+                                    print("**Player Y: ", yPos, " E Y: ", netEntYPos, " Z: ", entitySprite.zPosition)
+                                    return entitySprite.zPosition
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return 0
     }
     
 }

@@ -26,7 +26,17 @@ class DeathState: GKState {
         let spriteComponent = self.entity.component(ofType: SpriteComponent.self)
         spriteComponent?.node.removeAllActions()
         spriteComponent?.node.physicsBody?.velocity = CGVector.zero
-        entity.component(ofType: SpriteComponent.self)?.node.alpha = 0.1
         entity.component(ofType: SpriteComponent.self)?.node.physicsBody?.velocity = CGVector.zero
+        let gameScene = spriteComponent?.node.scene as! GameScene
+        gameScene.cameraFollowsPlayer = false
+        
+        // Falling Animation
+        let animationTime: TimeInterval = 0.5
+        let downAction = SKAction.moveBy(x: 0, y: -30, duration: animationTime)
+        let shrinkAction = SKAction.scale(to: 0.01, duration: animationTime)
+        let fallAction = SKAction.group([downAction, shrinkAction])
+        spriteComponent?.node.run(fallAction, completion: {
+            spriteComponent?.node.removeFromParent()
+        })
     }
 }

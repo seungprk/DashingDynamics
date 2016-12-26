@@ -84,6 +84,7 @@ class GameSceneStateSetup: GKState {
         
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
+            playerSprite.node.position = CGPoint(x: 0, y: GameplayConfiguration.Platform.size.height/2)
             scene.addChild(playerSprite.node)
         }
         

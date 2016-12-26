@@ -62,6 +62,7 @@ class Player: GKEntity {
     override func update(deltaTime seconds: TimeInterval) {
         component(ofType: MovementComponent.self)?.update(deltaTime: seconds)
         checkAnimation()
+        setZPosition()
     }
     
     func checkAnimation() {
@@ -119,8 +120,52 @@ class Player: GKEntity {
             spriteNode.texture = updateTexture
             
             idleAnimationStarted = false
+        }
+    }
+    
+    func setZPosition() {
+        if let spriteComp = component(ofType: SpriteComponent.self),
+           let scene = spriteComp.node.scene {
+            let gameScene = scene as! GameScene
+            let playerYPos = spriteComp.node.position.y - (spriteComp.node.texture?.size().height)! / 2
             
-            print(updateTextureName)
+            // Get a list of relevant nodes sorted by y position
+            var positionalArray = [SKNode]()
+            for node in gameScene.children {
+                if node is PlatformBlock {
+                    for nodeChild in node.children {
+                        if nodeChild.name == "platform" || nodeChild.name == "obstacle" || nodeChild.name == "tiled wall" {
+                            positionalArray.append(nodeChild)
+                        }
+                    }
+                }
+            }
+            positionalArray.sort(by: { gameScene.convert($0.position, from: $0.parent!).y < gameScene.convert($1.position, from: $1.parent!).y })
+            print(" *** Start Array Print *** ")
+            for tester in positionalArray {
+                print(tester.name, gameScene.convert(tester.position, from: tester.parent!), " Z: ", tester.zPosition)
+            }
+            // Find the node with nearest y position
+            for node in positionalArray {
+                var nodeTemp = node
+                if nodeTemp.name == "tiled wall" {
+                    nodeTemp = node.children[0] as! SKSpriteNode
+                }
+                var nodeYPosCheck: CGFloat
+                nodeYPosCheck = gameScene.convert(nodeTemp.position, from: nodeTemp.parent!).y
+                if nodeTemp.name == "platform" {
+                    nodeYPosCheck += GameplayConfiguration.Platform.size.height / 2 + 12
+                }
+                print("Node Top: ", nodeYPosCheck)
+                print("Player Pos: ", playerYPos)
+                
+                if playerYPos < nodeYPosCheck {
+                    spriteComp.node.zPosition = nodeTemp.zPosition + 0.5
+                    print("Z Node Pos: ", nodeTemp.zPosition)
+                    print("Z Player Pos: ", spriteComp.node.zPosition)
+                    break
+                }
+            }
         }
     }
     

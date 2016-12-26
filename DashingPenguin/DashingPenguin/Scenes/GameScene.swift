@@ -32,6 +32,9 @@ class GameScene: SKScene, GameInputDelegate {
     var menuScene: MenuScene?
     var pauseOverlay: SKNode?
     
+    // Utility
+    var cameraFollowsPlayer = true
+    
     // MARK: - State Machine setup
     
     override func didMove(to view: SKView) {
@@ -59,7 +62,7 @@ class GameScene: SKScene, GameInputDelegate {
         }
         
         updateCurrentTime(currentTime)
-        centerCamera()
+        if cameraFollowsPlayer == true { centerCamera() }
         sideWall?.tileSideWall(scene: self)
     }
     

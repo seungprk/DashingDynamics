@@ -22,6 +22,7 @@ class Obstacle: GKEntity {
         } else {
             spriteComponent = SpriteComponent(texture: texture!)
         }
+        spriteComponent.node.name = "obstacle"
         
         let physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody.isDynamic = false

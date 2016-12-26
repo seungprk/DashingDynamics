@@ -17,6 +17,7 @@ class Platform: GKEntity {
         super.init()
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
+        spriteComponent.node.name = "platform"
         let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2)
         let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
@@ -41,6 +42,7 @@ class Platform: GKEntity {
         print("\(randomSlidingCenterX) in \(scene.frame.width) between \(possibleCenterMin) and \(possibleCenterMax)")
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
+        spriteComponent.node.name = "platform"
         let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2)
         let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         

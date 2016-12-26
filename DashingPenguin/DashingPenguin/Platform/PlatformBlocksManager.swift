@@ -44,23 +44,40 @@ class PlatformBlocksManager {
         let lastBlock = (blocks.last)!
         newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
         
-        // Set New Block Sprite Node
-        var newBlockPlatSpriteNode: SKSpriteNode! = nil
-        if newBlock is PlatformBlockEnergyMatter {
-            newBlockPlatSpriteNode = newBlock.children.first as! SKSpriteNode
-        } else {
-            newBlockPlatSpriteNode = newBlock.entities.first?.component(ofType: SpriteComponent.self)?.node
-        }
-        
         // Set Last Block Sprite Node
         var lastBlockPlatSpriteNode: SKSpriteNode! = nil
         if lastBlock is PlatformBlockEnergyMatter {
-            lastBlockPlatSpriteNode = lastBlock.children.first as! SKSpriteNode
+            lastBlockPlatSpriteNode = lastBlock.children.last as! SKSpriteNode
         } else {
-            lastBlockPlatSpriteNode = lastBlock.entities.first?.component(ofType: SpriteComponent.self)?.node
+            lastBlockPlatSpriteNode = lastBlock.entities.last?.component(ofType: SpriteComponent.self)?.node
+            if lastBlock is PlatformBlockObstacleWall {
+                lastBlockPlatSpriteNode = lastBlock.entities.last?.component(ofType: TiledWallSpriteComponent.self)?.node.children[0] as! SKSpriteNode
+            }
         }
         
-        newBlockPlatSpriteNode?.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - 1
+        // Set New Block Sprite Node
+        if newBlock is PlatformBlockEnergyMatter {
+            let newBlockPlatSpriteNode = newBlock.children.first as! SKSpriteNode
+            newBlockPlatSpriteNode.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - 1
+        } else {
+            var counter: CGFloat = 0 //used to make sure consecutive zPosition changes are applied correctly
+            for entity in newBlock.entities {
+                if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
+                    if spriteNode.name == "platform" || spriteNode.name == "obstacle" || spriteNode.name == "tiled wall" {
+                        spriteNode.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - (1 + counter)
+                        counter += 1
+                    }
+                }
+                if let tiledNode = entity.component(ofType: TiledWallSpriteComponent.self)?.node {
+                    for node in tiledNode.children {
+                        node.zPosition = (lastBlockPlatSpriteNode?.zPosition)! - (1 + counter)
+                        print(node.zPosition)
+                    }
+                    counter += 1
+                }
+            }
+        }
+        
         scene.addChild(newBlock)
         blocks.append(newBlock)
     }

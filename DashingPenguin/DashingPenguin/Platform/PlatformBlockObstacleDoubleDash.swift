@@ -45,7 +45,6 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         obstacle = Obstacle(size: GameplayConfiguration.Obstacle.size, texture: texture)
         let obstacleSpriteNode = obstacle.component(ofType: SpriteComponent.self)!.node
         obstacleSpriteNode.position = CGPoint(x: (firstPlatXPos + nextBlockFirstPlatformXPos)/2, y: GameplayConfiguration.Platform.size.height/2)
-        obstacleSpriteNode.zPosition = firstPlatformSpriteNode.zPosition
         addChild(obstacleSpriteNode)
         entities.append(obstacle)
     }
