@@ -19,3 +19,6 @@ Dashing Research Institute
 Advanced Dashing
 Dash Bot
 Jim the Dashing Robot
+Dashing Dynamics
+Dash Dynamics
+Dash Labs
