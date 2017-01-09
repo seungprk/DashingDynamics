@@ -20,6 +20,7 @@ class Player: GKEntity {
     var dashingState: DashingState?
     let playerAnimatedAtlas = SKTextureAtlas(named: "player")
     var idleAnimationStarted = false
+    var laserDeath = false
     
     // Sprite Atlas Initialization
     override init() {
@@ -125,9 +126,10 @@ class Player: GKEntity {
     
     func setZPosition() {
         if let spriteComp = component(ofType: SpriteComponent.self),
-           let scene = spriteComp.node.scene {
+           let scene = spriteComp.node.scene,
+           let texture = component(ofType: SpriteComponent.self)?.node.texture {
             let gameScene = scene as! GameScene
-            let playerYPos = spriteComp.node.position.y - (spriteComp.node.texture?.size().height)! / 2
+            let playerYPos = spriteComp.node.position.y - texture.size().height / 2
             
             // Get a list of relevant nodes sorted by y position
             var positionalArray = [SKNode]()

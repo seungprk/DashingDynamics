@@ -43,13 +43,13 @@ extension GameScene: SKPhysicsContactDelegate {
             guard let laserDelegate = self.laserIdDelegate else { break }
             
             if laserDelegate.isLaserActivated(for: laserNode) {
+                self.player?.laserDeath = true
                 self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
             }
         
         // Player and energy matter intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.energyMatter):
             if secondBody.node?.parent != nil {
-                print("Physics: dashCount -1")
                 player?.component(ofType: MovementComponent.self)?.dashCount -= 1
                 
                 // Energy Matter Texture Setup
@@ -62,12 +62,26 @@ extension GameScene: SKPhysicsContactDelegate {
                     texture.filteringMode = .nearest
                 }
                 
-                // Animate and Remove
-                let glowAction = SKAction.animate(with: energyMatterTextureFrames, timePerFrame: 0.01)
+                // Animate Energy Matter and Remove
+                let glowAction = SKAction.animate(with: energyMatterTextureFrames, timePerFrame: 0.0125)
+                let shrinkAction = SKAction.scale(by: 0.01, duration: 0.1)
                 let removeSpriteAction = SKAction.run({
                     secondBody.node?.removeFromParent()
                 })
                 secondBody.node?.run(SKAction.sequence([glowAction, removeSpriteAction]))
+                secondBody.node?.run(shrinkAction)
+                
+                // Animate Player
+                let spriteComponent = player?.component(ofType: SpriteComponent.self)
+                let rectNode = SKSpriteNode(imageNamed: "lightbar")
+                rectNode.position = CGPoint(x: 0, y: -((spriteComponent?.node.texture?.size().height)! / 2) + ((rectNode.texture?.size().height)! / 2))
+                rectNode.zPosition = 10
+                spriteComponent?.node.addChild(rectNode)
+                
+                let moveUp = SKAction.moveBy(x: 0, y: (spriteComponent?.node.texture?.size().height)! - (rectNode.texture?.size().height)! / 2 , duration: 0.1)
+                rectNode.run(moveUp, completion: {
+                    rectNode.removeFromParent()
+                })
             }
             
 //        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):

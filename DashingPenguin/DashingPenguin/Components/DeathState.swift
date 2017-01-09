@@ -30,13 +30,37 @@ class DeathState: GKState {
         let gameScene = spriteComponent?.node.scene as! GameScene
         gameScene.cameraFollowsPlayer = false
         
-        // Falling Animation
-        let animationTime: TimeInterval = 0.5
-        let downAction = SKAction.moveBy(x: 0, y: -30, duration: animationTime)
-        let shrinkAction = SKAction.scale(to: 0.01, duration: animationTime)
-        let fallAction = SKAction.group([downAction, shrinkAction])
-        spriteComponent?.node.run(fallAction, completion: {
-            spriteComponent?.node.removeFromParent()
-        })
+        if entity.laserDeath == true {
+            // Laser Death Animation
+            let animationTime: TimeInterval = 0.5
+            
+            // Setup the bright yellow node in shape of player
+            let yellowCropNode = SKCropNode()
+            let maskNode = SKSpriteNode(texture: spriteComponent?.node.texture)
+            yellowCropNode.maskNode = maskNode
+            let yellowBoxNode = SKSpriteNode(imageNamed: "brightyellow")
+            yellowCropNode.alpha = 1
+            yellowCropNode.addChild(yellowBoxNode)
+            spriteComponent?.node.addChild(yellowCropNode)
+            
+            let removeOriginal = SKAction.run({
+                spriteComponent?.node.texture = nil
+            })
+            let fadeOut = SKAction.fadeOut(withDuration: animationTime / 5 * 4)
+            let fadeAndRemove = SKAction.group([removeOriginal, fadeOut])
+            let yellowTrans = SKAction.fadeIn(withDuration: animationTime / 5)
+            spriteComponent?.node.run(SKAction.sequence([yellowTrans, fadeAndRemove]))
+            
+            entity.laserDeath = false
+        } else {
+            // Falling Animation
+            let animationTime: TimeInterval = 0.5
+            let downAction = SKAction.moveBy(x: 0, y: -30, duration: animationTime)
+            let shrinkAction = SKAction.scale(to: 0.01, duration: animationTime)
+            let fallAction = SKAction.group([downAction, shrinkAction])
+            spriteComponent?.node.run(fallAction, completion: {
+                spriteComponent?.node.removeFromParent()
+            })
+        }
     }
 }
