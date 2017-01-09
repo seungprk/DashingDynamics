@@ -22,7 +22,7 @@ class ZoneChallengeVisibility: Zone {
         if hasBeenEntered == false {
             print("challenge zone entered")
             hasBeenEntered = true
-            scene.stateMachine.enter(GameSceneStateCinematicPause.self)
+            //scene.stateMachine.enter(GameSceneStateCinematicPause.self)
             
             // Setup Challenge Start Overlay
             let challengeOverlayNode = SKNode()
@@ -30,8 +30,9 @@ class ZoneChallengeVisibility: Zone {
             
             let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
             flashingLabel.name = "flashingLabel"
-            flashingLabel.fontColor = UIColor.black
+            flashingLabel.fontColor = UIColor.white
             flashingLabel.position = CGPoint(x: 0, y: 0)
+            flashingLabel.zPosition = 100
             
             scene.cameraNode?.addChild(challengeOverlayNode)
             challengeOverlayNode.addChild(flashingLabel)
@@ -41,7 +42,7 @@ class ZoneChallengeVisibility: Zone {
             
             flashingLabel.run(flashingAction, completion: {
                 self.scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
-                self.scene.stateMachine.enter(GameSceneStatePlaying.self)
+                //self.scene.stateMachine.enter(GameSceneStatePlaying.self)
                 
                 // Setup Challenge Activation
                 let blinderOverlayNode = SKSpriteNode(texture: nil, color: UIColor.blue, size: self.scene.size)
