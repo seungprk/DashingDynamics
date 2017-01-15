@@ -19,57 +19,28 @@ class ZoneChallengeVisibility: Zone {
     }
     
     override func enterEvent() {
+        super.enterEvent()
+        
         if hasBeenEntered == false {
-            print("challenge zone entered")
             hasBeenEntered = true
-            //scene.stateMachine.enter(GameSceneStateCinematicPause.self)
             
-            // Setup Challenge Start Overlay
-            let challengeOverlayNode = SKNode()
-            challengeOverlayNode.name = "challengeOverlayNode"
+            // Setup Challenge Activation
+            let blinderOverlayNode = SKSpriteNode(texture: nil, color: UIColor.blue, size: self.scene.size)
+            blinderOverlayNode.name = "blinderOverlayNode"
+            blinderOverlayNode.position = CGPoint.zero
+            blinderOverlayNode.zPosition = GameplayConfiguration.HeightOf.overlay
+            let blinderAction = SKAction.sequence([SKAction.fadeIn(withDuration: 0.1), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.1), SKAction.wait(forDuration: 2)])
+            let blinderRepeatAction = SKAction.repeatForever(blinderAction)
             
-            let flashingLabel = SKLabelNode(text: "CHALLENGE!!")
-            flashingLabel.name = "flashingLabel"
-            flashingLabel.fontColor = UIColor.white
-            flashingLabel.position = CGPoint(x: 0, y: 0)
-            flashingLabel.zPosition = 100
-            
-            scene.cameraNode?.addChild(challengeOverlayNode)
-            challengeOverlayNode.addChild(flashingLabel)
-            
-            // Animate Layer
-            let flashingAction = SKAction.sequence([SKAction.fadeIn(withDuration: 1), SKAction.fadeOut(withDuration: 1)])
-            
-            flashingLabel.run(flashingAction, completion: {
-                self.scene.cameraNode?.childNode(withName: "flashingLabel")?.removeFromParent()
-                //self.scene.stateMachine.enter(GameSceneStatePlaying.self)
-                
-                // Setup Challenge Activation
-                let blinderOverlayNode = SKSpriteNode(texture: nil, color: UIColor.blue, size: self.scene.size)
-                blinderOverlayNode.name = "blinderOverlayNode"
-                blinderOverlayNode.position = CGPoint.zero
-                blinderOverlayNode.zPosition = GameplayConfiguration.HeightOf.overlay
-                let blinderAction = SKAction.sequence([SKAction.fadeIn(withDuration: 0.1), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.1), SKAction.wait(forDuration: 2)])
-                let blinderRepeatAction = SKAction.repeatForever(blinderAction)
-                
-                // Activate Challenge
-                challengeOverlayNode.addChild(blinderOverlayNode)
-                blinderOverlayNode.run(blinderRepeatAction)
-            })
-
+            // Activate Challenge
+            scene.cameraNode?.childNode(withName: "challengeOverlayNode")?.addChild(blinderOverlayNode)
+            blinderOverlayNode.run(blinderRepeatAction)
         }
     }
     
     override func exitEvent() {
         if hasBeenExited == false {
-            
-            // Deactivate Challenge
-            let removeNode = scene.cameraNode?.childNode(withName: "challengeOverlayNode")
-            removeNode?.removeFromParent()
-            
-            // Run Exit Animation
-            
-            print("EXIT ZONE!!")
+            super.exitEvent()
             hasBeenExited = true
         }
     }

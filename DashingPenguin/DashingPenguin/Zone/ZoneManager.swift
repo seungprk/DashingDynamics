@@ -134,9 +134,13 @@ class ZoneManager: LaserIdentificationDelegate {
                 for zone in zones {
                     let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
                     if firstPlatSprite == currentPlatformSprite {
-                        zone.enterEvent()
-                        currentZone = zone
-                        break
+                        if zone is ZoneChallengeMagnet ||
+                           zone is ZoneChallengeLongJump ||
+                           zone is ZoneChallengeVisibility {
+                            zone.enterEvent()
+                            currentZone = zone
+                            break
+                        }
                     }
                 }
             }

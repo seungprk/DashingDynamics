@@ -33,18 +33,94 @@ class Zone {
     }
     
     func enterEvent() {
-        // Function for subclass
         if hasBeenEntered == false {
-            print("Empty enterEvent Function")
-            hasBeenEntered = true
+            
+            // Setup Textures
+            let challengeOverlayAtlas = SKTextureAtlas(named: "hazard-warning")
+            let hazardOctagonTexture = challengeOverlayAtlas.textureNamed("hazard-warning-octagon")
+            let hazardTextbarTextureFrames = [challengeOverlayAtlas.textureNamed("hazard-warning-textbar1"),
+                                              challengeOverlayAtlas.textureNamed("hazard-warning-textbar2"),
+                                              challengeOverlayAtlas.textureNamed("hazard-warning-textbar3"),
+                                              challengeOverlayAtlas.textureNamed("hazard-warning-textbar4")]
+            hazardOctagonTexture.filteringMode = .nearest
+            for texture in hazardTextbarTextureFrames {
+                texture.filteringMode = .nearest
+            }
+            
+            // Setup Graphic Nodes 106width 24height full size
+            let overlayFullWidth: CGFloat = 106
+            let graphicYPos:CGFloat = scene.size.height * 0.30
+            
+            let challengeOverlayNode = SKNode()
+            challengeOverlayNode.name = "challengeOverlayNode"
+            
+            let hazardOctagon = SKSpriteNode(texture: hazardOctagonTexture)
+            hazardOctagon.name = "hazardOctagon"
+            hazardOctagon.position = CGPoint(x: -(overlayFullWidth / 2) + hazardOctagonTexture.size().width / 2, y: graphicYPos)
+            hazardOctagon.zPosition = 110
+            hazardOctagon.setScale(0.1)
+            
+            let hazardTextbar = SKSpriteNode(texture: hazardTextbarTextureFrames[0])
+            hazardTextbar.name = "hazardTextbar"
+            hazardTextbar.position = CGPoint(x: -hazardTextbarTextureFrames[0].size().width, y: 0)
+            hazardTextbar.zPosition = 100
+            
+            let maskNode = SKSpriteNode(texture: hazardTextbarTextureFrames[0])
+            
+            let hazardTextbarCropNode = SKCropNode()
+            hazardTextbarCropNode.name = "hazardTextbarCropNode"
+            hazardTextbarCropNode.maskNode = maskNode
+            hazardTextbarCropNode.position = CGPoint(x: overlayFullWidth / 2 - hazardTextbarTextureFrames[0].size().width / 2, y: graphicYPos)
+            
+            scene.cameraNode?.addChild(challengeOverlayNode)
+            challengeOverlayNode.addChild(hazardOctagon)
+            challengeOverlayNode.addChild(hazardTextbarCropNode)
+            hazardTextbarCropNode.addChild(hazardTextbar)
+            
+            // Setup and Run SKAction
+            let scaleOctagon = SKAction.scale(to: 1.0, duration: 0.1)
+            let slideTextbar = SKAction.moveBy(x: hazardTextbarTextureFrames[0].size().width, y: 0, duration: 0.1)
+            let barAnimate = SKAction.animate(with: hazardTextbarTextureFrames, timePerFrame: 0.2)
+            let barLoop = SKAction.repeatForever(barAnimate)
+            
+            hazardOctagon.run(scaleOctagon, completion: {
+                hazardTextbar.run(slideTextbar)
+                hazardTextbar.run(barLoop)
+            })
+            
+            // Tint Background
+            let tintColor = UIColor(red: 255, green: 175, blue: 175, alpha: 0.7)
+            let tint = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.5)
+            let bgNode = scene.cameraNode?.childNode(withName: "bgNode")
+            for tile in (bgNode?.children)! {
+                tile.run(tint)
+            }
         }
     }
     
     func exitEvent() {
-        // Function for subclass
         if hasBeenExited == false {
-            print("Empty exitEvent Function")
-            hasBeenExited = true
+            let overlayNode = scene.cameraNode?.childNode(withName: "challengeOverlayNode")
+            let hazardTextbarCropNode = overlayNode?.childNode(withName: "hazardTextbarCropNode") as! SKCropNode
+            let hazardTextBar = hazardTextbarCropNode.childNode(withName: "hazardTextbar") as! SKSpriteNode
+            let hazardOctagon = overlayNode?.childNode(withName: "hazardOctagon")
+            
+            // Setup and Run SKAction
+            let slideInTextbar = SKAction.moveBy(x: -hazardTextBar.size.width, y: 0, duration: 0.1)
+            let shrinkOctagon = SKAction.scale(to: 0.1, duration: 0.1)
+            
+            hazardTextBar.run(slideInTextbar, completion: {
+                hazardOctagon?.run(shrinkOctagon, completion: {
+                    self.scene.cameraNode?.childNode(withName: "challengeOverlayNode")?.removeFromParent()
+                })
+            })
+            
+            // Undo Background Tint
+            let undoTint = SKAction.colorize(with: UIColor.clear, colorBlendFactor: 0.0, duration: 0.5)
+            let bgNode = scene.cameraNode?.childNode(withName: "bgNode")
+            for tile in (bgNode?.children)! {
+                tile.run(undoTint)
+            }
         }
     }
 }

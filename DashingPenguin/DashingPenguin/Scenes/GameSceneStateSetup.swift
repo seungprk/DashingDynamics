@@ -35,6 +35,9 @@ class GameSceneStateSetup: GKState {
         scene.camera = scene.cameraNode
         
         // Add Background to Camera Node
+        let bgNode = SKNode()
+        bgNode.name = "bgNode"
+        
         let bgTexture = SKTexture(imageNamed: "background")
         bgTexture.filteringMode = .nearest
         let tileWidth = bgTexture.size().width
@@ -43,13 +46,15 @@ class GameSceneStateSetup: GKState {
         let verticalTilesNumber = Int(scene.size.height / tileHeight)
         let startingX = -scene.size.width/2 + tileWidth/2
         let startingY = -scene.size.height/2 + tileHeight/2
+        
+        scene.cameraNode?.addChild(bgNode)
         for vIndex in 0...verticalTilesNumber {
             for hIndex in 0...horizontalTilesNumber {
                 let tile = SKSpriteNode(texture: bgTexture)
                 tile.position = CGPoint(x: startingX + CGFloat(hIndex) * tileWidth, y: startingY + CGFloat(vIndex) * tileHeight)
                 print("** Pos: ", tile.position)
-                tile.zPosition = -1000
-                scene.cameraNode?.addChild(tile)
+                tile.zPosition = -1000000
+                bgNode.addChild(tile)
             }
         }
 

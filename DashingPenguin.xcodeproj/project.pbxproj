@@ -14,6 +14,7 @@
 		2425B70E1DBD73DD005168A7 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2425B70D1DBD73DD005168A7 /* player.atlas */; };
 		242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DA8281DA0C90400272FB5 /* EnergyMatter.swift */; };
 		243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */; };
+		244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 244583B31E2AB2F200867EC1 /* hazard-warning.atlas */; };
 		245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */; };
 		247607561DDAC83900237A53 /* TiledWallSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */; };
 		247607581DDAD56F00237A53 /* ObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247607571DDAD56F00237A53 /* ObstacleWall.swift */; };
@@ -79,6 +80,7 @@
 		2425B70D1DBD73DD005168A7 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
 		242DA8281DA0C90400272FB5 /* EnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnergyMatter.swift; path = DashingPenguin/Entities/EnergyMatter.swift; sourceTree = "<group>"; };
 		243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeVisibility.swift; path = DashingPenguin/Zone/ZoneChallengeVisibility.swift; sourceTree = "<group>"; };
+		244583B31E2AB2F200867EC1 /* hazard-warning.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "hazard-warning.atlas"; sourceTree = "<group>"; };
 		245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnetMoveComponent.swift; path = DashingPenguin/Components/MagnetMoveComponent.swift; sourceTree = "<group>"; };
 		247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiledWallSpriteComponent.swift; path = DashingPenguin/Components/TiledWallSpriteComponent.swift; sourceTree = "<group>"; };
 		247607571DDAD56F00237A53 /* ObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObstacleWall.swift; path = DashingPenguin/Entities/ObstacleWall.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		7FB4ED4D1D2B262B00407A8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				244583B31E2AB2F200867EC1 /* hazard-warning.atlas */,
 				24CB458B1DF4DA0400CBF82B /* laser.atlas */,
 				24CB458C1DF4DA0400CBF82B /* obstacle.atlas */,
 				24CB458D1DF4DA0400CBF82B /* obstaclewall.atlas */,
@@ -422,6 +425,7 @@
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
 				24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */,
+				244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */,
 				24CB458E1DF4DA0400CBF82B /* laser.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
