@@ -35,6 +35,7 @@
 		24CB45901DF4DA0400CBF82B /* obstaclewall.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24CB458D1DF4DA0400CBF82B /* obstaclewall.atlas */; };
 		24CB45921DF4ED9C00CBF82B /* ObstacleSideWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CB45911DF4ED9C00CBF82B /* ObstacleSideWall.swift */; };
 		24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */; };
+		24D8A6E51E2C1AA00041268E /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24D8A6E41E2C1AA00041268E /* background.atlas */; };
 		24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */; };
 		24E9C23C1DC6AFA700F0DB61 /* energymatter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */; };
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
@@ -102,6 +103,7 @@
 		24CB458D1DF4DA0400CBF82B /* obstaclewall.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstaclewall.atlas; sourceTree = "<group>"; };
 		24CB45911DF4ED9C00CBF82B /* ObstacleSideWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObstacleSideWall.swift; path = DashingPenguin/Entities/ObstacleSideWall.swift; sourceTree = "<group>"; };
 		24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlocksManager.swift; path = DashingPenguin/Platform/PlatformBlocksManager.swift; sourceTree = "<group>"; };
+		24D8A6E41E2C1AA00041268E /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
 		24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockMoving.swift; path = DashingPenguin/Platform/PlatformBlockMoving.swift; sourceTree = "<group>"; };
 		24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = energymatter.atlas; sourceTree = "<group>"; };
 		7F01D59E1D2A163B000A51D8 /* DashingPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DashingPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +301,7 @@
 		7FB4ED4D1D2B262B00407A8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				24D8A6E41E2C1AA00041268E /* background.atlas */,
 				244583B31E2AB2F200867EC1 /* hazard-warning.atlas */,
 				24CB458B1DF4DA0400CBF82B /* laser.atlas */,
 				24CB458C1DF4DA0400CBF82B /* obstacle.atlas */,
@@ -428,6 +431,7 @@
 				7F24DF4F1D92018300796DB0 /* dial.wav in Resources */,
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				24CB45901DF4DA0400CBF82B /* obstaclewall.atlas in Resources */,
+				24D8A6E51E2C1AA00041268E /* background.atlas in Resources */,
 				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
 				2425B70E1DBD73DD005168A7 /* player.atlas in Resources */,

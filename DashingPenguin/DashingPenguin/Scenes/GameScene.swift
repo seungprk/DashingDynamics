@@ -96,10 +96,6 @@ class GameScene: SKScene, GameInputDelegate {
             cameraNode?.run(move)
             
             bgManager.parallaxMove(withEndY: endY)
-            
-            print(" ** ** ** ")
-            print("destination: ", endY)
-            print("diff: ", endY - begY)
         }
     }
     

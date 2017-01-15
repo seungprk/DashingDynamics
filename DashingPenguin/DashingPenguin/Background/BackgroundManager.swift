@@ -13,15 +13,28 @@ class BackgroundManager {
     var scene: GameScene!
     var tileMatrix = [[SKSpriteNode]]()
     var bgNode = SKNode()
-    var tileSize = SKTexture(imageNamed: "background").size()
+    var tileSize: CGSize!
     
     init(scene: GameScene) {
         self.scene = scene
         
+        // Texture Setup
+        let bgAnimatedAtlas = SKTextureAtlas(named: "background")
+        var bgAnimatedTextureFrames = [SKTexture]()
+        for count in 1...bgAnimatedAtlas.textureNames.count {
+            let texture = bgAnimatedAtlas.textureNamed("background" + String(count))
+            bgAnimatedTextureFrames.append(texture)
+        }
+        for texture in bgAnimatedTextureFrames {
+            texture.filteringMode = .nearest
+        }
+        tileSize = bgAnimatedTextureFrames[0].size()
+        
+        // Tiles Setup
         bgNode = SKNode()
         bgNode.name = "bgNode"
         
-        let bgTexture = SKTexture(imageNamed: "background")
+        let bgTexture = (bgAnimatedTextureFrames.last)!
         bgTexture.filteringMode = .nearest
         let tileWidth = bgTexture.size().width
         let tileHeight = bgTexture.size().height
@@ -30,6 +43,7 @@ class BackgroundManager {
         let startingX = -scene.size.width/2 + tileWidth/2
         let startingY = scene.size.height/2 - tileHeight/2
         
+        // Tiles Add to Scene
         scene.cameraNode?.addChild(bgNode)
         for vIndex in 0...verticalTilesNumber {
             var row = [SKSpriteNode]()
@@ -42,6 +56,22 @@ class BackgroundManager {
                 row.append(tile)
             }
             tileMatrix.append(row)
+        }
+        
+        // Animate Tiles
+        let duration: TimeInterval = 0.01
+        let linePulse = SKAction.animate(with: bgAnimatedTextureFrames, timePerFrame: duration)
+        let pulseTime = TimeInterval(bgAnimatedTextureFrames.count) * duration
+        
+        let totalPulseTime = pulseTime * TimeInterval(tileMatrix[0].count)
+        for row in tileMatrix {
+            for index in 0..<row.count {
+                let varWaitAction = SKAction.wait(forDuration: pulseTime * TimeInterval(index))
+                let endWaitAction = SKAction.wait(forDuration: totalPulseTime - pulseTime * TimeInterval(index))
+                let varSeq = SKAction.sequence([varWaitAction, linePulse, endWaitAction])
+                let varLoop = SKAction.repeatForever(varSeq)
+                row[index].run(varLoop)
+            }
         }
     }
     
