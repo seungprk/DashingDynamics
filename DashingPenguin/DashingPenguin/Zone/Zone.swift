@@ -57,13 +57,13 @@ class Zone {
             let hazardOctagon = SKSpriteNode(texture: hazardOctagonTexture)
             hazardOctagon.name = "hazardOctagon"
             hazardOctagon.position = CGPoint(x: -(overlayFullWidth / 2) + hazardOctagonTexture.size().width / 2, y: graphicYPos)
-            hazardOctagon.zPosition = 110
+            hazardOctagon.zPosition = 1000
             hazardOctagon.setScale(0.1)
             
             let hazardTextbar = SKSpriteNode(texture: hazardTextbarTextureFrames[0])
             hazardTextbar.name = "hazardTextbar"
             hazardTextbar.position = CGPoint(x: -hazardTextbarTextureFrames[0].size().width, y: 0)
-            hazardTextbar.zPosition = 100
+            hazardTextbar.zPosition = 1000
             
             let maskNode = SKSpriteNode(texture: hazardTextbarTextureFrames[0])
             
@@ -89,7 +89,6 @@ class Zone {
             })
             
             // Tint Background
-            let tintColor = UIColor(red: 255, green: 175, blue: 175, alpha: 0.7)
             let tint = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.5)
             let bgNode = scene.cameraNode?.childNode(withName: "bgNode")
             for tile in (bgNode?.children)! {

@@ -17,6 +17,7 @@ class GameScene: SKScene, GameInputDelegate {
     var player: Player?
     var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
+    var bgManager: BackgroundManager!
     var sideWall: ObstacleSideWall?
     
     // Physics
@@ -81,16 +82,24 @@ class GameScene: SKScene, GameInputDelegate {
         }
 
         zoneManager.update(deltaTime: dt)
+        bgManager.update()
         
         self.lastUpdateTime = currentTime
-        
     }
     
     func centerCamera() {
         if let playerSprite = player?.component(ofType: SpriteComponent.self)?.node {
-            let move = SKAction.move(to: CGPoint(x: 0, y: playerSprite.position.y + self.size.height * 0.3), duration: 0.2)
+            let begY = (cameraNode?.position.y)!
+            let endY = playerSprite.position.y + self.size.height * 0.3
+            let move = SKAction.move(to: CGPoint(x: 0, y: endY), duration: 0.2)
             move.timingMode = .easeOut
             cameraNode?.run(move)
+            
+            bgManager.parallaxMove(withEndY: endY)
+            
+            print(" ** ** ** ")
+            print("destination: ", endY)
+            print("diff: ", endY - begY)
         }
     }
     

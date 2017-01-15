@@ -29,7 +29,11 @@ class ZoneChallengeVisibility: Zone {
             blinderOverlayNode.name = "blinderOverlayNode"
             blinderOverlayNode.position = CGPoint.zero
             blinderOverlayNode.zPosition = GameplayConfiguration.HeightOf.overlay
-            let blinderAction = SKAction.sequence([SKAction.fadeIn(withDuration: 0.1), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.1), SKAction.wait(forDuration: 2)])
+            blinderOverlayNode.alpha = 0
+            let blinderAction = SKAction.sequence([SKAction.wait(forDuration: 2),
+                                                   SKAction.fadeIn(withDuration: 0.1),
+                                                   SKAction.wait(forDuration: 0.5),
+                                                   SKAction.fadeOut(withDuration: 0.1)])
             let blinderRepeatAction = SKAction.repeatForever(blinderAction)
             
             // Activate Challenge

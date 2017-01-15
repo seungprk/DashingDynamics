@@ -143,10 +143,10 @@ class Player: GKEntity {
                 }
             }
             positionalArray.sort(by: { gameScene.convert($0.position, from: $0.parent!).y < gameScene.convert($1.position, from: $1.parent!).y })
-            print(" *** Start Array Print *** ")
-            for tester in positionalArray {
-                print(tester.name, gameScene.convert(tester.position, from: tester.parent!), " Z: ", tester.zPosition)
-            }
+//            print(" *** Start Array Print *** ")
+//            for tester in positionalArray {
+//                print(tester.name, gameScene.convert(tester.position, from: tester.parent!), " Z: ", tester.zPosition)
+//            }
             // Find the node with nearest y position
             for node in positionalArray {
                 var nodeTemp = node
@@ -158,13 +158,13 @@ class Player: GKEntity {
                 if nodeTemp.name == "platform" {
                     nodeYPosCheck += GameplayConfiguration.Platform.size.height / 2 + 12
                 }
-                print("Node Top: ", nodeYPosCheck)
-                print("Player Pos: ", playerYPos)
+//                print("Node Top: ", nodeYPosCheck)
+//                print("Player Pos: ", playerYPos)
                 
                 if playerYPos < nodeYPosCheck {
                     spriteComp.node.zPosition = nodeTemp.zPosition + 0.5
-                    print("Z Node Pos: ", nodeTemp.zPosition)
-                    print("Z Player Pos: ", spriteComp.node.zPosition)
+//                    print("Z Node Pos: ", nodeTemp.zPosition)
+//                    print("Z Player Pos: ", spriteComp.node.zPosition)
                     break
                 }
             }

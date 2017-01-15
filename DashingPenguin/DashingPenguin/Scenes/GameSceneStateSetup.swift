@@ -34,29 +34,8 @@ class GameSceneStateSetup: GKState {
         scene.addChild(scene.cameraNode!)
         scene.camera = scene.cameraNode
         
-        // Add Background to Camera Node
-        let bgNode = SKNode()
-        bgNode.name = "bgNode"
-        
-        let bgTexture = SKTexture(imageNamed: "background")
-        bgTexture.filteringMode = .nearest
-        let tileWidth = bgTexture.size().width
-        let tileHeight = bgTexture.size().height
-        let horizontalTilesNumber = Int(scene.size.width / tileWidth)
-        let verticalTilesNumber = Int(scene.size.height / tileHeight)
-        let startingX = -scene.size.width/2 + tileWidth/2
-        let startingY = -scene.size.height/2 + tileHeight/2
-        
-        scene.cameraNode?.addChild(bgNode)
-        for vIndex in 0...verticalTilesNumber {
-            for hIndex in 0...horizontalTilesNumber {
-                let tile = SKSpriteNode(texture: bgTexture)
-                tile.position = CGPoint(x: startingX + CGFloat(hIndex) * tileWidth, y: startingY + CGFloat(vIndex) * tileHeight)
-                print("** Pos: ", tile.position)
-                tile.zPosition = -1000000
-                bgNode.addChild(tile)
-            }
-        }
+        // Add Background Manager
+        scene.bgManager = BackgroundManager(scene: scene)
 
         // Add Side wall physics to camera node
         let rightWallCenter = CGPoint(x: scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2, y: 0)

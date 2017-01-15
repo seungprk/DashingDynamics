@@ -51,6 +51,7 @@ extension GameScene: SKPhysicsContactDelegate {
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.energyMatter):
             if secondBody.node?.parent != nil {
                 player?.component(ofType: MovementComponent.self)?.dashCount -= 1
+                secondBody.node?.physicsBody = nil
                 
                 // Energy Matter Texture Setup
                 let energyMatterAnimatedAtlas = SKTextureAtlas(named: "energymatter")

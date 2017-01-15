@@ -28,6 +28,7 @@
 		24AD9A441D38A1D7003EB602 /* PlatformBlockSingleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */; };
 		24AD9A461D38B009003EB602 /* PlatformBlockFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */; };
 		24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */; };
+		24C222DA1E2B0182008BF20E /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C222D91E2B0182008BF20E /* BackgroundManager.swift */; };
 		24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */; };
 		24CB458E1DF4DA0400CBF82B /* laser.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24CB458B1DF4DA0400CBF82B /* laser.atlas */; };
 		24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24CB458C1DF4DA0400CBF82B /* obstacle.atlas */; };
@@ -94,6 +95,7 @@
 		24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockSingleDash.swift; path = DashingPenguin/Platform/PlatformBlockSingleDash.swift; sourceTree = "<group>"; };
 		24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockFirst.swift; path = DashingPenguin/Platform/PlatformBlockFirst.swift; sourceTree = "<group>"; };
 		24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleWall.swift; path = DashingPenguin/Platform/PlatformBlockObstacleWall.swift; sourceTree = "<group>"; };
+		24C222D91E2B0182008BF20E /* BackgroundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundManager.swift; path = DashingPenguin/Background/BackgroundManager.swift; sourceTree = "<group>"; };
 		24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateCinematicPause.swift; path = DashingPenguin/Scenes/GameSceneStateCinematicPause.swift; sourceTree = "<group>"; };
 		24CB458B1DF4DA0400CBF82B /* laser.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = laser.atlas; sourceTree = "<group>"; };
 		24CB458C1DF4DA0400CBF82B /* obstacle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacle.atlas; sourceTree = "<group>"; };
@@ -182,6 +184,14 @@
 			name = Platform;
 			sourceTree = "<group>";
 		};
+		24C222D81E2B0145008BF20E /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				24C222D91E2B0182008BF20E /* BackgroundManager.swift */,
+			);
+			name = Background;
+			sourceTree = "<group>";
+		};
 		7F01D5951D2A163B000A51D8 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +212,7 @@
 		7F01D5A01D2A163B000A51D8 /* DashingPenguin */ = {
 			isa = PBXGroup;
 			children = (
+				24C222D81E2B0145008BF20E /* Background */,
 				7F24DF4C1D91FFA200796DB0 /* Audio */,
 				7FCAE7B21D8B72BE00A02B79 /* Nodes */,
 				7FB4ED4E1D2B267000407A8B /* Scenes */,
@@ -437,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24C222DA1E2B0182008BF20E /* BackgroundManager.swift in Sources */,
 				24775DCC1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift in Sources */,
 				247DA9151D331F5C004C4A14 /* Platform.swift in Sources */,
 				7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */,
