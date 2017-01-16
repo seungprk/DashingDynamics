@@ -89,11 +89,7 @@ class Zone {
             })
             
             // Tint Background
-            let tint = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1.0, duration: 0.5)
-            let bgNode = scene.cameraNode?.childNode(withName: "bgNode")
-            for tile in (bgNode?.children)! {
-                tile.run(tint)
-            }
+            scene.bgManager.tint(color: UIColor.red)
         }
     }
     
@@ -115,11 +111,7 @@ class Zone {
             })
             
             // Undo Background Tint
-            let undoTint = SKAction.colorize(with: UIColor.clear, colorBlendFactor: 0.0, duration: 0.5)
-            let bgNode = scene.cameraNode?.childNode(withName: "bgNode")
-            for tile in (bgNode?.children)! {
-                tile.run(undoTint)
-            }
+            scene.bgManager.resetTint()
         }
     }
 }

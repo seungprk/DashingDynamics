@@ -82,7 +82,7 @@ class GameScene: SKScene, GameInputDelegate {
         }
 
         zoneManager.update(deltaTime: dt)
-        bgManager.update()
+        bgManager.update(deltaTime: dt)
         
         self.lastUpdateTime = currentTime
     }
