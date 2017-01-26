@@ -18,6 +18,7 @@ class GameScene: SKScene, GameInputDelegate {
     var platformBlocksManager: PlatformBlocksManager!
     var zoneManager: ZoneManager!
     var bgManager: BackgroundManager!
+    var hudManager: HudManager!
     var sideWall: ObstacleSideWall?
     
     // Physics
