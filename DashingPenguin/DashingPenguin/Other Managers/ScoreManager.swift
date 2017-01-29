@@ -23,13 +23,17 @@ class ScoreManager {
         let distFactor = playerYPos! / 30
         if distFactor > distanceScore {
             distanceScore = distFactor
-            scene.hudManager.updateScoreNumber(to: Int(distanceScore + platformScore))
+            scene.hudManager.updateScoreNumber(to: getTotalScore())
         }
     }
     
     func incrementPlatformPart() {
         platformScore += 10
-        scene.hudManager.updateScoreNumber(to: Int(distanceScore + platformScore))
+        scene.hudManager.updateScoreNumber(to: getTotalScore())
         scene.hudManager.popAnimateScore()
+    }
+    
+    func getTotalScore() -> Int {
+        return Int(distanceScore + platformScore)
     }
 }
