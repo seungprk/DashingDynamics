@@ -17,8 +17,8 @@ class PlatformBlockMoving: PlatformBlock {
         let platformSize = Platform().size
         
         // Get Random Distance
-        let rMax = GameplayConfiguration.TouchControls.maxDistance
-        let rMin = sqrt(2) * platformSize.height/2 * 1.5
+        //let rMax = GameplayConfiguration.TouchControls.maxDistance
+        //let rMin = sqrt(2) * platformSize.height/2 * 1.5
         let randomDist = GameplayConfiguration.TouchControls.maxDistance
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y

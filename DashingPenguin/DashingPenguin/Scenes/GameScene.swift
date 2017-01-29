@@ -19,6 +19,7 @@ class GameScene: SKScene, GameInputDelegate {
     var zoneManager: ZoneManager!
     var bgManager: BackgroundManager!
     var hudManager: HudManager!
+    var scoreManager: ScoreManager!
     var sideWall: ObstacleSideWall?
     
     // Physics
@@ -65,7 +66,6 @@ class GameScene: SKScene, GameInputDelegate {
         
         updateCurrentTime(currentTime)
         if cameraFollowsPlayer == true { centerCamera() }
-        sideWall?.tileSideWall(scene: self)
     }
     
     func updateCurrentTime(_ currentTime: TimeInterval) {
@@ -84,13 +84,14 @@ class GameScene: SKScene, GameInputDelegate {
 
         zoneManager.update(deltaTime: dt)
         bgManager.update(deltaTime: dt)
+        scoreManager.updateScore()
+        sideWall?.tileSideWall(scene: self)
         
         self.lastUpdateTime = currentTime
     }
     
     func centerCamera() {
         if let playerSprite = player?.component(ofType: SpriteComponent.self)?.node {
-            let begY = (cameraNode?.position.y)!
             let endY = playerSprite.position.y + self.size.height * 0.3
             let move = SKAction.move(to: CGPoint(x: 0, y: endY), duration: 0.2)
             move.timingMode = .easeOut

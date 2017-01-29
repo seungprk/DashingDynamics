@@ -37,6 +37,7 @@ class GameSceneStateSetup: GKState {
         // Add Background, Hud and Score Managers
         scene.bgManager = BackgroundManager(scene: scene)
         scene.hudManager = HudManager(scene: scene)
+        scene.scoreManager = ScoreManager(scene: scene)
         
         // Add Side wall physics to camera node
         let rightWallCenter = CGPoint(x: scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2, y: 0)

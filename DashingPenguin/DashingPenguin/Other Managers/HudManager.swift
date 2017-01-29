@@ -14,6 +14,9 @@ class HudManager {
     var numberFontTextures = [SKTexture]()
     var hudNode = SKNode()
     var scoreNode = SKNode()
+    var scoreNumSpriteArray = [SKSpriteNode]()
+    let maxScorePlaceValue = 5
+    var currentScore = 0
     
     init(scene: GameScene) {
         self.scene = scene
@@ -115,17 +118,48 @@ class HudManager {
         
         scoreNode.position.x = (hudNode.childNode(withName: "ratingTextSpriteNode")?.position.x)!
         scoreNode.position.y = -10 + numberFontTextures[0].size().height / 2
-        
-        updateScoreNumber(to: 0)
-        
         hudNode.addChild(scoreNode)
+        
+        let numberFontWidth = numberFontTextures[0].size().width
+        for count in 0..<maxScorePlaceValue {
+            let newSpriteNode = SKSpriteNode(texture: numberFontTextures[0])
+            newSpriteNode.position.x = 0 + CGFloat(count) * numberFontWidth
+            newSpriteNode.zPosition = GameplayConfiguration.HeightOf.hud + 0.5
+            scoreNode.addChild(newSpriteNode)
+            scoreNumSpriteArray.append(newSpriteNode)
+        }
+        
+        updateScoreNumber(to: 1150)
     }
     
     func updateScoreNumber(to number: Int) {
-        let temp = SKSpriteNode(texture: numberFontTextures[0])
-        temp.zPosition = GameplayConfiguration.HeightOf.hud
-        scoreNode.addChild(temp)
+        if number != currentScore {
+            currentScore = number
+            
+            // Break down number into an array per digit
+            var digits = [Int]()
+            var i = number
+            while i > 0 {
+                digits.insert(i % 10, at: 0)
+                i /= 10
+            }
+            if number == 0 { digits.append(0) }
+            
+            // Shift scoreNode depending on how many digits in the score
+            let numberFontWidth = numberFontTextures[0].size().width
+            scoreNode.position.x = -CGFloat(digits.count - 1) * (numberFontWidth / 2)
+            
+            // Pick the correct number texture and place it in the SpriteNode
+            for count in 0..<digits.count {
+                let digit = digits[count]
+                let numberTexture = numberFontTextures[digit]
+                scoreNumSpriteArray[count].texture = numberTexture
+            }
+            
+            // For the remaining SpriteNodes set texture to nil
+            for count in digits.count..<maxScorePlaceValue {
+                scoreNumSpriteArray[count].texture = nil
+            }
+        }
     }
-    
-    
 }
