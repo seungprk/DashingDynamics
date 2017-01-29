@@ -123,14 +123,9 @@ class ZoneManager: LaserIdentificationDelegate {
         let playerStateMachine = scene.player?.component(ofType: MovementComponent.self)?.stateMachine
         if playerStateMachine?.currentState is LandedState {
             if let currentPlatform = playerStateMachine?.state(forClass: LandedState.self)?.currentPlatform {
-                currentPlatformSprite = currentPlatform as! SKSpriteNode
-                
-                // Change Platform Texture landed on
-                let landedTexture = SKTexture(imageNamed: "bigPlatform2")
-                landedTexture.filteringMode = .nearest
-                currentPlatformSprite.texture = landedTexture
                 
                 // Activate enter event for zone
+                currentPlatformSprite = currentPlatform as! SKSpriteNode
                 for zone in zones {
                     let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
                     if firstPlatSprite == currentPlatformSprite {

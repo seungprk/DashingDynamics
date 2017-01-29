@@ -11,15 +11,25 @@ import GameplayKit
 
 class ScoreManager {
     var scene: GameScene!
-    var score: CGFloat = 0
+    var distanceScore: CGFloat = 0
+    var platformScore: CGFloat = 0
     
     init(scene: GameScene) {
         self.scene = scene
     }
     
-    func updateScore() {
+    func updateDistanceScore() {
         let playerYPos = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
-        let currScore = playerYPos! / 20
-        scene.hudManager.updateScoreNumber(to: Int(currScore))
+        let distFactor = playerYPos! / 30
+        if distFactor > distanceScore {
+            distanceScore = distFactor
+            scene.hudManager.updateScoreNumber(to: Int(distanceScore + platformScore))
+        }
+    }
+    
+    func incrementPlatformPart() {
+        platformScore += 10
+        scene.hudManager.updateScoreNumber(to: Int(distanceScore + platformScore))
+        scene.hudManager.popAnimateScore()
     }
 }

@@ -84,7 +84,7 @@ class GameScene: SKScene, GameInputDelegate {
 
         zoneManager.update(deltaTime: dt)
         bgManager.update(deltaTime: dt)
-        scoreManager.updateScore()
+        scoreManager.updateDistanceScore()
         sideWall?.tileSideWall(scene: self)
         
         self.lastUpdateTime = currentTime

@@ -21,6 +21,12 @@ class LandedState: GKState, PlatformLandingDelegate {
     
     override func didEnter(from previousState: GKState?) {
         entity.component(ofType: MovementComponent.self)?.dashCount = 0
+        
+        // Activate Platform
+        if let platform = currentPlatform {
+            let platEntity = platform.entity as! Platform
+            platEntity.landingActivate()
+        }
     }
     
     override func update(deltaTime seconds: TimeInterval) {

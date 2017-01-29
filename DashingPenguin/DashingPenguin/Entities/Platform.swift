@@ -10,14 +10,17 @@ import SpriteKit
 import GameplayKit
 
 class Platform: GKEntity {
-    
+
     let size = GameplayConfiguration.Platform.size
+    var activated = false
     
     override init() {
         super.init()
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
         spriteComponent.node.name = "platform"
+        spriteComponent.node.entity = self
+        
         let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2)
         let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
@@ -43,6 +46,8 @@ class Platform: GKEntity {
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
         spriteComponent.node.name = "platform"
+        spriteComponent.node.entity = self
+        
         let physicsPosition = CGPoint(x: spriteComponent.node.position.x, y: spriteComponent.node.position.y + spriteComponent.node.size.height / 2 - size.height / 2)
         let physicsBody = SKPhysicsBody(rectangleOf: size, center: physicsPosition)
         
@@ -64,6 +69,20 @@ class Platform: GKEntity {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func landingActivate() {
+        if activated == false {
+            let landedTexture = SKTexture(imageNamed: "bigPlatform2")
+            landedTexture.filteringMode = .nearest
+            
+            let spriteNode = component(ofType: SpriteComponent.self)?.node
+            spriteNode?.texture = landedTexture
+            let gameScene = spriteNode?.scene as! GameScene
+            gameScene.scoreManager.incrementPlatformPart()
+            
+            activated = true
+        }
     }
     
 }

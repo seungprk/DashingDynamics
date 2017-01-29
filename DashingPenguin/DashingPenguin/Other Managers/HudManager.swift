@@ -162,4 +162,14 @@ class HudManager {
             }
         }
     }
+    
+    func popAnimateScore() {
+        let pop = SKAction.scale(to: 1.5, duration: 0.2)
+        let revert = SKAction.scale(to: 1.0, duration: 0.2)
+        let popSeq = SKAction.sequence([pop, revert])
+        
+        for node in scoreNumSpriteArray {
+            node.run(popSeq)
+        }
+    }
 }
