@@ -40,6 +40,7 @@
 		24CFA6841E399B4100EB08A5 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CFA6831E399B4100EB08A5 /* HudManager.swift */; };
 		24CFA6861E399FD400EB08A5 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CFA6851E399FD400EB08A5 /* ScoreManager.swift */; };
 		24D8A6E51E2C1AA00041268E /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24D8A6E41E2C1AA00041268E /* background.atlas */; };
+		24DB0FC31E3EB8380087CDB3 /* CreepDeathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */; };
 		24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */; };
 		24E9C23C1DC6AFA700F0DB61 /* energymatter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */; };
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
@@ -112,6 +113,7 @@
 		24CFA6831E399B4100EB08A5 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudManager.swift; sourceTree = "<group>"; };
 		24CFA6851E399FD400EB08A5 /* ScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		24D8A6E41E2C1AA00041268E /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
+		24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreepDeathManager.swift; sourceTree = "<group>"; };
 		24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockMoving.swift; path = DashingPenguin/Platform/PlatformBlockMoving.swift; sourceTree = "<group>"; };
 		24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = energymatter.atlas; sourceTree = "<group>"; };
 		7F01D59E1D2A163B000A51D8 /* DashingPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DashingPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 				24C222D91E2B0182008BF20E /* BackgroundManager.swift */,
 				24CFA6831E399B4100EB08A5 /* HudManager.swift */,
 				24CFA6851E399FD400EB08A5 /* ScoreManager.swift */,
+				24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */,
 			);
 			name = "Other Managers";
 			path = "DashingPenguin/Other Managers";
@@ -469,6 +472,7 @@
 			files = (
 				24C222DA1E2B0182008BF20E /* BackgroundManager.swift in Sources */,
 				24775DCC1DA1DA5800ED743C /* PlatformBlockEnergyMatter.swift in Sources */,
+				24DB0FC31E3EB8380087CDB3 /* CreepDeathManager.swift in Sources */,
 				247DA9151D331F5C004C4A14 /* Platform.swift in Sources */,
 				7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */,
 				248C79511D3C2C2D003F8A0E /* Obstacle.swift in Sources */,

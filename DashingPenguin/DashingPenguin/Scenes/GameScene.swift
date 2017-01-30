@@ -20,6 +20,7 @@ class GameScene: SKScene, GameInputDelegate {
     var bgManager: BackgroundManager!
     var hudManager: HudManager!
     var scoreManager: ScoreManager!
+    var creepDeathManager: CreepDeathManager!
     var sideWall: ObstacleSideWall?
     
     // Physics
@@ -85,6 +86,7 @@ class GameScene: SKScene, GameInputDelegate {
         zoneManager.update(deltaTime: dt)
         bgManager.update(deltaTime: dt)
         scoreManager.updateDistanceScore()
+        creepDeathManager.updatePhysicsBodyPos(cameraYPos: (cameraNode?.position.y)!)
         sideWall?.tileSideWall(scene: self)
         
         self.lastUpdateTime = currentTime

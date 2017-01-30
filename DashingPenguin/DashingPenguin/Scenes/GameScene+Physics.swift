@@ -46,6 +46,10 @@ extension GameScene: SKPhysicsContactDelegate {
                 self.player?.laserDeath = true
                 self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
             }
+            
+        // Player and laser intersect
+        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.creepDeath):
+            self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
         
         // Player and energy matter intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.energyMatter):

@@ -30,6 +30,11 @@ class ZoneManager: LaserIdentificationDelegate {
         
         // Add Normal Zone
         zones.append(ZoneNormal(scene: scene, begXPos: 0, begYPos: 0, begZPos: 0))
+        let firstPlatform = zones[0].platformBlocksManager.blocks[0].entities[0] as! Platform
+        let texture = SKTexture(imageNamed: "bigPlatform2")
+        texture.filteringMode = .nearest
+        firstPlatform.component(ofType: SpriteComponent.self)?.node.texture = texture
+        firstPlatform.activated = true
     }
     
     func update(deltaTime seconds: TimeInterval) {

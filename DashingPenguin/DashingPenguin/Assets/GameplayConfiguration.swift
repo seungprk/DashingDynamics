@@ -67,5 +67,6 @@ struct GameplayConfiguration {
         static let energyMatter: UInt32 = 0x1 << 4
         static let field       : UInt32 = 0x1 << 5
         //static let wall        : UInt32 = 0x1 << 5
+        static let creepDeath  : UInt32 = 0x1 << 6
     }
 }
