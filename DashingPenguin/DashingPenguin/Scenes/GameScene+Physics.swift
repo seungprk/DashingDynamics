@@ -43,12 +43,13 @@ extension GameScene: SKPhysicsContactDelegate {
             guard let laserDelegate = self.laserIdDelegate else { break }
             
             if laserDelegate.isLaserActivated(for: laserNode) {
-                self.player?.laserDeath = true
+                self.player?.death = "laser"
                 self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
             }
             
-        // Player and laser intersect
+        // Player and creep death intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.creepDeath):
+            self.player?.death = "creep"
             self.player?.component(ofType: MovementComponent.self)?.stateMachine.enter(DeathState.self)
         
         // Player and energy matter intersect

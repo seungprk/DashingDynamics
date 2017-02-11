@@ -20,7 +20,8 @@ class Player: GKEntity {
     var dashingState: DashingState?
     let playerAnimatedAtlas = SKTextureAtlas(named: "player")
     var idleAnimationStarted = false
-    var laserDeath = false
+    var death = ""
+
     
     // Sprite Atlas Initialization
     override init() {

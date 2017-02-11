@@ -30,7 +30,7 @@ class DeathState: GKState {
         let gameScene = spriteComponent?.node.scene as! GameScene
         gameScene.cameraFollowsPlayer = false
         
-        if entity.laserDeath == true {
+        if entity.death == "laser" {
             // Laser Death Animation
             let animationTime: TimeInterval = 0.5
             
@@ -38,7 +38,7 @@ class DeathState: GKState {
             let yellowCropNode = SKCropNode()
             let maskNode = SKSpriteNode(texture: spriteComponent?.node.texture)
             yellowCropNode.maskNode = maskNode
-            let yellowBoxNode = SKSpriteNode(imageNamed: "brightyellow")
+            let yellowBoxNode = SKSpriteNode(imageNamed: "playerdeathyellow")
             yellowCropNode.alpha = 1
             yellowCropNode.addChild(yellowBoxNode)
             spriteComponent?.node.addChild(yellowCropNode)
@@ -51,7 +51,27 @@ class DeathState: GKState {
             let yellowTrans = SKAction.fadeIn(withDuration: animationTime / 5)
             spriteComponent?.node.run(SKAction.sequence([yellowTrans, fadeAndRemove]))
             
-            entity.laserDeath = false
+        } else if entity.death == "creep" {
+            // Creep Death Animation
+            let animationTime: TimeInterval = 0.5
+            
+            // Setup the bright yellow node in shape of player
+            let yellowCropNode = SKCropNode()
+            let maskNode = SKSpriteNode(texture: spriteComponent?.node.texture)
+            yellowCropNode.maskNode = maskNode
+            let yellowBoxNode = SKSpriteNode(imageNamed: "playerdeathblack")
+            yellowCropNode.alpha = 1
+            yellowCropNode.addChild(yellowBoxNode)
+            spriteComponent?.node.addChild(yellowCropNode)
+            
+            let removeOriginal = SKAction.run({
+                spriteComponent?.node.texture = nil
+            })
+            let fadeOut = SKAction.fadeOut(withDuration: animationTime / 5 * 4)
+            let fadeAndRemove = SKAction.group([removeOriginal, fadeOut])
+            let yellowTrans = SKAction.fadeIn(withDuration: animationTime / 5)
+            spriteComponent?.node.run(SKAction.sequence([yellowTrans, fadeAndRemove]))
+            
         } else {
             // Falling Animation
             let animationTime: TimeInterval = 0.5
