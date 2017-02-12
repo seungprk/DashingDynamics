@@ -51,6 +51,7 @@ class CreepDeathManager {
             let rightShiftPerTile = CGFloat(index) * (hexTileWidth + hexTileGapWidth - 1)
             let leftEdgePosOfTileWithGap = (-scene.size.width / 2) - hexTileDiagEdgeWidth + rightShiftPerTile
             tileSpriteRowOne.position.x = leftEdgePosOfTileWithGap + hexTileWidth / 2
+            tileSpriteRowOne.position.y = -scene.size.height / 2
             tileSpriteRowOne.zPosition = GameplayConfiguration.HeightOf.deathTile
             tileSpriteRowOne.color = defaultColor
             tileSpriteRowOne.colorBlendFactor = 1.0
@@ -67,6 +68,7 @@ class CreepDeathManager {
             // Row Two Sprite
             let tileSpriteRowTwo = SKSpriteNode(texture: tileTexture)
             tileSpriteRowTwo.position.x = tileSpriteRowOne.position.x + hexTileGapWidth + hexTileDiagEdgeWidth
+            tileSpriteRowTwo.position.y = tileSpriteRowOne.position.y + hexTileSize.height / 2
             tileSpriteRowTwo.zPosition = GameplayConfiguration.HeightOf.deathTile
             tileSpriteRowTwo.color = defaultColor
             tileSpriteRowTwo.colorBlendFactor = 1.0
@@ -80,8 +82,6 @@ class CreepDeathManager {
             
             tileRowTwo.addChild(tileSpriteRowTwo)
         }
-        tileRowOne.position.y = -scene.size.height / 2
-        tileRowTwo.position.y = tileRowOne.position.y + hexTileSize.height / 2
         
         // Add Nodes
         scene.addChild(creepNode)
@@ -92,7 +92,10 @@ class CreepDeathManager {
     }
     
     func updatePhysicsBodyPos(cameraYPos: CGFloat) {
-        let topOfContactNode = (hexTileSize.height / 2) + (tileRowTwo.position.y > tileRowOne.position.y ? tileRowTwo.position.y : tileRowOne.position.y)
+        let twoHeight = tileRowTwo.children[0].position.y
+        let oneHeight = tileRowOne.children[0].position.y
+        let topOfContactNode = (hexTileSize.height / 2) + (twoHeight > oneHeight ? twoHeight : oneHeight)
+        
         let botOfCamera = cameraYPos - scene.size.height / 2
         if topOfContactNode + 1 < botOfCamera { // +1 to cover for float inaccuracies
             restartAnimateRows()
@@ -102,36 +105,71 @@ class CreepDeathManager {
     
     func restartAnimateRows() {
         // Clear Actions
-        tileRowOne.removeAllActions()
-        tileRowTwo.removeAllActions()
+        creepNode.removeAllActions()
         coverSpriteNode.removeAllActions()
+        for node in tileRowOne.children {
+            node.removeAllActions()
+        }
+        for node in tileRowTwo.children {
+            node.removeAllActions()
+        }
         
-        // Reset Pos
-        tileRowTwo.position.y = (scene.cameraNode?.position.y)! - (scene.size.height / 2) - (hexTileSize.height / 2)
-        tileRowOne.position.y = tileRowTwo.position.y - hexTileSize.height / 2
-        coverSpriteNode.position.y = tileRowTwo.position.y - coverSpriteNode.size.height / 2
+        // Reposition
+        for node in tileRowTwo.children { node.position.y = (scene.cameraNode?.position.y)! - (scene.size.height / 2) - (hexTileSize.height / 2) }
+        for node in tileRowOne.children { node.position.y = tileRowTwo.children[0].position.y - hexTileSize.height / 2 }
+        coverSpriteNode.position.y = tileRowTwo.children[0].position.y - coverSpriteNode.size.height / 2
         
-        // Reapply actions
+        // Random move up of hexagons
         let tickSec: TimeInterval = 1
         let startWaitSec: TimeInterval = 1
         
+        // Setup move up animation
+        let arrayCount = tileRowOne.children.count
+        let setTiny = SKAction.scale(to: 0, duration: 0)
         let moveUp = SKAction.moveBy(x: 0, y: hexTileSize.height, duration: 0)
-        let wait = SKAction.wait(forDuration: tickSec * 2)
-        let startWait = SKAction.wait(forDuration: startWaitSec)
-        let moveUpSeq = SKAction.sequence([moveUp, wait])
-        let moveUpLoop = SKAction.repeatForever(moveUpSeq)
-        let waitThenLoop = SKAction.sequence([startWait, moveUpLoop])
+        let expand = SKAction.scale(to: 1.0, duration: tickSec / TimeInterval(arrayCount))
+        let upAnimation = SKAction.sequence([setTiny, moveUp, expand])
         
-        let waitHalf = SKAction.wait(forDuration: tickSec)
-        let waitHalfThenLoop = SKAction.sequence([startWait, waitHalf, moveUpLoop])
+        let randMoveUpRowOne = SKAction.run({
+            // Setup array to randomly move up hexagons - make an array of sequential numbers and consume one each randomly
+            var tempArray = Array(0..<arrayCount)
+            for index in 0..<arrayCount {
+                let randEle = Int(arc4random_uniform(UInt32(tempArray.count)))
+                let randNum = tempArray[randEle]
+                tempArray.remove(at: randEle)
+                
+                let varWait = SKAction.wait(forDuration: (tickSec / TimeInterval(arrayCount)) * TimeInterval(index))
+                let waitThenUp = SKAction.sequence([varWait, upAnimation])
+                self.tileRowOne.children[randNum].run(waitThenUp)
+            }
+        })
+        
+        let randMoveUpRowTwo = SKAction.run({
+            // Setup array to randomly move up hexagons - make an array of sequential numbers and consume one each randomly
+            var tempArray = Array(0..<arrayCount)
+            for index in 0..<arrayCount {
+                let randEle = Int(arc4random_uniform(UInt32(tempArray.count)))
+                let randNum = tempArray[randEle]
+                tempArray.remove(at: randEle)
+                
+                let varWait = SKAction.wait(forDuration: (tickSec / TimeInterval(arrayCount)) * TimeInterval(index))
+                let waitThenUp = SKAction.sequence([varWait, upAnimation])
+                self.tileRowTwo.children[randNum].run(waitThenUp)
+            }
+        })
+        
+        // Setup Creep Up Loop
+        let startWait = SKAction.wait(forDuration: startWaitSec)
+        let tickWait = SKAction.wait(forDuration: tickSec)
+        
+        let creepLoop = SKAction.repeatForever(SKAction.sequence([randMoveUpRowOne, tickWait, randMoveUpRowTwo, tickWait]))
+        let waitCreep = SKAction.sequence([startWait, creepLoop])
         
         let moveUpHalf = SKAction.moveBy(x: 0, y: hexTileSize.height / 2, duration: 0)
-        let moveUpHalfPerTickSeq = SKAction.sequence([moveUpHalf, waitHalf])
-        let moveUpHalfPerTickLoop = SKAction.repeatForever(moveUpHalfPerTickSeq)
-        let waitThenMoveHalfPerTickLoop = SKAction.sequence([startWait, moveUpHalfPerTickLoop])
+        let coverLoop = SKAction.repeatForever(SKAction.sequence([tickWait, moveUpHalf]))
+        let waitCover = SKAction.sequence([startWait, coverLoop])
         
-        tileRowOne.run(waitThenLoop)
-        tileRowTwo.run(waitHalfThenLoop)
-        coverSpriteNode.run(waitThenMoveHalfPerTickLoop)
+        creepNode.run(waitCreep)
+        coverSpriteNode.run(waitCover)
     }
 }

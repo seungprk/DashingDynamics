@@ -59,7 +59,7 @@ class DeathState: GKState {
             let yellowCropNode = SKCropNode()
             let maskNode = SKSpriteNode(texture: spriteComponent?.node.texture)
             yellowCropNode.maskNode = maskNode
-            let yellowBoxNode = SKSpriteNode(imageNamed: "playerdeathblack")
+            let yellowBoxNode = SKSpriteNode(imageNamed: "playerdeathblue")
             yellowCropNode.alpha = 1
             yellowCropNode.addChild(yellowBoxNode)
             spriteComponent?.node.addChild(yellowCropNode)
