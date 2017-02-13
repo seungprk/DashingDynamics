@@ -13,7 +13,7 @@ class ScoreManager {
     var scene: GameScene!
     var distanceScore: CGFloat = 0
     var platformScore: CGFloat = 0
-    
+
     init(scene: GameScene) {
         self.scene = scene
     }

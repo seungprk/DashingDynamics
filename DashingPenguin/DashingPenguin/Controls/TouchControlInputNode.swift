@@ -82,6 +82,14 @@ class TouchControlInputNode: SKSpriteNode {
                 
                 delegate?.swipeGesture(velocity: CGVector(dx: moveX, dy: moveY))
             }
+        
+        // PASS LONG TAP GESTURE
+        } else {
+                if let scene = self.scene {
+                let touchLocation = touches.first!.location(in: scene.view)
+                print("tapped \(touchLocation)")
+                delegate?.tapGesture(at: CGPoint(x: touchLocation.x, y: touchLocation.y))
+            }
         }
     }
     

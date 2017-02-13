@@ -61,6 +61,7 @@ class HudManager {
         // Add sprites
         let hudFullWidth: CGFloat = 176
         hudNode.position = CGPoint(x: 0, y: scene.size.height / 2 - baseboxTexture.size().height / 2 - 2)
+        hudNode.isUserInteractionEnabled = true
         
         let baseboxSpriteNode = SKSpriteNode(texture: baseboxTexture)
         baseboxSpriteNode.position = CGPoint(x: hudFullWidth / 2 - baseboxTexture.size().width / 2, y: 0)
@@ -83,9 +84,20 @@ class HudManager {
         rightFlourishSpriteNode.position = CGPoint(x: ratingTextSpriteNode.position.x + 44, y: 0)
         rightFlourishSpriteNode.zPosition = GameplayConfiguration.HeightOf.hud
         
-        let pauseButtonSpriteNode = SKSpriteNode(texture: pauseButtonTexture)
-        pauseButtonSpriteNode.position = CGPoint(x: hudFullWidth / 2 - pauseButtonTexture.size().width / 2 - 5, y: 0)
-        pauseButtonSpriteNode.zPosition = GameplayConfiguration.HeightOf.hud
+//        let pauseButtonSpriteNode = SKSpriteNode(texture: pauseButtonTexture)
+//        pauseButtonSpriteNode.position = CGPoint(x: hudFullWidth / 2 - pauseButtonTexture.size().width / 2 - 5, y: 0)
+//        pauseButtonSpriteNode.zPosition = GameplayConfiguration.HeightOf.hud
+        
+        /*
+         Pause Button with interaction
+         */
+        let pauseButtonSize = CGSize(width: 20, height: 20)
+        let pauseButtonPosition = CGPoint(x: hudFullWidth / 2 - pauseButtonSize.width / 2 - 5, y: 0)
+        let pauseButton = SKButton(size: CGSize(width: 20, height: 20), nameForImageNormal: "score-hud-pausebutton", nameForImageNormalHighlight: "score-hud-pausebutton")
+        pauseButton.position = pauseButtonPosition
+        pauseButton.zPosition = GameplayConfiguration.HeightOf.hud
+        pauseButton.delegate = self
+        pauseButton.name = "PauseButton"
         
         scene.cameraNode?.addChild(hudNode)
         hudNode.addChild(baseboxSpriteNode)
@@ -93,7 +105,8 @@ class HudManager {
         hudNode.addChild(leftFlourishSpriteNode)
         hudNode.addChild(ratingTextSpriteNode)
         hudNode.addChild(rightFlourishSpriteNode)
-        hudNode.addChild(pauseButtonSpriteNode)
+        
+        hudNode.addChild(pauseButton)
         
         // Animate flourishes
         let leftFlourishAnimation = SKAction.animate(with: leftFlourishTextures, timePerFrame: 0.2)
@@ -171,5 +184,14 @@ class HudManager {
         for node in scoreNumSpriteArray {
             node.run(popSeq)
         }
+    }
+    
+    
+}
+
+extension HudManager: SKButtonDelegate {
+    func onButtonPress(named: String) {
+        scene.stateMachine.enter(GameSceneStatePause.self)
+        print(named)
     }
 }
