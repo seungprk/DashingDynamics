@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="partialCurl" id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
@@ -17,7 +22,39 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.047058823529411764" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgo-DU-jTm" userLabel="Colorbox">
+                                <rect key="frame" x="79" y="265" width="217.5" height="137"/>
+                                <color key="backgroundColor" red="1" green="0.39275659784303285" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BaX-Y5-l9q">
+                                <rect key="frame" x="94" y="280" width="187.5" height="107"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dd-logo" translatesAutoresizingMaskIntoConstraints="NO" id="kKe-8U-Ql3">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="69"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kKe-8U-Ql3" secondAttribute="height" multiplier="2000:739" id="77m-XL-NSZ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dd-logo-type" translatesAutoresizingMaskIntoConstraints="NO" id="Myt-aW-hjb">
+                                        <rect key="frame" x="0.0" y="89" width="187.5" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Myt-aW-hjb" secondAttribute="height" multiplier="2000:192" id="FYv-8c-STz"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.050980392156862744" green="0.089986644683787267" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xgo-DU-jTm" firstAttribute="width" secondItem="BaX-Y5-l9q" secondAttribute="width" constant="30" id="0xa-83-gsF"/>
+                            <constraint firstItem="BaX-Y5-l9q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="HSn-JX-hsU"/>
+                            <constraint firstItem="xgo-DU-jTm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kfz-OO-hic"/>
+                            <constraint firstItem="xgo-DU-jTm" firstAttribute="height" secondItem="BaX-Y5-l9q" secondAttribute="height" constant="30" id="U2b-BG-bjg"/>
+                            <constraint firstItem="xgo-DU-jTm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eHz-l8-Urr"/>
+                            <constraint firstItem="BaX-Y5-l9q" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="qgv-C7-2gz"/>
+                            <constraint firstItem="BaX-Y5-l9q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yAK-9Q-adM"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,4 +62,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dd-logo" width="2000" height="739"/>
+        <image name="dd-logo-type" width="2000" height="192"/>
+    </resources>
 </document>
