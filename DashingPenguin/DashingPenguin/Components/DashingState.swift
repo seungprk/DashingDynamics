@@ -38,6 +38,8 @@ class DashingState: GKState, WallContactDelegate {
             spriteComponent.node.physicsBody?.velocity.dx += dashVelocity.dx
             spriteComponent.node.physicsBody?.velocity.dy += dashVelocity.dy
         }
+        
+        AudioManager.sharedInstance.play("energy-burst")
     }
     
     override func update(deltaTime seconds: TimeInterval) {

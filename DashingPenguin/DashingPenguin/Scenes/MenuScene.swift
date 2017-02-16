@@ -202,6 +202,8 @@ class MenuScene: SKScene, SKButtonDelegate {
         if let view = self.view {
             view.presentScene(gameScene, transition: transition)
         }
+        
+        AudioManager.sharedInstance.preInit()
     }
     
     func toggleSound() {
