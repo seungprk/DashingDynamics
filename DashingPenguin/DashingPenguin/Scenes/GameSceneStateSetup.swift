@@ -39,6 +39,7 @@ class GameSceneStateSetup: GKState {
         scene.hudManager = HudManager(scene: scene)
         scene.scoreManager = ScoreManager(scene: scene)
         scene.creepDeathManager = CreepDeathManager(scene: scene)
+        scene.hudManager.hudNode.zPosition = controlInputNode.zPosition + 100 // needs to be on top of touch control input
         
         // Add Side wall physics to camera node
         let rightWallCenter = CGPoint(x: scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2, y: 0)
