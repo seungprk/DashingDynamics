@@ -15,6 +15,7 @@ class GameSceneStatePause: GKState {
     
     unowned let scene : GameScene
     let pauseView: UIView
+    var unpBtn: UIButton?
     
     init(scene: GameScene) {
         self.scene = scene
@@ -22,9 +23,12 @@ class GameSceneStatePause: GKState {
         // Pause View
         pauseView = UIView(frame: scene.frame)
         pauseView.backgroundColor = .clear
-        pauseView.layer.position.y += scene.frame.height / 2 + 20
-        pauseView.layer.position.x += scene.frame.width / 2 + 20
-        pauseView.layer.transform = CATransform3DScale(CATransform3DIdentity, 2.5, 2.5, 1)
+        pauseView.layer.transform = CATransform3DScale(CATransform3DIdentity, 2, 2, 1)
+//        pauseView.layer.transform = CATransform3DScale(CATransform3DIdentity, 2.5, 2.5, 1)
+        let viewX = scene.view!.frame.midX
+        let viewY = scene.view!.frame.midY
+        pauseView.layer.position.x = viewX
+        pauseView.layer.position.y = viewY
         super.init()
         
         // Background Blur
@@ -37,20 +41,20 @@ class GameSceneStatePause: GKState {
         // Sprite image size: 41 x 21
         let buttonSize = CGRect(x: 0, y: 0, width: 41 * 4, height: 21 * 4)
         let unpauseButton = UIButton(frame: buttonSize)
-        unpauseButton.layer.position = CGPoint(
-            x: pauseView.layer.frame.midX - 105,
-            y: pauseView.layer.frame.midY - 180)
+        let buttonX = viewX - pauseView.layer.frame.midX / 2
+        let buttonY = viewY - pauseView.layer.frame.midY / 2
+        unpauseButton.layer.position = CGPoint(x: buttonX, y: buttonY)
         unpauseButton.setImage(UIImage(named: "unpause-button"), for: .normal)
         unpauseButton.imageView?.layer.magnificationFilter = kCAFilterNearest
         unpauseButton.addTarget(self, action: #selector(log(gestureRecognizer:)), for: .allEvents)
-        
+        unpBtn = unpauseButton
         pauseView.addSubview(blurEffectView)
         pauseView.addSubview(unpauseButton)
     }
     
     func log(gestureRecognizer: UIGestureRecognizer) {
         scene.stateMachine.enter(GameSceneStatePlaying.self)
-        print("hello~ from pause scene")
+        print("UNPAUSE BUTTON \(unpBtn!.layer.position)")
     }
     
     override func didEnter(from previousState: GKState?) {
