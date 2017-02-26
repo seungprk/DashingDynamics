@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import QuartzCore
 
 class GameSceneStatePause: GKState {
     
@@ -18,28 +19,33 @@ class GameSceneStatePause: GKState {
     init(scene: GameScene) {
         self.scene = scene
         
+        // Pause View
         pauseView = UIView(frame: scene.frame)
-        pauseView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
-        pauseView.layer.position.y += scene.frame.height / 2
-        pauseView.layer.position.x += scene.frame.width / 2
-        let pauseLabel = UILabel(frame: CGRect(origin: CGPoint(x: scene.frame.midX, y: scene.frame.midY), size: CGSize(width: 300, height: 100)))
-        pauseLabel.font = UIFont.systemFont(ofSize: 36)
-        pauseLabel.textAlignment = .center
-        pauseLabel.textColor = .black
-        pauseLabel.text = "PAUSED"
-        pauseLabel.frame.origin.x -= pauseLabel.frame.width * 0.5
-        pauseLabel.frame.origin.y -= pauseLabel.frame.height * 0.5
-        pauseView.layer.transform = CATransform3DScale(CATransform3DIdentity, 2, 2, 1)
-//        pauseView.addSubview(pauseLabel)
-        
-        
-        let unpauseButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
-        unpauseButton.layer.position = CGPoint(x: pauseView.layer.frame.midX, y: pauseView.layer.frame.midY)
-        unpauseButton.setTitle("UNPAUSE", for: .normal)
-        pauseView.addSubview(unpauseButton)
-
+        pauseView.backgroundColor = .clear
+        pauseView.layer.position.y += scene.frame.height / 2 + 20
+        pauseView.layer.position.x += scene.frame.width / 2 + 20
+        pauseView.layer.transform = CATransform3DScale(CATransform3DIdentity, 2.5, 2.5, 1)
         super.init()
+        
+        // Background Blur
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = pauseView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Unpause Button
+        // Sprite image size: 41 x 21
+        let buttonSize = CGRect(x: 0, y: 0, width: 41 * 4, height: 21 * 4)
+        let unpauseButton = UIButton(frame: buttonSize)
+        unpauseButton.layer.position = CGPoint(
+            x: pauseView.layer.frame.midX - 105,
+            y: pauseView.layer.frame.midY - 180)
+        unpauseButton.setImage(UIImage(named: "unpause-button"), for: .normal)
+        unpauseButton.imageView?.layer.magnificationFilter = kCAFilterNearest
         unpauseButton.addTarget(self, action: #selector(log(gestureRecognizer:)), for: .allEvents)
+        
+        pauseView.addSubview(blurEffectView)
+        pauseView.addSubview(unpauseButton)
     }
     
     func log(gestureRecognizer: UIGestureRecognizer) {
