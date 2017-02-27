@@ -25,17 +25,38 @@ class SKToggle: SKButton {
         
         if let imageOffName = imageOff {
             self.textureOff = SKTexture(imageNamed: imageOffName)
+            self.textureOff?.filteringMode = .nearest
         } else {
             self.textureOff = nil
         }
         if let imageOffHighlightName = imageOffHighlight {
             self.textureOffHighlight = SKTexture(imageNamed: imageOffHighlightName)
+            self.textureOffHighlight?.filteringMode = .nearest
         } else {
             self.textureOffHighlight = nil
         }
         self.isOn = isOn
         
         super.init(size: size, nameForImageNormal: imageNormal, nameForImageNormalHighlight: imageHighlight)
+    }
+    
+    init(isOn: Bool, imageNormal: String?, imageHighlight: String?, imageOff: String?, imageOffHighlight: String?) {
+        
+        if let imageOffName = imageOff {
+            self.textureOff = SKTexture(imageNamed: imageOffName)
+            self.textureOff?.filteringMode = .nearest
+        } else {
+            self.textureOff = nil
+        }
+        if let imageOffHighlightName = imageOffHighlight {
+            self.textureOffHighlight = SKTexture(imageNamed: imageOffHighlightName)
+            self.textureOffHighlight?.filteringMode = .nearest
+        } else {
+            self.textureOffHighlight = nil
+        }
+        self.isOn = isOn
+        
+        super.init(size: SKTexture(imageNamed: imageNormal!).size(), nameForImageNormal: imageNormal, nameForImageNormalHighlight: imageHighlight)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,6 +70,7 @@ class SKToggle: SKButton {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let texture = isOn ? textureNormalHighlight : textureOffHighlight {
             self.texture = texture
+            self.texture?.filteringMode = .nearest
         }
         
         delegate?.onButtonDown?(named: name)
@@ -62,6 +84,7 @@ class SKToggle: SKButton {
                 isOn = !isOn
                 if let texture = isOn ? textureNormal : textureOff {
                     self.texture = texture
+                    self.texture?.filteringMode = .nearest
                 }
                 
                 if let name = self.name {
@@ -72,6 +95,7 @@ class SKToggle: SKButton {
             } else {
                 if let texture = isOn ? textureNormal : textureOff {
                     self.texture = texture
+                    self.texture?.filteringMode = .nearest
                 }
             }
         }

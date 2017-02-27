@@ -23,7 +23,10 @@ class AudioManager {
         
         let soundData: [(fileName: String, type: AudioFileType)] = [
             ("charge", AudioFileType.wav),
-            ("energy-burst", AudioFileType.wav)]
+            ("energy-burst", AudioFileType.wav),
+            ("beep-low", AudioFileType.wav),
+            ("beep-high", AudioFileType.wav),
+            ("phase-death", AudioFileType.wav)]
         
         for data in soundData {
             if let sound = audioPlayerWithFile(file: data.fileName, type: data.type) {
@@ -60,6 +63,6 @@ class AudioManager {
     }
     
     func preInit() {
-        let temp = 1.0
+        _ = 0
     }
 }

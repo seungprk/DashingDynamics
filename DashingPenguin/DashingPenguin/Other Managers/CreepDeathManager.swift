@@ -100,7 +100,6 @@ class CreepDeathManager {
         if topOfContactNode + 1 < botOfCamera { // +1 to cover for float inaccuracies
             restartAnimateRows()
         }
-        print("Top of Contact: ", topOfContactNode, " Bot of Cam: ", botOfCamera)
     }
     
     func restartAnimateRows() {

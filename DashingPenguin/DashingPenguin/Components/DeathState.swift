@@ -30,6 +30,8 @@ class DeathState: GKState {
         let gameScene = spriteComponent?.node.scene as! GameScene
         gameScene.cameraFollowsPlayer = false
         
+        AudioManager.sharedInstance.play("phase-death")
+        
         if entity.death == "laser" {
             // Laser Death Animation
             let animationTime: TimeInterval = 0.5

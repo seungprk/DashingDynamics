@@ -32,6 +32,9 @@
 		24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */; };
 		24C222DA1E2B0182008BF20E /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C222D91E2B0182008BF20E /* BackgroundManager.swift */; };
 		24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */; };
+		24C764C91E6403A100331C6C /* beep-low.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24C764C71E6403A100331C6C /* beep-low.wav */; };
+		24C764CA1E6403A100331C6C /* beep-high.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24C764C81E6403A100331C6C /* beep-high.wav */; };
+		24C764CC1E6406EB00331C6C /* phase-death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24C764CB1E6406EB00331C6C /* phase-death.wav */; };
 		24CB458E1DF4DA0400CBF82B /* laser.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24CB458B1DF4DA0400CBF82B /* laser.atlas */; };
 		24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24CB458C1DF4DA0400CBF82B /* obstacle.atlas */; };
 		24CB45901DF4DA0400CBF82B /* obstaclewall.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24CB458D1DF4DA0400CBF82B /* obstaclewall.atlas */; };
@@ -105,6 +108,9 @@
 		24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleWall.swift; path = DashingPenguin/Platform/PlatformBlockObstacleWall.swift; sourceTree = "<group>"; };
 		24C222D91E2B0182008BF20E /* BackgroundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateCinematicPause.swift; path = DashingPenguin/Scenes/GameSceneStateCinematicPause.swift; sourceTree = "<group>"; };
+		24C764C71E6403A100331C6C /* beep-low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-low.wav"; sourceTree = "<group>"; };
+		24C764C81E6403A100331C6C /* beep-high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-high.wav"; sourceTree = "<group>"; };
+		24C764CB1E6406EB00331C6C /* phase-death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "phase-death.wav"; sourceTree = "<group>"; };
 		24CB458B1DF4DA0400CBF82B /* laser.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = laser.atlas; sourceTree = "<group>"; };
 		24CB458C1DF4DA0400CBF82B /* obstacle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacle.atlas; sourceTree = "<group>"; };
 		24CB458D1DF4DA0400CBF82B /* obstaclewall.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstaclewall.atlas; sourceTree = "<group>"; };
@@ -278,6 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				24DE7A531E55718B0091ACDC /* energy-burst.wav */,
+				24C764C71E6403A100331C6C /* beep-low.wav */,
+				24C764CB1E6406EB00331C6C /* phase-death.wav */,
+				24C764C81E6403A100331C6C /* beep-high.wav */,
 				7F24DF501D92019600796DB0 /* charge.wav */,
 			);
 			name = Audio;
@@ -448,6 +457,7 @@
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				24CB45901DF4DA0400CBF82B /* obstaclewall.atlas in Resources */,
 				24D8A6E51E2C1AA00041268E /* background.atlas in Resources */,
+				24C764C91E6403A100331C6C /* beep-low.wav in Resources */,
 				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
 				2421DC531E35798B00748DA7 /* score-hud.atlas in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
@@ -455,10 +465,12 @@
 				24E9C23C1DC6AFA700F0DB61 /* energymatter.atlas in Resources */,
 				24DE7A541E55718B0091ACDC /* energy-burst.wav in Resources */,
 				7F24DF511D92019600796DB0 /* charge.wav in Resources */,
+				24C764CC1E6406EB00331C6C /* phase-death.wav in Resources */,
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
 				24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */,
 				244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */,
+				24C764CA1E6403A100331C6C /* beep-high.wav in Resources */,
 				24CB458E1DF4DA0400CBF82B /* laser.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

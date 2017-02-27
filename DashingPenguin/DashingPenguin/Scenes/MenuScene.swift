@@ -19,123 +19,93 @@ let SoundStringOff = "Sound Off"
 
 class MenuScene: SKScene, SKButtonDelegate {
     
-    var motionManager: CMMotionManager?
-    
-    var background1: SKSpriteNode?
-    var background2: SKSpriteNode?
-    
-    var nodesToAnimateIn = [SKNode]()
-    
     override init(size: CGSize) {
         super.init(size: size)
         
-        // tilemap iOS 10.0+ only
-//        let backgroundTexture = SKTexture(imageNamed: "menu-background")
-//        let backgroundDefinition = SKTileDefinition(texture: backgroundTexture)
-//        let backgroundGroup = SKTileGroup(tileDefinition: backgroundDefinition)
-        
-        let backgroundTexture = SKTexture(imageNamed: "menu-background")
-        backgroundTexture.filteringMode = .nearest
-        let bgSize = backgroundTexture.size()
-        let cols = size.width / bgSize.width
-        let rows = size.height / bgSize.height
-        print("SIZE : \(bgSize)")
-        
-        for c in 0...Int(cols) {
-            for r in 0...Int(rows) {
-                let bgTile = SKSpriteNode(texture: backgroundTexture)
-                bgTile.position = CGPoint(
-                    x: CGFloat(c) * cols * 2.2, // + size.width / 2,
-                    y: CGFloat(r) * rows * 1.25 + 10) // + size.height / 2)
-                bgTile.zPosition = -10000
-                addChild(bgTile)
-            }
-        }
-        
         backgroundColor = .init(red: 0.05, green: 0.09, blue: 0.09, alpha: 1)
         
-        let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
-        guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist"); return }
+        // Add Shell Border
+        let shellLeftTexture = SKTexture(imageNamed: "shellpiece-left")
+        let shellRightTexture = SKTexture(imageNamed: "shellpiece-right")
+        let shellTopTexture = SKTexture(imageNamed: "shellpiece-top")
+        let shellBottomTexture = SKTexture(imageNamed: "shellpiece-bottom")
         
-        let logo = SKSpriteNode(imageNamed: "menu-title")
-        logo.size = CGSize(width: 120, height: 40)
-        logo.texture?.filteringMode = .nearest
-        logo.position = CGPoint(x: frame.midX, y: frame.midY + 60)
-        addChild(logo)
+        shellLeftTexture.filteringMode = .nearest
+        shellRightTexture.filteringMode = .nearest
+        shellTopTexture.filteringMode = .nearest
+        shellBottomTexture.filteringMode = .nearest
         
+        let shellLeft = SKSpriteNode(texture: shellLeftTexture)
+        shellLeft.position = CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2)
+        let shellRight = SKSpriteNode(texture: shellRightTexture)
+        shellRight.position = CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2)
+        let shellTop = SKSpriteNode(texture: shellTopTexture)
+        shellTop.position = CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2)
+        let shellBottom = SKSpriteNode(texture: shellBottomTexture)
+        shellBottom.position = CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 2)
         
-        let playButton = SKButton(size: CGSize(width: 120, height: 40), nameForImageNormal: "playbutton", nameForImageNormalHighlight: "playbutton-highlight")
+        addChild(shellLeft)
+        addChild(shellRight)
+        addChild(shellTop)
+        addChild(shellBottom)
+        
+        // Add Static Graphics
+        
+        let border = SKSpriteNode(imageNamed: "menu-border")
+        border.texture?.filteringMode = .nearest
+        border.position = CGPoint(x: frame.midX, y: frame.midY + 26)
+        addChild(border)
+        
+        let title = SKSpriteNode(imageNamed: "menu-title")
+        title.texture?.filteringMode = .nearest
+        title.position = CGPoint(x: frame.midX, y: frame.midY + 107)
+        addChild(title)
+        
+        let box1 = SKSpriteNode(imageNamed: "menu-box1")
+        box1.texture?.filteringMode = .nearest
+        box1.position = CGPoint(x: frame.midX, y: frame.midY + 73)
+        addChild(box1)
+        
+        let box2 = SKSpriteNode(imageNamed: "menu-box2")
+        box2.texture?.filteringMode = .nearest
+        box2.position = CGPoint(x: frame.midX, y: frame.midY + 30)
+        addChild(box2)
+        
+        let box3 = SKSpriteNode(imageNamed: "menu-box3")
+        box3.texture?.filteringMode = .nearest
+        box3.position = CGPoint(x: frame.midX, y: frame.midY - 47)
+        addChild(box3)
+        
+        // Add Buttons
+        
+        let playButton = SKButton(nameForImageNormal: "menu-play", nameForImageNormalHighlight: "menu-play-active")
         playButton.name = "playButton"
         playButton.delegate = self
         playButton.texture?.filteringMode = .nearest
-        playButton.position = CGPoint(x: size.width / 2 - 0.5, y: size.height * 0.2 - 4.5)
+        playButton.position = CGPoint(x: size.width / 2, y: size.height / 2 - 104)
         addChild(playButton)
         
+        let scoreButton = SKButton(nameForImageNormal: "menu-score", nameForImageNormalHighlight: "menu-score-active")
+        scoreButton.name = "scoreButton"
+        scoreButton.delegate = self
+        scoreButton.texture?.filteringMode = .nearest
+        scoreButton.position = CGPoint(x: size.width / 2 + 31, y: size.height / 2 - 5)
+        addChild(scoreButton)
         
+        // Add Sound Toggle
+        
+        let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
+        guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist"); return }
         guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
-
-        let soundToggle = SKToggle(size: CGSize(width: 40.5, height: 20.5), isOn: isSoundOn, imageNormal: "sound-on", imageHighlight: "sound-on-highlight", imageOff: "sound-off", imageOffHighlight: "sound-off-highlight")
+        
+        let soundToggle = SKToggle(isOn: isSoundOn, imageNormal: "menu-sound", imageHighlight: "menu-sound-active", imageOff: "menu-sound-off", imageOffHighlight: "menu-sound-off-active")
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
-        soundToggle.texture?.filteringMode = .nearest
-        soundToggle.position = CGPoint(x: size.width / 2 - soundToggle.size.width + 0.5, y: size.height * 0.8 + 13.2)
+        soundToggle.position = CGPoint(x: size.width / 2 - 31, y: size.height / 2 - 5)
         addChild(soundToggle)
         
-        let outline = SKSpriteNode(imageNamed: "robot-blueprint-outline")
-        outline.texture?.filteringMode = .nearest
-        outline.position = CGPoint(x: frame.midX, y: frame.midY - 20)
-        addChild(outline)
-        
-        let panSpeed: TimeInterval = 4
-        let slowPan = SKAction.sequence([ SKAction.moveBy(x: 1, y: 0, duration: panSpeed ),
-                                          SKAction.moveBy(x: 0, y: 1, duration: panSpeed ),
-                                          SKAction.moveBy(x: -1, y: -1, duration: panSpeed) ])
-        outline.run(SKAction.repeatForever(slowPan))
-
-        
-        /*
-        let leaderboardButton = SKButton(size: CGSize(width: 30, height: 30), nameForImageNormal: "leaderboard", nameForImageNormalHighlight: "leaderboard_highlight")
-        leaderboardButton.name = "leaderboardButton"
-        leaderboardButton.delegate = self
-        leaderboardButton.texture?.filteringMode = .nearest
-        leaderboardButton.position = CGPoint(x: size.width / 2 + leaderboardButton.size.width, y: size.height * 0.8)
-        addChild(leaderboardButton)
-        */
-        
-        /*
-        let borderInset: CGFloat = 10
-        let border = SKShapeNode(rect: CGRect(x: borderInset, y: borderInset, width: size.width - borderInset * 2, height: size.height - borderInset * 2))
-        border.strokeColor = .init(red: 43/255, green: 237/255, blue: 230/255, alpha: 0.5)
-        border.isUserInteractionEnabled = false
-        border.zPosition = -100000
-        addChild(border)
-        */
-        
-        /*
-        background1 = SKSpriteNode(imageNamed: "background_1")
-        background2 = SKSpriteNode(imageNamed: "background_2")
-        
-        background1?.size = CGSize(width: size.width, height: size.height)
-        background2?.size = CGSize(width: size.width, height: size.height)
-        
-        background1?.position = CGPoint(x: frame.midX, y: frame.midY)
-        background2?.position = CGPoint(x: frame.midX, y: frame.midY)
-        
-        background1?.zPosition = -100000
-        background2?.zPosition = -100000
-        
-        addChild(background1!)
-        addChild(background2!)
-        */
-        
-        //motionManager = CMMotionManager()
-        //motionManager?.startAccelerometerUpdates()
-        
-        /*
-        for child in children {
-            nodesToAnimateIn.append(child)
-        }
-        */
+        // Misc
+        AudioManager.sharedInstance.preInit()
     }
     
     override func didMove(to view: SKView) {
@@ -177,25 +147,9 @@ class MenuScene: SKScene, SKButtonDelegate {
         }
     }
     
-    func movePixel(x: CGFloat, y: CGFloat, isHorizontal: Bool, iter: Int) {
-        let pixel = SKSpriteNode(imageNamed: "white-pixel")
-        pixel.position = CGPoint(x: x, y: y)
-        if isHorizontal {
-            
-            let shift = SKAction.moveTo(x: 1, duration: 0.2)
-            pixel.run(shift)
-        }
-    }
-    
     func presentGameScene() {
-        let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
-        let moveOutToLeft = SKAction.move(to: CGPoint(x: view!.center.x - view!.frame.width, y: view!.center.y), duration: 0.5)
-        fadeOut.timingMode = .easeIn
-        moveOutToLeft.timingMode = .easeIn
-        
-        // Set Up and Present Main Game Scene
         let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
-        let transition = SKTransition.moveIn(with: .up, duration: 0.5)
+        let transition = SKTransition.fade(withDuration: 2)
         if let view = self.view {
             view.presentScene(gameScene, transition: transition)
         }
@@ -204,7 +158,6 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     func toggleSound() {
-        AudioManager.sharedInstance.play("charge")
         
         guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
             else { print("can't make PlayerData.plist url") ; return }
@@ -223,10 +176,15 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         switch named {
         case "playButton":
+            AudioManager.sharedInstance.play("beep-high")
             presentGameScene()
         
         case "soundToggle":
+            AudioManager.sharedInstance.play("beep-low")
             toggleSound()
+        
+        case "scoreButton":
+            AudioManager.sharedInstance.play("beep-low")
             
         default:
             break
@@ -243,33 +201,5 @@ class MenuScene: SKScene, SKButtonDelegate {
         default:
             print("No action registered for onButtonDown(_:) of \(named) button")
         }
-    }
-    
-    var blinkCounter = 0
-    
-    func blinkIn(node: SKNode) {
-        blinkCounter += 1
-        let blinkIn = SKAction.fadeIn(withDuration: 0)
-        let blinkOut = SKAction.fadeOut(withDuration: 0)
-        let initialDelay = SKAction.wait(forDuration: 0.2 * TimeInterval(blinkCounter))
-        let delay = SKAction.wait(forDuration: 0.04)
-        
-        let blinkInSequence = SKAction.repeat(SKAction.sequence([delay, blinkOut, delay, blinkIn]), count: 4)
-
-        node.alpha = 0
-        node.run(SKAction.sequence([initialDelay, blinkIn, blinkInSequence, periodicBlink()]))
-    }
-    
-    func periodicBlink() -> SKAction {
-    // private let periodicBlink: SKAction = {
-        let randomOffset = TimeInterval( Double(arc4random_uniform(40)) / 10.0 )// * 10.0
-        
-        let blinkIn = SKAction.fadeIn(withDuration: 0)
-        let blinkOut = SKAction.fadeOut(withDuration: 0)
-        let delay = SKAction.wait(forDuration: 0.04)
-        
-        let blinkSequence = SKAction.repeat(SKAction.sequence([delay, blinkOut, delay, blinkIn]), count: 4)
-        let forever = SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 6), blinkSequence]))
-        return SKAction.sequence([SKAction.wait(forDuration: randomOffset), forever])
     }
 }

@@ -34,6 +34,27 @@ class SKButton: SKSpriteNode {
         
         if let nameNormal = nameForImageNormal {
             textureNormal = SKTexture(imageNamed: nameNormal)
+            textureNormal?.filteringMode = .nearest
+        } else {
+            textureNormal = nil
+        }
+        
+        if let nameHighlight = nameForImageNormalHighlight {
+            textureNormalHighlight = SKTexture(imageNamed: nameHighlight)
+            textureNormalHighlight?.filteringMode = .nearest
+        } else {
+            textureNormalHighlight = nil
+        }
+        
+        super.init(texture: textureNormal, color: .clear, size: size)
+        
+        self.isUserInteractionEnabled = true
+    }
+    
+    init(nameForImageNormal: String?, nameForImageNormalHighlight: String?) {
+        
+        if let nameNormal = nameForImageNormal {
+            textureNormal = SKTexture(imageNamed: nameNormal)
         } else {
             textureNormal = nil
         }
@@ -44,7 +65,7 @@ class SKButton: SKSpriteNode {
             textureNormalHighlight = nil
         }
         
-        super.init(texture: textureNormal, color: .clear, size: size)
+        super.init(texture: textureNormal, color: .clear, size: (textureNormal?.size())!)
         
         self.isUserInteractionEnabled = true
     }
@@ -56,6 +77,7 @@ class SKButton: SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let textureHiglight = textureNormalHighlight {
             self.texture = textureHiglight
+            self.texture?.filteringMode = .nearest
         }
 
         delegate?.onButtonDown?(named: name)

@@ -101,11 +101,13 @@ class GameScene: SKScene, GameInputDelegate {
     func centerCamera() {
         if let playerSprite = player?.component(ofType: SpriteComponent.self)?.node {
             let endY = playerSprite.position.y + self.size.height * 0.3
-            let move = SKAction.move(to: CGPoint(x: 0, y: endY), duration: 0.2)
-            move.timingMode = .easeOut
-            cameraNode?.run(move)
-            
-            bgManager.parallaxMove(withEndY: endY)
+            if cameraNode?.position.y != endY {
+                let move = SKAction.move(to: CGPoint(x: 0, y: endY), duration: 0.2)
+                move.timingMode = .easeOut
+                cameraNode?.run(move)
+                
+                bgManager.parallaxMove(withEndY: endY)
+            }
         }
     }
     

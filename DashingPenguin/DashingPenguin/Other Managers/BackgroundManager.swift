@@ -17,6 +17,7 @@ class BackgroundManager {
     var bgAnimatedTextureFrames: [SKTexture]!
     var timeElapsed: TimeInterval = 0
     var defaultColor = UIColor(red: 31/255, green: 151/255, blue: 255/255, alpha: 1.0)
+    var parallaxFactor: CGFloat = 0.3
     
     init(scene: GameScene) {
         self.scene = scene
@@ -64,7 +65,6 @@ class BackgroundManager {
     }
     
     func parallaxMove(withEndY: CGFloat) {
-        let parallaxFactor: CGFloat = 0.3
         let parallaxMove = SKAction.move(to: CGPoint(x: 0, y: -withEndY * parallaxFactor), duration: 0.2)
         parallaxMove.timingMode = .easeOut
         bgNode.run(parallaxMove)
