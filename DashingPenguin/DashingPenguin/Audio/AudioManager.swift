@@ -22,10 +22,12 @@ class AudioManager {
     init() {
         
         let soundData: [(fileName: String, type: AudioFileType)] = [
-            ("charge", AudioFileType.wav)]
+            ("charge", AudioFileType.wav),
+            ("energy-burst", AudioFileType.wav)]
         
         for data in soundData {
             if let sound = audioPlayerWithFile(file: data.fileName, type: data.type) {
+                sound.prepareToPlay()
                 sounds.updateValue(sound, forKey: data.fileName)
             }
         }
@@ -47,6 +49,17 @@ class AudioManager {
     }
     
     func play(_ name: String) {
-       sounds[name]?.play()
+        let sound = sounds[name]
+        DispatchQueue.global(qos: .background).async {
+            if (sound?.isPlaying)! {
+                sound?.pause()
+            }
+            sound?.currentTime = 0
+            sound?.play()
+        }
+    }
+    
+    func preInit() {
+        let temp = 1.0
     }
 }
