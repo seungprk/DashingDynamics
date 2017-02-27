@@ -194,11 +194,8 @@ class MenuScene: SKScene, SKButtonDelegate {
         moveOutToLeft.timingMode = .easeIn
         
         // Set Up and Present Main Game Scene
-        let gameScene = GameScene(size: self.size)
-        gameScene.scaleMode = SKSceneScaleMode.aspectFill
-        gameScene.menuScene = self
+        let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
         let transition = SKTransition.moveIn(with: .up, duration: 0.5)
-        
         if let view = self.view {
             view.presentScene(gameScene, transition: transition)
         }

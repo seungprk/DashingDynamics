@@ -41,6 +41,12 @@ class GameScene: SKScene, GameInputDelegate {
     
     // MARK: - State Machine setup
     
+    convenience init(size: CGSize, menu: MenuScene, scaleMode: SKSceneScaleMode) {
+        self.init(size: size)
+        self.menuScene = menu
+        self.scaleMode = scaleMode
+    }
+    
     override func didMove(to view: SKView) {
 
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
