@@ -150,7 +150,17 @@ class MenuScene: SKScene, SKButtonDelegate {
     func presentGameScene() {
         let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
         let transition = SKTransition.fade(withDuration: 2)
+
         if let view = self.view {
+            
+            let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
+            let destination = CGPoint(
+                x: view.center.x - view.frame.width,
+                y: view.center.y)
+            let moveOutToLeft = SKAction.move(to: destination, duration: 0.5)
+            fadeOut.timingMode = .easeIn
+            moveOutToLeft.timingMode = .easeIn
+            
             view.presentScene(gameScene, transition: transition)
         }
         
