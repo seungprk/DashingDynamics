@@ -24,7 +24,7 @@ class GameSceneStateGameover: GKState {
         let delay = SKAction.wait(forDuration: 2.0)
         
         scene.run(delay) {
-            let transition = SKTransition.moveIn(with: .up, duration: 0.5)
+            let transition = SKTransition.fade(withDuration: 1)
             
             if let view = self.scene.view,
                let menu = self.scene.menuScene{

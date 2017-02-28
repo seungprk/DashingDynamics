@@ -19,10 +19,19 @@ let SoundStringOff = "Sound Off"
 
 class MenuScene: SKScene, SKButtonDelegate {
     
+    var hasBeenPresentedOnce = false
+    
     override init(size: CGSize) {
         super.init(size: size)
         
         backgroundColor = .init(red: 0.05, green: 0.09, blue: 0.09, alpha: 1)
+        AudioManager.sharedInstance.preInit()
+        
+        // Add Camera
+        let cameraNode = SKCameraNode()
+        cameraNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        camera = cameraNode
+        addChild(cameraNode)
         
         // Add Shell Border
         let shellLeftTexture = SKTexture(imageNamed: "shellpiece-left")
@@ -36,13 +45,17 @@ class MenuScene: SKScene, SKButtonDelegate {
         shellBottomTexture.filteringMode = .nearest
         
         let shellLeft = SKSpriteNode(texture: shellLeftTexture)
-        shellLeft.position = CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2)
+        shellLeft.position = CGPoint(x: -shellLeftTexture.size().width / 2, y: size.height / 2)
+        shellLeft.zPosition = 0
         let shellRight = SKSpriteNode(texture: shellRightTexture)
-        shellRight.position = CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2)
+        shellRight.position = CGPoint(x: size.width + shellRightTexture.size().width / 2, y: size.height / 2)
+        shellRight.zPosition = 0
         let shellTop = SKSpriteNode(texture: shellTopTexture)
-        shellTop.position = CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2)
+        shellTop.position = CGPoint(x: size.width / 2, y: size.height + shellTopTexture.size().height / 2)
+        shellTop.zPosition = 1
         let shellBottom = SKSpriteNode(texture: shellBottomTexture)
-        shellBottom.position = CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 2)
+        shellBottom.position = CGPoint(x: size.width / 2, y: -shellBottomTexture.size().height / 2)
+        shellBottom.zPosition = 1
         
         addChild(shellLeft)
         addChild(shellRight)
@@ -52,28 +65,38 @@ class MenuScene: SKScene, SKButtonDelegate {
         // Add Static Graphics
         
         let border = SKSpriteNode(imageNamed: "menu-border")
+        border.name = "border"
         border.texture?.filteringMode = .nearest
         border.position = CGPoint(x: frame.midX, y: frame.midY + 26)
+        border.alpha = 0
         addChild(border)
         
         let title = SKSpriteNode(imageNamed: "menu-title")
+        title.name = "title"
         title.texture?.filteringMode = .nearest
         title.position = CGPoint(x: frame.midX, y: frame.midY + 107)
+        title.alpha = 0
         addChild(title)
         
         let box1 = SKSpriteNode(imageNamed: "menu-box1")
+        box1.name = "box1"
         box1.texture?.filteringMode = .nearest
         box1.position = CGPoint(x: frame.midX, y: frame.midY + 73)
+        box1.alpha = 0
         addChild(box1)
         
         let box2 = SKSpriteNode(imageNamed: "menu-box2")
+        box2.name = "box2"
         box2.texture?.filteringMode = .nearest
         box2.position = CGPoint(x: frame.midX, y: frame.midY + 30)
+        box2.alpha = 0
         addChild(box2)
         
         let box3 = SKSpriteNode(imageNamed: "menu-box3")
+        box3.name = "box3"
         box3.texture?.filteringMode = .nearest
         box3.position = CGPoint(x: frame.midX, y: frame.midY - 47)
+        box3.alpha = 0
         addChild(box3)
         
         // Add Buttons
@@ -83,6 +106,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         playButton.delegate = self
         playButton.texture?.filteringMode = .nearest
         playButton.position = CGPoint(x: size.width / 2, y: size.height / 2 - 104)
+        playButton.alpha = 0
         addChild(playButton)
         
         let scoreButton = SKButton(nameForImageNormal: "menu-score", nameForImageNormalHighlight: "menu-score-active")
@@ -90,6 +114,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         scoreButton.delegate = self
         scoreButton.texture?.filteringMode = .nearest
         scoreButton.position = CGPoint(x: size.width / 2 + 31, y: size.height / 2 - 5)
+        scoreButton.alpha = 0
         addChild(scoreButton)
         
         // Add Sound Toggle
@@ -102,34 +127,75 @@ class MenuScene: SKScene, SKButtonDelegate {
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
         soundToggle.position = CGPoint(x: size.width / 2 - 31, y: size.height / 2 - 5)
+        soundToggle.alpha = 0
         addChild(soundToggle)
         
-        // Misc
-        AudioManager.sharedInstance.preInit()
+        // Shell Slide In Animation
+        
+        let slideInDur = TimeInterval(2)
+        let slideInLeft = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2), duration: slideInDur)
+        let slideInRight = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2), duration: slideInDur)
+        let slideInTop = SKAction.move(to: CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2), duration: slideInDur)
+        let slideInBottom = SKAction.move(to: CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 2), duration: slideInDur)
+        
+        shellLeft.run(slideInLeft)
+        shellRight.run(slideInRight)
+        shellTop.run(slideInTop)
+        shellBottom.run(slideInBottom)
+        
+        // Interface Blink In Animation
+        
+        let wait = SKAction.wait(forDuration: slideInDur)
+        let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5)
+        let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
+        let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5)
+        let flickerIn = SKAction.sequence([wait, firstFadeIn, firstFadeOut, secondFadeIn])
+        
+        border.run(flickerIn)
+        title.run(flickerIn)
+        box1.run(flickerIn)
+        box2.run(flickerIn)
+        box3.run(flickerIn)
+        scoreButton.run(flickerIn)
+        soundToggle.run(flickerIn)
+        playButton.run(flickerIn)
     }
     
     override func didMove(to view: SKView) {
-        /*for node in nodesToAnimateIn {
-            blinkIn(node: node)
-        }*/
+        if hasBeenPresentedOnce == true {
+            self.childNode(withName: "border")?.alpha = 0
+            self.childNode(withName: "title")?.alpha = 0
+            self.childNode(withName: "box1")?.alpha = 0
+            self.childNode(withName: "box2")?.alpha = 0
+            self.childNode(withName: "box3")?.alpha = 0
+            self.childNode(withName: "scoreButton")?.alpha = 0
+            self.childNode(withName: "soundToggle")?.alpha = 0
+            self.childNode(withName: "playButton")?.alpha = 0
+            
+            let zoomOut = SKAction.scale(to: 1.0, duration: 0.5)
+            camera?.run(zoomOut, completion: {
+                let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5)
+                let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
+                let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5)
+                let flickerIn = SKAction.sequence([firstFadeIn, firstFadeOut, secondFadeIn])
+                
+                self.childNode(withName: "border")?.run(flickerIn)
+                self.childNode(withName: "title")?.run(flickerIn)
+                self.childNode(withName: "box1")?.run(flickerIn)
+                self.childNode(withName: "box2")?.run(flickerIn)
+                self.childNode(withName: "box3")?.run(flickerIn)
+                self.childNode(withName: "scoreButton")?.run(flickerIn)
+                self.childNode(withName: "soundToggle")?.run(flickerIn)
+                self.childNode(withName: "playButton")?.run(flickerIn)
+            })
+        } else {
+            hasBeenPresentedOnce = true
+        }
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
-        /*
-        if let motion = motionManager?.accelerometerData {
-            print("\(motion.acceleration.x) \(motion.acceleration.y)")
-            
-            let mX = CGFloat(motion.acceleration.x * 10)
-            let mY = CGFloat(motion.acceleration.y * 10)
-//            scene?.run(.move(to: CGPoint(x: mX, y: mY), duration: 0.1) )
-            
-            //view?.frame.origin.x = mX
-            //view?.frame.origin.y = mY
-            
-            background1?.position = CGPoint(x: frame.midX - mX, y: frame.midY - mY)
-            background2?.position = CGPoint(x: frame.midX - mX * 4, y: frame.midY - mY * 4)
-        }
-        */
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -137,34 +203,32 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches {
-            let touchLocation = t.location(in: self)
-            for node in nodes(at: touchLocation) {
-                if node.name == "playLabel" {
-                    presentGameScene()
-                }
-            }
-        }
+
     }
     
     func presentGameScene() {
-        let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
-        let transition = SKTransition.fade(withDuration: 2)
-
-        if let view = self.view {
-            
-            let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
-            let destination = CGPoint(
-                x: view.center.x - view.frame.width,
-                y: view.center.y)
-            let moveOutToLeft = SKAction.move(to: destination, duration: 0.5)
-            fadeOut.timingMode = .easeIn
-            moveOutToLeft.timingMode = .easeIn
-            
-            view.presentScene(gameScene, transition: transition)
-        }
+        let animationDur = TimeInterval(0.5)
         
-        AudioManager.sharedInstance.preInit()
+        // Fade out animation
+        let fadeOut = SKAction.fadeOut(withDuration: animationDur)
+        self.childNode(withName: "border")?.run(fadeOut)
+        self.childNode(withName: "title")?.run(fadeOut)
+        self.childNode(withName: "box1")?.run(fadeOut)
+        self.childNode(withName: "box2")?.run(fadeOut)
+        self.childNode(withName: "box3")?.run(fadeOut)
+        self.childNode(withName: "scoreButton")?.run(fadeOut)
+        self.childNode(withName: "soundToggle")?.run(fadeOut)
+        self.childNode(withName: "playButton")?.run(fadeOut)
+        
+        // Zoom animation
+        let zoomInAction = SKAction.scale(to: 0.77, duration: animationDur)
+        camera?.run(zoomInAction, completion: {
+            
+            // Present the scene
+            let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
+            let transition = SKTransition.fade(withDuration: 1)
+            self.view?.presentScene(gameScene, transition: transition)
+        })
     }
     
     func toggleSound() {
@@ -186,16 +250,20 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         switch named {
         case "playButton":
-            AudioManager.sharedInstance.play("beep-high")
-            presentGameScene()
+            if childNode(withName: "playButton")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-high")
+                presentGameScene()
+            }
         
         case "soundToggle":
-            AudioManager.sharedInstance.play("beep-low")
-            toggleSound()
-        
+            if childNode(withName: "soundToggle")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-low")
+                toggleSound()
+            }
         case "scoreButton":
-            AudioManager.sharedInstance.play("beep-low")
-            
+            if childNode(withName: "scoreButton")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-low")
+            }
         default:
             break
         }
