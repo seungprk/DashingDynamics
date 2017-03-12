@@ -21,6 +21,26 @@ class GameSceneStateGameover: GKState {
     override func didEnter(from previousState: GKState?) {
         print("game over")
         
+        // Once we enter this scene
+        // we need to animate in the shell border
+        // fade the game scene to black.
+        
+        // calculate the session statistics
+        guard let scoreManager = scene.scoreManager else { return }
+        let totalScore    = scoreManager.getTotalScore()
+        let distanceScore = scoreManager.getDistance()
+        let platformScore = scoreManager.getPlatformScore()
+
+        // display the session statistics
+        //   high score
+        //   current score
+        //   distance traveled
+        //   points collected
+        //     NOTE: make sure the stats are formatted, padded, and aligned properly
+        // add button interaction to 
+        //   exit to menu
+        //   restart a new session
+        
         let delay = SKAction.wait(forDuration: 2.0)
         
         scene.run(delay) {

@@ -33,7 +33,18 @@ class ScoreManager {
         scene.hudManager.popAnimateScore()
     }
     
+    // These may be changed safely in the future to provide better 
+    // score results
+
     func getTotalScore() -> Int {
         return Int(distanceScore + platformScore)
+    }
+    
+    func getDistance() -> Int {
+        return Int(distanceScore)
+    }
+    
+    func getPlatformScore() -> Int {
+        return Int(platformScore)
     }
 }
