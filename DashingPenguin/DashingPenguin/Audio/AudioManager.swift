@@ -11,6 +11,7 @@ import AVFoundation
 enum AudioFileType: String {
     case wav = "wav"
     case m4a = "m4a"
+    case mp3 = "mp3"
 }
 
 class AudioManager {
@@ -26,7 +27,13 @@ class AudioManager {
             ("energy-burst", AudioFileType.wav),
             ("beep-low", AudioFileType.wav),
             ("beep-high", AudioFileType.wav),
-            ("phase-death", AudioFileType.wav)]
+            ("phase-death", AudioFileType.wav),
+            ("shell-move", AudioFileType.wav),
+            ("chirp", AudioFileType.wav),
+            ("energy-up", AudioFileType.wav),
+            ("menu-beeping", AudioFileType.wav),
+            ("music", AudioFileType.mp3),
+            ("laser-charge", AudioFileType.wav)]
         
         for data in soundData {
             if let sound = audioPlayerWithFile(file: data.fileName, type: data.type) {
@@ -59,6 +66,27 @@ class AudioManager {
             }
             sound?.currentTime = 0
             sound?.play()
+        }
+    }
+    
+    func playLoop(_ name: String) {
+        let sound = sounds[name]
+        DispatchQueue.global(qos: .background).async {
+            if (sound?.isPlaying)! {
+                sound?.pause()
+            }
+            sound?.currentTime = 0
+            sound?.numberOfLoops = -1
+            sound?.play()
+        }
+    }
+    
+    func stop(_ name: String) {
+        let sound = sounds[name]
+        DispatchQueue.global(qos: .background).async {
+            if (sound?.isPlaying)! {
+                sound?.pause()
+            }
         }
     }
     

@@ -141,7 +141,12 @@ class MenuScene: SKScene, SKButtonDelegate {
         shellLeft.run(slideInLeft)
         shellRight.run(slideInRight)
         shellTop.run(slideInTop)
-        shellBottom.run(slideInBottom)
+        shellBottom.run(slideInBottom, completion: {
+            AudioManager.sharedInstance.playLoop("menu-beeping")
+            AudioManager.sharedInstance.playLoop("music")
+        })
+        
+        AudioManager.sharedInstance.play("shell-move")
         
         // Interface Blink In Animation
         
@@ -172,7 +177,7 @@ class MenuScene: SKScene, SKButtonDelegate {
             self.childNode(withName: "soundToggle")?.alpha = 0
             self.childNode(withName: "playButton")?.alpha = 0
             
-            let zoomOut = SKAction.scale(to: 1.0, duration: 0.5)
+            let zoomOut = SKAction.scale(to: 1.0, duration: 0.25)
             camera?.run(zoomOut, completion: {
                 let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5)
                 let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
@@ -187,11 +192,13 @@ class MenuScene: SKScene, SKButtonDelegate {
                 self.childNode(withName: "scoreButton")?.run(flickerIn)
                 self.childNode(withName: "soundToggle")?.run(flickerIn)
                 self.childNode(withName: "playButton")?.run(flickerIn)
+                
+                AudioManager.sharedInstance.playLoop("menu-beeping")
+                AudioManager.sharedInstance.playLoop("music")
             })
         } else {
             hasBeenPresentedOnce = true
         }
-        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -207,7 +214,7 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     func presentGameScene() {
-        let animationDur = TimeInterval(0.5)
+        let animationDur = TimeInterval(0.25)
         
         // Fade out animation
         let fadeOut = SKAction.fadeOut(withDuration: animationDur)
@@ -221,7 +228,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         self.childNode(withName: "playButton")?.run(fadeOut)
         
         // Zoom animation
-        let zoomInAction = SKAction.scale(to: 0.77, duration: animationDur)
+        let zoomInAction = SKAction.scale(to: 0.75, duration: animationDur)
         camera?.run(zoomInAction, completion: {
             
             // Present the scene
@@ -229,6 +236,8 @@ class MenuScene: SKScene, SKButtonDelegate {
             let transition = SKTransition.fade(withDuration: 1)
             self.view?.presentScene(gameScene, transition: transition)
         })
+        
+        AudioManager.sharedInstance.stop("menu-beeping")
     }
     
     func toggleSound() {

@@ -24,8 +24,9 @@ class GameSceneStateGameover: GKState {
         let delay = SKAction.wait(forDuration: 2.0)
         
         scene.run(delay) {
-            let transition = SKTransition.fade(withDuration: 1)
+            AudioManager.sharedInstance.stop("music")
             
+            let transition = SKTransition.fade(withDuration: 1)
             if let view = self.scene.view,
                let menu = self.scene.menuScene{
                 view.presentScene(menu, transition: transition)
