@@ -14,6 +14,7 @@
 		2421DC531E35798B00748DA7 /* score-hud.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2421DC521E35798B00748DA7 /* score-hud.atlas */; };
 		2421DC551E358AE900748DA7 /* number-font.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2421DC541E358AE900748DA7 /* number-font.atlas */; };
 		2425B70E1DBD73DD005168A7 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2425B70D1DBD73DD005168A7 /* player.atlas */; };
+		242850641E75C6D40090B84F /* laser-charge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 242850631E75C6D40090B84F /* laser-charge.wav */; };
 		242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DA8281DA0C90400272FB5 /* EnergyMatter.swift */; };
 		243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */; };
 		244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 244583B31E2AB2F200867EC1 /* hazard-warning.atlas */; };
@@ -47,6 +48,11 @@
 		24DE7A541E55718B0091ACDC /* energy-burst.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24DE7A531E55718B0091ACDC /* energy-burst.wav */; };
 		24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */; };
 		24E9C23C1DC6AFA700F0DB61 /* energymatter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */; };
+		24ED958F1E6C8C0100E82AD9 /* shell-move.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24ED958E1E6C8C0100E82AD9 /* shell-move.wav */; };
+		24ED95911E6C970D00E82AD9 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 24ED95901E6C970D00E82AD9 /* music.mp3 */; };
+		24ED95931E6C9A4200E82AD9 /* chirp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24ED95921E6C9A4200E82AD9 /* chirp.wav */; };
+		24ED95951E6C9B6700E82AD9 /* energy-up.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24ED95941E6C9B6700E82AD9 /* energy-up.wav */; };
+		24ED95971E6C9BC900E82AD9 /* menu-beeping.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24ED95961E6C9BC900E82AD9 /* menu-beeping.wav */; };
 		7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */; };
 		7F01D5AA1D2A163B000A51D8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F01D5A91D2A163B000A51D8 /* GameViewController.swift */; };
 		7F027DB81D8606F900C91CCD /* GameSceneStateSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F027DB71D8606F900C91CCD /* GameSceneStateSetup.swift */; };
@@ -91,6 +97,7 @@
 		2421DC521E35798B00748DA7 /* score-hud.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "score-hud.atlas"; sourceTree = "<group>"; };
 		2421DC541E358AE900748DA7 /* number-font.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "number-font.atlas"; sourceTree = "<group>"; };
 		2425B70D1DBD73DD005168A7 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
+		242850631E75C6D40090B84F /* laser-charge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "laser-charge.wav"; sourceTree = "<group>"; };
 		242DA8281DA0C90400272FB5 /* EnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnergyMatter.swift; path = DashingPenguin/Entities/EnergyMatter.swift; sourceTree = "<group>"; };
 		243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeVisibility.swift; path = DashingPenguin/Zone/ZoneChallengeVisibility.swift; sourceTree = "<group>"; };
 		244583B31E2AB2F200867EC1 /* hazard-warning.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "hazard-warning.atlas"; sourceTree = "<group>"; };
@@ -124,6 +131,11 @@
 		24DE7A531E55718B0091ACDC /* energy-burst.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "energy-burst.wav"; sourceTree = "<group>"; };
 		24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockMoving.swift; path = DashingPenguin/Platform/PlatformBlockMoving.swift; sourceTree = "<group>"; };
 		24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = energymatter.atlas; sourceTree = "<group>"; };
+		24ED958E1E6C8C0100E82AD9 /* shell-move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "shell-move.wav"; sourceTree = "<group>"; };
+		24ED95901E6C970D00E82AD9 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		24ED95921E6C9A4200E82AD9 /* chirp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chirp.wav; sourceTree = "<group>"; };
+		24ED95941E6C9B6700E82AD9 /* energy-up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "energy-up.wav"; sourceTree = "<group>"; };
+		24ED95961E6C9BC900E82AD9 /* menu-beeping.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "menu-beeping.wav"; sourceTree = "<group>"; };
 		7F01D59E1D2A163B000A51D8 /* DashingPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DashingPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F01D5A11D2A163B000A51D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "DashingPenguin/DashingPenguin (iOS)/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		7F01D5A91D2A163B000A51D8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = "DashingPenguin/DashingPenguin (iOS)/GameViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -288,7 +300,13 @@
 				24DE7A531E55718B0091ACDC /* energy-burst.wav */,
 				24C764C71E6403A100331C6C /* beep-low.wav */,
 				24C764CB1E6406EB00331C6C /* phase-death.wav */,
+				24ED95901E6C970D00E82AD9 /* music.mp3 */,
+				24ED95921E6C9A4200E82AD9 /* chirp.wav */,
+				24ED95961E6C9BC900E82AD9 /* menu-beeping.wav */,
+				24ED958E1E6C8C0100E82AD9 /* shell-move.wav */,
+				24ED95941E6C9B6700E82AD9 /* energy-up.wav */,
 				24C764C81E6403A100331C6C /* beep-high.wav */,
+				242850631E75C6D40090B84F /* laser-charge.wav */,
 				7F24DF501D92019600796DB0 /* charge.wav */,
 			);
 			name = Audio;
@@ -457,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2421DC551E358AE900748DA7 /* number-font.atlas in Resources */,
+				24ED95951E6C9B6700E82AD9 /* energy-up.wav in Resources */,
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				24CB45901DF4DA0400CBF82B /* obstaclewall.atlas in Resources */,
 				24D8A6E51E2C1AA00041268E /* background.atlas in Resources */,
@@ -465,16 +484,21 @@
 				2421DC531E35798B00748DA7 /* score-hud.atlas in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
 				2425B70E1DBD73DD005168A7 /* player.atlas in Resources */,
+				24ED95911E6C970D00E82AD9 /* music.mp3 in Resources */,
 				24E9C23C1DC6AFA700F0DB61 /* energymatter.atlas in Resources */,
+				242850641E75C6D40090B84F /* laser-charge.wav in Resources */,
 				24DE7A541E55718B0091ACDC /* energy-burst.wav in Resources */,
 				7F24DF511D92019600796DB0 /* charge.wav in Resources */,
+				24ED958F1E6C8C0100E82AD9 /* shell-move.wav in Resources */,
 				24C764CC1E6406EB00331C6C /* phase-death.wav in Resources */,
+				24ED95971E6C9BC900E82AD9 /* menu-beeping.wav in Resources */,
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
 				24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */,
 				244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */,
 				24C764CA1E6403A100331C6C /* beep-high.wav in Resources */,
 				24CB458E1DF4DA0400CBF82B /* laser.atlas in Resources */,
+				24ED95931E6C9A4200E82AD9 /* chirp.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

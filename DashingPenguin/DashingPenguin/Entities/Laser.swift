@@ -69,6 +69,7 @@ class Laser: GKEntity {
                 spriteComponent?.node.run(animateAction, completion: {
                     self.isActivated = !self.isActivated
                 })
+                AudioManager.sharedInstance.play("laser-charge")
             }
         }
     }

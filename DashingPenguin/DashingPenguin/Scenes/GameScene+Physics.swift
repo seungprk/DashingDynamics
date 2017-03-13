@@ -89,6 +89,8 @@ extension GameScene: SKPhysicsContactDelegate {
                 rectNode.run(moveUp, completion: {
                     rectNode.removeFromParent()
                 })
+                
+                AudioManager.sharedInstance.play("energy-up")
             }
             
 //        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):

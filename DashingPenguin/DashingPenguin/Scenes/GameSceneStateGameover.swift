@@ -51,7 +51,6 @@ class GameSceneStateGameover: GKState {
         // add button interaction to 
         //   exit to menu
         //   restart a new session
-
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

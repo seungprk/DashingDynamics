@@ -20,7 +20,6 @@ class GameSceneStatePlaying: GKState {
     
     override func didEnter(from previousState: GKState?) {
         scene.view?.isPaused = false
-        
 //        let field = SKFieldNode.magneticField()
 //        field.strength = 0.005
 //        field.position = CGPoint.zero // scene.player!.component(ofType: SpriteComponent.self)!.node.position
