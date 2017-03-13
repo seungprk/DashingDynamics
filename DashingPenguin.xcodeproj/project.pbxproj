@@ -79,6 +79,7 @@
 		7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */; };
 		7F24DF511D92019600796DB0 /* charge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7F24DF501D92019600796DB0 /* charge.wav */; };
 		7F24DF531D92136800796DB0 /* SKToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F24DF521D92136800796DB0 /* SKToggle.swift */; };
+		7F3B464C1E76059100ECFD07 /* SKScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B464B1E76059100ECFD07 /* SKScoreLabel.swift */; };
 		7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */; };
 		7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */; };
 		7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */; };
@@ -166,6 +167,7 @@
 		7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioManager.swift; path = DashingPenguin/Audio/AudioManager.swift; sourceTree = "<group>"; };
 		7F24DF501D92019600796DB0 /* charge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = charge.wav; sourceTree = "<group>"; };
 		7F24DF521D92136800796DB0 /* SKToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKToggle.swift; path = DashingPenguin/Node/SKToggle.swift; sourceTree = "<group>"; };
+		7F3B464B1E76059100ECFD07 /* SKScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKScoreLabel.swift; path = DashingPenguin/Node/SKScoreLabel.swift; sourceTree = "<group>"; };
 		7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchControlInputNode.swift; path = DashingPenguin/Controls/TouchControlInputNode.swift; sourceTree = "<group>"; };
 		7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayConfiguration.swift; path = DashingPenguin/Assets/GameplayConfiguration.swift; sourceTree = "<group>"; };
 		7F3D324E1D454D5E0063BC07 /* GameScene+Physics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+Physics.swift"; path = "DashingPenguin/Scenes/GameScene+Physics.swift"; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */,
 				7F0D44591D8E237A0065A1C3 /* SKButton.swift */,
 				7F24DF521D92136800796DB0 /* SKToggle.swift */,
+				7F3B464B1E76059100ECFD07 /* SKScoreLabel.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */,
 				7F23A5C01D2C803E008CDA5C /* Player.swift in Sources */,
 				24AD9A441D38A1D7003EB602 /* PlatformBlockSingleDash.swift in Sources */,
+				7F3B464C1E76059100ECFD07 /* SKScoreLabel.swift in Sources */,
 				7F027DB81D8606F900C91CCD /* GameSceneStateSetup.swift in Sources */,
 				24AD9A461D38B009003EB602 /* PlatformBlockFirst.swift in Sources */,
 				24CB45921DF4ED9C00CBF82B /* ObstacleSideWall.swift in Sources */,
