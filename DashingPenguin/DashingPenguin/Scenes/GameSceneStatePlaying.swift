@@ -20,6 +20,10 @@ class GameSceneStatePlaying: GKState {
     
     override func didEnter(from previousState: GKState?) {
         scene.view?.isPaused = false
+        
+        AudioManager.sharedInstance.playLoop("creeping-death-drone")
+        AudioManager.sharedInstance.setVolume("creeping-death-drone", volume: 0, dur: 0)
+        
 //        let field = SKFieldNode.magneticField()
 //        field.strength = 0.005
 //        field.position = CGPoint.zero // scene.player!.component(ofType: SpriteComponent.self)!.node.position

@@ -144,6 +144,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         shellBottom.run(slideInBottom, completion: {
             AudioManager.sharedInstance.playLoop("menu-beeping")
             AudioManager.sharedInstance.playLoop("music")
+            AudioManager.sharedInstance.setVolume("music", volume: 1.0, dur: 0)
         })
         
         AudioManager.sharedInstance.play("shell-move")
@@ -195,6 +196,7 @@ class MenuScene: SKScene, SKButtonDelegate {
                 
                 AudioManager.sharedInstance.playLoop("menu-beeping")
                 AudioManager.sharedInstance.playLoop("music")
+                AudioManager.sharedInstance.setVolume("music", volume: 1.0, dur: 0)
             })
         } else {
             hasBeenPresentedOnce = true

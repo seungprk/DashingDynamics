@@ -19,6 +19,7 @@ class CreepDeathManager {
     let hexTileGapWidth: CGFloat = 12
     let hexTileDiagEdgeWidth: CGFloat = 8
     let defaultColor = UIColor(red: 31/255, green: 151/255, blue: 255/255, alpha: 1.0)
+    var lastDiffRatio: CGFloat = 1.0
     
     init(scene: GameScene) {
         self.scene = scene
@@ -89,6 +90,11 @@ class CreepDeathManager {
         creepNode.addChild(tileRowTwo)
         creepNode.addChild(coverSpriteNode)
         restartAnimateRows()
+    }
+    
+    func update(cameraYPos: CGFloat) {
+        updatePhysicsBodyPos(cameraYPos: cameraYPos)
+        updateSounds()
     }
     
     func updatePhysicsBodyPos(cameraYPos: CGFloat) {
@@ -170,5 +176,23 @@ class CreepDeathManager {
         
         creepNode.run(waitCreep)
         coverSpriteNode.run(waitCover)
+    }
+    
+    func updateSounds() {
+        let playerYPos = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
+        let botOfScreen = (scene.cameraNode?.position.y)! - scene.size.height / 2
+        let maxDiff = playerYPos! - botOfScreen
+        
+        let topOfCreep = coverSpriteNode.position.y + coverSpriteNode.size.height / 2 + hexTileSize.height
+        let creepDiff = playerYPos! - topOfCreep
+        var diffRatio = creepDiff / maxDiff
+        if (diffRatio > 1) { diffRatio = 1 }
+        if (diffRatio < 0) { diffRatio = 0 }
+        
+        if (diffRatio != lastDiffRatio) {
+            AudioManager.sharedInstance.setVolume("creeping-death-drone", volume: 1.0 - Float(diffRatio), dur: 0)
+            AudioManager.sharedInstance.setVolume("music", volume: Float(diffRatio), dur: 1)
+            lastDiffRatio = diffRatio
+        }
     }
 }

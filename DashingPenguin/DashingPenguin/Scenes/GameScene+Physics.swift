@@ -37,6 +37,10 @@ extension GameScene: SKPhysicsContactDelegate {
             guard let node = secondBody.node else { break }
             platformLandingDelegate?.markForLanding(platform: node)
             
+        // Player and obstacle intersect
+        case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):
+            AudioManager.sharedInstance.play("bump")
+            
         // Player and laser intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.laser):
             guard let laserNode = secondBody.node else { break }

@@ -45,6 +45,7 @@ class GameSceneStateGameover: GKState {
         
         scene.run(delay) {
             AudioManager.sharedInstance.stop("music")
+            AudioManager.sharedInstance.stop("creeping-death-drone")
             
             let transition = SKTransition.fade(withDuration: 1)
             if let view = self.scene.view,

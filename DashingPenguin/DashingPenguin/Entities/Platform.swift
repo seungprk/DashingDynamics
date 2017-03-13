@@ -82,6 +82,8 @@ class Platform: GKEntity {
             gameScene.scoreManager.incrementPlatformPart()
             
             activated = true
+            
+            AudioManager.sharedInstance.play("beep-low")
         }
     }
     
