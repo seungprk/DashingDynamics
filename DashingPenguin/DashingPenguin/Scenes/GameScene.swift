@@ -95,6 +95,8 @@ class GameScene: SKScene, GameInputDelegate {
         creepDeathManager.updatePhysicsBodyPos(cameraYPos: (cameraNode?.position.y)!)
         sideWall?.tileSideWall(scene: self)
         
+        self.stateMachine.state(forClass: GameSceneStateGameover.self)?.update(deltaTime: dt)
+        
         self.lastUpdateTime = currentTime
     }
     

@@ -57,6 +57,10 @@ class GameSceneStateGameover: GKState {
         return stateClass is GameSceneStateSetup.Type
     }
     
+    override func update(deltaTime seconds: TimeInterval) {
+        transitionElapsed += seconds
+    }
+    
     private func makeAgainButton() -> SKButton {
         let againButton = SKButton(
             nameForImageNormal: "again-button",
@@ -73,18 +77,54 @@ class GameSceneStateGameover: GKState {
     }
 
     // Tile Transition Methods
+    let deathTransitionDuration: TimeInterval = 4.0
+    var transitionLayer: SKNode?
+    var transitionElapsed: TimeInterval = 0
     
     private func deathTransition(completion: @escaping () -> Void) {
+        transitionElapsed = 0
+        transitionLayer = SKNode()
+        transitionLayer?.position = CGPoint.zero // = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
+        transitionLayer?.zPosition = 1000000000
+        scene.addChild(transitionLayer!)
         
-        let tile = SKSpriteNode(texture: tileTexture)
-        tile.position = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
-        tile.zPosition = 1000000000
-        scene.addChild(tile)
-        growTile(tile) {
+        // Start first tile at a set position
+        let pos = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
+        nextTile(position: pos)
+        
+        // Delay scene for total transition duration
+        let delay = SKAction.wait(forDuration: 4)
+        
+        // Add UI after transition ends.
+        scene.run(delay) {
             completion()
         }
         
+        // set start position
+        // call nextTile
         // animate death tiles
+    }
+    
+    private func nextTile(position: CGPoint) {
+        let newPosition = CGPoint(x: position.x, y: position.y + 20)// + tileTexture.height)
+        animateNewTile(position: position,
+                       duration: deathTransitionDuration / 2)
+        let delay = SKAction.wait(forDuration: deathTransitionDuration / 2)
+        scene.run(delay) {
+            if self.transitionElapsed < self.deathTransitionDuration {
+                self.nextTile(position: newPosition)
+            }
+        }
+    }
+    
+    private func animateNewTile(position: CGPoint, duration: TimeInterval) {
+        guard let parent = transitionLayer else { return }
+        let newTile = SKSpriteNode(texture: tileTexture)
+        newTile.position = position
+        newTile.scale(to: CGSize.zero)
+        parent.addChild(newTile)
+        let scaleToFull = SKAction.scale(to: 1, duration: duration)
+        newTile.run(scaleToFull)
     }
     
     private func growTile(_ tile: SKSpriteNode, completion: @escaping () -> Void) {
