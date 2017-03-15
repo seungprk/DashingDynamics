@@ -33,7 +33,7 @@ class GameSceneStateGameover: GKState {
         let platformScore = scoreManager.getPlatformScore()
         */
         
-        deathTransition() {
+        deathTransition(uiDelay: 1) {
             let againButton = self.makeAgainButton()
             againButton.zPosition = 1000000000 * 2
             self.scene.addChild(againButton)
@@ -55,7 +55,6 @@ class GameSceneStateGameover: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-//        transitionElapsed += seconds
     }
     
     private func makeAgainButton() -> SKButton {
@@ -79,51 +78,46 @@ class GameSceneStateGameover: GKState {
     let tileAppearSpeed: TimeInterval = 0.3
     var transitionLayer: SKNode?
     
-    private func deathTransition(completion: @escaping () -> Void) {
-        transitionElapsed = 0
-        transitionLayer = SKNode()
-        transitionLayer?.position = CGPoint.zero // = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
-        transitionLayer?.zPosition = 1000000000
-        scene.addChild(transitionLayer!)
+    private func deathTransition(uiDelay: TimeInterval, completion: @escaping () -> Void) {
+        initializeTransitionLayer()
         
         // Start first tile at a set position
         let start = CGPoint(x: scene.frame.midX - 200, y: scene.frame.midY - 150)
         
-        // Delay scene for total transition duration
-        let uiDelay = SKAction.wait(forDuration: deathTransitionDuration)
+        // Delay scene for total transition duration.
+        let uiDelay = SKAction.wait(forDuration: uiDelay)
         
         // Add UI after transition ends.
         scene.run(uiDelay) {
             completion()
         }
         
+        // Animate tiles to cover screen.
         let rows = 50
         let cols = 10
         let delayInbetween = deathTransitionDuration / Double(rows * cols)
-        
-        
-        let dimensionNode = SKSpriteNode(texture: tileTexture)
-        let tileWidth = dimensionNode.size.width
-        let tileHeight = dimensionNode.size.height
-        let xOffset = tileWidth * 1.5 - 4
-        let yOffset = tileHeight / 2
-        
         
         for row in 0...rows {
             for col in 0...cols {
                 let count = (row * rows) + col
                 let tileDelay = Double(count) * delayInbetween
                 let delay = SKAction.wait(forDuration: tileDelay)
-                scene.run(delay) {
-                    var tilePos = CGPoint(x: start.x + CGFloat(col) * xOffset,
-                                          y: start.y + CGFloat(row) * yOffset)
-                    if row.isEven() {
-                        tilePos.x += xOffset / 2
-                    }
-                    self.animateNewTile(position: tilePos,
-                                        duration: self.tileAppearSpeed)
-                }
+                scene.run(delay, completion: showTile(origin: start, row: row, col: col))
             }
+        }
+    }
+    
+    /// Shows a tile by calculating position from the origin by row and col count.
+    private func showTile(origin: CGPoint, row: Int, col: Int) -> () -> Void {
+        let offset = CGSize(width: tileTexture.size().width * 1.5 - 4,
+                            height: tileTexture.size().height / 2)
+        return {
+            var tilePos = CGPoint(x: origin.x + CGFloat(col) * offset.width,
+                                  y: origin.y + CGFloat(row) * offset.height)
+            if row.isEven() {
+                tilePos.x += offset.width / 2
+            }
+            self.animateNewTile(position: tilePos, duration: self.tileAppearSpeed)
         }
     }
     
@@ -135,6 +129,13 @@ class GameSceneStateGameover: GKState {
         parent.addChild(newTile)
         let scaleToFull = SKAction.scale(to: 1, duration: duration)
         newTile.run(scaleToFull)
+    }
+    
+    private func initializeTransitionLayer() {
+        transitionLayer = SKNode()
+        transitionLayer?.position = CGPoint.zero
+        transitionLayer?.zPosition = 1000000000
+        scene.addChild(transitionLayer!)
     }
 }
 
