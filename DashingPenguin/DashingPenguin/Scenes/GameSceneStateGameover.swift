@@ -25,20 +25,17 @@ class GameSceneStateGameover: GKState {
     
     override func didEnter(from previousState: GKState?) {
         print("game over")
-        
-        // Once we enter this scene
-        // we need to animate in the shell border
-        // fade the game scene to black.
-        
         // Calculate the session statistics
-//        guard let scoreManager = scene.scoreManager else { return }
-//        let totalScore    = scoreManager.getTotalScore()
-//        let distanceScore = scoreManager.getDistance()
-//        let platformScore = scoreManager.getPlatformScore()
-
+        /*
+        guard let scoreManager = scene.scoreManager else { return }
+        let totalScore    = scoreManager.getTotalScore()
+        let distanceScore = scoreManager.getDistance()
+        let platformScore = scoreManager.getPlatformScore()
+        */
         
         deathTransition() {
             let againButton = self.makeAgainButton()
+            againButton.zPosition = 1000000000 * 2
             self.scene.addChild(againButton)
         }
         
@@ -58,7 +55,7 @@ class GameSceneStateGameover: GKState {
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        transitionElapsed += seconds
+//        transitionElapsed += seconds
     }
     
     private func makeAgainButton() -> SKButton {
@@ -66,6 +63,7 @@ class GameSceneStateGameover: GKState {
             nameForImageNormal: "again-button",
             nameForImageNormalHighlight: nil
         )
+        againButton.textureNormal?.filteringMode = .nearest
         againButton.name = "again_button"
         againButton.delegate = self
         againButton.zPosition = 1000000000 // TODO: set this to a reasonable zPosition based on config
@@ -77,9 +75,9 @@ class GameSceneStateGameover: GKState {
     }
 
     // Tile Transition Methods
-    let deathTransitionDuration: TimeInterval = 4.0
+    let deathTransitionDuration: TimeInterval = 0.5
+    let tileAppearSpeed: TimeInterval = 0.3
     var transitionLayer: SKNode?
-    var transitionElapsed: TimeInterval = 0
     
     private func deathTransition(completion: @escaping () -> Void) {
         transitionElapsed = 0
@@ -89,30 +87,42 @@ class GameSceneStateGameover: GKState {
         scene.addChild(transitionLayer!)
         
         // Start first tile at a set position
-        let pos = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
-        nextTile(position: pos)
+        let start = CGPoint(x: scene.frame.midX - 200, y: scene.frame.midY - 150)
         
         // Delay scene for total transition duration
-        let delay = SKAction.wait(forDuration: 4)
+        let uiDelay = SKAction.wait(forDuration: deathTransitionDuration)
         
         // Add UI after transition ends.
-        scene.run(delay) {
+        scene.run(uiDelay) {
             completion()
         }
         
-        // set start position
-        // call nextTile
-        // animate death tiles
-    }
-    
-    private func nextTile(position: CGPoint) {
-        let newPosition = CGPoint(x: position.x, y: position.y + 20)// + tileTexture.height)
-        animateNewTile(position: position,
-                       duration: deathTransitionDuration / 2)
-        let delay = SKAction.wait(forDuration: deathTransitionDuration / 2)
-        scene.run(delay) {
-            if self.transitionElapsed < self.deathTransitionDuration {
-                self.nextTile(position: newPosition)
+        let rows = 50
+        let cols = 10
+        let delayInbetween = deathTransitionDuration / Double(rows * cols)
+        
+        
+        let dimensionNode = SKSpriteNode(texture: tileTexture)
+        let tileWidth = dimensionNode.size.width
+        let tileHeight = dimensionNode.size.height
+        let xOffset = tileWidth * 1.5 - 4
+        let yOffset = tileHeight / 2
+        
+        
+        for row in 0...rows {
+            for col in 0...cols {
+                let count = (row * rows) + col
+                let tileDelay = Double(count) * delayInbetween
+                let delay = SKAction.wait(forDuration: tileDelay)
+                scene.run(delay) {
+                    var tilePos = CGPoint(x: start.x + CGFloat(col) * xOffset,
+                                          y: start.y + CGFloat(row) * yOffset)
+                    if row.isEven() {
+                        tilePos.x += xOffset / 2
+                    }
+                    self.animateNewTile(position: tilePos,
+                                        duration: self.tileAppearSpeed)
+                }
             }
         }
     }
@@ -125,15 +135,6 @@ class GameSceneStateGameover: GKState {
         parent.addChild(newTile)
         let scaleToFull = SKAction.scale(to: 1, duration: duration)
         newTile.run(scaleToFull)
-    }
-    
-    private func growTile(_ tile: SKSpriteNode, completion: @escaping () -> Void) {
-        tile.scale(to: CGSize.zero)
-        let scaleSpeed = 4.0
-        let scaleToFull = SKAction.scale(to: 1, duration: scaleSpeed)
-        tile.run(scaleToFull) {
-            completion()
-        }
     }
 }
 
@@ -149,4 +150,8 @@ extension GameSceneStateGameover: SKButtonDelegate {
     }
 }
 
-
+extension Int {
+    func isEven() -> Bool {
+        return self % 2 == 0
+    }
+}
