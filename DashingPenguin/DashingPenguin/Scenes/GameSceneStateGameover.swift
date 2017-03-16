@@ -28,7 +28,6 @@ class GameSceneStateGameover: GKState {
     }
     
     override func didEnter(from previousState: GKState?) {
-        print("game over")
         // Calculate the session statistics
         /*
             guard let scoreManager = scene.scoreManager else { return }
@@ -37,7 +36,7 @@ class GameSceneStateGameover: GKState {
             let platformScore = scoreManager.getPlatformScore()
         */
         
-        // Bind handlers to local variables.
+        // Initialize the handlers that need to fire after the death tile transition.
         let uiFunc: () -> Void = showUi()
         let audioFunc: () -> Void = stopAudio()
         
@@ -91,24 +90,27 @@ class GameSceneStateGameover: GKState {
             ui.append(scoreLine)
             
             self.setFilteringMode(of: ui as! [SKSpriteNode])
-            self.updateZpos(of: ui)
-            self.addToScene(of: ui)
+            self.updateZpos(of: ui, to: 1000000000 * 2)
+            self.addToScene(nodes: ui)
         }
     }
     
+    /// Set the filtering mode of a node collection to .nearest.
     func setFilteringMode(of nodes: [SKSpriteNode]) {
         nodes.forEach({ node in
             node.texture?.filteringMode = .nearest
         })
     }
     
-    func updateZpos(of nodes: [SKNode]) {
+    /// Updates the zPositions of a collection of nodes.
+    func updateZpos(of nodes: [SKNode], to height: CGFloat) {
         nodes.forEach({ node in
-            node.zPosition = 1000000000 * 2
+            node.zPosition = height
         })
     }
     
-    func addToScene(of nodes: [SKNode]) {
+    /// Add a collection nodes to the scene
+    func addToScene(nodes: [SKNode]) {
         nodes.forEach({ node in
             scene.addChild(node)
         })
@@ -133,6 +135,7 @@ class GameSceneStateGameover: GKState {
 
     // MARK: Tile Transition Methods
     
+    /// Death transition entry point. Accepts a completion block.
     private func deathTransition(uiDelay: TimeInterval, completion: @escaping () -> Void) {
         initializeTransitionLayer()
         
@@ -190,6 +193,7 @@ class GameSceneStateGameover: GKState {
     /// must be called before adding any tiles.
     private func initializeTransitionLayer() {
         transitionLayer = SKNode()
+        // TODO: change this to match current scene position!!!!
         transitionLayer?.position = CGPoint.zero
         transitionLayer?.zPosition = 1000000000
         scene.addChild(transitionLayer!)
