@@ -17,6 +17,10 @@ class GameSceneStateGameover: GKState {
     // Re-used tile texture
     let tileTexture = SKTexture(imageNamed: "deathtile")
     
+    let deathTransitionDuration: TimeInterval = 0.5
+    let tileAppearSpeed: TimeInterval = 0.3
+    var transitionLayer: SKNode?
+    
     init(scene: GameScene) {
         self.scene = scene
         super.init()
@@ -33,12 +37,8 @@ class GameSceneStateGameover: GKState {
         let platformScore = scoreManager.getPlatformScore()
         */
         
-        deathTransition(uiDelay: 1) {
-            let againButton = self.makeAgainButton()
-            againButton.zPosition = 1000000000 * 2
-            self.scene.addChild(againButton)
-        }
-        
+        deathTransition(uiDelay: 1, completion: showUi())
+
         // display the session statistics
         //   high score
         //   current score
@@ -49,12 +49,63 @@ class GameSceneStateGameover: GKState {
         //   exit to menu
         //   restart a new session
     }
-    
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass is GameSceneStateSetup.Type
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+    }
+    
+    // MARK: Present UI.
+    
+    func showUi() -> () -> Void {
+        return {
+            let againButton = self.makeAgainButton()
+            let title = SKSpriteNode(imageNamed: "gameover-title")
+            let scoreTitles = SKSpriteNode(imageNamed: "score-titles")
+            let scoreLine = SKSpriteNode(imageNamed: "horizontal-rule")
+
+            title.position = CGPoint(
+                x: againButton.position.x,
+                y: againButton.position.y + 180
+            )
+            scoreTitles.position = CGPoint(
+                x: againButton.position.x,
+                y: againButton.position.y + 120
+            )
+            scoreLine.position = CGPoint(
+                x: scoreTitles.position.x,
+                y: scoreTitles.position.y - 5
+            )
+            
+            var ui = [SKNode]()
+            ui.append(againButton)
+            ui.append(title)
+            ui.append(scoreTitles)
+            ui.append(scoreLine)
+            
+            self.setFilteringMode(of: ui as! [SKSpriteNode])
+            self.updateZpos(of: ui)
+            self.addToScene(of: ui)
+        }
+    }
+    
+    func setFilteringMode(of nodes: [SKSpriteNode]) {
+        nodes.forEach({ node in
+            node.texture?.filteringMode = .nearest
+        })
+    }
+    
+    func updateZpos(of nodes: [SKNode]) {
+        nodes.forEach({ node in
+            node.zPosition = 1000000000 * 2
+        })
+    }
+    
+    func addToScene(of nodes: [SKNode]) {
+        nodes.forEach({ node in
+            scene.addChild(node)
+        })
     }
     
     private func makeAgainButton() -> SKButton {
@@ -65,35 +116,29 @@ class GameSceneStateGameover: GKState {
         againButton.textureNormal?.filteringMode = .nearest
         againButton.name = "again_button"
         againButton.delegate = self
-        againButton.zPosition = 1000000000 // TODO: set this to a reasonable zPosition based on config
+        // TODO: set this to a reasonable zPosition based on config
+        againButton.zPosition = 1000000000 * 2
         againButton.position = CGPoint(
-            x: scene.frame.midX - againButton.frame.width / 2,
-            y: scene.frame.midY - againButton.frame.height / 2
+            x: scene.frame.midX - againButton.frame.width / 1.5,
+            y: scene.frame.midY - againButton.frame.height / 1.5 - 20
         )
         return againButton
     }
 
-    // Tile Transition Methods
-    let deathTransitionDuration: TimeInterval = 0.5
-    let tileAppearSpeed: TimeInterval = 0.3
-    var transitionLayer: SKNode?
+    // MARK: Tile Transition Methods
     
     private func deathTransition(uiDelay: TimeInterval, completion: @escaping () -> Void) {
         initializeTransitionLayer()
         
-        // Start first tile at a set position
-        let start = CGPoint(x: scene.frame.midX - 200, y: scene.frame.midY - 150)
-        
-        // Delay scene for total transition duration.
+        // Delay the scene until ready for UI elements to be added.
         let uiDelay = SKAction.wait(forDuration: uiDelay)
-        
-        // Add UI after transition ends.
         scene.run(uiDelay) {
             completion()
         }
         
         // Animate tiles to cover screen.
-        let rows = 50
+        let start = CGPoint(x: scene.frame.midX - 200, y: scene.frame.midY - 150)
+        let rows = 70
         let cols = 10
         let delayInbetween = deathTransitionDuration / Double(rows * cols)
         
@@ -107,11 +152,14 @@ class GameSceneStateGameover: GKState {
         }
     }
     
-    /// Shows a tile by calculating position from the origin by row and col count.
+    /// Returns a function that shows tile by calculating position 
+    /// from the origin by row and col count. Should be used as the completion
+    /// parameter of an SKAction.
     private func showTile(origin: CGPoint, row: Int, col: Int) -> () -> Void {
         let offset = CGSize(width: tileTexture.size().width * 1.5 - 4,
                             height: tileTexture.size().height / 2)
-        return {
+        // Returns a closure
+        return { _ in
             var tilePos = CGPoint(x: origin.x + CGFloat(col) * offset.width,
                                   y: origin.y + CGFloat(row) * offset.height)
             if row.isEven() {
@@ -121,6 +169,7 @@ class GameSceneStateGameover: GKState {
         }
     }
     
+    /// Animates a single tile into the scene.
     private func animateNewTile(position: CGPoint, duration: TimeInterval) {
         guard let parent = transitionLayer else { return }
         let newTile = SKSpriteNode(texture: tileTexture)
@@ -131,6 +180,8 @@ class GameSceneStateGameover: GKState {
         newTile.run(scaleToFull)
     }
     
+    /// Initializes transition layer,
+    /// must be called before adding any tiles.
     private func initializeTransitionLayer() {
         transitionLayer = SKNode()
         transitionLayer?.position = CGPoint.zero
