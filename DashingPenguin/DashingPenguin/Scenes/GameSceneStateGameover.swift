@@ -31,42 +31,35 @@ class GameSceneStateGameover: GKState {
         print("game over")
         // Calculate the session statistics
         /*
-        guard let scoreManager = scene.scoreManager else { return }
-        let totalScore    = scoreManager.getTotalScore()
-        let distanceScore = scoreManager.getDistance()
-        let platformScore = scoreManager.getPlatformScore()
+            guard let scoreManager = scene.scoreManager else { return }
+            let totalScore    = scoreManager.getTotalScore()
+            let distanceScore = scoreManager.getDistance()
+            let platformScore = scoreManager.getPlatformScore()
         */
         
-        deathTransition(uiDelay: 1, completion: showUi())
-
-        // display the session statistics
-        //   high score
-        //   current score
-        //   distance traveled
-        //   points collected
-        //     NOTE: make sure the stats are formatted, padded, and aligned properly
-        // add button interaction to 
-        //   exit to menu
-        //   restart a new session
+        // Bind handlers to local variables.
+        let uiFunc: () -> Void = showUi()
+        let audioFunc: () -> Void = stopAudio()
         
-        let delay = SKAction.wait(forDuration: 2.0)
-        
-        scene.run(delay) {
-            AudioManager.sharedInstance.stop("music")
-            AudioManager.sharedInstance.stop("creeping-death-drone")
-            
-            let transition = SKTransition.fade(withDuration: 1)
-            if let view = self.scene.view,
-               let menu = self.scene.menuScene{
-                view.presentScene(menu, transition: transition)
-            }
+        // Execute handlers after scene transition.
+        deathTransition(uiDelay: 2) {
+            uiFunc()
+            audioFunc()
         }
     }
-        override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass is GameSceneStateSetup.Type
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+    }
+    
+    func stopAudio() -> () -> Void {
+        return {
+            AudioManager.sharedInstance.stop("music")
+            AudioManager.sharedInstance.stop("creeping-death-drone")
+        }
     }
     
     // MARK: Present UI.
