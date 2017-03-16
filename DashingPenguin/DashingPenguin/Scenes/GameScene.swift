@@ -92,7 +92,7 @@ class GameScene: SKScene, GameInputDelegate {
         zoneManager.update(deltaTime: dt)
         bgManager.update(deltaTime: dt)
         scoreManager.updateDistanceScore()
-        creepDeathManager.updatePhysicsBodyPos(cameraYPos: (cameraNode?.position.y)!)
+        creepDeathManager.update(cameraYPos: (cameraNode?.position.y)!)
         sideWall?.tileSideWall(scene: self)
         
         self.stateMachine.state(forClass: GameSceneStateGameover.self)?.update(deltaTime: dt)

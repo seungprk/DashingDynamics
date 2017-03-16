@@ -31,6 +31,7 @@
 		24AD9A441D38A1D7003EB602 /* PlatformBlockSingleDash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */; };
 		24AD9A461D38B009003EB602 /* PlatformBlockFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */; };
 		24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */; };
+		24B73D0A1E7631A600E5B976 /* bump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24B73D091E7631A600E5B976 /* bump.wav */; };
 		24C222DA1E2B0182008BF20E /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C222D91E2B0182008BF20E /* BackgroundManager.swift */; };
 		24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */; };
 		24C764C91E6403A100331C6C /* beep-low.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24C764C71E6403A100331C6C /* beep-low.wav */; };
@@ -47,6 +48,7 @@
 		24DB0FC31E3EB8380087CDB3 /* CreepDeathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */; };
 		24DE7A541E55718B0091ACDC /* energy-burst.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24DE7A531E55718B0091ACDC /* energy-burst.wav */; };
 		24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */; };
+		24E2F2841E761092002CBBF2 /* creeping-death-drone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24E2F2831E761092002CBBF2 /* creeping-death-drone.wav */; };
 		24E9C23C1DC6AFA700F0DB61 /* energymatter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */; };
 		24ED958F1E6C8C0100E82AD9 /* shell-move.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24ED958E1E6C8C0100E82AD9 /* shell-move.wav */; };
 		24ED95911E6C970D00E82AD9 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 24ED95901E6C970D00E82AD9 /* music.mp3 */; };
@@ -114,6 +116,7 @@
 		24AD9A431D38A1D7003EB602 /* PlatformBlockSingleDash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockSingleDash.swift; path = DashingPenguin/Platform/PlatformBlockSingleDash.swift; sourceTree = "<group>"; };
 		24AD9A451D38B009003EB602 /* PlatformBlockFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockFirst.swift; path = DashingPenguin/Platform/PlatformBlockFirst.swift; sourceTree = "<group>"; };
 		24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleWall.swift; path = DashingPenguin/Platform/PlatformBlockObstacleWall.swift; sourceTree = "<group>"; };
+		24B73D091E7631A600E5B976 /* bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bump.wav; sourceTree = "<group>"; };
 		24C222D91E2B0182008BF20E /* BackgroundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateCinematicPause.swift; path = DashingPenguin/Scenes/GameSceneStateCinematicPause.swift; sourceTree = "<group>"; };
 		24C764C71E6403A100331C6C /* beep-low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-low.wav"; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreepDeathManager.swift; sourceTree = "<group>"; };
 		24DE7A531E55718B0091ACDC /* energy-burst.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "energy-burst.wav"; sourceTree = "<group>"; };
 		24DF28E31D7FD13E00053D2A /* PlatformBlockMoving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockMoving.swift; path = DashingPenguin/Platform/PlatformBlockMoving.swift; sourceTree = "<group>"; };
+		24E2F2831E761092002CBBF2 /* creeping-death-drone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "creeping-death-drone.wav"; sourceTree = "<group>"; };
 		24E9C23B1DC6AFA700F0DB61 /* energymatter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = energymatter.atlas; sourceTree = "<group>"; };
 		24ED958E1E6C8C0100E82AD9 /* shell-move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "shell-move.wav"; sourceTree = "<group>"; };
 		24ED95901E6C970D00E82AD9 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				24ED95961E6C9BC900E82AD9 /* menu-beeping.wav */,
 				24ED958E1E6C8C0100E82AD9 /* shell-move.wav */,
 				24ED95941E6C9B6700E82AD9 /* energy-up.wav */,
+				24B73D091E7631A600E5B976 /* bump.wav */,
+				24E2F2831E761092002CBBF2 /* creeping-death-drone.wav */,
 				24C764C81E6403A100331C6C /* beep-high.wav */,
 				242850631E75C6D40090B84F /* laser-charge.wav */,
 				7F24DF501D92019600796DB0 /* charge.wav */,
@@ -482,6 +488,7 @@
 				24C764C91E6403A100331C6C /* beep-low.wav in Resources */,
 				7F23A5C91D2C8064008CDA5C /* Assets.xcassets in Resources */,
 				2421DC531E35798B00748DA7 /* score-hud.atlas in Resources */,
+				24B73D0A1E7631A600E5B976 /* bump.wav in Resources */,
 				7F23A5D21D2C8081008CDA5C /* Main.storyboard in Resources */,
 				2425B70E1DBD73DD005168A7 /* player.atlas in Resources */,
 				24ED95911E6C970D00E82AD9 /* music.mp3 in Resources */,
@@ -494,6 +501,7 @@
 				24ED95971E6C9BC900E82AD9 /* menu-beeping.wav in Resources */,
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
+				24E2F2841E761092002CBBF2 /* creeping-death-drone.wav in Resources */,
 				24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */,
 				244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */,
 				24C764CA1E6403A100331C6C /* beep-high.wav in Resources */,

@@ -33,7 +33,9 @@ class AudioManager {
             ("energy-up", AudioFileType.wav),
             ("menu-beeping", AudioFileType.wav),
             ("music", AudioFileType.mp3),
-            ("laser-charge", AudioFileType.wav)]
+            ("laser-charge", AudioFileType.wav),
+            ("creeping-death-drone", AudioFileType.wav),
+            ("bump", AudioFileType.wav)]
         
         for data in soundData {
             if let sound = audioPlayerWithFile(file: data.fileName, type: data.type) {
@@ -87,6 +89,24 @@ class AudioManager {
             if (sound?.isPlaying)! {
                 sound?.pause()
             }
+        }
+    }
+    
+    func setVolume(_ name: String, volume: Float, dur: TimeInterval) {
+        let sound = sounds[name]
+        DispatchQueue.global(qos: .background).async {
+            sound?.setVolume(volume, fadeDuration: dur)
+        }
+    }
+    
+    func incrementVolume(_ name: String, increment: Float, dur: TimeInterval) {
+        let sound = sounds[name]
+        DispatchQueue.global(qos: .background).async {
+            var newVol = (sound?.volume)! + increment
+            if (newVol > 1.0) { newVol = 1.0 }
+            if (newVol < 0.0) { newVol = 0.0 }
+            sound?.setVolume(newVol, fadeDuration: dur)
+            print(newVol)
         }
     }
     

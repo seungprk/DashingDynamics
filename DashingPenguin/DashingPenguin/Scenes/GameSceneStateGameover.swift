@@ -48,6 +48,19 @@ class GameSceneStateGameover: GKState {
         // add button interaction to 
         //   exit to menu
         //   restart a new session
+        
+        let delay = SKAction.wait(forDuration: 2.0)
+        
+        scene.run(delay) {
+            AudioManager.sharedInstance.stop("music")
+            AudioManager.sharedInstance.stop("creeping-death-drone")
+            
+            let transition = SKTransition.fade(withDuration: 1)
+            if let view = self.scene.view,
+               let menu = self.scene.menuScene{
+                view.presentScene(menu, transition: transition)
+            }
+        }
     }
         override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass is GameSceneStateSetup.Type
