@@ -20,11 +20,13 @@ class GameSceneStateGameover: GKState {
     let deathTransitionDuration: TimeInterval = 0.5
     let tileAppearSpeed: TimeInterval = 0.3
     var transitionLayer: SKNode?
+    var tileHeight: CGFloat?
     
     init(scene: GameScene) {
         self.scene = scene
         super.init()
         tileTexture.filteringMode = .nearest
+        tileHeight = CGFloat(tileTexture.cgImage().height)
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -127,8 +129,8 @@ class GameSceneStateGameover: GKState {
         // TODO: set this to a reasonable zPosition based on config
         againButton.zPosition = 1000000000 * 2
         againButton.position = CGPoint(
-            x: scene.frame.midX - againButton.frame.width / 1.5,
-            y: scene.frame.midY - againButton.frame.height / 1.5 - 20
+            x: 0,
+            y: transitionLayer!.position.y + againButton.frame.height * 1.5
         )
         return againButton
     }
@@ -192,10 +194,16 @@ class GameSceneStateGameover: GKState {
     /// Initializes transition layer,
     /// must be called before adding any tiles.
     private func initializeTransitionLayer() {
+        guard let position = scene.cameraNode?.position,
+              let tileHeight = self.tileHeight else {
+            return
+        }
         transitionLayer = SKNode()
-        // TODO: change this to match current scene position!!!!
-        transitionLayer?.position = CGPoint.zero
         transitionLayer?.zPosition = 1000000000
+        transitionLayer?.position = CGPoint(
+            x: position.x,
+            y: position.y - scene.frame.midY - tileHeight
+        )
         scene.addChild(transitionLayer!)
     }
 }
