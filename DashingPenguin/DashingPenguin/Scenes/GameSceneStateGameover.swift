@@ -21,6 +21,8 @@ class GameSceneStateGameover: GKState {
     let tileAppearSpeed: TimeInterval = 0.3
     var transitionLayer: SKNode?
     
+    let numberFont = SKTextureAtlas(named: "number-font").textures()
+
     init(scene: GameScene) {
         self.scene = scene
         super.init()
@@ -69,6 +71,13 @@ class GameSceneStateGameover: GKState {
             let title = SKSpriteNode(imageNamed: "gameover-title")
             let scoreTitles = SKSpriteNode(imageNamed: "score-titles")
             let scoreLine = SKSpriteNode(imageNamed: "horizontal-rule")
+            
+            // Loads number for testing.
+//            let number = SKSpriteNode(texture: self.numberFont.first)
+//            number.position = CGPoint(
+//                x: againButton.position.x,
+//                y: againButton.position.y + againButton.size.height
+//            )
 
             title.position = CGPoint(
                 x: againButton.position.x,
@@ -88,6 +97,8 @@ class GameSceneStateGameover: GKState {
             ui.append(title)
             ui.append(scoreTitles)
             ui.append(scoreLine)
+            
+//            ui.append(number)
             
             self.setFilteringMode(of: ui as! [SKSpriteNode])
             self.updateZpos(of: ui, to: 1000000000 * 2)
@@ -192,6 +203,7 @@ class GameSceneStateGameover: GKState {
     /// Initializes transition layer,
     /// must be called before adding any tiles.
     private func initializeTransitionLayer() {
+        // TODO: change this to not be dependent on camera. (camera is too dynamic)
         guard let position = scene.cameraNode?.position else {
             return
         }
@@ -204,6 +216,8 @@ class GameSceneStateGameover: GKState {
         scene.addChild(transitionLayer!)
     }
 }
+
+// MARK: ======== Helper Extensions ========
 
 extension GameSceneStateGameover: SKButtonDelegate {
     func onButtonPress(named: String) {
@@ -220,5 +234,15 @@ extension GameSceneStateGameover: SKButtonDelegate {
 extension Int {
     func isEven() -> Bool {
         return self % 2 == 0
+    }
+}
+
+extension SKTextureAtlas {
+    func textures() -> [SKTexture] {
+        return self.textureNames.map({ name in
+            let texture = self.textureNamed(name)
+            texture.filteringMode = .nearest
+            return texture
+        })
     }
 }
