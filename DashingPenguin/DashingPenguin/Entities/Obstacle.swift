@@ -28,7 +28,7 @@ class Obstacle: GKEntity {
         physicsBody.isDynamic = false
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.player
-        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.none
+        physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)

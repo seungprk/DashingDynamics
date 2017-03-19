@@ -16,6 +16,7 @@ class GameSceneStateGameover: GKState {
     
     // Re-used tile texture
     let tileTexture = SKTexture(imageNamed: "deathtile")
+    var defaultColor = UIColor(red: 31/255, green: 151/255, blue: 255/255, alpha: 1.0)
     
     let deathTransitionDuration: TimeInterval = 0.5
     let tileAppearSpeed: TimeInterval = 0.3
@@ -193,6 +194,8 @@ class GameSceneStateGameover: GKState {
     private func animateNewTile(position: CGPoint, duration: TimeInterval) {
         guard let parent = transitionLayer else { return }
         let newTile = SKSpriteNode(texture: tileTexture)
+        newTile.colorBlendFactor = 1.0
+        newTile.color = defaultColor
         newTile.position = position
         newTile.scale(to: CGSize.zero)
         parent.addChild(newTile)
