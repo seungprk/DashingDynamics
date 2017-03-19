@@ -84,13 +84,8 @@ class HudManager {
         rightFlourishSpriteNode.position = CGPoint(x: ratingTextSpriteNode.position.x + 44, y: 0)
         rightFlourishSpriteNode.zPosition = GameplayConfiguration.HeightOf.hud
         
-//        let pauseButtonSpriteNode = SKSpriteNode(texture: pauseButtonTexture)
-//        pauseButtonSpriteNode.position = CGPoint(x: hudFullWidth / 2 - pauseButtonTexture.size().width / 2 - 5, y: 0)
-//        pauseButtonSpriteNode.zPosition = GameplayConfiguration.HeightOf.hud
-        
-        /*
-         Pause Button with interaction
-         */
+        // Pause Button with interaction
+
         let pauseButtonSize = CGSize(width: 20, height: 20)
         let pauseButtonPosition = CGPoint(x: hudFullWidth / 2 - pauseButtonSize.width / 2 - 5, y: 0)
         let pauseButton = SKButton(size: CGSize(width: 20, height: 20), nameForImageNormal: "score-hud-pausebutton", nameForImageNormalHighlight: "score-hud-pausebutton")
