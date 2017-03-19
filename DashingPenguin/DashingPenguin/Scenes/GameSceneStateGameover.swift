@@ -229,6 +229,7 @@ extension GameSceneStateGameover: SKButtonDelegate {
         let transition = SKTransition.fade(withDuration: 1)
         if let view = self.scene.view,
             let menu = self.scene.menuScene{
+            AudioManager.sharedInstance.stop("phase-death")
             view.presentScene(menu, transition: transition)
         }
     }
