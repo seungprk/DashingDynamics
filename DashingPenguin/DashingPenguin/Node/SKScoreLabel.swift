@@ -42,9 +42,7 @@ class SKScoreLabel: SKNode {
         
         #if DEBUG
             // Adds a red dot to show where the label node's center is.
-            let center = SKSpriteNode(color: .red, size: CGSize(width: 1, height: 1))
-            center.zPosition = 300000000000000000 // just needs to be above anything
-            addChild(center)
+            addChild(SKSpriteNode.dot())
         #endif
     }
     
