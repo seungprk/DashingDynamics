@@ -97,15 +97,21 @@ class GameSceneStateGameover: GKState {
                 let platformScoreLabel = SKScoreLabel(value: score.getPlatformScore())
                 let totalScoreLabel = SKScoreLabel(value: score.getTotalScore())
                 
+                #if DEBUG
+                    distanceScoreLabel.setValue(to: 1234)
+                    platformScoreLabel.setValue(to: 78)
+                    totalScoreLabel.setValue(to: 99900456)
+                #endif
+                
                 distanceScoreLabel.position = CGPoint(
                     x: topRight.x - distanceScoreLabel.size.width / 2,
-                    y: topRight.y - distanceScoreLabel.size.height / 2)
+                    y: topRight.y - distanceScoreLabel.size.height / 2 + 1)
                 platformScoreLabel.position = CGPoint(
-                    x: distanceScoreLabel.position.x,
+                    x: topRight.x - platformScoreLabel.size.width / 2,
                     y: distanceScoreLabel.position.y - platformScoreLabel.size.height)
                 totalScoreLabel.position = CGPoint(
-                    x: platformScoreLabel.position.x,
-                    y: platformScoreLabel.position.y - totalScoreLabel.size.height)
+                    x: topRight.x - totalScoreLabel.size.width / 2,
+                    y: platformScoreLabel.position.y - totalScoreLabel.size.height - 5)
                 
                 ui.append(distanceScoreLabel)
                 ui.append(platformScoreLabel)
