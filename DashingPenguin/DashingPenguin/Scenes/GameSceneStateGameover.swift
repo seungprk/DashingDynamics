@@ -31,15 +31,7 @@ class GameSceneStateGameover: GKState {
     }
     
     override func didEnter(from previousState: GKState?) {
-        // Calculate the session statistics
-        /*
-            guard let scoreManager = scene.scoreManager else { return }
-            let totalScore    = scoreManager.getTotalScore()
-            let distanceScore = scoreManager.getDistance()
-            let platformScore = scoreManager.getPlatformScore()
-        */
-        
-        // Initialize the handlers that need to fire after the death tile transition.
+        // Set the handlers that need to fire after the death tile transition.
         let uiFunc: () -> Void = showUi()
         let audioFunc: () -> Void = stopAudio()
         
@@ -68,13 +60,17 @@ class GameSceneStateGameover: GKState {
     
     func showUi() -> () -> Void {
         return {
-            var ui = [SKNode]()
+            var ui = Set<SKNode>()
             
             let againButton = self.makeAgainButton()
             let title = SKSpriteNode(imageNamed: "gameover-title")
             let scoreTitles = SKSpriteNode(imageNamed: "score-titles")
             let scoreLine = SKSpriteNode(imageNamed: "horizontal-rule")
-
+            ui.insert(againButton)
+            ui.insert(title)
+            ui.insert(scoreTitles)
+            ui.insert(scoreLine)
+            
             title.position = CGPoint(
                 x: againButton.position.x,
                 y: againButton.position.y + 180
@@ -87,6 +83,8 @@ class GameSceneStateGameover: GKState {
                 x: scoreTitles.position.x,
                 y: scoreTitles.position.y - 5
             )
+
+            // Initialize score labels
             
             if let score = self.scene.scoreManager {
                 let topRight = CGPoint(
@@ -96,8 +94,14 @@ class GameSceneStateGameover: GKState {
                 let distanceScoreLabel = SKScoreLabel(value: score.getDistanceScore())
                 let platformScoreLabel = SKScoreLabel(value: score.getPlatformScore())
                 let totalScoreLabel = SKScoreLabel(value: score.getTotalScore())
+                ui.insert(distanceScoreLabel)
+                ui.insert(platformScoreLabel)
+                ui.insert(totalScoreLabel)
                 
                 #if DEBUG
+                    let dot = SKSpriteNode.dot(position: topRight)
+                    scoreTitles.parent?.addChild(dot)
+                    
                     distanceScoreLabel.setValue(to: 1234)
                     platformScoreLabel.setValue(to: 78)
                     totalScoreLabel.setValue(to: 99900456)
@@ -112,35 +116,16 @@ class GameSceneStateGameover: GKState {
                 totalScoreLabel.position = CGPoint(
                     x: topRight.x - totalScoreLabel.size.width / 2,
                     y: platformScoreLabel.position.y - totalScoreLabel.size.height - 5)
-                
-                ui.append(distanceScoreLabel)
-                ui.append(platformScoreLabel)
-                ui.append(totalScoreLabel)
             }
-
-            ui.append(againButton)
-            ui.append(title)
-            ui.append(scoreTitles)
-            ui.append(scoreLine)
-            
 
             self.setFilteringMode(of: ui)
             self.updateZpos(of: ui, to: 1000000000 * 2)
             self.addToScene(nodes: ui)
-            
-            #if DEBUG
-                let topRight = CGPoint(
-                    x: scoreTitles.position.x + scoreTitles.size.width / 2,
-                    y: scoreTitles.position.y + scoreTitles.size.height / 2)
-                let dot = SKSpriteNode.dot()
-                dot.position = topRight
-                scoreTitles.parent?.addChild(dot)
-            #endif
         }
     }
     
     /// Set the filtering mode of a node collection to .nearest.
-    func setFilteringMode(of nodes: [SKNode]) {
+    func setFilteringMode(of nodes: Set<SKNode>) {
         nodes.forEach({ node in
             if let sprite = node as? SKSpriteNode {
                 sprite.texture?.filteringMode = .nearest
@@ -149,14 +134,14 @@ class GameSceneStateGameover: GKState {
     }
     
     /// Updates the zPositions of a collection of nodes.
-    func updateZpos(of nodes: [SKNode], to height: CGFloat) {
+    func updateZpos(of nodes: Set<SKNode>, to height: CGFloat) {
         nodes.forEach({ node in
             node.zPosition = height
         })
     }
     
     /// Add a collection nodes to the scene
-    func addToScene(nodes: [SKNode]) {
+    func addToScene(nodes: Set<SKNode>) {
         nodes.forEach({ node in
             self.scene.camera!.addChild(node)
         })
