@@ -158,7 +158,7 @@ class GameSceneStateGameover: GKState {
     /// Add a collection nodes to the scene
     func addToScene(nodes: [SKNode]) {
         nodes.forEach({ node in
-            scene.addChild(node)
+            self.scene.camera!.addChild(node)
         })
     }
     
@@ -172,10 +172,7 @@ class GameSceneStateGameover: GKState {
         againButton.delegate = self
         // TODO: set this to a reasonable zPosition based on config
         againButton.zPosition = 1000000000 * 2
-        againButton.position = CGPoint(
-            x: 0,
-            y: transitionLayer!.position.y + againButton.frame.height * 1.5
-        )
+        againButton.position.y = -againButton.frame.height * 2
         return againButton
     }
 
@@ -240,17 +237,13 @@ class GameSceneStateGameover: GKState {
     /// Initializes transition layer,
     /// must be called before adding any tiles.
     private func initializeTransitionLayer() {
-        // TODO: change this to not be dependent on camera. (camera is too dynamic)
-        guard let position = scene.cameraNode?.position else {
+        guard let camera = scene.cameraNode else {
             return
         }
         transitionLayer = SKNode()
         transitionLayer?.zPosition = 1000000000
-        transitionLayer?.position = CGPoint(
-            x: position.x,
-            y: position.y - scene.frame.midY - tileTexture.size().height
-        )
-        scene.addChild(transitionLayer!)
+        transitionLayer?.position.y = -scene.frame.height / 2 - tileTexture.size().height
+        camera.addChild(transitionLayer!)
     }
 }
 
