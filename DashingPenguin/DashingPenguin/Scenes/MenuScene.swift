@@ -21,8 +21,16 @@ class MenuScene: SKScene, SKButtonDelegate {
     
     var hasBeenPresentedOnce = false
     
+    let timeScale = 0.2
+    
     override init(size: CGSize) {
         super.init(size: size)
+        
+//        let testLabel = SKScoreLabel(value: 123)
+//        testLabel.setValue(to: 321)
+//        testLabel.zPosition = 200000000000
+//        testLabel.position = CGPoint(x: size.width / 2, y: size.height / 2)
+//        addChild(testLabel)
         
         backgroundColor = .init(red: 5/255, green: 20/255, blue: 33/255, alpha: 1)
         AudioManager.sharedInstance.preInit()
@@ -132,7 +140,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         // Shell Slide In Animation
         
-        let slideInDur = TimeInterval(2)
+        let slideInDur = TimeInterval(2) * timeScale
         let slideInLeft = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur)
         let slideInRight = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur)
         let slideInTop = SKAction.move(to: CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2), duration: slideInDur)
@@ -152,9 +160,9 @@ class MenuScene: SKScene, SKButtonDelegate {
         // Interface Blink In Animation
         
         let wait = SKAction.wait(forDuration: slideInDur)
-        let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5)
-        let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
-        let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5)
+        let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5 * timeScale)
+        let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5 * timeScale)
+        let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5 * timeScale)
         let flickerIn = SKAction.sequence([wait, firstFadeIn, firstFadeOut, secondFadeIn])
         
         border.run(flickerIn)
@@ -178,11 +186,11 @@ class MenuScene: SKScene, SKButtonDelegate {
             self.childNode(withName: "soundToggle")?.alpha = 0
             self.childNode(withName: "playButton")?.alpha = 0
             
-            let zoomOut = SKAction.scale(to: 1.0, duration: 0.25)
+            let zoomOut = SKAction.scale(to: 1.0, duration: 0.25 * timeScale)
             camera?.run(zoomOut, completion: {
-                let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5)
-                let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5)
-                let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5)
+                let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5 * self.timeScale)
+                let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5 * self.timeScale)
+                let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5 * self.timeScale)
                 let flickerIn = SKAction.sequence([firstFadeIn, firstFadeOut, secondFadeIn])
                 
                 self.childNode(withName: "border")?.run(flickerIn)
