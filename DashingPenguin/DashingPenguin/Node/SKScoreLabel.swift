@@ -9,11 +9,19 @@
 import SpriteKit
 
 class SKScoreLabel: SKNode {
+    /// References the digit sprite nodes.
+    private var digits: [SKSpriteNode] = [SKSpriteNode]() {
+        willSet(value) {
+            return self.removeDigitNodes()
+        }
+    }
     
-    var digits = [SKSpriteNode]()
-    let fontsize: CGSize
-    let numberFont = SKTextureAtlas(named: "number-font").textures()
+    /// The number textures reused between score labels.
+    private static let numberFont = SKTextureAtlas(named: "number-font").textures()
     
+    /// Stores the font size.
+    private let fontsize: CGSize
+
     /// The size containing digit sprites.
     var size: CGSize {
         get {
@@ -25,14 +33,15 @@ class SKScoreLabel: SKNode {
     }
     
     override init() {
-        fontsize = numberFont.first!.size()
+        fontsize = SKScoreLabel.numberFont.first!.size()
         super.init()
         
-    #if DEBUG
-        let center = SKSpriteNode(color: .red, size: CGSize(width: 1, height: 1))
-        center.zPosition = 300000000000000000 // just needs to be above anything
-        addChild(center)
-    #endif
+        #if DEBUG
+            // Adds a red dot to show where the label node's center is.
+            let center = SKSpriteNode(color: .red, size: CGSize(width: 1, height: 1))
+            center.zPosition = 300000000000000000 // just needs to be above anything
+            addChild(center)
+        #endif
     }
     
     convenience init(value: Int) {
@@ -44,25 +53,38 @@ class SKScoreLabel: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Updates the sprite nodes that make up the score.
     func setValue(to number: Int) {
-        self.removeDigitNodes()
-        self.digits = number.digits()
-                            .enumerated()
-                            .map(toSprite)
+        let digits = number.digits()
+        
+        // Adds a new number sprite node to the label node.
+        func toSprite(index: Int, digit: Int) -> SKSpriteNode {
+            let xOffset = getOffset(index, digits.count)
+            let node = self.numberNode(digit: digit, at: xOffset)
+            self.addChild(node)
+            return node
+        }
+        self.digits = digits.enumerated().map(toSprite)
     }
     
+    /// Removes nodes from digit array.
     private func removeDigitNodes() {
         for _ in 0..<self.digits.count {
             self.digits.popLast()?.removeFromParent()
         }
     }
     
-    private func toSprite(at index: Int, for digit: Int) -> SKSpriteNode {
-        let node = SKSpriteNode(texture: self.numberFont[digit])
-        let offset = CGFloat(index) - (CGFloat(digits.count - 1) / 2)
-        node.position.x = offset * self.fontsize.width
-        self.addChild(node)
+    /// Creates a sprite node from the given digit and x position.
+    private func numberNode(digit: Int, at offset: CGFloat) -> SKSpriteNode {
+        let node = SKSpriteNode(texture: SKScoreLabel.numberFont[digit])
+        node.position.x = offset
         return node
+    }
+    
+    /// Returns an offset from the center of the parent label node.
+    private func getOffset(_ index: Int, _ digitCount: Int) -> CGFloat {
+        let indexFromCenter = CGFloat(index) - (CGFloat(digitCount - 1) / 2)
+        return indexFromCenter * self.fontsize.width
     }
 }
 
