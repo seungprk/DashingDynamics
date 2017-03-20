@@ -13,7 +13,7 @@ class SKScoreLabel: SKNode {
     private var digits: [SKSpriteNode] = [SKSpriteNode]() {
         willSet(value) {
             // Remove old nodes from the array and parent label.
-            for _ in 0..<self.digits.count {
+            while !digits.isEmpty {
                 self.digits.popLast()?.removeFromParent()
             }
         }

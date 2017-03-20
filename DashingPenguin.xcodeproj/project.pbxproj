@@ -86,6 +86,7 @@
 		7F4B330F1D738D600000D467 /* Laser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4B330E1D738D600000D467 /* Laser.swift */; };
 		7F4B33111D738F9C0000D467 /* PlatformBlockObstacleLaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4B33101D738F9C0000D467 /* PlatformBlockObstacleLaser.swift */; };
 		7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */; };
+		7F7841171E7FB13C00D7C977 /* SKSpriteNode+Dot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7841161E7FB13C00D7C977 /* SKSpriteNode+Dot.swift */; };
 		7FCAE7B41D8B72D600A02B79 /* SKNode+Unarchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */; };
 		7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */; };
 		7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */; };
@@ -174,6 +175,7 @@
 		7F4B330E1D738D600000D467 /* Laser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Laser.swift; path = DashingPenguin/Entities/Laser.swift; sourceTree = "<group>"; };
 		7F4B33101D738F9C0000D467 /* PlatformBlockObstacleLaser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleLaser.swift; path = DashingPenguin/Platform/PlatformBlockObstacleLaser.swift; sourceTree = "<group>"; };
 		7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlidingComponent.swift; path = DashingPenguin/Components/SlidingComponent.swift; sourceTree = "<group>"; };
+		7F7841161E7FB13C00D7C977 /* SKSpriteNode+Dot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKSpriteNode+Dot.swift"; path = "DashingPenguin/Node/SKSpriteNode+Dot.swift"; sourceTree = "<group>"; };
 		7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKNode+Unarchiver.swift"; path = "DashingPenguin/Node/SKNode+Unarchiver.swift"; sourceTree = "<group>"; };
 		7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Overlay.sks; path = DashingPenguin/Assets/Overlay.sks; sourceTree = "<group>"; };
 		7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsComponent.swift; path = DashingPenguin/Components/PhysicsComponent.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				7F0D44591D8E237A0065A1C3 /* SKButton.swift */,
 				7F24DF521D92136800796DB0 /* SKToggle.swift */,
 				7F3B464B1E76059100ECFD07 /* SKScoreLabel.swift */,
+				7F7841161E7FB13C00D7C977 /* SKSpriteNode+Dot.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				7F027DBF1D8607F900C91CCD /* GameSceneStateGameover.swift in Sources */,
 				7F23A5BB1D2C802F008CDA5C /* DashingState.swift in Sources */,
 				247607561DDAC83900237A53 /* TiledWallSpriteComponent.swift in Sources */,
+				7F7841171E7FB13C00D7C977 /* SKSpriteNode+Dot.swift in Sources */,
 				240165511D4AF409006E31DC /* Zone.swift in Sources */,
 				24775DCA1DA1D8E600ED743C /* ZoneChallengeLongJump.swift in Sources */,
 				7F01D5A21D2A163B000A51D8 /* AppDelegate.swift in Sources */,

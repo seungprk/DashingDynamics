@@ -68,17 +68,12 @@ class GameSceneStateGameover: GKState {
     
     func showUi() -> () -> Void {
         return {
+            var ui = [SKNode]()
+            
             let againButton = self.makeAgainButton()
             let title = SKSpriteNode(imageNamed: "gameover-title")
             let scoreTitles = SKSpriteNode(imageNamed: "score-titles")
             let scoreLine = SKSpriteNode(imageNamed: "horizontal-rule")
-            
-            // Loads number for testing.
-//            let number = SKSpriteNode(texture: self.numberFont.first)
-//            number.position = CGPoint(
-//                x: againButton.position.x,
-//                y: againButton.position.y + againButton.size.height
-//            )
 
             title.position = CGPoint(
                 x: againButton.position.x,
@@ -93,24 +88,57 @@ class GameSceneStateGameover: GKState {
                 y: scoreTitles.position.y - 5
             )
             
-            var ui = [SKNode]()
+            if let score = self.scene.scoreManager {
+                let topRight = CGPoint(
+                    x: scoreTitles.position.x + scoreTitles.size.width / 2,
+                    y: scoreTitles.position.y + scoreTitles.size.height / 2)
+                
+                let distanceScoreLabel = SKScoreLabel(value: score.getDistanceScore())
+                let platformScoreLabel = SKScoreLabel(value: score.getPlatformScore())
+                let totalScoreLabel = SKScoreLabel(value: score.getTotalScore())
+                
+                distanceScoreLabel.position = CGPoint(
+                    x: topRight.x - distanceScoreLabel.size.width / 2,
+                    y: topRight.y - distanceScoreLabel.size.height / 2)
+                platformScoreLabel.position = CGPoint(
+                    x: distanceScoreLabel.position.x,
+                    y: distanceScoreLabel.position.y - platformScoreLabel.size.height)
+                totalScoreLabel.position = CGPoint(
+                    x: platformScoreLabel.position.x,
+                    y: platformScoreLabel.position.y - totalScoreLabel.size.height)
+                
+                ui.append(distanceScoreLabel)
+                ui.append(platformScoreLabel)
+                ui.append(totalScoreLabel)
+            }
+
             ui.append(againButton)
             ui.append(title)
             ui.append(scoreTitles)
             ui.append(scoreLine)
             
-//            ui.append(number)
-            
-            self.setFilteringMode(of: ui as! [SKSpriteNode])
+
+            self.setFilteringMode(of: ui)
             self.updateZpos(of: ui, to: 1000000000 * 2)
             self.addToScene(nodes: ui)
+            
+            #if DEBUG
+                let topRight = CGPoint(
+                    x: scoreTitles.position.x + scoreTitles.size.width / 2,
+                    y: scoreTitles.position.y + scoreTitles.size.height / 2)
+                let dot = SKSpriteNode.dot()
+                dot.position = topRight
+                scoreTitles.parent?.addChild(dot)
+            #endif
         }
     }
     
     /// Set the filtering mode of a node collection to .nearest.
-    func setFilteringMode(of nodes: [SKSpriteNode]) {
+    func setFilteringMode(of nodes: [SKNode]) {
         nodes.forEach({ node in
-            node.texture?.filteringMode = .nearest
+            if let sprite = node as? SKSpriteNode {
+                sprite.texture?.filteringMode = .nearest
+            }
         })
     }
     
@@ -238,15 +266,5 @@ extension GameSceneStateGameover: SKButtonDelegate {
 extension Int {
     func isEven() -> Bool {
         return self % 2 == 0
-    }
-}
-
-extension SKTextureAtlas {
-    func textures() -> [SKTexture] {
-        return self.textureNames.map({ name in
-            let texture = self.textureNamed(name)
-            texture.filteringMode = .nearest
-            return texture
-        })
     }
 }

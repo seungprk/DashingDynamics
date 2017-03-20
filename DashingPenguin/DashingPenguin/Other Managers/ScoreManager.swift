@@ -40,7 +40,7 @@ class ScoreManager {
         return Int(distanceScore + platformScore)
     }
     
-    func getDistance() -> Int {
+    func getDistanceScore() -> Int {
         return Int(distanceScore)
     }
     
