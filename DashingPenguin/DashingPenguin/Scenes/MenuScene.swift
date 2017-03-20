@@ -24,7 +24,7 @@ class MenuScene: SKScene, SKButtonDelegate {
     override init(size: CGSize) {
         super.init(size: size)
         
-        backgroundColor = .init(red: 0.05, green: 0.09, blue: 0.09, alpha: 1)
+        backgroundColor = .init(red: 5/255, green: 20/255, blue: 33/255, alpha: 1)
         AudioManager.sharedInstance.preInit()
         
         // Add Camera
@@ -133,8 +133,8 @@ class MenuScene: SKScene, SKButtonDelegate {
         // Shell Slide In Animation
         
         let slideInDur = TimeInterval(2)
-        let slideInLeft = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2), duration: slideInDur)
-        let slideInRight = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2), duration: slideInDur)
+        let slideInLeft = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur)
+        let slideInRight = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur)
         let slideInTop = SKAction.move(to: CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2), duration: slideInDur)
         let slideInBottom = SKAction.move(to: CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 2), duration: slideInDur)
         
@@ -235,7 +235,7 @@ class MenuScene: SKScene, SKButtonDelegate {
             
             // Present the scene
             let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
-            let transition = SKTransition.fade(withDuration: 1)
+            let transition = SKTransition.fade(with: self.backgroundColor, duration: 1)
             self.view?.presentScene(gameScene, transition: transition)
         })
         
