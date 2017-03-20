@@ -232,8 +232,6 @@ class GameSceneStateGameover: GKState {
     }
 }
 
-// MARK: ======== Helper Extensions ========
-
 extension GameSceneStateGameover: SKButtonDelegate {
     func onButtonPress(named: String) {
         guard named == "again_button" else { return }
@@ -246,6 +244,8 @@ extension GameSceneStateGameover: SKButtonDelegate {
         }
     }
 }
+
+// MARK: ======== Helper Extensions ========
 
 extension Int {
     func isEven() -> Bool {
