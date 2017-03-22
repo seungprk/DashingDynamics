@@ -150,7 +150,7 @@ class GameSceneStateGameover: GKState {
     private func makeAgainButton() -> SKButton {
         let againButton = SKButton(
             nameForImageNormal: "again-button",
-            nameForImageNormalHighlight: nil
+            nameForImageNormalHighlight: "again-button-active"
         )
         againButton.textureNormal?.filteringMode = .nearest
         againButton.name = "again_button"
