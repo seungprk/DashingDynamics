@@ -45,7 +45,7 @@ class DashEndingState: GKState {
             spriteComponent.node.run(flashingSequence, withKey: "flashingSequence")
         } else {
             // Comment this out to enable invincibility
-            // stateMachine?.enter(DeathState.self)
+             stateMachine?.enter(DeathState.self)
         }
         
         elapsedTime = 0.0
