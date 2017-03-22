@@ -120,7 +120,7 @@ class GameSceneStateGameover: GKState {
 
             self.setFilteringMode(of: ui)
             self.updateZpos(of: ui, to: 1000000000 * 2)
-            self.addToScene(nodes: ui)
+            self.addToCamera(nodes: ui)
         }
     }
     
@@ -141,7 +141,7 @@ class GameSceneStateGameover: GKState {
     }
     
     /// Add a collection nodes to the scene
-    func addToScene(nodes: Set<SKNode>) {
+    func addToCamera(nodes: Set<SKNode>) {
         nodes.forEach({ node in
             self.scene.camera!.addChild(node)
         })
@@ -235,12 +235,20 @@ class GameSceneStateGameover: GKState {
 extension GameSceneStateGameover: SKButtonDelegate {
     func onButtonPress(named: String) {
         guard named == "again_button" else { return }
-        
+
         let transition = SKTransition.fade(withDuration: 1)
         if let view = self.scene.view,
             let menu = self.scene.menuScene{
             AudioManager.sharedInstance.stop("phase-death")
             view.presentScene(menu, transition: transition)
+        }
+    }
+    
+    func onButtonDown(named: String?) {
+        if let againButton = self.scene.cameraNode?.childNode(withName: "again_button") as? SKButton {
+            if againButton.isActive {
+                AudioManager.sharedInstance.play("beep-high")
+            }
         }
     }
 }
