@@ -30,6 +30,12 @@ class SKButton: SKSpriteNode {
     let textureNormal: SKTexture?
     let textureNormalHighlight: SKTexture?
     
+    var isActive: Bool {
+        get {
+            return self.texture == textureNormalHighlight
+        }
+    }
+    
     init(size: CGSize, nameForImageNormal: String?, nameForImageNormalHighlight: String?) {
         
         if let nameNormal = nameForImageNormal {
