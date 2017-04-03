@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
-        skView.showsPhysics = false
+        skView.showsPhysics = true
         skView.ignoresSiblingOrder = true
         skView.showsFields = true
         

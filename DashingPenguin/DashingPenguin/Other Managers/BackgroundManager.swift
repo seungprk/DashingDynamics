@@ -54,7 +54,7 @@ class BackgroundManager {
             for hIndex in 0...horizontalTilesNumber {
                 let tile = SKSpriteNode(texture: bgTexture)
                 tile.position = CGPoint(x: startingX + CGFloat(hIndex) * tileWidth, y: startingY - CGFloat(vIndex) * tileHeight)
-                tile.zPosition = -100000
+                tile.zPosition = -CGFloat.greatestFiniteMagnitude
                 tile.color = defaultColor
                 tile.colorBlendFactor = 1.0
                 bgNode.addChild(tile)

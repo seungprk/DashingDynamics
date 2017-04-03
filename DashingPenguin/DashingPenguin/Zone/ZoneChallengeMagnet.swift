@@ -11,8 +11,8 @@ import GameplayKit
 
 class ZoneChallengeMagnet: Zone {
     
-    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat, begZPos: CGFloat) {
-        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos, begZPos: begZPos)
+    override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
+        super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
         platformBlocksManager.generateRandomBlocks(amount: 3)
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.entities.first as! Platform!

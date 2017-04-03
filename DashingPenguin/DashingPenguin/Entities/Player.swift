@@ -33,7 +33,6 @@ class Player: GKEntity {
     
     func initPhysics(spriteComponent: SpriteComponent) {
         spriteComponent.node.size = GameplayConfiguration.Player.size
-        spriteComponent.node.zPosition = 1000
         
         let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: GameplayConfiguration.Player.physicsBodyOffset)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
@@ -126,49 +125,9 @@ class Player: GKEntity {
     }
     
     func setZPosition() {
-        if let spriteComp = component(ofType: SpriteComponent.self),
-           let scene = spriteComp.node.scene,
-           let texture = component(ofType: SpriteComponent.self)?.node.texture {
-            let gameScene = scene as! GameScene
-            let playerYPos = spriteComp.node.position.y - texture.size().height / 2
-            
-            // Get a list of relevant nodes sorted by y position
-            var positionalArray = [SKNode]()
-            for node in gameScene.children {
-                if node is PlatformBlock {
-                    for nodeChild in node.children {
-                        if nodeChild.name == "platform" || nodeChild.name == "obstacle" || nodeChild.name == "tiled wall" {
-                            positionalArray.append(nodeChild)
-                        }
-                    }
-                }
-            }
-            positionalArray.sort(by: { gameScene.convert($0.position, from: $0.parent!).y < gameScene.convert($1.position, from: $1.parent!).y })
-//            print(" *** Start Array Print *** ")
-//            for tester in positionalArray {
-//                print(tester.name, gameScene.convert(tester.position, from: tester.parent!), " Z: ", tester.zPosition)
-//            }
-            // Find the node with nearest y position
-            for node in positionalArray {
-                var nodeTemp = node
-                if nodeTemp.name == "tiled wall" {
-                    nodeTemp = node.children[0] as! SKSpriteNode
-                }
-                var nodeYPosCheck: CGFloat
-                nodeYPosCheck = gameScene.convert(nodeTemp.position, from: nodeTemp.parent!).y
-                if nodeTemp.name == "platform" {
-                    nodeYPosCheck += GameplayConfiguration.Platform.size.height / 2 + 12
-                }
-//                print("Node Top: ", nodeYPosCheck)
-//                print("Player Pos: ", playerYPos)
-                
-                if playerYPos < nodeYPosCheck {
-                    spriteComp.node.zPosition = nodeTemp.zPosition + 0.5
-//                    print("Z Node Pos: ", nodeTemp.zPosition)
-//                    print("Z Player Pos: ", spriteComp.node.zPosition)
-                    break
-                }
-            }
+        if let spriteComp = component(ofType: SpriteComponent.self) {
+            let spriteNode = spriteComp.node
+            spriteNode.zPosition = -(spriteNode.position.y - spriteNode.size.height / 2) / 1000
         }
     }
     

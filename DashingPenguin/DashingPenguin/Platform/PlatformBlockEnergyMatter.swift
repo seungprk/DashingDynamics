@@ -36,7 +36,6 @@ class PlatformBlockEnergyMatter: PlatformBlock {
         let energyMatter = EnergyMatter()
         let energyMatterSpriteNode = energyMatter.component(ofType: SpriteComponent.self)!.node
         energyMatterSpriteNode.position = CGPoint(x: firstPlatXPos, y: -size.height/2 + energyMatterSpriteNode.size.height/2)
-        energyMatterSpriteNode.zPosition = -1000000
         addChild(energyMatterSpriteNode)
         entities.append(energyMatter)
     }

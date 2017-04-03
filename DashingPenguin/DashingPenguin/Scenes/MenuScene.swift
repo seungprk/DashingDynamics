@@ -26,12 +26,6 @@ class MenuScene: SKScene, SKButtonDelegate {
     override init(size: CGSize) {
         super.init(size: size)
         
-//        let testLabel = SKScoreLabel(value: 123)
-//        testLabel.setValue(to: 321)
-//        testLabel.zPosition = 200000000000
-//        testLabel.position = CGPoint(x: size.width / 2, y: size.height / 2)
-//        addChild(testLabel)
-        
         backgroundColor = .init(red: 5/255, green: 20/255, blue: 33/255, alpha: 1)
         AudioManager.sharedInstance.preInit()
         
