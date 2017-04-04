@@ -21,7 +21,7 @@ class Player: GKEntity {
     let playerAnimatedAtlas = SKTextureAtlas(named: "player")
     var idleAnimationStarted = false
     var death = ""
-
+    var deathZPosSet = false
     
     // Sprite Atlas Initialization
     override init() {
@@ -125,9 +125,16 @@ class Player: GKEntity {
     }
     
     func setZPosition() {
-        if let spriteComp = component(ofType: SpriteComponent.self) {
-            let spriteNode = spriteComp.node
-            spriteNode.zPosition = -(spriteNode.position.y - spriteNode.size.height / 2) / 1000
+        if let spriteComp = component(ofType: SpriteComponent.self),
+           let   moveComp = component(ofType: MovementComponent.self) {
+            if !(moveComp.stateMachine.currentState is DeathState) {
+                let spriteNode = spriteComp.node
+                spriteNode.zPosition = -(spriteNode.position.y - spriteNode.size.height / 2) / 1000
+            } else if deathZPosSet == false { // change the y position basis for z position to be bottom of physics node when player dies
+                let spriteNode = spriteComp.node
+                spriteNode.zPosition = -(spriteNode.position.y + GameplayConfiguration.Player.physicsBodyOffset.y - GameplayConfiguration.Player.physicsBodyRadius) / 1000
+                deathZPosSet = true
+            }
         }
     }
     
