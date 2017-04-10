@@ -24,9 +24,32 @@ class GameSceneStateSetup: GKState {
         scene.backgroundColor = SKColor.black
         scene.lastUpdateTime = 0
         
+        // Camera Node Setup
+        scene.cameraNode = SKCameraNode()
+        scene.addChild(scene.cameraNode!)
+        scene.camera = scene.cameraNode
+        
+        // Setup Screen Effect Node
+        let filter = CIFilter(name: "CIPixellate")
+        filter?.setDefaults()
+        filter?.setValue(10.0, forKey: "inputScale")
+        
+        scene.sceneEffectNode = SKEffectNode()
+        scene.sceneEffectNode.shouldCenterFilter = true
+        scene.sceneEffectNode.shouldEnableEffects = false
+        scene.sceneEffectNode.filter = filter
+        scene.addChild(scene.sceneEffectNode)
+        
+        scene.sceneCamEffectNode = SKEffectNode()
+        scene.sceneCamEffectNode.shouldCenterFilter = true
+        scene.sceneCamEffectNode.shouldEnableEffects = false
+        scene.sceneCamEffectNode.filter = filter
+        scene.camera?.addChild(scene.sceneCamEffectNode)
+        
         // Initialize touch input node
         let controlInputNode = TouchControlInputNode(frame: scene.frame)
         controlInputNode.delegate = scene
+        scene.sceneCamEffectNode.addChild(controlInputNode)
         
         // Player Entity Setup
         scene.player = Player()
@@ -37,14 +60,8 @@ class GameSceneStateSetup: GKState {
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
             playerSprite.node.position = CGPoint(x: 0, y: 0)
-            scene.addChild(playerSprite.node)
+            scene.sceneEffectNode.addChild(playerSprite.node)
         }
-        
-        // Camera Node Setup
-        scene.cameraNode = SKCameraNode()
-        scene.cameraNode?.addChild(controlInputNode)
-        scene.addChild(scene.cameraNode!)
-        scene.camera = scene.cameraNode
         
         // Add Background, Hud and Score Managers
         scene.bgManager = BackgroundManager(scene: scene)
@@ -70,8 +87,8 @@ class GameSceneStateSetup: GKState {
         let wallLeftNode = SKNode()
         wallRightNode.physicsBody = wallRight
         wallLeftNode.physicsBody = wallLeft
-        scene.cameraNode?.addChild(wallRightNode)
-        scene.cameraNode?.addChild(wallLeftNode)
+        scene.sceneCamEffectNode.addChild(wallRightNode)
+        scene.sceneCamEffectNode.addChild(wallLeftNode)
         
         // Add Side wall
         scene.sideWall = ObstacleSideWall(size: scene.size)

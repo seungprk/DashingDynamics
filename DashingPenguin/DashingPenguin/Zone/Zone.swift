@@ -72,7 +72,7 @@ class Zone {
             hazardTextbarCropNode.maskNode = maskNode
             hazardTextbarCropNode.position = CGPoint(x: overlayFullWidth / 2 - hazardTextbarTextureFrames[0].size().width / 2, y: graphicYPos)
             
-            scene.cameraNode?.addChild(challengeOverlayNode)
+            scene.sceneCamEffectNode.addChild(challengeOverlayNode)
             challengeOverlayNode.addChild(hazardOctagon)
             challengeOverlayNode.addChild(hazardTextbarCropNode)
             hazardTextbarCropNode.addChild(hazardTextbar)
@@ -95,7 +95,7 @@ class Zone {
     
     func exitEvent() {
         if hasBeenExited == false {
-            let overlayNode = scene.cameraNode?.childNode(withName: "challengeOverlayNode")
+            let overlayNode = scene.sceneCamEffectNode.childNode(withName: "challengeOverlayNode")
             let hazardTextbarCropNode = overlayNode?.childNode(withName: "hazardTextbarCropNode") as! SKCropNode
             let hazardTextBar = hazardTextbarCropNode.childNode(withName: "hazardTextbar") as! SKSpriteNode
             let hazardOctagon = overlayNode?.childNode(withName: "hazardOctagon")

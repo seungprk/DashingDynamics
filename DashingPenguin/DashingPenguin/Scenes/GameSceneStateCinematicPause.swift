@@ -26,7 +26,7 @@ class GameSceneStateCinematicPause: GKState {
     }
     
     override func didEnter(from previousState: GKState?) {
-        scene.cameraNode?.addChild(darkOverlay)
+        scene.sceneCamEffectNode.addChild(darkOverlay)
         for childNode in scene.children {
             childNode.isPaused = true
         }

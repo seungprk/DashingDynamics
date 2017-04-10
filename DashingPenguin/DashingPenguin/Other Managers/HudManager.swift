@@ -94,7 +94,7 @@ class HudManager {
         pauseButton.delegate = self
         pauseButton.name = "PauseButton"
         
-        scene.cameraNode?.addChild(hudNode)
+        scene.sceneCamEffectNode.addChild(hudNode)
         hudNode.addChild(baseboxSpriteNode)
         hudNode.addChild(logoSpriteNode)
         hudNode.addChild(leftFlourishSpriteNode)

@@ -25,26 +25,33 @@ class ZoneChallengeVisibility: Zone {
             hasBeenEntered = true
             
             // Setup Challenge Activation
-            let blinderOverlayNode = SKSpriteNode(texture: nil, color: UIColor.blue, size: self.scene.size)
-            blinderOverlayNode.name = "blinderOverlayNode"
-            blinderOverlayNode.position = CGPoint.zero
-            blinderOverlayNode.zPosition = GameplayConfiguration.HeightOf.overlay
-            blinderOverlayNode.alpha = 0
-            let blinderAction = SKAction.sequence([SKAction.wait(forDuration: 2),
-                                                   SKAction.fadeIn(withDuration: 0.1),
-                                                   SKAction.wait(forDuration: 0.5),
-                                                   SKAction.fadeOut(withDuration: 0.1)])
-            let blinderRepeatAction = SKAction.repeatForever(blinderAction)
+            let filterIn = SKAction.run({
+                self.scene.sceneEffectNode.shouldEnableEffects = true
+                self.scene.sceneCamEffectNode.shouldEnableEffects = true
+            })
+            let filterOut = SKAction.run({
+                self.scene.sceneEffectNode.shouldEnableEffects = false
+                self.scene.sceneCamEffectNode.shouldEnableEffects = false
+            })
+            let filterAction = SKAction.sequence([SKAction.wait(forDuration: 2),
+                                                   filterIn,
+                                                   SKAction.wait(forDuration: 1),
+                                                   filterOut])
+            let filterRepeatAction = SKAction.repeatForever(filterAction)
             
             // Activate Challenge
-            scene.cameraNode?.childNode(withName: "challengeOverlayNode")?.addChild(blinderOverlayNode)
-            blinderOverlayNode.run(blinderRepeatAction)
+            scene.run(filterRepeatAction, withKey: "filterRepeatAction")
         }
     }
     
     override func exitEvent() {
         if hasBeenExited == false {
             super.exitEvent()
+            
+            scene.removeAction(forKey: "filterRepeatAction")
+            scene.sceneEffectNode.shouldEnableEffects = false
+            scene.sceneCamEffectNode.shouldEnableEffects = false
+            
             hasBeenExited = true
         }
     }

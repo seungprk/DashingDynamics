@@ -85,7 +85,7 @@ class CreepDeathManager {
         }
         
         // Add Nodes
-        scene.addChild(creepNode)
+        scene.sceneEffectNode.addChild(creepNode)
         creepNode.addChild(tileRowOne)
         creepNode.addChild(tileRowTwo)
         creepNode.addChild(coverSpriteNode)

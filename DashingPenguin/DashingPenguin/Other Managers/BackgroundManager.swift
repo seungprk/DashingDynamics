@@ -48,7 +48,7 @@ class BackgroundManager {
         let startingY = scene.size.height/2 - tileHeight/2
         
         // Tiles Add to Scene
-        scene.cameraNode?.addChild(bgNode)
+        scene.sceneCamEffectNode.addChild(bgNode)
         for vIndex in 0...verticalTilesNumber {
             var row = [SKSpriteNode]()
             for hIndex in 0...horizontalTilesNumber {

@@ -53,7 +53,7 @@ class ObstacleSideWall: GKEntity {
                 newWallRight.zPosition = 10
                 newWallRight.xScale = -1
                 newWallRight.physicsBody = nil
-                scene.addChild(newWallRight)
+                scene.sceneEffectNode.addChild(newWallRight)
                 tiles.append(newWallRight)
                 
                 // Left tile
@@ -68,7 +68,7 @@ class ObstacleSideWall: GKEntity {
                 newWallLeft.position = CGPoint(x: -size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: yPos)
                 newWallLeft.zPosition = 10
                 newWallLeft.physicsBody = nil
-                scene.addChild(newWallLeft)
+                scene.sceneEffectNode.addChild(newWallLeft)
                 tiles.append(newWallLeft)
             }
             

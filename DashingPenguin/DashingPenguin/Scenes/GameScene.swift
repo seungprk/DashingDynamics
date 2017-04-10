@@ -22,6 +22,8 @@ class GameScene: SKScene, GameInputDelegate {
     var scoreManager: ScoreManager!
     var creepDeathManager: CreepDeathManager!
     var sideWall: ObstacleSideWall?
+    var sceneEffectNode: SKEffectNode!
+    var sceneCamEffectNode: SKEffectNode!
     
     // Physics
     var lastUpdateTime: TimeInterval = 0
@@ -57,7 +59,6 @@ class GameScene: SKScene, GameInputDelegate {
                                                 GameSceneStateCinematicPause(scene: self),
                                                 GameSceneStateGameover(scene: self) ])
         stateMachine.enter(GameSceneStateSetup.self)
-        
     }
     
     // MARK: Update methods

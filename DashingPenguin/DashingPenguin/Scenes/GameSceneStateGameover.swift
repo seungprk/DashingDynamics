@@ -119,7 +119,7 @@ class GameSceneStateGameover: GKState {
             }
 
             self.setFilteringMode(of: ui)
-            self.updateZpos(of: ui, to: 1000000000 * 2)
+            self.updateZpos(of: ui, to: 10000000 * 2)
             self.addToCamera(nodes: ui)
         }
     }
@@ -143,7 +143,7 @@ class GameSceneStateGameover: GKState {
     /// Add a collection nodes to the scene
     func addToCamera(nodes: Set<SKNode>) {
         nodes.forEach({ node in
-            self.scene.camera!.addChild(node)
+            self.scene.camera?.addChild(node)
         })
     }
     
@@ -156,7 +156,7 @@ class GameSceneStateGameover: GKState {
         againButton.name = "again_button"
         againButton.delegate = self
         // TODO: set this to a reasonable zPosition based on config
-        againButton.zPosition = 1000000000 * 2
+        againButton.zPosition = 10000000 * 2
         againButton.position.y = -againButton.frame.height * 2
         return againButton
     }
@@ -226,7 +226,7 @@ class GameSceneStateGameover: GKState {
             return
         }
         transitionLayer = SKNode()
-        transitionLayer?.zPosition = 1000000000
+        transitionLayer?.zPosition = 10000000
         transitionLayer?.position.y = -scene.frame.height / 2 - tileTexture.size().height
         camera.addChild(transitionLayer!)
     }
