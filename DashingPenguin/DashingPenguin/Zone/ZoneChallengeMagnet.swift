@@ -23,9 +23,7 @@ class ZoneChallengeMagnet: Zone {
         
         if hasBeenEntered == false {
             // Activate Challenge
-            self.scene.player?.addComponent(MagnetMoveComponent(velocityX: 30))
-            let magnetComponent = self.scene.player?.component(ofType: MagnetMoveComponent.self)
-            magnetComponent?.beginMagnetEffect()
+            self.scene.magnetNode.isEnabled = true
             
             hasBeenEntered = true
         }
@@ -36,7 +34,7 @@ class ZoneChallengeMagnet: Zone {
             super.exitEvent()
             
             // Deactivate Challenge
-            scene.player?.removeComponent(ofType: MagnetMoveComponent.self)
+            self.scene.magnetNode.isEnabled = false
             
             hasBeenExited = true
         }

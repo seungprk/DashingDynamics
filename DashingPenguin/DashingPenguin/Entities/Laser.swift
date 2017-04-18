@@ -40,7 +40,7 @@ class Laser: GKEntity {
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         
-        physicsBody.isDynamic = true
+        physicsBody.isDynamic = false
         spriteComponent.node.physicsBody = physicsBody
         spriteComponent.node.name = name
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody)

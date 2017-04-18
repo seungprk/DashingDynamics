@@ -44,8 +44,7 @@ class TouchControlInputNode: SKSpriteNode {
             let touchLocation = touch.location(in: scene.view)
             startLocation = CGPoint(x: touchLocation.x, y: scene.view!.frame.maxY - touchLocation.y)
             
-            print("swiping...", terminator: "")
-            print(startLocation)
+            print("swiping... ", startLocation)
         }
 
     }
@@ -78,9 +77,9 @@ class TouchControlInputNode: SKSpriteNode {
                     let swipeAngle = atan2(dy, dx)
                     moveX = cos(swipeAngle) * maxDist
                     moveY = sin(swipeAngle) * maxDist
+                    
+                    delegate?.swipeGesture(velocity: CGVector(dx: moveX, dy: moveY))
                 }
-                
-                delegate?.swipeGesture(velocity: CGVector(dx: moveX, dy: moveY))
             }
         
         // PASS LONG TAP GESTURE

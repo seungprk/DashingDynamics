@@ -26,7 +26,7 @@ class Platform: GKEntity {
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
-        physicsBody.isDynamic = true
+        physicsBody.isDynamic = false
         spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)
@@ -54,6 +54,8 @@ class Platform: GKEntity {
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
+        physicsBody.fieldBitMask = GameplayConfiguration.PhysicsBitmask.none
+        
         physicsBody.isDynamic = true
         spriteComponent.node.physicsBody = physicsBody
         spriteComponent.node.position = CGPoint(x: randomSlidingCenterX, y: yPosition)

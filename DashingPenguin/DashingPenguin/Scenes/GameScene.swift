@@ -24,6 +24,7 @@ class GameScene: SKScene, GameInputDelegate {
     var sideWall: ObstacleSideWall?
     var sceneEffectNode: SKEffectNode!
     var sceneCamEffectNode: SKEffectNode!
+    var magnetNode: SKFieldNode!
     
     // Physics
     var lastUpdateTime: TimeInterval = 0

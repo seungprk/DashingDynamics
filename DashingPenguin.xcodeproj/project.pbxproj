@@ -18,7 +18,6 @@
 		242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DA8281DA0C90400272FB5 /* EnergyMatter.swift */; };
 		243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */; };
 		244583B41E2AB2F200867EC1 /* hazard-warning.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 244583B31E2AB2F200867EC1 /* hazard-warning.atlas */; };
-		245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */; };
 		247607561DDAC83900237A53 /* TiledWallSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */; };
 		247607581DDAD56F00237A53 /* ObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247607571DDAD56F00237A53 /* ObstacleWall.swift */; };
 		24775DCA1DA1D8E600ED743C /* ZoneChallengeLongJump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */; };
@@ -105,7 +104,6 @@
 		242DA8281DA0C90400272FB5 /* EnergyMatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnergyMatter.swift; path = DashingPenguin/Entities/EnergyMatter.swift; sourceTree = "<group>"; };
 		243DF2111D9E31A2002EB049 /* ZoneChallengeVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeVisibility.swift; path = DashingPenguin/Zone/ZoneChallengeVisibility.swift; sourceTree = "<group>"; };
 		244583B31E2AB2F200867EC1 /* hazard-warning.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "hazard-warning.atlas"; sourceTree = "<group>"; };
-		245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MagnetMoveComponent.swift; path = DashingPenguin/Components/MagnetMoveComponent.swift; sourceTree = "<group>"; };
 		247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiledWallSpriteComponent.swift; path = DashingPenguin/Components/TiledWallSpriteComponent.swift; sourceTree = "<group>"; };
 		247607571DDAD56F00237A53 /* ObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObstacleWall.swift; path = DashingPenguin/Entities/ObstacleWall.swift; sourceTree = "<group>"; };
 		24775DC91DA1D8E600ED743C /* ZoneChallengeLongJump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeLongJump.swift; path = DashingPenguin/Zone/ZoneChallengeLongJump.swift; sourceTree = "<group>"; };
@@ -405,7 +403,6 @@
 				7F23A5B81D2C802F008CDA5C /* SpriteComponent.swift */,
 				247607551DDAC83900237A53 /* TiledWallSpriteComponent.swift */,
 				7F5A3D2E1D650D42006F7BBE /* SlidingComponent.swift */,
-				245C47B31D8F108C0075A689 /* MagnetMoveComponent.swift */,
 				7F23A5B31D2C802F008CDA5C /* MovementComponent.swift */,
 				7F044F3B1D2C85BB00DDE789 /* MovementComponent States (Player) */,
 				7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */,
@@ -532,7 +529,6 @@
 				242DA8291DA0C90400272FB5 /* EnergyMatter.swift in Sources */,
 				7F23A5C31D2C804C008CDA5C /* GameScene.swift in Sources */,
 				2401654F1D4AF2F9006E31DC /* ZoneManager.swift in Sources */,
-				245C47B41D8F108C0075A689 /* MagnetMoveComponent.swift in Sources */,
 				7F027DBB1D8607DE00C91CCD /* GameSceneStatePlaying.swift in Sources */,
 				24DF28E41D7FD13E00053D2A /* PlatformBlockMoving.swift in Sources */,
 				7F0D445A1D8E237A0065A1C3 /* SKButton.swift in Sources */,

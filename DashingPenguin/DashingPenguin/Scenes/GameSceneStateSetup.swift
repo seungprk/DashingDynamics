@@ -84,7 +84,9 @@ class GameSceneStateSetup: GKState {
         wallRight.isDynamic = false
         
         let wallRightNode = SKNode()
+        wallRightNode.name = "wallRightNode"
         let wallLeftNode = SKNode()
+        wallRightNode.name = "wallLeftNode"
         wallRightNode.physicsBody = wallRight
         wallLeftNode.physicsBody = wallLeft
         scene.sceneCamEffectNode.addChild(wallRightNode)
@@ -113,6 +115,15 @@ class GameSceneStateSetup: GKState {
         
         scene.player?.component(ofType: MovementComponent.self)?.enterInitialState()
         self.stateMachine?.enter(GameSceneStatePlaying.self)
+        
+        // Setup Magnet
+        let magnetVector = vector_float3(1,0,0)
+        scene.magnetNode = SKFieldNode.linearGravityField(withVector: magnetVector)
+        scene.magnetNode.categoryBitMask = GameplayConfiguration.PhysicsBitmask.field
+        scene.magnetNode.falloff = 0
+        scene.magnetNode.strength = 2
+        scene.magnetNode.isEnabled = false
+        scene.addChild(scene.magnetNode)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
