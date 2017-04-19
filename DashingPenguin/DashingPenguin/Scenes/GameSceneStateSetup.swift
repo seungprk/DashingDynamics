@@ -55,7 +55,7 @@ class GameSceneStateSetup: GKState {
         scene.player = Player()
         scene.platformLandingDelegate = scene.player!.landedState
         scene.wallContactDelegate = scene.player!.dashingState
-        print("PLAYER DELEGATES: \n\(scene.player!.landedState) \(scene.player!.dashingState)")
+//        print("PLAYER DELEGATES: \n\(scene.player!.landedState) \(scene.player!.dashingState)")
         
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
@@ -93,7 +93,7 @@ class GameSceneStateSetup: GKState {
         scene.sceneCamEffectNode.addChild(wallLeftNode)
         
         // Add Side wall
-        scene.sideWall = ObstacleSideWall(size: scene.size)
+        scene.sideWall = ObstacleSideWall(scene: scene)
         
         // Add Pause Button
         let pauseButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "pause_on", nameForImageNormalHighlight: "pause_off")

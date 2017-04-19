@@ -290,7 +290,7 @@ class MenuScene: SKScene, SKButtonDelegate {
             print("\(name) pressed")
             
         default:
-            print("No action registered for onButtonDown(_:) of \(named) button")
+            print("No action registered for onButtonDown(_:) of ", named!, " button")
         }
     }
 }

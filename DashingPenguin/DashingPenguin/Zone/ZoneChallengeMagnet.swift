@@ -24,6 +24,7 @@ class ZoneChallengeMagnet: Zone {
         if hasBeenEntered == false {
             // Activate Challenge
             self.scene.magnetNode.isEnabled = true
+            scene.sideWall?.animateMagnet()
             
             hasBeenEntered = true
         }
@@ -35,6 +36,7 @@ class ZoneChallengeMagnet: Zone {
             
             // Deactivate Challenge
             self.scene.magnetNode.isEnabled = false
+            scene.sideWall?.removeMagnetAnimation()
             
             hasBeenExited = true
         }
