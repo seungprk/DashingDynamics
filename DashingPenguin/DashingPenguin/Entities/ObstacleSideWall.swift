@@ -16,13 +16,25 @@ class ObstacleSideWall: GKEntity {
     var tileSize = SKTexture(imageNamed: "wall").size()
     var cameraTopY: CGFloat = 0
     var coverSprite: SKSpriteNode!
+    var magnetAnimatedTextureFrames: [SKTexture]!
     
     init(scene: GameScene) {
         super.init()
         self.scene = scene
         
+        // Setup Magnet Textures
+        let magnetAnimatedAtlas = SKTextureAtlas(named: "magnetwall")
+        magnetAnimatedTextureFrames = [SKTexture]()
+        for count in 1...magnetAnimatedAtlas.textureNames.count {
+            let texture = magnetAnimatedAtlas.textureNamed("magnetwall" + String(count))
+            magnetAnimatedTextureFrames.append(texture)
+        }
+        for texture in magnetAnimatedTextureFrames {
+            texture.filteringMode = .nearest
+        }
+        
         let xPos = scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2
-        coverSprite = SKSpriteNode(imageNamed: "wallcover")
+        coverSprite = SKSpriteNode(texture: magnetAnimatedTextureFrames[0])
         coverSprite.position = CGPoint(x: xPos, y: 0)
         coverSprite.size.height = scene.size.height
         coverSprite.zPosition = 11
@@ -100,12 +112,17 @@ class ObstacleSideWall: GKEntity {
     
     func animateMagnet() {
         let fadeIn = SKAction.fadeAlpha(to: 0.7, duration: 1.0)
+        let animateMagnet = SKAction.animate(with: magnetAnimatedTextureFrames, timePerFrame: 0.03)
+        let repeatAnimateMagnet = SKAction.repeatForever(animateMagnet)
         coverSprite.run(fadeIn)
+        coverSprite.run(repeatAnimateMagnet, withKey: "repeatAnimateMagnet")
     }
     
     func removeMagnetAnimation() {
         let fadeOut = SKAction.fadeOut(withDuration: 1.0)
-        coverSprite?.run(fadeOut)
+        coverSprite?.run(fadeOut, completion: {
+            self.coverSprite.removeAction(forKey: "repeatAnimateMagnet")
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
