@@ -111,7 +111,7 @@ class ObstacleSideWall: GKEntity {
     }
     
     func animateMagnet() {
-        let fadeIn = SKAction.fadeAlpha(to: 0.7, duration: 1.0)
+        let fadeIn = SKAction.fadeAlpha(to: 0.9, duration: 1.0)
         let animateMagnet = SKAction.animate(with: magnetAnimatedTextureFrames, timePerFrame: 0.03)
         let repeatAnimateMagnet = SKAction.repeatForever(animateMagnet)
         coverSprite.run(fadeIn)
