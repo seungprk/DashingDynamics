@@ -34,7 +34,7 @@ class PlatformBlocksManager {
         firstBlock.position = CGPoint(x: 0, y: begYPos + firstBlock.size.height/2)
         
         setInitialZPos(for: firstBlock)
-        scene.addChild(firstBlock)
+        scene.sceneEffectNode.addChild(firstBlock)
         blocks.append(firstBlock)
     }
     
@@ -44,7 +44,7 @@ class PlatformBlocksManager {
         newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
         
         setInitialZPos(for: newBlock)
-        scene.addChild(newBlock)
+        scene.sceneEffectNode.addChild(newBlock)
         blocks.append(newBlock)
     }
     

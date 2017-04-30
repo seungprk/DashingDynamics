@@ -12,7 +12,6 @@ import GameplayKit
 
 class Laser: GKEntity {
     
-    var isActivated = false
     static var idIncrement = 0
     var laserTextures: [SKTexture]!
     let id: String
@@ -40,8 +39,8 @@ class Laser: GKEntity {
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         
-        physicsBody.isDynamic = true
-        spriteComponent.node.physicsBody = physicsBody
+        physicsBody.isDynamic = false
+        spriteComponent.node.physicsBody = nil
         spriteComponent.node.name = name
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
         
@@ -60,16 +59,22 @@ class Laser: GKEntity {
         
         if laserElapsed > 2 {
             laserElapsed = 0
+            
             let spriteComponent = component(ofType: SpriteComponent.self)
-            let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
-            if isActivated {
-                spriteComponent?.node.texture = spriteComponent?.textureFrames[0]
-                isActivated = !isActivated
-            } else {
-                spriteComponent?.node.run(animateAction, completion: {
-                    self.isActivated = !self.isActivated
+            let spriteNode = component(ofType: SpriteComponent.self)?.node
+            let savedPhysicsBody = component(ofType: PhysicsComponent.self)?.physicsBody
+            
+            // If deactivated, activate
+            if spriteNode?.physicsBody == nil {
+                let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
+                spriteNode?.run(animateAction, completion: {
+                    spriteNode?.physicsBody = savedPhysicsBody
                 })
                 AudioManager.sharedInstance.play("laser-charge")
+            // If activated, deactivate
+            } else {
+                spriteNode?.texture = spriteComponent?.textureFrames[0]
+                spriteNode?.physicsBody = nil
             }
         }
     }

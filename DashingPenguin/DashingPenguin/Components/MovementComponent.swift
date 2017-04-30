@@ -48,10 +48,10 @@ class MovementComponent: GKComponent {
         // Calculate the angle fo the swipe
         let angle = atan2(velocity.dy, velocity.dx)
         
-        // Hard-coded distance
-        let distance: CGFloat = GameplayConfiguration.Player.dashDistance // 400
-        let calculatedX = distance * cos(angle)
-        let calculatedY = distance * sin(angle)
+        // Hard-coded linear velocity
+        let velocityFactor: CGFloat = 800
+        let calculatedX = velocityFactor * cos(angle)
+        let calculatedY = velocityFactor * sin(angle)
         
         // Set velocity as the result of multiplying swipe angle and dash distance
         self.dashVelocity = CGVector(dx: calculatedX, dy: calculatedY)

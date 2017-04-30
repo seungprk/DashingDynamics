@@ -41,10 +41,10 @@ class Player: GKEntity {
         physicsBody.fieldBitMask = GameplayConfiguration.PhysicsBitmask.field
         
         physicsBody.restitution = 1
-        physicsBody.charge = 0.1
+        physicsBody.charge = 0.0
         physicsBody.friction = 0
         physicsBody.mass = 1
-        physicsBody.linearDamping = 0
+        physicsBody.linearDamping = 8.5
         physicsBody.usesPreciseCollisionDetection = true
         physicsBody.isDynamic = true
         

@@ -11,16 +11,39 @@ import GameplayKit
 
 class ObstacleSideWall: GKEntity {
     
-    var size: CGSize!
+    var scene: GameScene!
     var tiles = [SKSpriteNode]()
     var tileSize = SKTexture(imageNamed: "wall").size()
     var cameraTopY: CGFloat = 0
-    init(size: CGSize) {
+    var coverSprite: SKSpriteNode!
+    var magnetAnimatedTextureFrames: [SKTexture]!
+    
+    init(scene: GameScene) {
         super.init()
-        self.size = size
+        self.scene = scene
+        
+        // Setup Magnet Textures
+        let magnetAnimatedAtlas = SKTextureAtlas(named: "magnetwall")
+        magnetAnimatedTextureFrames = [SKTexture]()
+        for count in 1...magnetAnimatedAtlas.textureNames.count {
+            let texture = magnetAnimatedAtlas.textureNamed("magnetwall" + String(count))
+            magnetAnimatedTextureFrames.append(texture)
+        }
+        for texture in magnetAnimatedTextureFrames {
+            texture.filteringMode = .nearest
+        }
+        
+        let xPos = scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2
+        coverSprite = SKSpriteNode(texture: magnetAnimatedTextureFrames[0])
+        coverSprite.position = CGPoint(x: xPos, y: 0)
+        coverSprite.size.height = scene.size.height
+        coverSprite.zPosition = 11
+        coverSprite.alpha = 0.0
+        
+        scene.sceneCamEffectNode.addChild(coverSprite)
     }
     
-    func tileSideWall(scene: GameScene) {
+    func tileSideWall() {
         let currentCameraTopY = (scene.cameraNode?.position.y)! + scene.size.height / 2
         if currentCameraTopY > cameraTopY {
             cameraTopY = (scene.cameraNode?.position.y)! + scene.size.height / 2
@@ -46,14 +69,15 @@ class ObstacleSideWall: GKEntity {
                 }
                 randTexture.filteringMode = .nearest
                 let newWallRight = SKSpriteNode(texture: randTexture)
-                let xPos = size.width / 2 - GameplayConfiguration.Sidewall.width / 2
+                let xPos = scene.size.width / 2 - GameplayConfiguration.Sidewall.width / 2
                 let yPos = topTileY + tileSize.height / 2 + tileSize.height * CGFloat(index)
                 let position = CGPoint(x: xPos, y: yPos)
                 newWallRight.position = position
                 newWallRight.zPosition = 10
                 newWallRight.xScale = -1
                 newWallRight.physicsBody = nil
-                scene.addChild(newWallRight)
+                
+                scene.sceneEffectNode.addChild(newWallRight)
                 tiles.append(newWallRight)
                 
                 // Left tile
@@ -65,10 +89,11 @@ class ObstacleSideWall: GKEntity {
                 }
                 randTexture.filteringMode = .nearest
                 let newWallLeft = SKSpriteNode(texture: randTexture)
-                newWallLeft.position = CGPoint(x: -size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: yPos)
+                newWallLeft.position = CGPoint(x: -scene.size.width / 2 + GameplayConfiguration.Sidewall.width / 2, y: yPos)
                 newWallLeft.zPosition = 10
                 newWallLeft.physicsBody = nil
-                scene.addChild(newWallLeft)
+                
+                scene.sceneEffectNode.addChild(newWallLeft)
                 tiles.append(newWallLeft)
             }
             
@@ -83,6 +108,21 @@ class ObstacleSideWall: GKEntity {
                 tiles.removeFirst(removeNum)
             }
         }
+    }
+    
+    func animateMagnet() {
+        let fadeIn = SKAction.fadeAlpha(to: 0.9, duration: 1.0)
+        let animateMagnet = SKAction.animate(with: magnetAnimatedTextureFrames, timePerFrame: 0.03)
+        let repeatAnimateMagnet = SKAction.repeatForever(animateMagnet)
+        coverSprite.run(fadeIn)
+        coverSprite.run(repeatAnimateMagnet, withKey: "repeatAnimateMagnet")
+    }
+    
+    func removeMagnetAnimation() {
+        let fadeOut = SKAction.fadeOut(withDuration: 1.0)
+        coverSprite?.run(fadeOut, completion: {
+            self.coverSprite.removeAction(forKey: "repeatAnimateMagnet")
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {

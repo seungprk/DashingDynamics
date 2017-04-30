@@ -23,12 +23,15 @@ class DeathState: GKState {
     
     override func didEnter(from previousState: GKState?) {
         print("DEAD")
+        
+        // Stop gameplay
         let spriteComponent = self.entity.component(ofType: SpriteComponent.self)
         spriteComponent?.node.removeAllActions()
         spriteComponent?.node.physicsBody?.velocity = CGVector.zero
         entity.component(ofType: SpriteComponent.self)?.node.physicsBody?.velocity = CGVector.zero
         let gameScene = spriteComponent?.node.scene as! GameScene
         gameScene.cameraFollowsPlayer = false
+        spriteComponent?.node.physicsBody?.fieldBitMask = GameplayConfiguration.PhysicsBitmask.none
         
         AudioManager.sharedInstance.play("phase-death")
         

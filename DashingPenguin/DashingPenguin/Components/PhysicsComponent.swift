@@ -11,7 +11,7 @@ import GameplayKit
 
 class PhysicsComponent: GKComponent {
     
-    unowned var physicsBody: SKPhysicsBody
+    var physicsBody: SKPhysicsBody
     
     init(physicsBody: SKPhysicsBody) {
         self.physicsBody = physicsBody

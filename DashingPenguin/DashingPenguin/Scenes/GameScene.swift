@@ -22,6 +22,9 @@ class GameScene: SKScene, GameInputDelegate {
     var scoreManager: ScoreManager!
     var creepDeathManager: CreepDeathManager!
     var sideWall: ObstacleSideWall?
+    var sceneEffectNode: SKEffectNode!
+    var sceneCamEffectNode: SKEffectNode!
+    var magnetNode: SKFieldNode!
     
     // Physics
     var lastUpdateTime: TimeInterval = 0
@@ -29,7 +32,6 @@ class GameScene: SKScene, GameInputDelegate {
     
     // Delegates
     var platformLandingDelegate: PlatformLandingDelegate?
-    var laserIdDelegate: LaserIdentificationDelegate?
     var wallContactDelegate: WallContactDelegate?
     
     var stateMachine: GKStateMachine!
@@ -57,7 +59,6 @@ class GameScene: SKScene, GameInputDelegate {
                                                 GameSceneStateCinematicPause(scene: self),
                                                 GameSceneStateGameover(scene: self) ])
         stateMachine.enter(GameSceneStateSetup.self)
-        
     }
     
     // MARK: Update methods
@@ -93,7 +94,7 @@ class GameScene: SKScene, GameInputDelegate {
         bgManager.update(deltaTime: dt)
         scoreManager.updateDistanceScore()
         creepDeathManager.update(cameraYPos: (cameraNode?.position.y)!)
-        sideWall?.tileSideWall(scene: self)
+        sideWall?.tileSideWall()
         
         self.stateMachine.state(forClass: GameSceneStateGameover.self)?.update(deltaTime: dt)
         

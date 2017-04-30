@@ -33,6 +33,7 @@ class EnergyMatter: GKEntity {
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.energyMatter
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
+        physicsBody.isDynamic = false
         spriteComponent.node.physicsBody = physicsBody
         
         addComponent(spriteComponent)

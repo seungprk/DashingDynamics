@@ -24,27 +24,44 @@ class GameSceneStateSetup: GKState {
         scene.backgroundColor = SKColor.black
         scene.lastUpdateTime = 0
         
+        // Camera Node Setup
+        scene.cameraNode = SKCameraNode()
+        scene.addChild(scene.cameraNode!)
+        scene.camera = scene.cameraNode
+        
+        // Setup Screen Effect Node
+        let filter = CIFilter(name: "CIPixellate")
+        filter?.setDefaults()
+        filter?.setValue(10.0, forKey: "inputScale")
+        
+        scene.sceneEffectNode = SKEffectNode()
+        scene.sceneEffectNode.shouldCenterFilter = true
+        scene.sceneEffectNode.shouldEnableEffects = false
+        scene.sceneEffectNode.filter = filter
+        scene.addChild(scene.sceneEffectNode)
+        
+        scene.sceneCamEffectNode = SKEffectNode()
+        scene.sceneCamEffectNode.shouldCenterFilter = true
+        scene.sceneCamEffectNode.shouldEnableEffects = false
+        scene.sceneCamEffectNode.filter = filter
+        scene.camera?.addChild(scene.sceneCamEffectNode)
+        
         // Initialize touch input node
         let controlInputNode = TouchControlInputNode(frame: scene.frame)
         controlInputNode.delegate = scene
+        scene.sceneCamEffectNode.addChild(controlInputNode)
         
         // Player Entity Setup
         scene.player = Player()
         scene.platformLandingDelegate = scene.player!.landedState
         scene.wallContactDelegate = scene.player!.dashingState
-        print("PLAYER DELEGATES: \n\(scene.player!.landedState) \(scene.player!.dashingState)")
+//        print("PLAYER DELEGATES: \n\(scene.player!.landedState) \(scene.player!.dashingState)")
         
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
             playerSprite.node.position = CGPoint(x: 0, y: 0)
-            scene.addChild(playerSprite.node)
+            scene.sceneEffectNode.addChild(playerSprite.node)
         }
-        
-        // Camera Node Setup
-        scene.cameraNode = SKCameraNode()
-        scene.cameraNode?.addChild(controlInputNode)
-        scene.addChild(scene.cameraNode!)
-        scene.camera = scene.cameraNode
         
         // Add Background, Hud and Score Managers
         scene.bgManager = BackgroundManager(scene: scene)
@@ -67,14 +84,16 @@ class GameSceneStateSetup: GKState {
         wallRight.isDynamic = false
         
         let wallRightNode = SKNode()
+        wallRightNode.name = "wallRightNode"
         let wallLeftNode = SKNode()
+        wallRightNode.name = "wallLeftNode"
         wallRightNode.physicsBody = wallRight
         wallLeftNode.physicsBody = wallLeft
-        scene.cameraNode?.addChild(wallRightNode)
-        scene.cameraNode?.addChild(wallLeftNode)
+        scene.sceneCamEffectNode.addChild(wallRightNode)
+        scene.sceneCamEffectNode.addChild(wallLeftNode)
         
         // Add Side wall
-        scene.sideWall = ObstacleSideWall(size: scene.size)
+        scene.sideWall = ObstacleSideWall(scene: scene)
         
         // Add Pause Button
         let pauseButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "pause_on", nameForImageNormalHighlight: "pause_off")
@@ -88,7 +107,6 @@ class GameSceneStateSetup: GKState {
         // Physics
         scene.setupPhysics()
         scene.zoneManager = ZoneManager(scene: scene)
-        scene.laserIdDelegate = scene.zoneManager
         
         // Camera and background positioning
         scene.cameraNode?.position = CGPoint(x: 0, y: scene.size.height * 0.3 + GameplayConfiguration.Platform.size.height / 2)
@@ -96,6 +114,15 @@ class GameSceneStateSetup: GKState {
         
         scene.player?.component(ofType: MovementComponent.self)?.enterInitialState()
         self.stateMachine?.enter(GameSceneStatePlaying.self)
+        
+        // Setup Magnet
+        let magnetVector = vector_float3(1,0,0)
+        scene.magnetNode = SKFieldNode.linearGravityField(withVector: magnetVector)
+        scene.magnetNode.categoryBitMask = GameplayConfiguration.PhysicsBitmask.field
+        scene.magnetNode.falloff = 0
+        scene.magnetNode.strength = 2
+        scene.magnetNode.isEnabled = false
+        scene.addChild(scene.magnetNode)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
