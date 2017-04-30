@@ -35,12 +35,12 @@ class Laser: GKEntity {
         
         // Setup Physicsbody
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.frame.size)
-        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.none // changes to PhysicsBitmask.laser during the on-off cycle
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.laser
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         
         physicsBody.isDynamic = false
-        spriteComponent.node.physicsBody = physicsBody
+        spriteComponent.node.physicsBody = nil
         spriteComponent.node.name = name
         let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
         
@@ -61,19 +61,20 @@ class Laser: GKEntity {
             laserElapsed = 0
             
             let spriteComponent = component(ofType: SpriteComponent.self)
-            let physicsBody = spriteComponent?.node.physicsBody
+            let spriteNode = component(ofType: SpriteComponent.self)?.node
+            let savedPhysicsBody = component(ofType: PhysicsComponent.self)?.physicsBody
             
-            // If activated, deactivate
-            if physicsBody?.categoryBitMask == GameplayConfiguration.PhysicsBitmask.laser {
-                spriteComponent?.node.texture = spriteComponent?.textureFrames[0]
-                physicsBody?.categoryBitMask = GameplayConfiguration.PhysicsBitmask.none
             // If deactivated, activate
-            } else {
+            if spriteNode?.physicsBody == nil {
                 let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
-                spriteComponent?.node.run(animateAction, completion: {
-                    physicsBody?.categoryBitMask = GameplayConfiguration.PhysicsBitmask.laser
+                spriteNode?.run(animateAction, completion: {
+                    spriteNode?.physicsBody = savedPhysicsBody
                 })
                 AudioManager.sharedInstance.play("laser-charge")
+            // If activated, deactivate
+            } else {
+                spriteNode?.texture = spriteComponent?.textureFrames[0]
+                spriteNode?.physicsBody = nil
             }
         }
     }

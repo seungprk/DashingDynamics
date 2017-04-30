@@ -92,9 +92,9 @@ class ZoneManager {
         case 0:
             zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
         case 1:
-            zones.append(ZoneChallengeMagnet/*ZoneChallengeVisibility*/(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
         case 2:
-            zones.append(ZoneChallengeMagnet/*ZoneChallengeLongJump*/(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
         default:
             break
         }
