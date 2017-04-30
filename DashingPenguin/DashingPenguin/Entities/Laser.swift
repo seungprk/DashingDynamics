@@ -71,6 +71,7 @@ class Laser: GKEntity {
                     spriteNode?.physicsBody = savedPhysicsBody
                 })
                 AudioManager.sharedInstance.play("laser-charge")
+                AudioManager.sharedInstance.setVolume("laser-charge", volume: 0.7, dur: 0)
             // If activated, deactivate
             } else {
                 spriteNode?.texture = spriteComponent?.textureFrames[0]
