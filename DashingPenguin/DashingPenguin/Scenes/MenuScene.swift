@@ -170,6 +170,10 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     override func didMove(to view: SKView) {
+        // TODO: delete
+        print("CURRENT DEVICE!!!")
+        print(FormFactor.isIPhone)
+        
         if hasBeenPresentedOnce == true {
             self.childNode(withName: "border")?.alpha = 0
             self.childNode(withName: "title")?.alpha = 0
