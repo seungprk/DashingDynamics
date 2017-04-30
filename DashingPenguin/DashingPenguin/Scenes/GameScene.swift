@@ -32,7 +32,6 @@ class GameScene: SKScene, GameInputDelegate {
     
     // Delegates
     var platformLandingDelegate: PlatformLandingDelegate?
-    var laserIdDelegate: LaserIdentificationDelegate?
     var wallContactDelegate: WallContactDelegate?
     
     var stateMachine: GKStateMachine!

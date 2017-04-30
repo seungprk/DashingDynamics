@@ -12,7 +12,6 @@ import GameplayKit
 
 class Laser: GKEntity {
     
-    var isActivated = false
     static var idIncrement = 0
     var laserTextures: [SKTexture]!
     let id: String
@@ -36,7 +35,7 @@ class Laser: GKEntity {
         
         // Setup Physicsbody
         let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.frame.size)
-        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.laser
+        physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.none // changes to PhysicsBitmask.laser during the on-off cycle
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
         
@@ -60,14 +59,19 @@ class Laser: GKEntity {
         
         if laserElapsed > 2 {
             laserElapsed = 0
+            
             let spriteComponent = component(ofType: SpriteComponent.self)
-            let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
-            if isActivated {
+            let physicsBody = spriteComponent?.node.physicsBody
+            
+            // If activated, deactivate
+            if physicsBody?.categoryBitMask == GameplayConfiguration.PhysicsBitmask.laser {
                 spriteComponent?.node.texture = spriteComponent?.textureFrames[0]
-                isActivated = !isActivated
+                physicsBody?.categoryBitMask = GameplayConfiguration.PhysicsBitmask.none
+            // If deactivated, activate
             } else {
+                let animateAction = SKAction.animate(with: laserTextures, timePerFrame: 0.1)
                 spriteComponent?.node.run(animateAction, completion: {
-                    self.isActivated = !self.isActivated
+                    physicsBody?.categoryBitMask = GameplayConfiguration.PhysicsBitmask.laser
                 })
                 AudioManager.sharedInstance.play("laser-charge")
             }

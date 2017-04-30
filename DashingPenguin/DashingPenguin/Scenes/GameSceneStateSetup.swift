@@ -107,7 +107,6 @@ class GameSceneStateSetup: GKState {
         // Physics
         scene.setupPhysics()
         scene.zoneManager = ZoneManager(scene: scene)
-        scene.laserIdDelegate = scene.zoneManager
         
         // Camera and background positioning
         scene.cameraNode?.position = CGPoint(x: 0, y: scene.size.height * 0.3 + GameplayConfiguration.Platform.size.height / 2)
