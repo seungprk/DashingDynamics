@@ -35,7 +35,7 @@ class GameSceneStatePlaying: GKState {
             }
             return false
             
-        case is GameSceneStatePause.Type, is GameSceneStateCinematicPause.Type:
+        case is GameSceneStatePause.Type:
             return true
         
         default:

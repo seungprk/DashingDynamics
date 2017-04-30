@@ -40,6 +40,7 @@ extension GameScene: SKPhysicsContactDelegate {
         // Player and obstacle intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.obstacle):
             AudioManager.sharedInstance.play("bump")
+            AudioManager.sharedInstance.setVolume("bump", volume: 1.1, dur: 0)
             
         // Player and laser intersect
         case (GameplayConfiguration.PhysicsBitmask.player, GameplayConfiguration.PhysicsBitmask.laser):

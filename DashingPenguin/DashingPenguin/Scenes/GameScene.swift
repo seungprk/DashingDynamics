@@ -54,9 +54,9 @@ class GameScene: SKScene, GameInputDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
         stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self),
+                                                GameSceneStateIntro(scene: self),
                                                 GameSceneStatePlaying(scene: self),
                                                 GameSceneStatePause(scene: self),
-                                                GameSceneStateCinematicPause(scene: self),
                                                 GameSceneStateGameover(scene: self) ])
         stateMachine.enter(GameSceneStateSetup.self)
     }

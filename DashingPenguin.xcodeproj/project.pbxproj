@@ -32,7 +32,6 @@
 		24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */; };
 		24B8E6E91E7F400200315B62 /* bump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24B8E6E81E7F400200315B62 /* bump.wav */; };
 		24C222DA1E2B0182008BF20E /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C222D91E2B0182008BF20E /* BackgroundManager.swift */; };
-		24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */; };
 		24C6A6401EAD163600F9E5A2 /* magnetwall.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24C6A63F1EAD163600F9E5A2 /* magnetwall.atlas */; };
 		24C764C91E6403A100331C6C /* beep-low.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24C764C71E6403A100331C6C /* beep-low.wav */; };
 		24C764CA1E6403A100331C6C /* beep-high.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24C764C81E6403A100331C6C /* beep-high.wav */; };
@@ -44,6 +43,7 @@
 		24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */; };
 		24CFA6841E399B4100EB08A5 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CFA6831E399B4100EB08A5 /* HudManager.swift */; };
 		24CFA6861E399FD400EB08A5 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CFA6851E399FD400EB08A5 /* ScoreManager.swift */; };
+		24D4B3491EB6ABFA00B63D2D /* GameSceneStateIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4B3481EB6ABFA00B63D2D /* GameSceneStateIntro.swift */; };
 		24D8A6E51E2C1AA00041268E /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 24D8A6E41E2C1AA00041268E /* background.atlas */; };
 		24DB0FC31E3EB8380087CDB3 /* CreepDeathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */; };
 		24DE7A541E55718B0091ACDC /* energy-burst.wav in Resources */ = {isa = PBXBuildFile; fileRef = 24DE7A531E55718B0091ACDC /* energy-burst.wav */; };
@@ -119,7 +119,6 @@
 		24B35BC21D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlockObstacleWall.swift; path = DashingPenguin/Platform/PlatformBlockObstacleWall.swift; sourceTree = "<group>"; };
 		24B8E6E81E7F400200315B62 /* bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bump.wav; sourceTree = "<group>"; };
 		24C222D91E2B0182008BF20E /* BackgroundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
-		24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateCinematicPause.swift; path = DashingPenguin/Scenes/GameSceneStateCinematicPause.swift; sourceTree = "<group>"; };
 		24C6A63F1EAD163600F9E5A2 /* magnetwall.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = magnetwall.atlas; sourceTree = "<group>"; };
 		24C764C71E6403A100331C6C /* beep-low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-low.wav"; sourceTree = "<group>"; };
 		24C764C81E6403A100331C6C /* beep-high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-high.wav"; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 		24CEA55C1D32CCC300C338E9 /* PlatformBlocksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlatformBlocksManager.swift; path = DashingPenguin/Platform/PlatformBlocksManager.swift; sourceTree = "<group>"; };
 		24CFA6831E399B4100EB08A5 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudManager.swift; sourceTree = "<group>"; };
 		24CFA6851E399FD400EB08A5 /* ScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
+		24D4B3481EB6ABFA00B63D2D /* GameSceneStateIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneStateIntro.swift; path = DashingPenguin/Scenes/GameSceneStateIntro.swift; sourceTree = "<group>"; };
 		24D8A6E41E2C1AA00041268E /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
 		24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreepDeathManager.swift; sourceTree = "<group>"; };
 		24DE7A531E55718B0091ACDC /* energy-burst.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "energy-burst.wav"; sourceTree = "<group>"; };
@@ -276,10 +276,10 @@
 			isa = PBXGroup;
 			children = (
 				7F027DB71D8606F900C91CCD /* GameSceneStateSetup.swift */,
+				24D4B3481EB6ABFA00B63D2D /* GameSceneStateIntro.swift */,
 				7F027DBA1D8607DE00C91CCD /* GameSceneStatePlaying.swift */,
 				7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */,
 				7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */,
-				24C458D51D9853D600A9F109 /* GameSceneStateCinematicPause.swift */,
 			);
 			name = "GameScene States";
 			sourceTree = "<group>";
@@ -546,10 +546,10 @@
 				24B35BC31D7E6F66007AAF2F /* PlatformBlockObstacleWall.swift in Sources */,
 				7F24DF531D92136800796DB0 /* SKToggle.swift in Sources */,
 				7F098E671D8382E2009B1A4A /* MenuScene.swift in Sources */,
-				24C458D61D9853D600A9F109 /* GameSceneStateCinematicPause.swift in Sources */,
 				24CFA6841E399B4100EB08A5 /* HudManager.swift in Sources */,
 				7F23A5BD1D2C802F008CDA5C /* LandedState.swift in Sources */,
 				7F5A3D2F1D650D42006F7BBE /* SlidingComponent.swift in Sources */,
+				24D4B3491EB6ABFA00B63D2D /* GameSceneStateIntro.swift in Sources */,
 				7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */,
 				243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */,
 				7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */,
