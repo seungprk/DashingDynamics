@@ -179,19 +179,22 @@ class CreepDeathManager {
     }
     
     func updateSounds() {
+        let volMax:CGFloat = 0.9
+        
         let playerYPos = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
         let botOfScreen = (scene.cameraNode?.position.y)! - scene.size.height / 2
         let maxDiff = playerYPos! - botOfScreen
         
         let topOfCreep = coverSpriteNode.position.y + coverSpriteNode.size.height / 2 + hexTileSize.height
-        let creepDiff = playerYPos! - topOfCreep
-        var diffRatio = creepDiff / maxDiff
-        if (diffRatio > 1) { diffRatio = 1 }
+        let percentAdj = maxDiff * 0.1
+        let creepDiff = playerYPos! - topOfCreep + percentAdj
+        var diffRatio = (creepDiff / maxDiff) * volMax
+        if (diffRatio > volMax) { diffRatio = volMax }
         if (diffRatio < 0) { diffRatio = 0 }
         
         if (diffRatio != lastDiffRatio) {
-            AudioManager.sharedInstance.setVolume("creeping-death-drone", volume: 1.0 - Float(diffRatio), dur: 0)
-            AudioManager.sharedInstance.setVolume("music", volume: Float(diffRatio), dur: 1)
+            AudioManager.sharedInstance.setVolume("creeping-death-drone", volume: Float(volMax - diffRatio), dur: 0)
+            AudioManager.sharedInstance.setVolume("music", volume: Float(diffRatio * volMax), dur: 1)
             lastDiffRatio = diffRatio
         }
     }
