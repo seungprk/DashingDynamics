@@ -53,35 +53,6 @@ class DashingState: GKState, WallContactDelegate {
             }
             self.stateMachine?.enter(DashEndingState.self)
         }
-
-//        // Slow down the player based on its current velocity
-//        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self),
-//            let currentVelocity = spriteComponent.node.physicsBody?.velocity {
-//            
-//            // ** Other Possible Formulas **
-//            // https://www.desmos.com/calculator/j16otdoh4a
-//            // initialRate = ~0.0
-//            // finalRate   = ~0.2
-//            // FORMULA1: y = 20 ^ (x - 1.5)
-//            // FORMULA2: y = 200 ^ (x - 1.3)
-//            // FORMULA3: y = 20000 ^ (x - 1.1)
-//            // FORMULA4: y = 20000 ^ (x - 0.4)
-//            // FORMULAcurrent: y = 20000 ^ (x - 0.55)
-//            
-//            // Calculate percentage of elapsed time
-//            var progress = CGFloat(elapsedTime / GameplayConfiguration.Player.dashDuration)
-//            if (progress > 1) { progress = 1 }
-//            
-//            var rate: CGFloat = pow(20000, (progress - GameplayConfiguration.Player.dashMagnitude))
-//            if (rate < 0) { rate = 0 }
-//            if (rate > 0.2) { rate = 0.2 }
-//            
-//            let relativeVelocity = CGVector(dx: 0 - currentVelocity.dx, dy: 0 - currentVelocity.dy)
-//            let updatedVelocity = CGVector(dx: currentVelocity.dx + relativeVelocity.dx * rate,
-//                                           dy: currentVelocity.dy + relativeVelocity.dy * rate)
-//            
-//            spriteComponent.node.physicsBody?.velocity = updatedVelocity
-//        }
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -92,11 +63,6 @@ class DashingState: GKState, WallContactDelegate {
             return false
         }
     }
-    
-//    func curvedProgress(elapsed: TimeInterval) -> Double {
-//        let dashCompletion = min(1, elapsed / GameplayConfiguration.Player.dashDuration)
-//        return -(pow(-dashCompletion, 10) - 1)
-//    }
     
     func didContactWall() {
         print("HITWALL")

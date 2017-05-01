@@ -28,7 +28,7 @@ class GameScene: SKScene, GameInputDelegate {
     
     // Physics
     var lastUpdateTime: TimeInterval = 0
-    internal var physicsContactCount = 0
+    internal var physicsContactCount = 1
     
     // Delegates
     var platformLandingDelegate: PlatformLandingDelegate?
@@ -64,7 +64,6 @@ class GameScene: SKScene, GameInputDelegate {
     // MARK: Update methods
     
     override func update(_ currentTime: TimeInterval) {
-        print(player?.component(ofType: SpriteComponent.self)?.node.position)
         // Called before each frame is rendered
         if self.stateMachine.currentState is GameSceneStatePlaying {
             

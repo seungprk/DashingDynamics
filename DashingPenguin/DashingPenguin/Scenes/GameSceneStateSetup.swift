@@ -93,6 +93,7 @@ class GameSceneStateSetup: GKState {
         
         // Add Side wall
         scene.sideWall = ObstacleSideWall(scene: scene)
+        scene.sideWall?.tileSideWall()
         
         // Add Pause Button
         let pauseButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "pause_on", nameForImageNormalHighlight: "pause_off")
