@@ -64,16 +64,19 @@ class GameScene: SKScene, GameInputDelegate {
     // MARK: Update methods
     
     override func update(_ currentTime: TimeInterval) {
+        print(player?.component(ofType: SpriteComponent.self)?.node.position)
         // Called before each frame is rendered
-        
-        if let currentState = player?.component(ofType: MovementComponent.self)?.stateMachine.currentState {
-            if type(of: currentState) is DeathState.Type {
-                stateMachine.enter(GameSceneStateGameover.self)
+        if self.stateMachine.currentState is GameSceneStatePlaying {
+            
+            if let currentState = player?.component(ofType: MovementComponent.self)?.stateMachine.currentState {
+                if type(of: currentState) is DeathState.Type {
+                    stateMachine.enter(GameSceneStateGameover.self)
+                }
             }
+            
+            updateCurrentTime(currentTime)
+            if cameraFollowsPlayer == true { centerCamera() }
         }
-        
-        updateCurrentTime(currentTime)
-        if cameraFollowsPlayer == true { centerCamera() }
     }
     
     func updateCurrentTime(_ currentTime: TimeInterval) {
@@ -89,14 +92,13 @@ class GameScene: SKScene, GameInputDelegate {
         for entity in self.entities {
             entity.update(deltaTime: dt)
         }
-
-        zoneManager.update(deltaTime: dt)
-        bgManager.update(deltaTime: dt)
+        
         scoreManager.updateDistanceScore()
         creepDeathManager.update(cameraYPos: (cameraNode?.position.y)!)
-        sideWall?.tileSideWall()
-        
         self.stateMachine.state(forClass: GameSceneStateGameover.self)?.update(deltaTime: dt)
+        zoneManager.update(deltaTime: dt)
+        bgManager.update(deltaTime: dt)
+        sideWall?.tileSideWall()
         
         self.lastUpdateTime = currentTime
     }
