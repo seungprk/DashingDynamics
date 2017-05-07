@@ -19,18 +19,8 @@ class GameSceneStatePlaying: GKState {
     }   
     
     override func didEnter(from previousState: GKState?) {
-        scene.view?.isPaused = false
-        
         AudioManager.sharedInstance.playLoop("creeping-death-drone")
         AudioManager.sharedInstance.setVolume("creeping-death-drone", volume: 0, dur: 0)
-        
-//        let field = SKFieldNode.magneticField()
-//        field.strength = 0.005
-//        field.position = CGPoint.zero // scene.player!.component(ofType: SpriteComponent.self)!.node.position
-//        field.region = SKRegion(size: CGSize(width: 3200, height: 3200))
-//        field.categoryBitMask = GameplayConfiguration.PhysicsBitmask.field
-//        field.isEnabled = true
-//        scene.addChild(field)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -43,7 +33,7 @@ class GameSceneStatePlaying: GKState {
             }
             return false
             
-        case is GameSceneStatePause.Type, is GameSceneStateCinematicPause.Type:
+        case is GameSceneStatePause.Type:
             return true
         
         default:

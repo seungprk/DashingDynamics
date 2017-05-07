@@ -77,7 +77,6 @@ class Player: GKEntity {
             component(ofType: SpriteComponent.self)?.node.run(idleAnimation)
             idleAnimationStarted = true
         } else if currentState is DashingState {
-            component(ofType: SpriteComponent.self)?.node.removeAllActions()
             let spriteNode = (component(ofType: SpriteComponent.self)?.node)!
             let velocity = (spriteNode.physicsBody?.velocity)!
             let angle = atan2(velocity.dy, velocity.dx)

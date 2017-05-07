@@ -59,7 +59,6 @@ class GameSceneStateSetup: GKState {
         
         scene.entities.append(scene.player!)
         if let playerSprite = scene.player?.component(ofType: SpriteComponent.self) {
-            playerSprite.node.position = CGPoint(x: 0, y: 0)
             scene.sceneEffectNode.addChild(playerSprite.node)
         }
         
@@ -94,6 +93,7 @@ class GameSceneStateSetup: GKState {
         
         // Add Side wall
         scene.sideWall = ObstacleSideWall(scene: scene)
+        scene.sideWall?.tileSideWall()
         
         // Add Pause Button
         let pauseButton = SKButton(size: CGSize(width: 40, height: 40), nameForImageNormal: "pause_on", nameForImageNormalHighlight: "pause_off")
@@ -112,9 +112,6 @@ class GameSceneStateSetup: GKState {
         scene.cameraNode?.position = CGPoint(x: 0, y: scene.size.height * 0.3 + GameplayConfiguration.Platform.size.height / 2)
         scene.bgManager.bgNode.position = CGPoint(x: 0, y: (-scene.size.height * 0.3 - GameplayConfiguration.Platform.size.height / 2) * scene.bgManager.parallaxFactor)
         
-        scene.player?.component(ofType: MovementComponent.self)?.enterInitialState()
-        self.stateMachine?.enter(GameSceneStatePlaying.self)
-        
         // Setup Magnet
         let magnetVector = vector_float3(1,0,0)
         scene.magnetNode = SKFieldNode.linearGravityField(withVector: magnetVector)
@@ -123,9 +120,12 @@ class GameSceneStateSetup: GKState {
         scene.magnetNode.strength = 2
         scene.magnetNode.isEnabled = false
         scene.addChild(scene.magnetNode)
+        
+        scene.player?.component(ofType: MovementComponent.self)?.enterInitialState()
+        self.stateMachine?.enter(GameSceneStateIntro.self)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass is GameSceneStatePlaying.Type
+        return stateClass is GameSceneStateIntro.Type
     }
 }

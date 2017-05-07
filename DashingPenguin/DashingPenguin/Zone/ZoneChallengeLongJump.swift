@@ -16,7 +16,6 @@ class ZoneChallengeLongJump: Zone {
         platformBlocksManager.addBlock(withType: "EnergyMatter")
         platformBlocksManager.addBlock(withType: "EnergyMatter")
         platformBlocksManager.addBlock(withType: "EnergyMatter")
-        platformBlocksManager.addBlock(withType: "EnergyMatter")
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.entities.first as! Platform!
     }
