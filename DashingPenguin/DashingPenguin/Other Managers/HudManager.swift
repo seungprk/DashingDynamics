@@ -16,7 +16,7 @@ class HudManager {
     var scoreNode = SKNode()
     var scoreNumSpriteArray = [SKSpriteNode]()
     let maxScorePlaceValue = 5
-    var currentScore = 0
+    var currentScore = -1
     
     init(scene: GameScene) {
         self.scene = scene
@@ -137,7 +137,7 @@ class HudManager {
             scoreNumSpriteArray.append(newSpriteNode)
         }
         
-        updateScoreNumber(to: 1150)
+        updateScoreNumber(to: 0)
     }
     
     func updateScoreNumber(to number: Int) {
