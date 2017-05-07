@@ -66,7 +66,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         // Add Static Graphics
         
-        let border = SKSpriteNode(imageNamed: "menu-border")
+        let border = SKSpriteNode(imageNamed: FormFactor.isIPhone ? "menu-border" : "menu-border-ipad")
         border.name = "border"
         border.texture?.filteringMode = .nearest
         border.position = CGPoint(x: frame.midX, y: frame.midY + (FormFactor.isIPhone ? 26 : -14))
