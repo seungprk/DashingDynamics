@@ -102,11 +102,11 @@ class Zone {
             
             // Setup and Run SKAction
             let slideInTextbar = SKAction.moveBy(x: -hazardTextBar.size.width, y: 0, duration: 0.1)
-            let shrinkOctagon = SKAction.scale(to: 0.1, duration: 0.1)
+            let shrinkOctagon = SKAction.scale(to: 0, duration: 0.1)
             
             hazardTextBar.run(slideInTextbar, completion: {
                 hazardOctagon?.run(shrinkOctagon, completion: {
-                    self.scene.cameraNode?.childNode(withName: "challengeOverlayNode")?.removeFromParent()
+                    overlayNode?.removeFromParent()
                 })
             })
             
