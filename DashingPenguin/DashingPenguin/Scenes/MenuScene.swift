@@ -246,8 +246,13 @@ class MenuScene: SKScene, SKButtonDelegate {
         let zoomInAction = SKAction.scale(to: 0.75, duration: animationDur)
         camera?.run(zoomInAction, completion: {
             
+            var size = self.size
+            if !FormFactor.isIPhone {
+                size = CGSize(width: self.size.width, height: self.size.height)
+            }
+            
             // Present the scene
-            let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
+            let gameScene = GameScene(size: size, menu: self, scaleMode: .aspectFill)
             let transition = SKTransition.fade(with: self.backgroundColor, duration: 1)
             self.view?.presentScene(gameScene, transition: transition)
         })

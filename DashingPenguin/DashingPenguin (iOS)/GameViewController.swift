@@ -22,11 +22,23 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.showsFields = true
         
+        print(skView.frame)
+        skView.frame = CGRect(
+            x: skView.frame.origin.x - 10,
+            y: skView.frame.origin.y - 10,
+            width: skView.frame.width + 20,
+            height: skView.frame.height + 20
+        )
+        print(skView.frame)
+
         // Lower resolution to pixelate game scenes
         let downscaleRatio = 180 / skView.frame.width
         let downscaledHeight = skView.frame.height * downscaleRatio
-        let downscaledSize = CGSize(width: 180, height: downscaledHeight)
-        let scene = MenuScene(size: downscaledSize) // GameScene(size: skView.frame.size)
+        let downscaledSize = CGSize(
+            width: 180, //FormFactor.isIPhone ? 180 : 120,
+            height: downscaledHeight
+        )
+        let scene = MenuScene(size: downscaledSize)
         scene.scaleMode = .aspectFill
         skView.presentScene(scene)
     }
