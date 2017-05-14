@@ -71,15 +71,13 @@ class GameSceneStateGameover: GKState {
             ui.insert(scoreTitles)
             ui.insert(scoreLine)
             
-            let offset: CGFloat = FormFactor.isIPhone ? 0 : -40
-            
             title.position = CGPoint(
                 x: againButton.position.x,
-                y: againButton.position.y + 180 + offset
+                y: againButton.position.y + 180
             )
             scoreTitles.position = CGPoint(
                 x: againButton.position.x,
-                y: againButton.position.y + 120 + offset
+                y: againButton.position.y + 120
             )
             scoreLine.position = CGPoint(
                 x: scoreTitles.position.x,
@@ -160,9 +158,6 @@ class GameSceneStateGameover: GKState {
         // TODO: set this to a reasonable zPosition based on config
         againButton.zPosition = 10000000 * 2
         againButton.position.y = -againButton.frame.height * 2
-        if !FormFactor.isIPhone {
-            againButton.position.y += 38
-        }
         return againButton
     }
 

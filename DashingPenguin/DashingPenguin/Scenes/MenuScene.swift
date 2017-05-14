@@ -234,12 +234,9 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         // Zoom animation
         let zoomInAction = SKAction.scale(to: 0.75, duration: animationDur)
-        camera?.run(zoomInAction, completion: {
-            
-            var size = self.size
-            
+        camera?.run(zoomInAction, completion: {            
             // Present the scene
-            let gameScene = GameScene(size: size, menu: self, scaleMode: .aspectFill)
+            let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
             let transition = SKTransition.fade(with: self.backgroundColor, duration: 1)
             gameScene.scaleMode = .aspectFit
             self.view?.presentScene(gameScene, transition: transition)

@@ -11,15 +11,13 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
-//    var skView: SKView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let skView = self.view as! SKView
 
-        if !FormFactor.isIPhone {
+        if UIDevice.current.model == "iPad" {
             let frame = self.view.frame
             let width = frame.height / (16 / 9)
             let insetX = (self.view.frame.width - width) / 2
