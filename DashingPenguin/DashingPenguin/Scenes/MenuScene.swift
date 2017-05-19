@@ -66,44 +66,40 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         // Add Static Graphics
         
-        let border = SKSpriteNode(imageNamed: FormFactor.isIPhone ? "menu-border" : "menu-border-ipad")
+        let border = SKSpriteNode(imageNamed: "menu-border")
         border.name = "border"
         border.texture?.filteringMode = .nearest
-        border.position = CGPoint(x: frame.midX, y: frame.midY + (FormFactor.isIPhone ? 26 : -14))
+        border.position = CGPoint(x: frame.midX, y: frame.midY + 26)
         border.alpha = 0
         addChild(border)
         
         let title = SKSpriteNode(imageNamed: "menu-title")
         title.name = "title"
         title.texture?.filteringMode = .nearest
-        title.position = CGPoint(x: frame.midX, y: frame.midY + (FormFactor.isIPhone ? 107 : 57))
+        title.position = CGPoint(x: frame.midX, y: frame.midY + 107)
         title.alpha = 0
         addChild(title)
         
         let box1 = SKSpriteNode(imageNamed: "menu-box1")
-        if FormFactor.isIPhone {
-            box1.name = "box1"
-            box1.texture?.filteringMode = .nearest
-            box1.position = CGPoint(x: frame.midX, y: frame.midY + (FormFactor.isIPhone ? 73 : 33))
-            box1.alpha = 0
-            addChild(box1)
-        }
+        box1.name = "box1"
+        box1.texture?.filteringMode = .nearest
+        box1.position = CGPoint(x: frame.midX, y: frame.midY + 73)
+        box1.alpha = 0
+        addChild(box1)
         
         let box2 = SKSpriteNode(imageNamed: "menu-box2")
         box2.name = "box2"
         box2.texture?.filteringMode = .nearest
-        box2.position = CGPoint(x: frame.midX, y: frame.midY + (FormFactor.isIPhone ? 30 : 16))// -50))
+        box2.position = CGPoint(x: frame.midX, y: frame.midY + 30)
         box2.alpha = 0
         addChild(box2)
         
         let box3 = SKSpriteNode(imageNamed: "menu-box3")
-        if FormFactor.isIPhone {
-            box3.name = "box3"
-            box3.texture?.filteringMode = .nearest
-            box3.position = CGPoint(x: frame.midX, y: frame.midY - 47)
-            box3.alpha = 0
-            addChild(box3)
-        }
+        box3.name = "box3"
+        box3.texture?.filteringMode = .nearest
+        box3.position = CGPoint(x: frame.midX, y: frame.midY - 47)
+        box3.alpha = 0
+        addChild(box3)
         
         // Add Buttons
         
@@ -111,7 +107,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         playButton.name = "playButton"
         playButton.delegate = self
         playButton.texture?.filteringMode = .nearest
-        playButton.position = CGPoint(x: size.width / 2, y: size.height / 2 - (FormFactor.isIPhone ? 104 : 64))
+        playButton.position = CGPoint(x: size.width / 2, y: size.height / 2 - 104)
         playButton.alpha = 0
         addChild(playButton)
         
@@ -119,7 +115,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         scoreButton.name = "scoreButton"
         scoreButton.delegate = self
         scoreButton.texture?.filteringMode = .nearest
-        scoreButton.position = CGPoint(x: size.width / 2 + 31, y: size.height / 2 - (FormFactor.isIPhone ? 5 : 21))// 45))
+        scoreButton.position = CGPoint(x: size.width / 2 + 31, y: size.height / 2 - 5)
         scoreButton.alpha = 0
         addChild(scoreButton)
         
@@ -132,7 +128,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         let soundToggle = SKToggle(isOn: isSoundOn, imageNormal: "menu-sound", imageHighlight: "menu-sound-active", imageOff: "menu-sound-off", imageOffHighlight: "menu-sound-off-active")
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
-        soundToggle.position = CGPoint(x: size.width / 2 - 31, y: size.height / 2 - (FormFactor.isIPhone ? 5 : 21))// 45))
+        soundToggle.position = CGPoint(x: size.width / 2 - 31, y: size.height / 2 - 5)
         soundToggle.alpha = 0
         addChild(soundToggle)
         
@@ -165,22 +161,16 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         border.run(flickerIn)
         title.run(flickerIn)
+        box1.run(flickerIn)
         box2.run(flickerIn)
+        box3.run(flickerIn)
 
-        if FormFactor.isIPhone {
-            box1.run(flickerIn)
-            box3.run(flickerIn)
-        }
         scoreButton.run(flickerIn)
         soundToggle.run(flickerIn)
         playButton.run(flickerIn)
     }
     
     override func didMove(to view: SKView) {
-        // TODO: delete
-        print("CURRENT DEVICE!!!")
-        print(FormFactor.isIPhone)
-        
         if hasBeenPresentedOnce == true {
             self.childNode(withName: "border")?.alpha = 0
             self.childNode(withName: "title")?.alpha = 0
@@ -244,16 +234,11 @@ class MenuScene: SKScene, SKButtonDelegate {
         
         // Zoom animation
         let zoomInAction = SKAction.scale(to: 0.75, duration: animationDur)
-        camera?.run(zoomInAction, completion: {
-            
-            var size = self.size
-            if !FormFactor.isIPhone {
-                size = CGSize(width: self.size.width, height: self.size.height)
-            }
-            
+        camera?.run(zoomInAction, completion: {            
             // Present the scene
-            let gameScene = GameScene(size: size, menu: self, scaleMode: .aspectFill)
+            let gameScene = GameScene(size: self.size, menu: self, scaleMode: .aspectFill)
             let transition = SKTransition.fade(with: self.backgroundColor, duration: 1)
+            gameScene.scaleMode = .aspectFit
             self.view?.presentScene(gameScene, transition: transition)
         })
         

@@ -79,7 +79,6 @@
 		7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */; };
 		7F24DF511D92019600796DB0 /* charge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7F24DF501D92019600796DB0 /* charge.wav */; };
 		7F24DF531D92136800796DB0 /* SKToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F24DF521D92136800796DB0 /* SKToggle.swift */; };
-		7F31E7171E9F1BE2006DF132 /* FormFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F31E7161E9F1BE2006DF132 /* FormFactor.swift */; };
 		7F3B464C1E76059100ECFD07 /* SKScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B464B1E76059100ECFD07 /* SKScoreLabel.swift */; };
 		7F3C34DF1D2CB8C1008DA5B3 /* TouchControlInputNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */; };
 		7F3C34E11D2CC413008DA5B3 /* GameplayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */; };
@@ -169,7 +168,6 @@
 		7F24DF4A1D91FF9E00796DB0 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioManager.swift; path = DashingPenguin/Audio/AudioManager.swift; sourceTree = "<group>"; };
 		7F24DF501D92019600796DB0 /* charge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = charge.wav; sourceTree = "<group>"; };
 		7F24DF521D92136800796DB0 /* SKToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKToggle.swift; path = DashingPenguin/Node/SKToggle.swift; sourceTree = "<group>"; };
-		7F31E7161E9F1BE2006DF132 /* FormFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFactor.swift; sourceTree = "<group>"; };
 		7F3B464B1E76059100ECFD07 /* SKScoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKScoreLabel.swift; path = DashingPenguin/Node/SKScoreLabel.swift; sourceTree = "<group>"; };
 		7F3C34DE1D2CB8C1008DA5B3 /* TouchControlInputNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchControlInputNode.swift; path = DashingPenguin/Controls/TouchControlInputNode.swift; sourceTree = "<group>"; };
 		7F3C34E01D2CC413008DA5B3 /* GameplayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameplayConfiguration.swift; path = DashingPenguin/Assets/GameplayConfiguration.swift; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 				24CFA6831E399B4100EB08A5 /* HudManager.swift */,
 				24CFA6851E399FD400EB08A5 /* ScoreManager.swift */,
 				24DB0FC21E3EB8380087CDB3 /* CreepDeathManager.swift */,
-				7F31E7161E9F1BE2006DF132 /* FormFactor.swift */,
 			);
 			name = "Other Managers";
 			path = "DashingPenguin/Other Managers";
@@ -579,7 +576,6 @@
 				24CFA6861E399FD400EB08A5 /* ScoreManager.swift in Sources */,
 				247607581DDAD56F00237A53 /* ObstacleWall.swift in Sources */,
 				7F0D445C1D8E32970065A1C3 /* GameScene+SKButtonDelegate.swift in Sources */,
-				7F31E7171E9F1BE2006DF132 /* FormFactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

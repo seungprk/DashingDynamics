@@ -11,35 +11,35 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let skView = self.view as! SKView
+
+        if UIDevice.current.model == "iPad" {
+            let frame = self.view.frame
+            let width = frame.height / (16 / 9)
+            let insetX = (self.view.frame.width - width) / 2
+            skView.frame = frame.insetBy(dx: insetX, dy: 0)
+        }
+
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.showsPhysics = true
         skView.ignoresSiblingOrder = true
         skView.showsFields = true
-        
-        print(skView.frame)
-        skView.frame = CGRect(
-            x: skView.frame.origin.x - 10,
-            y: skView.frame.origin.y - 10,
-            width: skView.frame.width + 20,
-            height: skView.frame.height + 20
-        )
-        print(skView.frame)
 
         // Lower resolution to pixelate game scenes
         let downscaleRatio = 180 / skView.frame.width
         let downscaledHeight = skView.frame.height * downscaleRatio
         let downscaledSize = CGSize(
-            width: 180, //FormFactor.isIPhone ? 180 : 120,
+            width: 180,
             height: downscaledHeight
         )
         let scene = MenuScene(size: downscaledSize)
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
+        
         skView.presentScene(scene)
     }
 
