@@ -26,7 +26,7 @@ class PlatformBlockObstacleDoubleDash: PlatformBlock {
         let nextDelta = nextBlockDelta(fromX: firstPlatXPos, withDist: distance, inScene: scene)
         
         // Setup Size of Block and X Position of First Platform in the Next Block
-        size = CGSize(width: scene.size.width, height: nextDelta.dy + platformSize.height)
+        size = CGSize(width: scene.size.width, height: nextDelta.dy)
         nextBlockFirstPlatformXPos = firstPlatXPos + nextDelta.dx
         
         // Background for debug

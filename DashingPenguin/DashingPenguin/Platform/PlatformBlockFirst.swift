@@ -13,7 +13,7 @@ class PlatformBlockFirst: PlatformBlock {
     
     init(scene: GameScene) {
         super.init()
-        size = CGSize(width: scene.size.width, height: 200)
+        size = CGSize(width: scene.size.width, height: 150)
         
         // Background for Debug
         //addChild(SKSpriteNode(color: UIColor.blue, size: self.size))

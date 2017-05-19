@@ -100,6 +100,8 @@ class GameScene: SKScene, GameInputDelegate {
         sideWall?.tileSideWall()
         
         self.lastUpdateTime = currentTime
+        
+        print("TIME DIFF: ", dt, "/ PLAYER POS: ", player?.component(ofType: SpriteComponent.self)?.node.position)
     }
     
     func centerCamera() {

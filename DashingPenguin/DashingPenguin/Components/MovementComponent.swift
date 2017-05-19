@@ -49,7 +49,7 @@ class MovementComponent: GKComponent {
         let angle = atan2(velocity.dy, velocity.dx)
         
         // Hard-coded linear velocity
-        let velocityFactor: CGFloat = 800
+        let velocityFactor: CGFloat = 695
         let calculatedX = velocityFactor * cos(angle)
         let calculatedY = velocityFactor * sin(angle)
         

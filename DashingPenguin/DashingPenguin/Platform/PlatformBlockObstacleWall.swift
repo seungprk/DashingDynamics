@@ -49,7 +49,7 @@ class PlatformBlockObstacleWall: PlatformBlock {
         let wallLength = wallRightX - wallLeftX
         
         // Setup Next Block's Platform Y Position through Size
-        size = CGSize(width: scene.size.width, height: maxDash + platformSize.height)
+        size = CGSize(width: scene.size.width, height: maxDash)
         
         // Setup Next Block's Platform X Position
         let rMax = maxDash

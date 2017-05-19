@@ -28,21 +28,25 @@ class PlatformBlock: SKNode {
         let platformSize = Platform().size
         
         // Get Random Angle, Limit by Either Width of Screen or Next Platform Should be Higher Y
-        let distToRightEdge = scene.size.width/2 - firstPlatXPos - platformSize.width/2
-        let distToLeftEdge = firstPlatXPos + scene.size.width/2 - platformSize.width/2
+        let distToRightEdge = scene.size.width/2 - firstPlatXPos - platformSize.width/2 - GameplayConfiguration.Sidewall.width
+        let distToLeftEdge = firstPlatXPos + scene.size.width/2 - platformSize.width/2 - GameplayConfiguration.Sidewall.width
         
         let angleReducFromRightEdge = acos(distToRightEdge / randomDist)
         let angleReducFromLeftEdge = acos(distToLeftEdge / randomDist)
         let angleReducFromNextPlat = asin(platformSize.height / randomDist)
         
+        // Min Angle
         var angleMin: CGFloat!
-        if distToRightEdge < sqrt(randomDist * randomDist - platformSize.height * platformSize.height) {
+        let adjacentLenIfPlatHeight = sqrt(randomDist * randomDist - platformSize.height * platformSize.height)
+        if distToRightEdge < adjacentLenIfPlatHeight { // pick the angle which is closer to the original x pos
             angleMin = angleReducFromRightEdge
         } else {
             angleMin = angleReducFromNextPlat
         }
+        
+        // Max Angle
         var maxReduction: CGFloat!
-        if distToLeftEdge < sqrt(randomDist * randomDist - platformSize.height * platformSize.height) {
+        if distToLeftEdge < adjacentLenIfPlatHeight {
             maxReduction = angleReducFromLeftEdge
         } else {
             maxReduction = angleReducFromNextPlat
