@@ -17,8 +17,6 @@ class ZoneNormal: Zone {
         platformBlocksManager.addBlock(withType: "SingleDash")
         platformBlocksManager.addBlock(withType: "SingleDash")
         platformBlocksManager.addBlock(withType: "SingleDash")
-        platformBlocksManager.addBlock(withType: "SingleDash")
-        platformBlocksManager.addBlock(withType: "SingleDash")
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.entities.first as! Platform!
     }

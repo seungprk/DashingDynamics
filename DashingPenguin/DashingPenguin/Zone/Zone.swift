@@ -57,13 +57,12 @@ class Zone {
             let hazardOctagon = SKSpriteNode(texture: hazardOctagonTexture)
             hazardOctagon.name = "hazardOctagon"
             hazardOctagon.position = CGPoint(x: -(overlayFullWidth / 2) + hazardOctagonTexture.size().width / 2, y: graphicYPos)
-            hazardOctagon.zPosition = 1000
-            hazardOctagon.setScale(0.1)
+            hazardOctagon.zPosition = GameplayConfiguration.HeightOf.hud
             
             let hazardTextbar = SKSpriteNode(texture: hazardTextbarTextureFrames[0])
             hazardTextbar.name = "hazardTextbar"
             hazardTextbar.position = CGPoint(x: -hazardTextbarTextureFrames[0].size().width, y: 0)
-            hazardTextbar.zPosition = 1000
+            hazardTextbar.zPosition = GameplayConfiguration.HeightOf.hud
             
             let maskNode = SKSpriteNode(texture: hazardTextbarTextureFrames[0])
             
@@ -71,6 +70,7 @@ class Zone {
             hazardTextbarCropNode.name = "hazardTextbarCropNode"
             hazardTextbarCropNode.maskNode = maskNode
             hazardTextbarCropNode.position = CGPoint(x: overlayFullWidth / 2 - hazardTextbarTextureFrames[0].size().width / 2, y: graphicYPos)
+            hazardTextbarCropNode.zPosition = GameplayConfiguration.HeightOf.hud
             
             scene.sceneCamEffectNode.addChild(challengeOverlayNode)
             challengeOverlayNode.addChild(hazardOctagon)

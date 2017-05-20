@@ -90,11 +90,11 @@ class ZoneManager {
         let randomize = arc4random_uniform(3)
         switch randomize {
         case 0:
-            zones.append(ZoneChallengeMagnet(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeVisibility/*Magnet*/(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
         case 1:
             zones.append(ZoneChallengeVisibility(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
         case 2:
-            zones.append(ZoneChallengeLongJump(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
+            zones.append(ZoneChallengeVisibility/*LongJump*/(scene: scene, begXPos: zoneFirstXPos, begYPos: lastZoneTopYPos))
         default:
             break
         }
