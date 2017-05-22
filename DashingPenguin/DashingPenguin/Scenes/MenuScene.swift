@@ -21,7 +21,7 @@ class MenuScene: SKScene, SKButtonDelegate {
     
     var hasBeenPresentedOnce = false
     
-    let timeScale = 0.2
+    let timeScale: TimeInterval = 0.5
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -135,15 +135,28 @@ class MenuScene: SKScene, SKButtonDelegate {
         // Shell Slide In Animation
         
         let slideInDur = TimeInterval(2) * timeScale
-        let slideInLeft = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur)
-        let slideInRight = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur)
-        let slideInTop = SKAction.move(to: CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2), duration: slideInDur)
-        let slideInBottom = SKAction.move(to: CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 2), duration: slideInDur)
         
-        shellLeft.run(slideInLeft)
-        shellRight.run(slideInRight)
-        shellTop.run(slideInTop)
-        shellBottom.run(slideInBottom, completion: {
+        let slideInLeft = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 1.8, y: size.height / 2 + 3), duration: slideInDur * 0.6)
+        let slideInLeftBack = SKAction.move(to: CGPoint(x: shellLeftTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur * 0.05)
+        
+        let slideInRight = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 1.8, y: size.height / 2 + 3), duration: slideInDur * 0.6)
+        let slideInRightBack = SKAction.move(to: CGPoint(x: size.width - shellRightTexture.size().width / 2, y: size.height / 2 + 3), duration: slideInDur * 0.05)
+        
+        let slideInTop = SKAction.move(to: CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 1.8), duration: slideInDur)
+        let slideInTopBack = SKAction.move(to: CGPoint(x: size.width / 2, y: size.height - shellTopTexture.size().height / 2), duration: slideInDur * 0.05)
+
+        let slideInBottom = SKAction.move(to: CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 1.8), duration: slideInDur)
+        let slideInBottomBack = SKAction.move(to: CGPoint(x: size.width / 2, y: shellBottomTexture.size().height / 2), duration: slideInDur * 0.05)
+        
+        slideInLeft.timingMode = .easeIn
+        slideInRight.timingMode = .easeIn
+        slideInTop.timingMode = .easeIn
+        slideInBottom.timingMode = .easeIn
+        
+        shellLeft.run(SKAction.sequence([slideInLeft, slideInLeftBack]))
+        shellRight.run(SKAction.sequence([slideInRight, slideInRightBack]))
+        shellTop.run(SKAction.sequence([slideInTop, slideInTopBack]))
+        shellBottom.run(SKAction.sequence([slideInBottom, slideInBottomBack]), completion: {
             AudioManager.sharedInstance.playLoop("menu-beeping")
             AudioManager.sharedInstance.playLoop("music")
             AudioManager.sharedInstance.setVolume("music", volume: 0.9, dur: 0)
