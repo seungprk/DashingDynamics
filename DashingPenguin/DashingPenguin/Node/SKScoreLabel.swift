@@ -40,10 +40,10 @@ class SKScoreLabel: SKNode {
         fontsize = SKScoreLabel.numberFont.first!.size()
         super.init()
         
-        #if DEBUG
-            // Adds a red dot to show where the label node's center is.
-            addChild(SKSpriteNode.dot())
-        #endif
+//        #if DEBUG
+//            // Adds a red dot to show where the label node's center is.
+//            addChild(SKSpriteNode.dot())
+//        #endif
     }
     
     /// Creates a new score label with a given initial value.

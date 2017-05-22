@@ -97,16 +97,16 @@ class GameSceneStateGameover: GKState {
                 ui.insert(distanceScoreLabel)
                 ui.insert(platformScoreLabel)
                 ui.insert(totalScoreLabel)
-                
-                #if DEBUG
-                    let dot = SKSpriteNode.dot(position: topRight)
-                    scoreTitles.parent?.addChild(dot)
-                    
-                    distanceScoreLabel.setValue(to: 1234)
-                    platformScoreLabel.setValue(to: 78)
-                    totalScoreLabel.setValue(to: 99900456)
-                #endif
-                
+     
+//                #if DEBUG
+//                    let dot = SKSpriteNode.dot(position: topRight)
+//                    scoreTitles.parent?.addChild(dot)
+//                    
+//                    distanceScoreLabel.setValue(to: 1234)
+//                    platformScoreLabel.setValue(to: 78)
+//                    totalScoreLabel.setValue(to: 99900456)
+//                #endif
+
                 distanceScoreLabel.position = CGPoint(
                     x: topRight.x - distanceScoreLabel.size.width / 2,
                     y: topRight.y - distanceScoreLabel.size.height / 2 + 1)
