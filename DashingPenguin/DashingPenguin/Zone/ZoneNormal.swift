@@ -13,10 +13,8 @@ class ZoneNormal: Zone {
     
     override init(scene: GameScene, begXPos: CGFloat, begYPos: CGFloat) {
         super.init(scene: scene, begXPos: begXPos, begYPos: begYPos)
-        //platformBlocksManager.generateRandomBlocks(amount: 3)
-        platformBlocksManager.addBlock(withType: "SingleDash")
-        platformBlocksManager.addBlock(withType: "SingleDash")
-        platformBlocksManager.addBlock(withType: "SingleDash")
+        platformBlocksManager.generateRandomBlocks(amount: 5)
+//        platformBlocksManager.addBlock(withType: "SingleDash")
         initSize()
         firstPlatform = platformBlocksManager.blocks.first?.entities.first as! Platform!
     }

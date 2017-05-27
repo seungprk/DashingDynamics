@@ -19,6 +19,7 @@ class AudioManager {
     static let sharedInstance = AudioManager()
     
     var sounds = [String: AVAudioPlayer]()
+    var isSoundOn: Bool!
     
     init() {
         
@@ -43,6 +44,15 @@ class AudioManager {
                 sounds.updateValue(sound, forKey: data.fileName)
             }
         }
+        
+        // Get sound state from plist
+        guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
+            else { print("can't make PlayerData.plist url") ; return }
+        guard let data = NSDictionary(contentsOf: url)
+            else { print("No PlayerData.plist") ; return }
+        guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool
+            else { print("no key isSoundOn"); return }
+        self.isSoundOn = isSoundOn
     }
     
     func audioPlayerWithFile(file: String, type: AudioFileType) -> AVAudioPlayer? {
@@ -61,25 +71,29 @@ class AudioManager {
     }
     
     func play(_ name: String) {
-        let sound = sounds[name]
-        DispatchQueue.global(qos: .background).async {
-            if (sound?.isPlaying)! {
-                sound?.pause()
+        if isSoundOn == true {
+            let sound = sounds[name]
+            DispatchQueue.global(qos: .background).async {
+                if (sound?.isPlaying)! {
+                    sound?.pause()
+                }
+                sound?.currentTime = 0
+                sound?.play()
             }
-            sound?.currentTime = 0
-            sound?.play()
         }
     }
     
     func playLoop(_ name: String) {
-        let sound = sounds[name]
-        DispatchQueue.global(qos: .background).async {
-            if (sound?.isPlaying)! {
-                sound?.pause()
+        if isSoundOn == true {
+            let sound = sounds[name]
+            DispatchQueue.global(qos: .background).async {
+                if (sound?.isPlaying)! {
+                    sound?.pause()
+                }
+                sound?.currentTime = 0
+                sound?.numberOfLoops = -1
+                sound?.play()
             }
-            sound?.currentTime = 0
-            sound?.numberOfLoops = -1
-            sound?.play()
         }
     }
     
@@ -88,6 +102,7 @@ class AudioManager {
         DispatchQueue.global(qos: .background).async {
             if (sound?.isPlaying)! {
                 sound?.pause()
+                sound?.currentTime = 0
             }
         }
     }
@@ -107,6 +122,33 @@ class AudioManager {
             if (newVol < 0.0) { newVol = 0.0 }
             sound?.setVolume(newVol, fadeDuration: dur)
             print(newVol)
+        }
+    }
+    
+    func toggleSound() {
+        // Set sound in plist and object var
+        guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
+            else { print("can't make PlayerData.plist url") ; return }
+        guard let data = NSDictionary(contentsOf: url)
+            else { print("No PlayerData.plist") ; return }
+        guard let isSoundOn = data.value(forKey: "isSoundOn") as? NSNumber.BooleanLiteralType
+            else { print("no key isSoundOn"); return }
+        
+        let newData = NSMutableDictionary(dictionary: data)
+        newData.setValue(!isSoundOn, forKey: "isSoundOn")
+        newData.write(to: url, atomically: false)
+        
+        self.isSoundOn = !self.isSoundOn
+        
+        // Stop or play sounds
+        if !self.isSoundOn {
+            for soundName in sounds.keys {
+                stop(soundName)
+            }
+        } else {
+            playLoop("menu-beeping")
+            playLoop("music")
+            setVolume("music", volume: 0.9, dur: 0)
         }
     }
     

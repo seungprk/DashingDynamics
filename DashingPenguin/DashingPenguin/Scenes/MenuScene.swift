@@ -258,20 +258,6 @@ class MenuScene: SKScene, SKButtonDelegate {
         AudioManager.sharedInstance.stop("menu-beeping")
     }
     
-    func toggleSound() {
-        
-        guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
-            else { print("can't make PlayerData.plist url") ; return }
-        guard let data = NSDictionary(contentsOf: url)
-            else { print("No PlayerData.plist") ; return }
-        guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool
-            else { print("no key isSoundOn"); return }
-
-        let newData = NSMutableDictionary(dictionary: data)
-        newData.setValue(!isSoundOn, forKey: "isSoundOn")
-        newData.write(to: url, atomically: false)
-    }
-    
     func onButtonPress(named: String) {
         print(named)
         
@@ -285,7 +271,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         case "soundToggle":
             if childNode(withName: "soundToggle")?.alpha == 1 {
                 AudioManager.sharedInstance.play("beep-low")
-                toggleSound()
+                AudioManager.sharedInstance.toggleSound()
             }
         case "scoreButton":
             if childNode(withName: "scoreButton")?.alpha == 1 {
