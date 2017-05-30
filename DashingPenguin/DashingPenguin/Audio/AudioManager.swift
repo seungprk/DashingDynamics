@@ -45,14 +45,13 @@ class AudioManager {
             }
         }
         
-        // Get sound state from plist
-        guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
-            else { print("can't make PlayerData.plist url") ; return }
-        guard let data = NSDictionary(contentsOf: url)
-            else { print("No PlayerData.plist") ; return }
-        guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool
-            else { print("no key isSoundOn"); return }
-        self.isSoundOn = isSoundOn
+        // Get sound state
+        let userDefaults = UserDefaults.standard
+        if let value = userDefaults.object(forKey: "isSoundOn") {
+            isSoundOn = value as! Bool
+        } else {
+            isSoundOn = true
+        }
     }
     
     func audioPlayerWithFile(file: String, type: AudioFileType) -> AVAudioPlayer? {
@@ -126,22 +125,8 @@ class AudioManager {
     }
     
     func toggleSound() {
-        // Set sound in plist and object var
-        guard let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
-            else { print("can't make PlayerData.plist url") ; return }
-        guard let data = NSDictionary(contentsOf: url)
-            else { print("No PlayerData.plist") ; return }
-        guard let isSoundOn = data.value(forKey: "isSoundOn") as? NSNumber.BooleanLiteralType
-            else { print("no key isSoundOn"); return }
-        
-        let newData = NSMutableDictionary(dictionary: data)
-        newData.setValue(!isSoundOn, forKey: "isSoundOn")
-        newData.write(to: url, atomically: false)
-        
-        self.isSoundOn = !self.isSoundOn
-        
         // Stop or play sounds
-        if !self.isSoundOn {
+        if self.isSoundOn {
             for soundName in sounds.keys {
                 stop(soundName)
             }
@@ -150,6 +135,11 @@ class AudioManager {
             playLoop("music")
             setVolume("music", volume: 0.9, dur: 0)
         }
+        
+        // Update settings
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(!isSoundOn, forKey: "isSoundOn")
+        isSoundOn = !isSoundOn
     }
     
     func preInit() {

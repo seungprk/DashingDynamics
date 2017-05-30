@@ -38,6 +38,10 @@ class SKToggle: SKButton {
         self.isOn = isOn
         
         super.init(size: size, nameForImageNormal: imageNormal, nameForImageNormalHighlight: imageHighlight)
+        
+        if let texture = isOn ? textureNormal : textureOff {
+            self.texture = texture
+        }
     }
     
     init(isOn: Bool, imageNormal: String?, imageHighlight: String?, imageOff: String?, imageOffHighlight: String?) {
@@ -57,14 +61,14 @@ class SKToggle: SKButton {
         self.isOn = isOn
         
         super.init(size: SKTexture(imageNamed: imageNormal!).size(), nameForImageNormal: imageNormal, nameForImageNormalHighlight: imageHighlight)
+        
+        if let texture = isOn ? textureNormal : textureOff {
+            self.texture = texture
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setState(to isOn: Bool) {
-        self.isOn = isOn
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -120,12 +120,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         addChild(scoreButton)
         
         // Add Sound Toggle
-        
-        let url = Bundle.main.url(forResource: "PlayerData", withExtension: "plist")
-        guard let data = NSDictionary(contentsOf: url!) else { print("No PlayerData.plist"); return }
-        guard let isSoundOn = data.value(forKey: "isSoundOn") as? Bool else { print("no key isSoundOn"); return }
-        
-        let soundToggle = SKToggle(isOn: isSoundOn, imageNormal: "menu-sound", imageHighlight: "menu-sound-active", imageOff: "menu-sound-off", imageOffHighlight: "menu-sound-off-active")
+        let soundToggle = SKToggle(isOn: AudioManager.sharedInstance.isSoundOn, imageNormal: "menu-sound", imageHighlight: "menu-sound-active", imageOff: "menu-sound-off", imageOffHighlight: "menu-sound-off-active")
         soundToggle.name = "soundToggle"
         soundToggle.delegate = self
         soundToggle.position = CGPoint(x: size.width / 2 - 31, y: size.height / 2 - 5)
