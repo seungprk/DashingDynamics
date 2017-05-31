@@ -98,6 +98,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             
             player?.isOnPlatform = physicsContactCount == 0 ? false : true
+            print("PLAYER ON PLAT: ", player?.isOnPlatform)
         }
     }
     
@@ -116,6 +117,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
 
             player?.isOnPlatform = physicsContactCount == 0 ? false : true
+            print("PLAYER ON PLAT: ", player?.isOnPlatform)
         }
     }
 }

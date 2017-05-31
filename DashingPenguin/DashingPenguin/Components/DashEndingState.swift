@@ -53,9 +53,11 @@ class DashEndingState: GKState {
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
-        
         elapsedTime += seconds
         
+        if entity.isOnPlatform {
+            stateMachine?.enter(LandedState.self)
+        }
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

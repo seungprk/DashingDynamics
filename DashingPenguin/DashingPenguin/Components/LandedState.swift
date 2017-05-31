@@ -22,6 +22,12 @@ class LandedState: GKState, PlatformLandingDelegate {
     override func didEnter(from previousState: GKState?) {
         entity.component(ofType: MovementComponent.self)?.dashCount = 0
         
+        // Remove player visual effects and prevent death
+        if let spriteComponent = self.entity.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.removeAllActions()
+            spriteComponent.node.alpha = 1
+        }
+        
         // Activate Platform
         if let platform = currentPlatform {
             let platEntity = platform.entity as! Platform
