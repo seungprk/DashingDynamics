@@ -125,8 +125,13 @@ class AudioManager {
     }
     
     func toggleSound() {
+        // Update settings
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(!isSoundOn, forKey: "isSoundOn")
+        isSoundOn = !isSoundOn
+        
         // Stop or play sounds
-        if self.isSoundOn {
+        if !self.isSoundOn {
             for soundName in sounds.keys {
                 stop(soundName)
             }
@@ -135,11 +140,6 @@ class AudioManager {
             playLoop("music")
             setVolume("music", volume: 0.9, dur: 0)
         }
-        
-        // Update settings
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(!isSoundOn, forKey: "isSoundOn")
-        isSoundOn = !isSoundOn
     }
     
     func preInit() {
