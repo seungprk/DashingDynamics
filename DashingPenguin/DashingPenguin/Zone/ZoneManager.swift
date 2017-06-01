@@ -135,4 +135,19 @@ class ZoneManager {
             }
         }
     }
+    
+    func turnOffLasers() {
+        AudioManager.sharedInstance.stop("laser-charge")
+        
+        for zone in zones {
+            for block in zone.platformBlocksManager.blocks {
+                for entity in block.entities {
+                    if entity is Laser {
+                        let laserEntity = entity as! Laser
+                        laserEntity.laserOn = false
+                    }
+                }
+            }
+        }
+    }
 }

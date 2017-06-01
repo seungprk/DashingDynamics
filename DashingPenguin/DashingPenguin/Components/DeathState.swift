@@ -44,6 +44,9 @@ class DeathState: GKState {
             }
         }
         
+        // Stop lasers turning on and off
+        gameScene.zoneManager.turnOffLasers()
+        
         AudioManager.sharedInstance.play("phase-death")
         
         if entity.death == "laser" {

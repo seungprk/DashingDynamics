@@ -15,6 +15,7 @@ class Laser: GKEntity {
     static var idIncrement = 0
     var laserTextures: [SKTexture]!
     let id: String
+    var laserOn = true
     
     init(frame: CGRect) {
         let name = "laser\(Laser.idIncrement)"
@@ -57,7 +58,7 @@ class Laser: GKEntity {
     override func update(deltaTime seconds: TimeInterval) {
         laserElapsed += seconds
         
-        if laserElapsed > 2 {
+        if laserElapsed > 2 && laserOn {
             laserElapsed = 0
             
             let spriteComponent = component(ofType: SpriteComponent.self)
