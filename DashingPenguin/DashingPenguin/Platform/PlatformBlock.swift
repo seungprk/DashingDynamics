@@ -17,6 +17,7 @@ class PlatformBlock: SKNode {
     
     override init() {
         super.init()
+        name = "platformBlock"
         print("PlatformBlock Object Created")
     }
     

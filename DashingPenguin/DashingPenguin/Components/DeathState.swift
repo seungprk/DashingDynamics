@@ -33,6 +33,17 @@ class DeathState: GKState {
         gameScene.cameraFollowsPlayer = false
         spriteComponent?.node.physicsBody?.fieldBitMask = GameplayConfiguration.PhysicsBitmask.none
         
+        // Remove all platform actions
+        for child in gameScene.sceneEffectNode.children {
+            if child.name == "platformBlock" {
+                for subChild in child.children {
+                    if subChild.name == "platform" {
+                        subChild.removeAllActions()
+                    }
+                }
+            }
+        }
+        
         AudioManager.sharedInstance.play("phase-death")
         
         if entity.death == "laser" {

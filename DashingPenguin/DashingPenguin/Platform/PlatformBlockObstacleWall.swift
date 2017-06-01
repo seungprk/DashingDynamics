@@ -31,7 +31,7 @@ class PlatformBlockObstacleWall: PlatformBlock {
         let maxDash = GameplayConfiguration.TouchControls.maxDistance
         let playerSprite = scene.player?.component(ofType: SpriteComponent.self)?.node
         let dashDistPlusPlatHeight = platformSize.height/2 + maxDash
-        let wallYPos =  dashDistPlusPlatHeight - wallThickness/2 - (playerSprite?.size.height)!/2
+        let wallYPos =  dashDistPlusPlatHeight - wallThickness/2 - (playerSprite?.size.height)!
         
         // X Position of Wall
         var wallLeftX: CGFloat!
