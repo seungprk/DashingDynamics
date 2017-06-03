@@ -101,25 +101,14 @@ class ZoneManager {
     }
     
     func checkIfChallengeZoneEntered() {
-        // Get current zone and platform the player is on
-        var currentPlatformSprite: SKSpriteNode!
-        let playerStateMachine = scene.player?.component(ofType: MovementComponent.self)?.stateMachine
-        if playerStateMachine?.currentState is LandedState {
-            if let currentPlatform = playerStateMachine?.state(forClass: LandedState.self)?.currentPlatform {
-                
-                // Activate enter event for zone
-                currentPlatformSprite = currentPlatform as! SKSpriteNode
-                for zone in zones {
-                    let firstPlatSprite = zone.firstPlatform.component(ofType: SpriteComponent.self)?.node
-                    if firstPlatSprite == currentPlatformSprite {
-                        if zone is ZoneChallengeMagnet ||
-                           zone is ZoneChallengeLongJump ||
-                           zone is ZoneChallengeVisibility {
-                            zone.enterEvent()
-                            currentZone = zone
-                            break
-                        }
-                    }
+        for zone in zones {
+            if !(zone is ZoneNormal) && zone.hasBeenEntered == false {
+                let begYPosOfZone = zone.begYPos
+                let yPosOfPlayer = scene.player?.component(ofType: SpriteComponent.self)?.node.position.y
+                if yPosOfPlayer! > begYPosOfZone! {
+                    zone.enterEvent()
+                    currentZone = zone
+                    break
                 }
             }
         }
@@ -132,6 +121,7 @@ class ZoneManager {
             let endYPosOfcurrentZone = begYPosOfcurrentZone! + (currentZone?.size.height)!
             if yPosOfPlayer! > endYPosOfcurrentZone {
                 currentZone?.exitEvent()
+                currentZone = nil
             }
         }
     }
