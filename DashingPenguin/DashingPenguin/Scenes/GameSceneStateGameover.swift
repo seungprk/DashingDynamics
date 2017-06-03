@@ -34,11 +34,13 @@ class GameSceneStateGameover: GKState {
         // Set the handlers that need to fire after the death tile transition.
         let uiFunc: () -> Void = showUi()
         let audioFunc: () -> Void = stopAudio()
+        let saveFunc: () -> Void = saveScore()
         
         // Execute handlers after scene transition.
         deathTransition(uiDelay: 2) {
             uiFunc()
             audioFunc()
+            saveFunc()
         }
     }
     
@@ -53,6 +55,14 @@ class GameSceneStateGameover: GKState {
         return {
             AudioManager.sharedInstance.stop("music")
             AudioManager.sharedInstance.stop("creeping-death-drone")
+        }
+    }
+    
+    func saveScore() -> () -> Void {
+        return {
+            if let score = self.scene.scoreManager {
+                score.saveHighScore()
+            }
         }
     }
     
@@ -116,8 +126,17 @@ class GameSceneStateGameover: GKState {
                 totalScoreLabel.position = CGPoint(
                     x: topRight.x - totalScoreLabel.size.width / 2,
                     y: platformScoreLabel.position.y - totalScoreLabel.size.height - 5)
+                
+                /* TEMP HIGH SCORE SPRITE HERE */
+                let highScoreLabel = SKScoreLabel(value: score.getHighScore())
+                ui.insert(highScoreLabel)
+                
+                highScoreLabel.position = CGPoint(
+                    x: 0,
+                    y: totalScoreLabel.position.y - totalScoreLabel.size.height * 5)
+                /* END OF TEMP HIGH SCORE ADDITION */
             }
-
+            
             self.setFilteringMode(of: ui)
             self.updateZpos(of: ui, to: 10000000 * 2)
             self.addToCamera(nodes: ui)
