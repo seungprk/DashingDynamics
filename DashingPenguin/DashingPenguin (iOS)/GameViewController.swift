@@ -26,9 +26,9 @@ class GameViewController: UIViewController {
 
         skView.showsFPS = true
         skView.showsNodeCount = true
-        skView.showsPhysics = true
+        skView.showsPhysics = false
         skView.ignoresSiblingOrder = true
-        skView.showsFields = true
+        skView.showsFields = false
 
         // Lower resolution to pixelate game scenes
         let downscaleRatio = 180 / skView.frame.width

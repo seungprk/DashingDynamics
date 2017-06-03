@@ -70,7 +70,7 @@ class ZoneManager {
     }
     
     func addZone() {
-        let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
+        let zoneFirstXPos = (zones.last?.platformBlocksManager.blocks.last?.nextBlockFirstPlatformXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
 
         
@@ -84,7 +84,7 @@ class ZoneManager {
     }
     
     func addRandomChallengeZone() {
-        let zoneFirstXPos = (zones.last?.platformBlocksManager.begXPos)!
+        let zoneFirstXPos = (zones.last?.platformBlocksManager.blocks.last?.nextBlockFirstPlatformXPos)!
         let lastZoneTopYPos = (zones.last?.begYPos)! + (zones.last?.size.height)!
 
         let randomize = arc4random_uniform(3)

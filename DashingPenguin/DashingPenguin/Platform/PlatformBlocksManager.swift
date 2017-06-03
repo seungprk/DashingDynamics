@@ -41,7 +41,7 @@ class PlatformBlocksManager {
     func addBlock(withType: String) {
         let newBlock = selectBlock(withType: withType)!
         let lastBlock = (blocks.last)!
-        newBlock.position = CGPoint(x: lastBlock.position.x, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
+        newBlock.position = CGPoint(x: 0, y: lastBlock.position.y + lastBlock.size.height/2 + newBlock.size.height/2)
         
         setInitialZPos(for: newBlock)
         scene.sceneEffectNode.addChild(newBlock)
