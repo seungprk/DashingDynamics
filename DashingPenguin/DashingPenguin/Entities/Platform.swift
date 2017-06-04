@@ -39,10 +39,19 @@ class Platform: GKEntity {
     init(scene: SKScene, slidingMagnitude: CGFloat, yPosition: CGFloat) {
         super.init()
         
-        let possibleCenterMin = size.width / 2 + slidingMagnitude / 2 - scene.frame.width / 2
-        let possibleCenterMax = scene.frame.width - size.width / 2 - slidingMagnitude / 2 - scene.frame.width / 2
+        let wallWidth = SKTexture(imageNamed: "wall").size().width
+        
+        let possibleCenterMin = size.width / 2
+            + slidingMagnitude / 2
+            - scene.frame.width / 2
+            + wallWidth
+        
+        let possibleCenterMax = scene.frame.width - size.width / 2
+            - slidingMagnitude / 2
+            - scene.frame.width / 2
+            - wallWidth
+        
         let randomSlidingCenterX = CGFloat(arc4random_uniform(UInt32(possibleCenterMax - possibleCenterMin))) + possibleCenterMin
-        print("\(randomSlidingCenterX) in \(scene.frame.width) between \(possibleCenterMin) and \(possibleCenterMax)")
         
         let spriteComponent = SpriteComponent(texture: SKTexture(imageNamed: "bigPlatform1"))
         spriteComponent.node.name = "platform"
