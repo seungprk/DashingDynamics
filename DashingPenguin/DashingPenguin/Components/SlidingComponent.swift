@@ -10,37 +10,48 @@ import GameplayKit
 import SpriteKit
 
 class SlidingComponent: GKComponent {
-    
+    let slidingDuration = 3.0
+
     var centerX: CGFloat
     var node: SKSpriteNode
     var magnitude: CGFloat
-    
-    var slidingSequence: SKAction?
     
     init(node: SKSpriteNode, centerX: CGFloat, magnitude: CGFloat) {
         self.node = node
         self.centerX = centerX
         self.magnitude = magnitude
         super.init()
-        
-        let slidingDuration = 3.0
-        
-        let magnitudeMax = centerX + magnitude / 2
-        let magnitudeMin = centerX - magnitude / 2
-        let slidingRight = SKAction.moveTo(x: magnitudeMax, duration: slidingDuration / 2)
-        let slidingLeft = SKAction.moveTo(x: magnitudeMin, duration: slidingDuration / 2)
-        slidingSequence = SKAction.sequence([slidingRight, slidingLeft])
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // first duration
+    // = (diff of xPos and max) / (max - min) * slidingDuration / 2
+    func makeFirstRight(_ min: CGFloat, _ max: CGFloat) -> SKAction {
+        let diff = abs(max - self.node.position.x)
+        let total = max - min
+        let percent = diff / total
+        let firstDuration = slidingDuration / 2 * Double(percent)
+        
+        return SKAction.moveTo(x: max, duration: firstDuration)
+    }
+    
+    func makeToAndFro(_ min: CGFloat, _ max: CGFloat) -> SKAction {
+        let slidingRight = SKAction.moveTo(x: max, duration: slidingDuration / 2)
+        let slidingLeft = SKAction.moveTo(x: min, duration: slidingDuration / 2)
+        return SKAction.sequence([slidingLeft, slidingRight])
+    }
+    
     func beginSliding() {
-        if let sequence = slidingSequence {
-            node.run(SKAction.repeatForever(sequence))
-        }
+        let min = centerX - magnitude / 2
+        let max = centerX + magnitude / 2
+        
+        node.run(SKAction.sequence([
+            makeFirstRight(min, max),
+            SKAction.repeatForever(makeToAndFro(min, max))
+        ]))
     }
 }
 
