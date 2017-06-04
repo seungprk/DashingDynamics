@@ -184,38 +184,42 @@ class MenuScene: SKScene, SKButtonDelegate {
     
     override func didMove(to view: SKView) {
         if hasBeenPresentedOnce == true {
-            self.childNode(withName: "border")?.alpha = 0
-            self.childNode(withName: "title")?.alpha = 0
-            self.childNode(withName: "box1")?.alpha = 0
-            self.childNode(withName: "box2")?.alpha = 0
-            self.childNode(withName: "box3")?.alpha = 0
-            self.childNode(withName: "scoreButton")?.alpha = 0
-            self.childNode(withName: "soundToggle")?.alpha = 0
-            self.childNode(withName: "playButton")?.alpha = 0
-            
-            let zoomOut = SKAction.scale(to: 1.0, duration: 0.25 * timeScale)
-            camera?.run(zoomOut, completion: {
-                let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5 * self.timeScale)
-                let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5 * self.timeScale)
-                let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5 * self.timeScale)
-                let flickerIn = SKAction.sequence([firstFadeIn, firstFadeOut, secondFadeIn])
-                
-                self.childNode(withName: "border")?.run(flickerIn)
-                self.childNode(withName: "title")?.run(flickerIn)
-                self.childNode(withName: "box1")?.run(flickerIn)
-                self.childNode(withName: "box2")?.run(flickerIn)
-                self.childNode(withName: "box3")?.run(flickerIn)
-                self.childNode(withName: "scoreButton")?.run(flickerIn)
-                self.childNode(withName: "soundToggle")?.run(flickerIn)
-                self.childNode(withName: "playButton")?.run(flickerIn)
-                
-                AudioManager.sharedInstance.playLoop("menu-beeping")
-                AudioManager.sharedInstance.playLoop("music")
-                AudioManager.sharedInstance.setVolume("music", volume: 0.9, dur: 0)
-            })
+            zoomOutAnimation()
         } else {
             hasBeenPresentedOnce = true
         }
+    }
+    
+    func zoomOutAnimation() {
+        self.childNode(withName: "border")?.alpha = 0
+        self.childNode(withName: "title")?.alpha = 0
+        self.childNode(withName: "box1")?.alpha = 0
+        self.childNode(withName: "box2")?.alpha = 0
+        self.childNode(withName: "box3")?.alpha = 0
+        self.childNode(withName: "scoreButton")?.alpha = 0
+        self.childNode(withName: "soundToggle")?.alpha = 0
+        self.childNode(withName: "playButton")?.alpha = 0
+        
+        let zoomOut = SKAction.scale(to: 1.0, duration: 0.25 * timeScale)
+        camera?.run(zoomOut, completion: {
+            let firstFadeIn = SKAction.fadeAlpha(to: 0.4, duration: 0.5 * self.timeScale)
+            let firstFadeOut = SKAction.fadeAlpha(to: 0, duration: 0.5 * self.timeScale)
+            let secondFadeIn = SKAction.fadeAlpha(to: 1, duration: 0.5 * self.timeScale)
+            let flickerIn = SKAction.sequence([firstFadeIn, firstFadeOut, secondFadeIn])
+            
+            self.childNode(withName: "border")?.run(flickerIn)
+            self.childNode(withName: "title")?.run(flickerIn)
+            self.childNode(withName: "box1")?.run(flickerIn)
+            self.childNode(withName: "box2")?.run(flickerIn)
+            self.childNode(withName: "box3")?.run(flickerIn)
+            self.childNode(withName: "scoreButton")?.run(flickerIn)
+            self.childNode(withName: "soundToggle")?.run(flickerIn)
+            self.childNode(withName: "playButton")?.run(flickerIn)
+            
+            AudioManager.sharedInstance.playLoop("menu-beeping")
+            AudioManager.sharedInstance.playLoop("music")
+            AudioManager.sharedInstance.setVolume("music", volume: 0.9, dur: 0)
+        })
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -227,7 +231,9 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        if scoreBox.alpha == 1 {
+            hideHighScoreBox()
+        }
     }
     
     func presentGameScene() {
@@ -275,11 +281,6 @@ class MenuScene: SKScene, SKButtonDelegate {
                 AudioManager.sharedInstance.play("beep-low")
                 showHighScoreBox()
             }
-        case "exitButton":
-            if childNode(withName: "scoreBox")?.alpha == 1 {
-                AudioManager.sharedInstance.play("beep-low")
-                hideHighScoreBox()
-            }
         default:
             break
         }
@@ -298,26 +299,46 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     func showHighScoreBox() {
-        // Get saved high score
-        var highScore: Int = 0
-        let userDefaults = UserDefaults.standard
-        if let value = userDefaults.object(forKey: "highScore") {
-            highScore = value as! Int
-        }
-        let scoreLabel = scoreBox.childNode(withName: "scoreLabel") as! SKScoreLabel
-        scoreLabel.setValue(to: highScore)
+        let animationDur = TimeInterval(0.25)
         
-        scoreBox.alpha = 1
+        // Fade out animation
+        let fadeOut = SKAction.fadeOut(withDuration: animationDur)
+        self.childNode(withName: "border")?.run(fadeOut)
+        self.childNode(withName: "title")?.run(fadeOut)
+        self.childNode(withName: "box1")?.run(fadeOut)
+        self.childNode(withName: "box2")?.run(fadeOut)
+        self.childNode(withName: "box3")?.run(fadeOut)
+        self.childNode(withName: "scoreButton")?.run(fadeOut)
+        self.childNode(withName: "soundToggle")?.run(fadeOut)
+        self.childNode(withName: "playButton")?.run(fadeOut)
+        
+        // Zoom animation
+        let zoomInAction = SKAction.scale(to: 0.75, duration: animationDur)
+        camera?.run(zoomInAction, completion: {
+            
+            // Get saved high score
+            var highScore: Int = 0
+            let userDefaults = UserDefaults.standard
+            if let value = userDefaults.object(forKey: "highScore") {
+                highScore = value as! Int
+            }
+            let scoreLabel = self.scoreBox.childNode(withName: "scoreLabel") as! SKScoreLabel
+            scoreLabel.setValue(to: highScore)
+            
+            // Show score box
+            self.scoreBox.run(SKAction.fadeIn(withDuration: 0.1))
+        })
     }
     
     func hideHighScoreBox() {
-        scoreBox.alpha = 0
+        zoomOutAnimation()
+        self.scoreBox.run(SKAction.fadeOut(withDuration: 0.1))
     }
     
     func setupHighScoreBox() {
-        scoreBox = SKSpriteNode(imageNamed: "playerdeathyellow")
+        scoreBox = SKSpriteNode(imageNamed: "scorebox-bg")
         scoreBox.name = "scoreBox"
-        scoreBox.size = CGSize(width: self.size.width * 0.8, height: self.size.height * 0.8)
+        scoreBox.size = CGSize(width: self.size.width, height: self.size.height)
         scoreBox.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         scoreBox.zPosition = 100
         scoreBox.alpha = 0
@@ -326,15 +347,17 @@ class MenuScene: SKScene, SKButtonDelegate {
         let scoreLabel = SKScoreLabel(value: 0)
         scoreLabel.name = "scoreLabel"
         scoreLabel.zPosition = 101
+        for node in scoreLabel.children {
+            let sprite = node as! SKSpriteNode
+            sprite.texture?.filteringMode = .nearest
+        }
         scoreBox.addChild(scoreLabel)
         
-        let exitButton = SKButton(nameForImageNormal: "exit-button", nameForImageNormalHighlight: "exit-button")
-        exitButton.name = "exitButton"
-        let posX = scoreBox.size.width / 2 - exitButton.size.width / 2
-        let posY = scoreBox.size.height / 2 - exitButton.size.height / 2
-        exitButton.position = CGPoint(x: posX, y: posY)
-        exitButton.delegate = self
-        exitButton.zPosition = 101
-        scoreBox.addChild(exitButton)
+        let header = SKSpriteNode(imageNamed: "scorebox-header")
+        header.name = "header"
+        header.texture?.filteringMode = .nearest
+        header.position = CGPoint(x: 0, y: scoreLabel.size.height * 1.5 + header.size.height / 2)
+        header.zPosition = 101
+        scoreBox.addChild(header)
     }
 }

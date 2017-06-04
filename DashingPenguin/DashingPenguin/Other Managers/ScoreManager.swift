@@ -14,6 +14,7 @@ class ScoreManager {
     var distanceScore: CGFloat = 0
     var platformScore: CGFloat = 0
     var highScore: CGFloat = 0
+    var isNewHighScore = false
     
     init(scene: GameScene) {
         self.scene = scene
@@ -47,6 +48,7 @@ class ScoreManager {
     func checkHighScore() {
         if (distanceScore + platformScore) > highScore {
             highScore = distanceScore + platformScore
+            isNewHighScore = true
         }
     }
     

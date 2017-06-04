@@ -30,7 +30,6 @@ class SlidingComponent: GKComponent {
         let slidingRight = SKAction.moveTo(x: magnitudeMax, duration: slidingDuration / 2)
         let slidingLeft = SKAction.moveTo(x: magnitudeMin, duration: slidingDuration / 2)
         slidingSequence = SKAction.sequence([slidingRight, slidingLeft])
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
