@@ -21,7 +21,7 @@ class MenuScene: SKScene, SKButtonDelegate {
     
     var hasBeenPresentedOnce = false
     var scoreView: UIView?
-    var isScoreActive = false
+    var scoreBox: SKSpriteNode!
     let timeScale: TimeInterval = 0.5
     
     override init(size: CGSize) {
@@ -177,6 +177,9 @@ class MenuScene: SKScene, SKButtonDelegate {
         scoreButton.run(flickerIn)
         soundToggle.run(flickerIn)
         playButton.run(flickerIn)
+        
+        // Setup High Score Box
+        setupHighScoreBox()
     }
     
     override func didMove(to view: SKView) {
@@ -211,7 +214,6 @@ class MenuScene: SKScene, SKButtonDelegate {
                 AudioManager.sharedInstance.setVolume("music", volume: 0.9, dur: 0)
             })
         } else {
-            setupScoreView()
             hasBeenPresentedOnce = true
         }
     }
@@ -256,27 +258,30 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     func onButtonPress(named: String) {
-        if !isScoreActive {
-            switch named {
-            case "playButton":
-                if childNode(withName: "playButton")?.alpha == 1 {
-                    AudioManager.sharedInstance.play("beep-high")
-                    presentGameScene()
-                }
-            
-            case "soundToggle":
-                if childNode(withName: "soundToggle")?.alpha == 1 {
-                    AudioManager.sharedInstance.play("beep-low")
-                    AudioManager.sharedInstance.toggleSound()
-                }
-            case "scoreButton":
-                if childNode(withName: "scoreButton")?.alpha == 1 {
-                    AudioManager.sharedInstance.play("beep-low")
-                    popUpHighScore()
-                }
-            default:
-                break
+        switch named {
+        case "playButton":
+            if childNode(withName: "playButton")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-high")
+                presentGameScene()
             }
+        
+        case "soundToggle":
+            if childNode(withName: "soundToggle")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-low")
+                AudioManager.sharedInstance.toggleSound()
+            }
+        case "scoreButton":
+            if childNode(withName: "scoreButton")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-low")
+                showHighScoreBox()
+            }
+        case "exitButton":
+            if childNode(withName: "scoreBox")?.alpha == 1 {
+                AudioManager.sharedInstance.play("beep-low")
+                hideHighScoreBox()
+            }
+        default:
+            break
         }
     }
     
@@ -292,69 +297,44 @@ class MenuScene: SKScene, SKButtonDelegate {
         }
     }
     
-    func setupScoreView() {
-        // Pause View
-        scoreView = UIView(frame: (scene?.frame)!)
-        scoreView?.backgroundColor = .black
-        scoreView?.layer.frame = CGRect(
-            x: (view?.frame.origin.x)!,
-            y: (view?.frame.origin.y)!,
-            width: (view?.frame.width)!,
-            height: (view?.frame.height)!)
-        let viewX = view?.frame.midX
-        let viewY = view?.frame.midY
-        scoreView?.layer.position.x = viewX!
-        scoreView?.layer.position.y = viewY!
-        
-        // Exit Button
-        // Sprite image size: 41 x 21
-        let buttonSize = CGRect(x: 0, y: 0, width: 82, height: 42)
-        let exitButton = UIButton(frame: buttonSize)
-        exitButton.frame.origin = CGPoint(
-            x: (scoreView?.frame.size.width)! / 2 - exitButton.frame.size.width / 2,
-            y: (scoreView?.frame.size.height)! / 2 - exitButton.frame.size.height / 2)
-        let buttonImage = UIImage(named: "unpause-button")
-        exitButton.setImage(buttonImage, for: .normal)
-        exitButton.imageView?.layer.magnificationFilter = kCAFilterNearest
-        exitButton.addTarget(self, action: #selector(log(gestureRecognizer:)), for: .allEvents)
-        scoreView?.addSubview(exitButton)
-        exitButton.isExclusiveTouch = true
-        
-        // Score Label
-        let labelSize = CGRect(x: 0, y: 0, width: 80, height: 20)
-        let scoreLabel = UILabel(frame: labelSize)
-        scoreLabel.textColor = UIColor.red
-        scoreLabel.textAlignment = .center
-        scoreLabel.frame.origin = CGPoint(
-            x: (scoreView?.frame.size.width)! / 2 - scoreLabel.frame.size.width / 2,
-            y: (scoreView?.frame.size.height)! / 2 + scoreLabel.frame.size.height * 2)
-        scoreView?.addSubview(scoreLabel)
-    }
-    
-    func popUpHighScore() {
+    func showHighScoreBox() {
         // Get saved high score
         var highScore: Int = 0
         let userDefaults = UserDefaults.standard
         if let value = userDefaults.object(forKey: "highScore") {
             highScore = value as! Int
         }
-        print("HIGHSCORE: ", highScore)
-        // Setup label
-        for subview in (scoreView?.subviews)! {
-            if subview is UILabel {
-                let label = subview as! UILabel
-                label.text = String(highScore)
-                break
-            }
-        }
+        let scoreLabel = scoreBox.childNode(withName: "scoreLabel") as! SKScoreLabel
+        scoreLabel.setValue(to: highScore)
         
-        // Present View
-        view?.addSubview(scoreView!)
-        isScoreActive = true
+        scoreBox.alpha = 1
     }
     
-    func log(gestureRecognizer: UIGestureRecognizer) {
-        scoreView?.removeFromSuperview()
-        isScoreActive = false
+    func hideHighScoreBox() {
+        scoreBox.alpha = 0
+    }
+    
+    func setupHighScoreBox() {
+        scoreBox = SKSpriteNode(imageNamed: "playerdeathyellow")
+        scoreBox.name = "scoreBox"
+        scoreBox.size = CGSize(width: self.size.width * 0.8, height: self.size.height * 0.8)
+        scoreBox.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        scoreBox.zPosition = 100
+        scoreBox.alpha = 0
+        addChild(scoreBox)
+        
+        let scoreLabel = SKScoreLabel(value: 0)
+        scoreLabel.name = "scoreLabel"
+        scoreLabel.zPosition = 101
+        scoreBox.addChild(scoreLabel)
+        
+        let exitButton = SKButton(nameForImageNormal: "exit-button", nameForImageNormalHighlight: "exit-button")
+        exitButton.name = "exitButton"
+        let posX = scoreBox.size.width / 2 - exitButton.size.width / 2
+        let posY = scoreBox.size.height / 2 - exitButton.size.height / 2
+        exitButton.position = CGPoint(x: posX, y: posY)
+        exitButton.delegate = self
+        exitButton.zPosition = 101
+        scoreBox.addChild(exitButton)
     }
 }
