@@ -184,13 +184,13 @@ class MenuScene: SKScene, SKButtonDelegate {
     
     override func didMove(to view: SKView) {
         if hasBeenPresentedOnce == true {
-            zoomOutAnimation()
+            zoomOutAnimation(replayMusic: true)
         } else {
             hasBeenPresentedOnce = true
         }
     }
     
-    func zoomOutAnimation() {
+    func zoomOutAnimation(replayMusic: Bool) {
         self.childNode(withName: "border")?.alpha = 0
         self.childNode(withName: "title")?.alpha = 0
         self.childNode(withName: "box1")?.alpha = 0
@@ -216,9 +216,11 @@ class MenuScene: SKScene, SKButtonDelegate {
             self.childNode(withName: "soundToggle")?.run(flickerIn)
             self.childNode(withName: "playButton")?.run(flickerIn)
             
-            AudioManager.sharedInstance.playLoop("menu-beeping")
-            AudioManager.sharedInstance.playLoop("music")
-            AudioManager.sharedInstance.setVolume("music", volume: 0.9, dur: 0)
+            if replayMusic {
+                AudioManager.sharedInstance.playLoop("menu-beeping")
+                AudioManager.sharedInstance.playLoop("music")
+                AudioManager.sharedInstance.setVolume("music", volume: 0.9, dur: 0)
+            }
         })
     }
     
@@ -331,7 +333,7 @@ class MenuScene: SKScene, SKButtonDelegate {
     }
     
     func hideHighScoreBox() {
-        zoomOutAnimation()
+        zoomOutAnimation(replayMusic: false)
         self.scoreBox.run(SKAction.fadeOut(withDuration: 0.1))
     }
     
@@ -339,7 +341,7 @@ class MenuScene: SKScene, SKButtonDelegate {
         scoreBox = SKSpriteNode(imageNamed: "scorebox-bg")
         scoreBox.name = "scoreBox"
         scoreBox.size = CGSize(width: self.size.width, height: self.size.height)
-        scoreBox.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        scoreBox.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - 10)
         scoreBox.zPosition = 100
         scoreBox.alpha = 0
         addChild(scoreBox)

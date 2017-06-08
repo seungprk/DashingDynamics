@@ -19,6 +19,8 @@ class GameSceneStatePlaying: GKState {
     }   
     
     override func didEnter(from previousState: GKState?) {
+        scene.player?.activateCollisions()
+        
         AudioManager.sharedInstance.playLoop("creeping-death-drone")
         AudioManager.sharedInstance.setVolume("creeping-death-drone", volume: 0, dur: 0)
     }

@@ -36,7 +36,7 @@ class Player: GKEntity {
         
         let physicsBody = SKPhysicsBody(circleOfRadius: GameplayConfiguration.Player.physicsBodyRadius, center: GameplayConfiguration.Player.physicsBodyOffset)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.player
-        physicsBody.collisionBitMask   = GameplayConfiguration.PhysicsBitmask.obstacle
+        physicsBody.collisionBitMask   = 0 // set to GameplayConfiguration.PhysicsBitmask.obstacle when game starts
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.platform
         physicsBody.fieldBitMask = GameplayConfiguration.PhysicsBitmask.field
         
@@ -141,4 +141,7 @@ class Player: GKEntity {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func activateCollisions() {
+        component(ofType: SpriteComponent.self)?.node.physicsBody?.collisionBitMask = GameplayConfiguration.PhysicsBitmask.obstacle
+    }
 }

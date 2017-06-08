@@ -45,6 +45,9 @@ class GameSceneStateIntro: GKState {
         let playerSpriteComp = scene.player?.component(ofType: SpriteComponent.self)
         let playerSprite = playerSpriteComp?.node
         
+        let sizeScale:CGFloat = 6
+        playerSprite?.setScale(sizeScale)
+        
         let playerStartY = scene.size.height * 0.5 + (scene.cameraNode?.position.y)! + (playerSprite?.size.height)! / 2
         playerSprite?.position = CGPoint(x: 0, y: playerStartY)
         
@@ -52,9 +55,12 @@ class GameSceneStateIntro: GKState {
         
         let dropAction = SKAction.move(to: playerLandPos, duration: 1.5)
         dropAction.timingMode = SKActionTimingMode.easeOut
+        let scaleAction = SKAction.scale(to: 1.0, duration: 1.5)
+        scaleAction.timingMode = SKActionTimingMode.easeOut
         let spinAction = SKAction.animate(with: playerTextureFrames, timePerFrame: 0.1)
         
         playerSprite?.run(spinAction)
+        playerSprite?.run(scaleAction)
         playerSprite?.run(dropAction, completion: {
             self.stateMachine?.enter(GameSceneStatePlaying.self)
         })
