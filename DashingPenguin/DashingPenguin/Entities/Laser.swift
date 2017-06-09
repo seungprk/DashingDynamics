@@ -35,7 +35,8 @@ class Laser: GKEntity {
         let spriteComponent = SpriteComponent(textureFrames: laserTextures)
         
         // Setup Physicsbody
-        let physicsBody = SKPhysicsBody(rectangleOf: spriteComponent.node.frame.size)
+        let physicsSize = CGSize(width: spriteComponent.node.frame.size.width, height: spriteComponent.node.frame.size.height / 2)
+        let physicsBody = SKPhysicsBody(rectangleOf: physicsSize)
         physicsBody.categoryBitMask = GameplayConfiguration.PhysicsBitmask.laser
         physicsBody.collisionBitMask = GameplayConfiguration.PhysicsBitmask.none
         physicsBody.contactTestBitMask = GameplayConfiguration.PhysicsBitmask.player
