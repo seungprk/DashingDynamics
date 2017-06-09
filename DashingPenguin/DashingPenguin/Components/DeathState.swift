@@ -104,7 +104,7 @@ class DeathState: GKState {
             })
             
             AudioManager.sharedInstance.play("power-down")
-            AudioManager.sharedInstance.setVolume("power-down", volume: 1.5, dur: 0)
+            AudioManager.sharedInstance.setVolume("power-down", volume: 2, dur: 0)
         }
     }
 }
