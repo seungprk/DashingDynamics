@@ -36,7 +36,9 @@ class AudioManager {
             ("music", AudioFileType.mp3),
             ("laser-charge", AudioFileType.wav),
             ("creeping-death-drone", AudioFileType.wav),
-            ("bump", AudioFileType.wav)]
+            ("bump", AudioFileType.wav),
+            ("splat", AudioFileType.wav),
+            ("power-down", AudioFileType.wav)]
         
         for data in soundData {
             if let sound = audioPlayerWithFile(file: data.fileName, type: data.type) {

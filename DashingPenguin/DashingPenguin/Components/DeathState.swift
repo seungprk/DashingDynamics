@@ -47,8 +47,6 @@ class DeathState: GKState {
         // Stop lasers turning on and off
         gameScene.zoneManager.turnOffLasers()
         
-        AudioManager.sharedInstance.play("phase-death")
-        
         if entity.death == "laser" {
             // Laser Death Animation
             let animationTime: TimeInterval = 0.5
@@ -69,6 +67,8 @@ class DeathState: GKState {
             let fadeAndRemove = SKAction.group([removeOriginal, fadeOut])
             let yellowTrans = SKAction.fadeIn(withDuration: animationTime / 5)
             spriteComponent?.node.run(SKAction.sequence([yellowTrans, fadeAndRemove]))
+            
+            AudioManager.sharedInstance.play("phase-death")
             
         } else if entity.death == "creep" {
             // Creep Death Animation
@@ -91,6 +91,8 @@ class DeathState: GKState {
             let yellowTrans = SKAction.fadeIn(withDuration: animationTime / 5)
             spriteComponent?.node.run(SKAction.sequence([yellowTrans, fadeAndRemove]))
             
+            AudioManager.sharedInstance.play("phase-death")
+            
         } else {
             // Falling Animation
             let animationTime: TimeInterval = 0.5
@@ -100,6 +102,9 @@ class DeathState: GKState {
             spriteComponent?.node.run(fallAction, completion: {
                 spriteComponent?.node.removeFromParent()
             })
+            
+            AudioManager.sharedInstance.play("power-down")
+            AudioManager.sharedInstance.setVolume("power-down", volume: 1.5, dur: 0)
         }
     }
 }

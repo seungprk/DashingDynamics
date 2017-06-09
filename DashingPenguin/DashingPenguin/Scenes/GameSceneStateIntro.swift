@@ -64,6 +64,9 @@ class GameSceneStateIntro: GKState {
         playerSprite?.run(dropAction, completion: {
             self.stateMachine?.enter(GameSceneStatePlaying.self)
         })
+        playerSprite?.run(SKAction.wait(forDuration: 0.15), completion: {
+            AudioManager.sharedInstance.play("splat")
+        })
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

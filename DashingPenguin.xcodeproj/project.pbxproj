@@ -11,6 +11,8 @@
 		240165511D4AF409006E31DC /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165501D4AF409006E31DC /* Zone.swift */; };
 		240165531D4AFA2E006E31DC /* ZoneNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165521D4AFA2E006E31DC /* ZoneNormal.swift */; };
 		240165551D4AFABC006E31DC /* ZoneChallengeMagnet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240165541D4AFABC006E31DC /* ZoneChallengeMagnet.swift */; };
+		241126771EEA47380041D68D /* splat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 241126761EEA47380041D68D /* splat.wav */; };
+		241126791EEA47F10041D68D /* power-down.wav in Resources */ = {isa = PBXBuildFile; fileRef = 241126781EEA47F10041D68D /* power-down.wav */; };
 		2421DC531E35798B00748DA7 /* score-hud.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2421DC521E35798B00748DA7 /* score-hud.atlas */; };
 		2421DC551E358AE900748DA7 /* number-font.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2421DC541E358AE900748DA7 /* number-font.atlas */; };
 		2425B70E1DBD73DD005168A7 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2425B70D1DBD73DD005168A7 /* player.atlas */; };
@@ -97,6 +99,8 @@
 		240165501D4AF409006E31DC /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Zone.swift; path = DashingPenguin/Zone/Zone.swift; sourceTree = "<group>"; };
 		240165521D4AFA2E006E31DC /* ZoneNormal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneNormal.swift; path = DashingPenguin/Zone/ZoneNormal.swift; sourceTree = "<group>"; };
 		240165541D4AFABC006E31DC /* ZoneChallengeMagnet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChallengeMagnet.swift; path = DashingPenguin/Zone/ZoneChallengeMagnet.swift; sourceTree = "<group>"; };
+		241126761EEA47380041D68D /* splat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splat.wav; sourceTree = "<group>"; };
+		241126781EEA47F10041D68D /* power-down.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "power-down.wav"; sourceTree = "<group>"; };
 		2421DC521E35798B00748DA7 /* score-hud.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "score-hud.atlas"; sourceTree = "<group>"; };
 		2421DC541E358AE900748DA7 /* number-font.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "number-font.atlas"; sourceTree = "<group>"; };
 		2425B70D1DBD73DD005168A7 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
@@ -303,6 +307,8 @@
 		7F24DF4D1D92010900796DB0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				241126761EEA47380041D68D /* splat.wav */,
+				241126781EEA47F10041D68D /* power-down.wav */,
 				24DE7A531E55718B0091ACDC /* energy-burst.wav */,
 				24C764C71E6403A100331C6C /* beep-low.wav */,
 				24C764CB1E6406EB00331C6C /* phase-death.wav */,
@@ -484,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2421DC551E358AE900748DA7 /* number-font.atlas in Resources */,
+				241126771EEA47380041D68D /* splat.wav in Resources */,
 				24ED95951E6C9B6700E82AD9 /* energy-up.wav in Resources */,
 				7F23A5CB1D2C8064008CDA5C /* PlayerData.plist in Resources */,
 				24CB45901DF4DA0400CBF82B /* obstaclewall.atlas in Resources */,
@@ -504,6 +511,7 @@
 				24ED95971E6C9BC900E82AD9 /* menu-beeping.wav in Resources */,
 				24C6A6401EAD163600F9E5A2 /* magnetwall.atlas in Resources */,
 				7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */,
+				241126791EEA47F10041D68D /* power-down.wav in Resources */,
 				7F23A5D11D2C8081008CDA5C /* LaunchScreen.storyboard in Resources */,
 				24E2F2841E761092002CBBF2 /* creeping-death-drone.wav in Resources */,
 				24CB458F1DF4DA0400CBF82B /* obstacle.atlas in Resources */,
