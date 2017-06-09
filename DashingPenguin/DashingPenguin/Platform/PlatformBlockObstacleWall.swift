@@ -52,19 +52,18 @@ class PlatformBlockObstacleWall: PlatformBlock {
         size = CGSize(width: scene.size.width, height: maxDash)
         
         // Setup Next Block's Platform X Position
-        let rMax = maxDash
-        let rMin = platformSize.width
-        var randXShift = rMin + CGFloat(arc4random_uniform(UInt32(rMax-rMin)) + 1)
-        
-        let maxShift = scene.size.width/2 - platformSize.width/2
-        if randXShift > maxShift {
-            randXShift = maxShift
-        }
+        let maxShiftFromCenter = scene.size.width / 2 - GameplayConfiguration.Platform.size.width / 2 - GameplayConfiguration.Sidewall.width// to not overlap with side walls
         
         if wallOnLeft == true {
-            nextBlockFirstPlatformXPos = firstPlatXPos - randXShift
+            nextBlockFirstPlatformXPos = firstPlatXPos - maxDash
+            if nextBlockFirstPlatformXPos < -maxShiftFromCenter {
+                nextBlockFirstPlatformXPos = -maxShiftFromCenter
+            }
         } else {
-            nextBlockFirstPlatformXPos = firstPlatXPos + randXShift
+            nextBlockFirstPlatformXPos = firstPlatXPos + maxDash
+            if nextBlockFirstPlatformXPos > maxShiftFromCenter {
+                nextBlockFirstPlatformXPos = maxShiftFromCenter
+            }
         }
         
         // Background for debug
