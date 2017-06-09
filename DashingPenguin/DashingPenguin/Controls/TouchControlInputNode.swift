@@ -73,7 +73,7 @@ class TouchControlInputNode: SKSpriteNode {
                 var moveY = dy
                 
                 let maxDist = GameplayConfiguration.TouchControls.maxDistance
-                if distance > maxDist {
+                if distance > GameplayConfiguration.TouchControls.minDistance {
                     let swipeAngle = atan2(dy, dx)
                     moveX = cos(swipeAngle) * maxDist
                     moveY = sin(swipeAngle) * maxDist
