@@ -43,9 +43,9 @@ class BackgroundManager {
         let tileWidth = bgTexture.size().width
         let tileHeight = bgTexture.size().height
         let horizontalTilesNumber = Int(scene.size.width / tileWidth)
-        let verticalTilesNumber = Int(scene.size.height / tileHeight) + 1
+        let verticalTilesNumber = Int(scene.size.height / tileHeight) + 2
         let startingX = -scene.size.width/2 + tileWidth/2
-        let startingY = scene.size.height/2 - tileHeight/2
+        let startingY = scene.size.height/2 - tileHeight/2 + tileHeight * 2
         
         // Tiles Add to Scene
         scene.sceneCamEffectNode.addChild(bgNode)
