@@ -78,17 +78,21 @@ class GameSceneStateGameover: GKState {
             let scoreLine = SKSpriteNode(imageNamed: "horizontal-rule")
             let highScoreTitle = SKSpriteNode(imageNamed: "high-score-blue")
             let outline = SKSpriteNode(imageNamed: "ui-outline")
-            
+            let highScoreLine = SKSpriteNode(imageNamed: "high-score-line")
+            let highScoreLabel = SKScoreLabel(value: 0)
+
             [ outline,
               title,
               scoreTitles,
               scoreLine,
               againButton,
+              highScoreLine,
+              highScoreLabel,
               highScoreTitle ].forEach({ node in ui.insert(node) })
             
             title.position = CGPoint(
                 x: againButton.position.x,
-                y: againButton.position.y + 150
+                y: againButton.position.y + 156
             )
             scoreTitles.position = CGPoint(
                 x: againButton.position.x,
@@ -100,12 +104,21 @@ class GameSceneStateGameover: GKState {
             )
             highScoreTitle.position = CGPoint(
                 x: againButton.position.x,
-                y: againButton.position.y + 210
+                y: againButton.position.y + 226
             )
             outline.position = CGPoint(
                 x: againButton.position.x,
                 y: againButton.position.y + 128
             )
+            highScoreLabel.position = CGPoint(
+                x: 0,
+                y: highScoreTitle.position.y - highScoreLabel.size.height * 1.1
+            )
+            highScoreLine.position = CGPoint(
+                x: againButton.position.x,
+                y: highScoreLabel.position.y - highScoreLabel.size.height * 1.2
+            )
+
 
             // Initialize score labels
             
@@ -129,7 +142,13 @@ class GameSceneStateGameover: GKState {
 //                    platformScoreLabel.setValue(to: 78)
 //                    totalScoreLabel.setValue(to: 99900456)
 //                #endif
-
+                
+                highScoreLabel.setValue(to: score.getHighScore())
+                if score.isNewHighScore {
+                    // 5fcde4
+                    
+                }
+                
                 distanceScoreLabel.position = CGPoint(
                     x: topRight.x - distanceScoreLabel.size.width / 2,
                     y: topRight.y - distanceScoreLabel.size.height / 2 + 1)
@@ -139,15 +158,6 @@ class GameSceneStateGameover: GKState {
                 totalScoreLabel.position = CGPoint(
                     x: topRight.x - totalScoreLabel.size.width / 2,
                     y: platformScoreLabel.position.y - totalScoreLabel.size.height - 5)
-                
-                /* TEMP HIGH SCORE SPRITE HERE */
-                let highScoreLabel = SKScoreLabel(value: score.getHighScore())
-                ui.insert(highScoreLabel)
-                
-                highScoreLabel.position = CGPoint(
-                    x: 0,
-                    y: totalScoreLabel.position.y - totalScoreLabel.size.height * 5)
-                /* END OF TEMP HIGH SCORE ADDITION */
             }
             
             self.setFilteringMode(of: ui)
