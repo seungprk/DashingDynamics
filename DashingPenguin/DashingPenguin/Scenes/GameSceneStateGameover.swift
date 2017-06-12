@@ -76,22 +76,35 @@ class GameSceneStateGameover: GKState {
             let title = SKSpriteNode(imageNamed: "gameover-title")
             let scoreTitles = SKSpriteNode(imageNamed: "score-titles")
             let scoreLine = SKSpriteNode(imageNamed: "horizontal-rule")
-            ui.insert(againButton)
-            ui.insert(title)
-            ui.insert(scoreTitles)
-            ui.insert(scoreLine)
+            let highScoreTitle = SKSpriteNode(imageNamed: "high-score-blue")
+            let outline = SKSpriteNode(imageNamed: "ui-outline")
+            
+            [ outline,
+              title,
+              scoreTitles,
+              scoreLine,
+              againButton,
+              highScoreTitle ].forEach({ node in ui.insert(node) })
             
             title.position = CGPoint(
                 x: againButton.position.x,
-                y: againButton.position.y + 180
+                y: againButton.position.y + 150
             )
             scoreTitles.position = CGPoint(
                 x: againButton.position.x,
-                y: againButton.position.y + 120
+                y: againButton.position.y + 100
             )
             scoreLine.position = CGPoint(
                 x: scoreTitles.position.x,
                 y: scoreTitles.position.y - 5
+            )
+            highScoreTitle.position = CGPoint(
+                x: againButton.position.x,
+                y: againButton.position.y + 210
+            )
+            outline.position = CGPoint(
+                x: againButton.position.x,
+                y: againButton.position.y + 128
             )
 
             // Initialize score labels
