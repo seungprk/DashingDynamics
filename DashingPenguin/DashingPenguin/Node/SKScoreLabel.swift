@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Tso on 3/12/17.
 //  Copyright © 2017 Dashing Duo. All rights reserved.
-//
+//  color: 5fcde4
 
 import SpriteKit
 
@@ -32,6 +32,22 @@ class SKScoreLabel: SKNode {
                 width: fontsize.width * CGFloat(digits.count),
                 height: fontsize.height
             )
+        }
+    }
+    
+    var _blendColor: UIColor?
+    var blendColor: UIColor? {
+        get {
+            return self._blendColor
+        }
+        set(value) {
+            self._blendColor = value
+            self.digits.forEach { node in
+                if let c = self._blendColor {
+                    node.color = c
+                    node.colorBlendFactor = 1.0
+                }
+            }
         }
     }
     
@@ -65,6 +81,12 @@ class SKScoreLabel: SKNode {
         func toSprite(index: Int, digit: Int) -> SKSpriteNode {
             let xOffset = getOffset(index, digits.count)
             let node = self.numberNode(digit: digit, at: xOffset)
+            
+            if let c = self._blendColor {
+                node.color = c
+                node.colorBlendFactor = 1.0
+            }
+            
             self.addChild(node)
             return node
         }

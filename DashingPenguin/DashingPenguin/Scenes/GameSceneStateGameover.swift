@@ -144,9 +144,20 @@ class GameSceneStateGameover: GKState {
 //                #endif
                 
                 highScoreLabel.setValue(to: score.getHighScore())
-                if score.isNewHighScore {
-                    // 5fcde4
-                    
+                if !score.isNewHighScore {
+                    // 5fcde4   rgb(95, 205, 228)
+                    highScoreLabel.blendColor = UIColor.init(red: 95/255, green: 205/255, blue: 228/255, alpha: 1)
+                } else {
+                    let wait = 0.2
+                    let flash = SKAction.repeatForever(
+                        SKAction.sequence([
+                            SKAction.fadeAlpha(to: 0, duration: 0.07),
+                            SKAction.wait(forDuration: wait / 2),
+                            SKAction.fadeAlpha(to: 1, duration: 0.07),
+                            SKAction.wait(forDuration: wait)
+                        ])
+                    )
+                    highScoreLabel.run(flash)
                 }
                 
                 distanceScoreLabel.position = CGPoint(
