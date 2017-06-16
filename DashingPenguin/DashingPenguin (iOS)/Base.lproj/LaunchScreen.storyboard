@@ -44,14 +44,22 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Music by Dhalius" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtR-Xr-ICe">
+                                <rect key="frame" x="120" y="427" width="135" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xgo-DU-jTm" firstAttribute="width" secondItem="BaX-Y5-l9q" secondAttribute="width" constant="30" id="0xa-83-gsF"/>
+                            <constraint firstItem="LtR-Xr-ICe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8G2-uh-WEQ"/>
                             <constraint firstItem="BaX-Y5-l9q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="HSn-JX-hsU"/>
                             <constraint firstItem="xgo-DU-jTm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kfz-OO-hic"/>
                             <constraint firstItem="xgo-DU-jTm" firstAttribute="height" secondItem="BaX-Y5-l9q" secondAttribute="height" constant="30" id="U2b-BG-bjg"/>
                             <constraint firstItem="xgo-DU-jTm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eHz-l8-Urr"/>
+                            <constraint firstItem="LtR-Xr-ICe" firstAttribute="top" secondItem="xgo-DU-jTm" secondAttribute="bottom" constant="25" id="pyh-1W-YJE"/>
                             <constraint firstItem="BaX-Y5-l9q" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="qgv-C7-2gz"/>
                             <constraint firstItem="BaX-Y5-l9q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yAK-9Q-adM"/>
                         </constraints>
@@ -59,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
