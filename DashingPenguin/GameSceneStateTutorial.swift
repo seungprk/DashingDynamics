@@ -16,8 +16,8 @@ protocol TapDelegate {
 func scaleImage(image: UIImage) -> UIImage {
     return UIImage(
         cgImage: image.cgImage!,
-        scale: 0.25,
-        orientation: UIImageOrientation.up
+        scale: 0.5,
+        orientation: .up
     )
 }
 
@@ -28,8 +28,8 @@ class GameSceneStateTutorial: GKState, TapDelegate {
     
     let slides: [UIImage] = {
         let images = [
-            UIImage(named: "1.png")!,
-            UIImage(named: "2.png")!,
+            UIImage(named: "tutorial-1.png")!,
+            UIImage(named: "tutorial-2.png")!,
             UIImage(named: "3.png")!
         ]
         

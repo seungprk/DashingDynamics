@@ -62,12 +62,22 @@ class GameSceneStateIntro: GKState {
 //        playerSprite?.run(spinAction)
         playerSprite?.run(scaleAction)
         playerSprite?.run(dropAction, completion: {
-            self.stateMachine?.enter(GameSceneStateTutorial.self)
-//            self.stateMachine?.enter(GameSceneStatePlaying.self)
+            self.stateMachine?.enter(self.getNextState())
         })
         playerSprite?.run(SKAction.wait(forDuration: 0.15), completion: {
             AudioManager.sharedInstance.play("splat")
         })
+    }
+    
+    func getNextState() -> AnyClass {
+        let userDefaults = UserDefaults.standard
+        
+        if userDefaults.object(forKey: "isTutorialShown") != nil {
+            return GameSceneStatePlaying.self
+        } else {
+            userDefaults.set(true, forKey: "isTutorialShown")
+            return GameSceneStateTutorial.self
+        }
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
