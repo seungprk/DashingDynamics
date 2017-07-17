@@ -15,8 +15,8 @@ protocol TapDelegate {
 
 class GameSceneStateTutorial: GKState, TapDelegate {
     
-    unowned let scene : GameScene
-    var slideView: UIImageView // SKSpriteNode
+    unowned let scene: GameScene
+    var slideView: UIImageView
     
     let slides = [
         UIImage(named: "1.png"),
@@ -39,6 +39,29 @@ class GameSceneStateTutorial: GKState, TapDelegate {
     }
     
     func tapGesture(at location: CGPoint) {
-        print(location)
+        if slideView.image == slides.last! {
+            enterNextScene()
+        } else {
+            nextSlide()
+        }
+    }
+    
+    func nextSlide() {
+        var current: UIImage?
+        for slide in slides {
+            if current != nil {
+                slideView.image = slide
+                break
+            }
+            if slideView.image == slide {
+                current = slide
+            }
+        }
+    }
+    
+    func enterNextScene() {
+        slideView.removeFromSuperview()
+        scene.view?.isPaused = false
+        scene.stateMachine.enter(GameSceneStatePlaying.self)
     }
 }
