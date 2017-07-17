@@ -33,6 +33,7 @@ class GameScene: SKScene, GameInputDelegate {
     // Delegates
     var platformLandingDelegate: PlatformLandingDelegate?
     var wallContactDelegate: WallContactDelegate?
+    var tapDelegate: TapDelegate?
     
     var stateMachine: GKStateMachine!
     var menuScene: MenuScene?
@@ -53,8 +54,12 @@ class GameScene: SKScene, GameInputDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         
+        let tutorialState = GameSceneStateTutorial(scene: self)
+        self.tapDelegate = tutorialState
+        
         stateMachine = GKStateMachine(states: [ GameSceneStateSetup(scene: self),
                                                 GameSceneStateIntro(scene: self),
+                                                tutorialState,
                                                 GameSceneStatePlaying(scene: self),
                                                 GameSceneStatePause(scene: self),
                                                 GameSceneStateGameover(scene: self) ])
@@ -127,7 +132,7 @@ class GameScene: SKScene, GameInputDelegate {
     }
     
     func tapGesture(at location: CGPoint) {
-
+        tapDelegate?.tapGesture(at: location)
     }
     
     // MARK: Notification Center methods

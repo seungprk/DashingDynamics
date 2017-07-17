@@ -91,6 +91,7 @@
 		7F7841171E7FB13C00D7C977 /* SKSpriteNode+Dot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7841161E7FB13C00D7C977 /* SKSpriteNode+Dot.swift */; };
 		7FCAE7B41D8B72D600A02B79 /* SKNode+Unarchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */; };
 		7FCAE7B61D8BA63E00A02B79 /* Overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */; };
+		7FE43E201F1C313F0010B2C1 /* GameSceneStateTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE43E1F1F1C313F0010B2C1 /* GameSceneStateTutorial.swift */; };
 		7FE5271E1D3C272300FF9D25 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,7 @@
 		7F7841161E7FB13C00D7C977 /* SKSpriteNode+Dot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKSpriteNode+Dot.swift"; path = "DashingPenguin/Node/SKSpriteNode+Dot.swift"; sourceTree = "<group>"; };
 		7FCAE7B31D8B72D600A02B79 /* SKNode+Unarchiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKNode+Unarchiver.swift"; path = "DashingPenguin/Node/SKNode+Unarchiver.swift"; sourceTree = "<group>"; };
 		7FCAE7B51D8BA63E00A02B79 /* Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Overlay.sks; path = DashingPenguin/Assets/Overlay.sks; sourceTree = "<group>"; };
+		7FE43E1F1F1C313F0010B2C1 /* GameSceneStateTutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneStateTutorial.swift; sourceTree = "<group>"; };
 		7FE5271D1D3C272300FF9D25 /* PhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsComponent.swift; path = DashingPenguin/Components/PhysicsComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,6 +280,7 @@
 			children = (
 				7F027DB71D8606F900C91CCD /* GameSceneStateSetup.swift */,
 				24D4B3481EB6ABFA00B63D2D /* GameSceneStateIntro.swift */,
+				7FE43E1F1F1C313F0010B2C1 /* GameSceneStateTutorial.swift */,
 				7F027DBA1D8607DE00C91CCD /* GameSceneStatePlaying.swift */,
 				7F027DBE1D8607F900C91CCD /* GameSceneStateGameover.swift */,
 				7F027DBC1D8607EE00C91CCD /* GameSceneStatePause.swift */,
@@ -460,7 +463,7 @@
 				TargetAttributes = {
 					7F01D59D1D2A163B000A51D8 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = RLZEP44CD7;
+						DevelopmentTeam = RZ2DT6A2TM;
 						DevelopmentTeamName = "Matthew Tso (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
@@ -557,6 +560,7 @@
 				24D4B3491EB6ABFA00B63D2D /* GameSceneStateIntro.swift in Sources */,
 				7F24DF4B1D91FF9E00796DB0 /* AudioManager.swift in Sources */,
 				243DF2121D9E31A2002EB049 /* ZoneChallengeVisibility.swift in Sources */,
+				7FE43E201F1C313F0010B2C1 /* GameSceneStateTutorial.swift in Sources */,
 				7F3D324F1D454D5E0063BC07 /* GameScene+Physics.swift in Sources */,
 				7F027DBD1D8607EE00C91CCD /* GameSceneStatePause.swift in Sources */,
 				24CEA55D1D32CCC300C338E9 /* PlatformBlocksManager.swift in Sources */,
@@ -705,10 +709,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RLZEP44CD7;
+				DEVELOPMENT_TEAM = RZ2DT6A2TM;
 				ENABLE_NS_ASSERTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = dd.DashingPenguin;
@@ -723,9 +727,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RLZEP44CD7;
+				DEVELOPMENT_TEAM = RZ2DT6A2TM;
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dd.DashingPenguin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
