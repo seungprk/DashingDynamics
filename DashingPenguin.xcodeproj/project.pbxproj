@@ -463,7 +463,7 @@
 				TargetAttributes = {
 					7F01D59D1D2A163B000A51D8 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = RZ2DT6A2TM;
+						DevelopmentTeam = XDMUQM4LZ2;
 						DevelopmentTeamName = "Matthew Tso (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
@@ -653,7 +653,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -696,7 +696,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -709,13 +709,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RZ2DT6A2TM;
+				DEVELOPMENT_TEAM = XDMUQM4LZ2;
 				ENABLE_NS_ASSERTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = dd.DashingPenguin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DashingDuo.DashingDynamics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -727,11 +727,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RZ2DT6A2TM;
+				DEVELOPMENT_TEAM = XDMUQM4LZ2;
 				INFOPLIST_FILE = "$(SRCROOT)/DashingPenguin/DashingPenguin (iOS)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dd.DashingPenguin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DashingDuo.DashingDynamics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
